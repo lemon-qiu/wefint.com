@@ -1,0 +1,58 @@
+.footer{
+	 width:100%;
+	 height:10%;
+	 background-color:#021b28;
+	 position: absolute;
+	 left:0%;
+	 top:130%;
+}
+.wm{
+	position: absolute;
+	top:5%;
+	left:10%;
+	
+}
+#gywm{
+	 background-color:#021b28;
+	 width:5%;
+	 position: absolute;
+	 left:10%;
+	 top:40%;
+	 color:#c8c6c4;
+     cursor: pointer;
+}
+#gywm:hover{
+	color:#eb8440;
+}
+#lxwm:hover{
+	color:#eb8440;
+}
+#lxwm{
+	background-color:#21b28;
+	width:5%;
+	position: absolute;
+	left:15%;
+	top:40%;
+	color:#c8c6c4;
+	cursor: pointer;
+}
+#shu{
+	color:#888888; 
+	position: absolute;
+	 left:14.5%;
+	 top:40%;
+}
+#gs{
+	 color:#c8c6c4;
+	 font-size:12px;
+	 position: absolute;
+	 top:35%;
+	 left:40%;
+}
+#icp{
+	 color:#c8c6c4;
+	 font-size:12px;
+	 position: absolute;
+	 top:35%;
+	 left:50%;
+}

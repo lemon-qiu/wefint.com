@@ -1,0 +1,146 @@
+// dao/userDao.js
+// 实现与MySQL交互
+var mysql = require('mysql');
+var $conf = require('../conf/db');
+var $util = require('../util/util');
+var $sql = require('./financeSqlMapping');
+var generateUUID = require('../util/generateUUID');
+
+// 使用连接池，提升性能
+var pool = mysql.createPool($util.extend({}, $conf.mysql));
+
+// 向前台返回JSON方法的简单封装
+var jsonWrite = function(res, ret) {
+    console.log(ret)
+        //  ret = 'undefined'
+    if (typeof ret === 'undefined') {
+        res.json({
+            code: '1',
+            msg: '操作失败'
+        });
+    } else {
+        res.send(JSON.stringify(ret));
+    }
+};
+
+module.exports = {
+    page01: function(req, res, next) {
+        pool.getConnection(function(err, connection) {
+            // 获取前台页面传过来的参数
+            var userName = "" + req.body.userName; // 为了拼凑正确的sql语句，这里要转下整数
+            var password = "" + req.body.password; // 为了拼凑正确的sql语句，这里要转下整数
+            var hotelName = "" + req.body.hotelName; // 为了拼凑正确的sql语句，这里要转下整数
+            var idCardNumber = "" + req.body.idCardNumber; // 为了拼凑正确的sql语句，这里要转下整数
+            var phoneNumber = "" + req.body.phoneNumber; // 为了拼凑正确的sql语句，这里要转下整数
+            var hotelLocationDetails = "" + req.body.hotelLocationDetails; // 为了拼凑正确的sql语句，这里要转下整数
+            var id = generateUUID();
+
+            connection.query($sql.insertPage01, [id, userName, password, idCardNumber, phoneNumber, hotelName, hotelLocationDetails, "true"], function(err, result) {
+                if (result != "") {
+                    //   console.log("UserNameIsExist");
+                    if (result) {
+                        result = {
+                            code: "200",
+                            msg: "提交成功！"
+                        };
+                    }
+                    // 以json形式，把操作结果返回给前台页面
+                    jsonWrite(res, result);
+                } else {
+
+                }
+                connection.release();
+            });
+
+        });
+    },
+    page02: function(req, res, next) {
+        pool.getConnection(function(err, connection) {
+            console.log(req.body.userName)
+                //             "email": data.email,
+                // "car": data.car,
+                // "companyCredit": data.companyCredit,
+                // "education": data.education,
+                // "profession": data.profession,
+                // "zhimaCredit": data.zhimaCredit,
+                // "note": data.note,
+                // 获取前台页面传过来的参数
+            var userName = "" + req.body.userName; // 为了拼凑正确的sql语句，这里要转下整数
+            var password = "" + req.body.password; // 为了拼凑正确的sql语句，这里要转下整数
+            var email = "" + req.body.email; // 为了拼凑正确的sql语句，这里要转下整数
+            var car = "" + req.body.car; // 为了拼凑正确的sql语句，这里要转下整数
+            var companyCredit = "" + req.body.companyCredit; // 为了拼凑正确的sql语句，这里要转下整数
+            var profession = "" + req.body.profession; // 为了拼凑正确的sql语句，这里要转下整数
+            var education = "" + req.body.education; // 为了拼凑正确的sql语句，这里要转下整数
+            var zhimaCredit = "" + req.body.zhimaCredit; // 为了拼凑正确的sql语句，这里要转下整数
+            var note = "" + req.body.note; // 为了拼凑正确的sql语句，这里要转下整数
+            var id = generateUUID();
+
+            connection.query($sql.insertPage02, [id, userName, password, email, car, companyCredit, education, profession, zhimaCredit, note, "true"], function(err, result) {
+                if (result != "") {
+                    //   console.log("UserNameIsExist");
+                    if (result) {
+                        result = {
+                            code: "200",
+                            msg: "提交成功！"
+                        };
+                    }
+                    // 以json形式，把操作结果返回给前台页面
+                    jsonWrite(res, result);
+                } else {
+                    result = {
+                        code: "400",
+                        msg: "提交成功！"
+                    };
+                }
+                // 释放连接 
+                connection.release();
+            });
+
+        });
+    },
+
+    checkPage01: function(req, res, next) {
+        pool.getConnection(function(err, connection) {
+            var userName = "" + req.body.userName; // 为了拼凑正确的sql语句，这里要转下整数
+            var password = "" + req.body.password; // 为了拼凑正确的sql语句，这里要转下整数
+            connection.query($sql.checkIsSubmitedPage01, [userName, password], function(err, result) {
+                if (result != "") {
+                    result = {
+                        code: "600",
+                        msg: "已提交"
+                    };
+                } else {
+                    result = {
+                        code: "400",
+                        msg: "未添加"
+                    };
+                }
+                jsonWrite(res, result);
+                connection.release();
+            });
+
+        });
+    },
+    checkPage02: function(req, res, next) {
+        pool.getConnection(function(err, connection) {
+            var userName = "" + req.body.userName; // 为了拼凑正确的sql语句，这里要转下整数
+            var password = "" + req.body.password; // 为了拼凑正确的sql语句，这里要转下整数
+            connection.query($sql.checkIsSubmitedPage02, [userName, password], function(err, result) {
+                if (result != "") {
+                    result = {
+                        code: "600",
+                        msg: "已提交"
+                    };
+                } else {
+                    result = {
+                        code: "400",
+                        msg: "未添加"
+                    };
+                }
+                jsonWrite(res, result);
+                connection.release();
+            });
+        });
+    },
+};

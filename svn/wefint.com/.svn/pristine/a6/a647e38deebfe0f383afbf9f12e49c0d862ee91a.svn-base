@@ -1,0 +1,9 @@
+.chartModel {
+    width: 700px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.body {
+    text-align: center
+}

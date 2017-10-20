@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../css/registermember.css" type="">
+    <script src="../js/base64.js"></script>
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/registermember.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../layui/layui.js"></script>
+</head>
+
+<body class="beg-login-bg" onload="createCode();">
+    <!--logo-->
+    <!--<img src="../img/ft.png" class="logo">-->
+    <!--<div id="yzm" style="width:100%;">
+        <input type="button" id="code" onclick="createCode()" style="width:5%;position: relative;top:0px" />
+    </div>-->
+    <div class="beg-login-box">
+        <header>
+            <!--<div src="../img/ftlogo.png" class="login-logo">-->
+            <!--<img src="../img/fta.png" class="wz">-->
+            <h1>用户注册</h1>
+        </header>
+        <!--注册信息-->
+        <div class="beg-login-main">
+            <form action="/manage/login" class="layui-form" method="post">
+                <!--<input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />-->
+                <!--用户名-->
+                <div class="layui-form-item">
+                    <label class="register-text">用户名</label>
+                    <input type="text" name="userName" lay-verify="required" autocomplete="off" placeholder="这里输入登录名" class="layui-input">
+                </div>
+                <!--密码-->
+                <div class="layui-form-item">
+                    <label class="register-text">密码</label>
+                    <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="这里输入密码" class="layui-input">
+                </div>
+                <!--再次输入密码-->
+                <div class="layui-form-item">
+                    <label class="register-text">再次输入密码</label>
+                    <input type="password" name="password2" lay-verify="required" autocomplete="off" placeholder="再次输入密码" class="layui-input">
+                </div>
+                <!--客栈名称-->
+                <div class="layui-form-item">
+                    <label class="register-text">客栈名称</label>
+                    <input type="text" name="hotelName" lay-verify="required" autocomplete="off" placeholder="客栈名称" class="layui-input">
+                </div>
+                <!--电子邮件-->
+                <div class="layui-form-item">
+                    <label class="register-text">电子邮件</label>
+                    <input type="text" name="email" lay-verify="email" autocomplete="off" placeholder="电子邮件" class="layui-input">
+                </div>
+                <!--手机号码-->
+                <div class="layui-form-item">
+                    <label class="register-text">手机号码</label>
+                    <input type="text" name="phoneNumber" lay-verify="phone" autocomplete="off" placeholder="手机号码" class="layui-input">
+                </div>
+                <!--验证码-->
+                <div class="layui-form-item">
+                    <div class="layui-form-item">
+                        <div class="beg-pull-left">
+                            <!--<input type="button" id="code" onclick="createCode()" class="layui-input" />-->
+                            <input type="button" id="code" onclick="createCode()" class="layui-input" />
+                        </div>
+                        <div class="beg-pull-right">
+                            <input type="text" id="checkcode" name="checkcode" lay-verify="required" autocomplete="off" placeholder="验证码" class="layui-input">
+                        </div>
+                        <div class="beg-clear"></div>
+                    </div>
+                    <!--注册按钮-->
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-primary layui-input" lay-submit lay-filter="register">注册</button>
+                        <input type="checkbox" name="" lay-skin="primary" checked>请勾选 <a href="http://www.wefint.com/html/serveiceinfo.html">疯特服务条款</a>
+
+                        </input>
+
+                    </div>
+                    <div class="beg-clear"></div>
+            </form>
+            </div>
+
+        </div>
+        <script type="text/javascript" src="../layui/layui.js"></script>
+        <script>
+            layui.use(['layer', 'form'], function() {
+                var layer = layui.layer,
+                    $ = layui.jquery,
+                    form = layui.form();
+
+                form.on('submit(register)', function(data) {
+                    // alert(data.field.checkcode);
+                    // validate();
+                    //  layer.msg(JSON.stringify(data.field));
+                    if (validate()) {
+                        if (data.field.password == data.field.password2) {
+                            memberRegister(data.field);
+                        } else {
+                            alert("密码不一致,请重新输入");
+                        }
+                    }
+                    return false;
+                });
+            });
+        </script>
+</body>
+
+</html>

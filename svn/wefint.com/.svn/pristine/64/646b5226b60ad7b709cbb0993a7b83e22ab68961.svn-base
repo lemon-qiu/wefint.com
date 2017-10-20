@@ -1,0 +1,11 @@
+// dao/userSqlMapping.js
+// CRUD SQL语句
+var userLogin = {
+    insert: 'INSERT INTO pms_user_register(id,userName, password, hotelName,phoneNumber,email) VALUES(?,?,?,?,?,?)',
+    update: 'update user set name=?, age=? where id=?',
+    delete: 'delete from user where id=?',
+    queryByNameAndPassword: 'select * from pms_user_register where userName=? and password=?',
+    queryAll: 'select * from user',
+    checkIfUserNameIsExist: 'select * from pms_user_register where userName=?',
+};
+module.exports = userLogin;

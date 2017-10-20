@@ -1,0 +1,172 @@
+function chaxun() {
+    var JsonData = {
+            // userName 账号
+            "userName": getCookie('userName'),
+            // password 密码
+            "password": getCookie('password'),
+            "roomNumber": getCookie("roomNumber"),
+            "hasStayDate": getCookie("Date"),
+        }
+        // alert(JSON.stringify(JsonData))
+    $.ajax({
+        cache: true,
+        type: "POST",
+        //url: getUrl() + "/HotelPMS/EditSelectDataServlet",
+        url:"http://10.168.10.190:8080/HotelPMS/EditSelectDataServlet",
+        data: {
+            "strEditData": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert("succeed")
+            // alert(data)
+            var objs = eval(data);
+            if (objs[0].clientType == "2")
+                document.getElementById("clientType").value = "入住";
+            else
+                document.getElementById("clientType").value = "预定";
+
+            document.getElementById("cilentName").value = objs[0].cilentName;
+            document.getElementById("clientCellNumber").value = objs[0].clientCellNumber;
+            document.getElementById("idCardNumber").value = objs[0].idCardNumber;
+            document.getElementById("clientSource").value = objs[0].clientSource;
+            document.getElementById("startDay").value = objs[0].startDay;
+            document.getElementById("stayDays").value = objs[0].stayDays;
+
+            // if (objs[0].paymentWays == "1")
+            //     document.getElementById("paymentWays").value = "现金";
+            // else if (objs[0].paymentWays == "2")
+            //     document.getElementById("paymentWays").value = "银行卡";
+            // else if (objs[0].paymentWays == "3")
+            //     document.getElementById("paymentWays").value = "支付宝";
+            // else if (objs[0].paymentWays == "4")
+            //     document.getElementById("paymentWays").value = "微信";
+            // else if (objs[0].paymentWays == "5")
+            //     document.getElementById("paymentWays").value = "其他";
+            document.getElementById("paymentWays").value = objs[0].paymentWays;
+            document.getElementById("truePayment").value = objs[0].truePayment;
+            document.getElementById("note").value = objs[0].note;
+            document.getElementById("endDay").value = objs[0].endDay;
+        }
+    });
+    return false;
+}
+
+
+
+function stayIn(data) {
+    var JsonData = {
+            //userName 账号
+            "userName": getCookie('userName'),
+            // password 密码
+            "password": getCookie('password'),
+            "roomNumber": getCookie("roomNumber"),
+            "hasStayDate": getCookie("Date"),
+        }
+        // alert(JSON.stringify(JsonData))
+    $.ajax({
+        cache: true,
+        type: "POST",
+        // url: getUrl() + "/HotelPMS/EditRuzhuServlet",
+        url: "http://10.168.10.190:8080/HotelPMS/EditRuzhuServlet",
+        data: {
+            "strEditRuzhu": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data);
+            if (data == "200") {
+                alert("入住成功！")
+                closethis()
+            } else
+                alert("入住失败！")
+        }
+    });
+    return false;
+}
+//删除
+function deleteRoom(data) {
+    if (confirm("确认删除吗")) {} else {
+        return;
+    }
+    var JsonData = {
+        //userName 账号 
+        "userName": getCookie('userName'),
+        // password 密码
+        "password": getCookie('password'),
+        "roomNumber": getCookie("roomNumber"),
+        "hasStayDate": getCookie("Date"),
+    }
+    alert(JSON.stringify(JsonData))
+    $.ajax({
+        cache: true,
+        type: "POST",
+        // url: getUrl() + "/HotelPMS/EditDeleteServlet",
+        url: "http://10.168.10.190:8080/HotelPMS/EditDeleteServlet",
+        data: {
+            "strDeleteEdit": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data);
+            if (data == "200") {
+                alert("删除成功！")
+                closethis()
+            } else
+                alert("删除失败！")
+        }
+    });
+    return false;
+}
+//更改信息
+function changeInfo() {
+    var JsonData = {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+            "roomNumber": getCookie("roomNumber"),
+            "hasStayDate": getCookie("Date"),
+        }
+        // alert(JSON.stringify(JsonData))
+    $.ajax({
+        cache: true,
+        type: "POST",
+        // url: getUrl() + "/HotelPMS/EditSelectDataServlet",
+        url:"http://10.168.10.190:8080/HotelPMS/EditSelectDataServlet",
+        data: {
+            "strEditData": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data)
+            // var objs = eval(data);
+            // if (objs[0].clientType == "2")
+            //     document.getElementById("clientType").value = "入住";
+            // else
+            //     document.getElementById("clientType").value = "预定";
+
+            // document.getElementById("cilentName").value = objs[0].cilentName;
+            // document.getElementById("clientCellNumber").value = objs[0].clientCellNumber;
+            // document.getElementById("idCardNumber").value = objs[0].idCardNumber;
+            // document.getElementById("clientSource").value = objs[0].clientSource;
+            // document.getElementById("startDay").value = objs[0].startDay;
+            document.getElementById("stayDays").value = data;
+            // document.getElementById("paymentWays").value = objs[0].paymentWays;
+            // document.getElementById("truePayment").value = objs[0].truePayment;
+            // document.getElementById("note").value = objs[0].note;
+            // document.getElementById("endDay").value = objs[0].endDay;
+        }
+    });
+    return false;
+}

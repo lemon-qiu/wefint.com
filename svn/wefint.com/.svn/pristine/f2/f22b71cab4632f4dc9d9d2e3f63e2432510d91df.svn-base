@@ -1,0 +1,289 @@
+function postPage() {
+    getData(0);
+    var uploada0 = document.getElementById('upload0');
+    uploada0.addEventListener("click", function() {
+        uploadFile(0);
+    }, false);
+
+    var uploada1 = document.getElementById('upload1');
+    uploada1.addEventListener("click", function() {
+        uploadFile(1);
+    }, false);
+
+    var uploada2 = document.getElementById('upload2');
+    uploada2.addEventListener("click", function() {
+        uploadFile(2);
+    }, false);
+
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: SERVER_ADD_PORT + "/finance/checkPage02",
+        data: {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            var obj = JSON.parse(data);
+            if (obj.code == "600") {
+                getData(1);
+                document.getElementById("Content-Main").innerHTML = "已经提交请耐心等候～～";
+            }
+        }
+    });
+}
+
+function uploadFile(n) {
+    var formData = new FormData();
+    switch (n) {
+        case 0:
+            var file = document.getElementById("PERSONALCREDIT")
+            if (file.files[0] == undefined) {
+                alert("请选择文件");
+                return false;
+            }
+            formData.append('file', file.files[0]);
+            formData.append('fileType', "1");
+            formData.append('fileClass', "PERSONALCREDIT");
+            break;
+        case 1:
+            var file = document.getElementById("HOUSEPROPERTY")
+            if (file.files[0] == undefined) {
+                alert("请选择文件");
+                return false;
+            }
+            formData.append('file', file.files[0]);
+            formData.append('fileType', "1");
+            formData.append('fileClass', "HOUSEPROPERTY");
+            break;
+        case 2:
+            var file = document.getElementById("ENTERPRISELICENSING")
+            if (file.files[0] == undefined) {
+                alert("请选择文件");
+                return false;
+            }
+            formData.append('file', file.files[0]);
+            formData.append('fileType', "1");
+            formData.append('fileClass', "ENTERPRISELICENSING");
+            break;
+        default:
+            break;
+    }
+    formData.append('userName', getCookie('userName'));
+    formData.append('password', getCookie('password'));
+
+    $.ajax({
+        url: SERVER_ADD_PORT + "/fileUpLoad/fileUpLoad",
+        type: 'POST',
+        data: formData,
+        // async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            // alert(data)
+            var obj = JSON.parse(data);
+            if ("200" == obj.code) {
+
+                switch (n) {
+                    case 0:
+                        $('#result0').html("上传成功！");
+                        $('#img0').attr('src', obj.msg);
+                        break;
+                    case 1:
+                        $('#result1').html("上传成功！");
+                        $('#img1').attr('src', obj.msg);
+                        break;
+                    case 2:
+                        $('#result2').html("上传成功！");
+                        $('#img2').attr('src', obj.msg);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                switch (n) {
+                    case 0:
+                        $('#result0').html("上传成功！");
+                        break;
+                    case 1:
+                        $('#result1').html("上传成功！");
+                        break;
+                    case 2:
+                        $('#result2').html("上传成功！");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            console.log('imgUploader upload success');
+        },
+        error: function() {
+            $("#result").html("与服务器通信发生错误");
+        }
+    });
+}
+
+function submitFinanceData(data) {
+    if (false) {
+        alert("图片需要先预览，以确定您上传的文件正确！")
+    }
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: SERVER_ADD_PORT + "/finance/page02",
+        data: {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+            "email": data.email,
+            "car": data.car,
+            "companyCredit": data.companyCredit,
+            "education": data.education,
+            "profession": data.profession,
+            "zhimaCredit": data.zhimaCredit,
+            "note": data.note,
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            var obj = JSON.parse(data);
+            if (obj.code == "200") {
+                getData(1);
+                document.getElementById("Content-Main").innerHTML = "已经提交请耐心等候～～";
+            }
+        }
+    });
+    return false;
+}
+
+function getData(n) {
+    switch (n) {
+        case 0:
+            readerChart(1, 1, 1, 1, 1, 1)
+            break;
+        case 1:
+            readerChart(30, 30, 30, 30, 30, 30)
+            break;
+        default:
+            break;
+    }
+
+
+
+    //     var JsonData = {
+    //         //     "userName": getCookie('userName'),
+    //         //     "password": getCookie('password'),
+    //         "userName": "998",
+    //         "password": "password",
+    //     }
+    //     $.ajax({
+    //         cache: true,
+    //         type: "POST",
+    //         // url: getUrl() + "/HotelPMS/ScoringSelectServlet",
+    //         url: "http://10.168.10.190:8080/HotelPMS/ScoringSelectServlet",
+    //         data: {
+    //             "strScoringSelect": JSON.stringify(JsonData)
+    //         },
+    //         async: false,
+    //         error: function(request) {
+    //             alert("获取状态失败，请稍后");
+    //         },
+    //         success: function(data) {
+    //             // alert(data);
+    //             // var obj = JSON.parse(data);
+    //             // alert(data);
+    //             var objs = eval(data);
+
+    //             for (var j = 0; j < objs.length; j++) {
+    //                 var aa = new Array();
+    //                 // alert(objs[j].idproofScoring);
+    //                 // alert(objs[j].tenantRatingScoring);
+    //                 // alert(objs[j].salesScore);
+    //                 // alert(objs[j].salesScoring);
+    //                 // alert(objs[j].totalCreditScore);
+    //                 // alert(objs[j].resourceScoring);
+    //                 aa[0] = objs[j].idproofScoring;
+    //                 aa[1] = objs[j].tenantRatingScoring;
+    //                 aa[2] = objs[j].salesScore;
+    //                 aa[3] = objs[j].salesScoring;
+    //                 aa[4] = objs[j].totalCreditScore;
+    //                 aa[5] = objs[j].resourceScoring;
+    //             }
+    //             var a = aa[0];
+    //             var b = aa[1];
+    //             var c = aa[2];
+    //             var d = aa[3];
+    //             var e = aa[4];
+    //             var f = aa[5];
+    //             raderChart(a, b, c, d, e, f)
+    //         }
+    //     });
+    //     return false;
+    // readerChart(30, 30, 30, 30, 30, 30)
+}
+
+function readerChart(a, b, c, d, e, f) {
+
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title: {
+            text: ''
+        },
+        legend: {
+            data: ['']
+        },
+        radar: [{
+
+        }, {
+            indicator: [{
+                text: '身份',
+                max: 100
+            }, {
+                text: '合同期',
+                max: 100
+            }, {
+                text: '销量',
+                max: 100
+            }, {
+                text: '规模',
+                max: 100
+            }, {
+                text: '信用历史',
+                max: 100
+            }, {
+                text: '人脉',
+                max: 100
+            }],
+            center: ['45%', '40%'],
+            radius: 120
+        }],
+        series: [{
+            name: '信用评分',
+            type: 'radar',
+            radarIndex: 1,
+            data: [{
+                value: [a, b, c, d, e, f],
+                name: '客栈',
+                areaStyle: {
+                    normal: {
+                        opacity: 0.9,
+                        color: new echarts.graphic.RadialGradient(1, 2, 1, [{
+                            color: '#1580c4',
+                            offset: 0
+                        }, {
+                            color: '#277eb5',
+                            offset: 1
+                        }])
+                    }
+                }
+            }]
+        }]
+    }
+    myChart.setOption(option);
+}

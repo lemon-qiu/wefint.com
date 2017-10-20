@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<!--
+	Aerial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+    <title>Wefint</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+</head>
+
+<body class="loading">
+    <div id="wrapper">
+        <div id="bg"></div>
+        <div id="overlay"></div>
+        <div id="main">
+
+            <!-- Header -->
+            <header id="header">
+                <h1>疯特</h1>
+                <p>简单 &nbsp;&bull;&nbsp; 开源 &nbsp;&bull;&nbsp; 您的智能管家</p>
+                <nav>
+                    <ul>
+                        <li><a href="./html/login.html" class="icon fa-user"><span class="label">login</span></a></li>
+                        <li><a href="./html/registermember.html" class="icon fa-user-plus"><span class="label">setup</span></a></li>
+                        <li><a href="#" class="icon fa-weibo"><span class="label">weibo</span></a></li>
+                        <li><a href="./financeintro.html" class="icon fa-cny"><span class="label">finance</span></a></li>
+                        <li><a href="#" class="icon fa-wechat"><span class="label">wechat</span></a></li>
+                        <li><a href="./aboutus.html" class="icon fa-hand-peace-o"><span class="label">wechat</span></a></li>
+                        <li><a href="./contactus.html" class="icon fa-paper-plane"><span class="label">contact us</span></a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <!--<span class="copyright">关于我们 &nbsp;&bull;&nbsp;联系我们 </span>-->
+                <span class="copyright">云南圣境环球酒店管理有限公司&nbsp;&bull;&nbsp;滇ICP备17005243号-1&nbsp;&bull;&nbsp;推荐浏览器：火狐浏览器Firefox 苹果浏览器Safari</span>
+            </footer>
+
+        </div>
+    </div>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script>
+        window.onload = function() {
+            document.body.className = '';
+        }
+        window.ontouchmove = function() {
+            return false;
+        }
+        window.onorientationchange = function() {
+            document.body.scrollTop = 0;
+        }
+    </script>
+</body>
+
+</html>

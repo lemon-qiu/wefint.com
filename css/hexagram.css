@@ -1,0 +1,137 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+div {
+    margin: 0px;
+    padding: 0px;
+}
+
+#header {
+    /*background-color: blue;*/
+    color: white;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 60px;
+    width: 100%;
+}
+
+#footer {
+    /*background-color: green;*/
+    color: white;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+#Content {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 60px;
+    bottom: 60px;
+    /* margin: 15px; */
+    /*background: #0FF;*/
+}
+
+#Content-Left {
+    border: 1px solid #ccc;
+    height: 100%;
+    width: 25%;
+    float: left;
+    /*设置元素跟其他元素的距离为20像素*/
+    /* float: left; */
+    /*设置浮动，实现多列效果，div+Css布局中很重要的*/
+    /*background: #90C;*/
+}
+
+#Content-Left-up {
+    /* border: 1px solid rgb(245, 245, 245); */
+    height: 35%;
+    overflow: auto;
+}
+
+#Content-Left-down {
+    /* border: 1px solid rgb(245, 245, 245); */
+    /* background-color: black; */
+    height: 65%;
+    width: 100%;
+    overflow: auto;
+}
+
+#Content-Main {
+    border: 1px solid green;
+    width: max-content;
+    height: 100%;
+    /*设置元素跟其他元素的距离为20像素*/
+    /* float: left; */
+    overflow: auto;
+    /*设置浮动，实现多列效果，div+Css布局中很重要的*/
+    /*background: #e90;*/
+}
+
+#hotelName {
+    background-color: rgb(245, 245, 245);
+}
+
+#userName {
+    background-color: rgb(245, 245, 245);
+}
+
+#part1 {
+    border: 1px solid rgb(245, 245, 245);
+    padding: 10px;
+    margin: 15px;
+}
+
+#part2 {
+    border: 1px solid rgb(245, 245, 245);
+    padding: 10px;
+    margin: 15px;
+}
+
+#part3 {
+    border: 1px solid rgb(245, 245, 245);
+    padding: 10px;
+    margin: 15px;
+}
+
+#part4 {
+    border: 1px solid rgb(245, 245, 245);
+    padding: 10px;
+    margin: 15px;
+}
+
+#part5 {
+    border: 1px solid rgb(245, 245, 245);
+    padding: 10px;
+    margin: 15px;
+}
+
+#part6 {
+    border: none;
+    padding: 10px;
+    margin: 15px;
+}
+
+#LAY_demo_upload {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.site-demo-upload {
+    /* border: 1px solid red; */
+    margin-top: 60px;
+    padding-left: 140px;
+}
+
+.layui-btn {
+    margin-left: 50px;
+}

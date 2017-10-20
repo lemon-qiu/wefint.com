@@ -1,0 +1,95 @@
+function check() {
+    alert(getCookie('userName'));
+    alert(getCookie('password'));
+    alert(getCookie("Date"));
+    alert(getCookie("roomNumber"));
+}
+
+function postClinetOrder(data, startDay, roomNumber) {
+
+
+    var JsonData = {
+            // userName 账号
+            "userName": getCookie('userName'),
+            // password 密码
+            "password": getCookie('password'),
+            // clientType 预定 / 现住
+            "clientType": data.clientType,
+            // cilentName 入住人姓名
+            "cilentName": data.cilentName,
+            // clientCellNumber 入住人手机
+            "clientCellNumber": data.clientCellNumber,
+            // idCardNumber 身份证号
+            "idCardNumber": data.idCardNumber,
+            // clientSource 客人来源 飞猪 艺龙
+            "clientSource": data.clientSource,
+            // "startDay": data.startDay, //开始入住日
+            "startDay": getCookie("Date"), //开始入住日
+            // stayDays 住宿天数（ 几天几条数据） 3
+            "stayDays": data.stayDays,
+            // enterRoomPrice 输入房间价格
+            "enterRoomPrice": data.enterRoomPrice,
+            // truePayment 实际收款（ 前台输入）
+            "truePayment": data.getPrice,
+            // paymentWays 收费选项付款方式 - 现金， 刷卡， 微信， 支付宝， 其他
+            "paymentWays": data.priceFrom,
+            // note 备注
+            "note": data.note,
+            //房间编号
+            "roomNumber": getCookie("roomNumber"),
+            // roomNumber 房间编号（ 同一家客栈不重复） 同客栈唯一
+        }
+        // alert(JSON.stringify(JsonData))
+
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "http://localhost:3000/roomStatus/add",
+        //  url: "http://10.168.10.190:8080/HotelPMS/EditSetupServlet",
+        data: {
+            // userName 账号
+            "userName": getCookie('userName'),
+            // password 密码
+            "password": getCookie('password'),
+            // clientType 预定 / 现住
+            "clientType": data.clientType,
+            // cilentName 入住人姓名
+            "cilentName": data.cilentName,
+            // clientCellNumber 入住人手机
+            "clientCellNumber": data.clientCellNumber,
+            // idCardNumber 身份证号
+            "idCardNumber": data.idCardNumber,
+            // clientSource 客人来源 飞猪 艺龙
+            "clientSource": data.clientSource,
+            // "startDay": data.startDay, //开始入住日
+            "startDay": getCookie("Date"), //开始入住日
+            // stayDays 住宿天数（ 几天几条数据） 3
+            "stayDays": data.stayDays,
+            // enterRoomPrice 输入房间价格
+            "enterRoomPrice": data.enterRoomPrice,
+            // truePayment 实际收款（ 前台输入）
+            "truePayment": data.getPrice,
+            // paymentWays 收费选项付款方式 - 现金， 刷卡， 微信， 支付宝， 其他
+            "paymentWays": data.priceFrom,
+            // note 备注
+            "note": data.note,
+            //房间编号
+            "roomNumber": getCookie("roomNumber"),
+            // roomNumber 房间编号（ 同一家客栈不重复） 同客栈唯一
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            alert(data)
+            if (data == "200") {
+                alert("入住成功！")
+                closethis()
+            } else
+                alert("房间冲突，请重新选择！")
+                //alert(data)
+        }
+    });
+    return false;
+}

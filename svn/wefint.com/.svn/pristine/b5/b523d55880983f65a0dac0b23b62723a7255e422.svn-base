@@ -1,0 +1,413 @@
+//获得信息
+function getMes() {
+    var b = new Base64();
+    var JsonData = {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+        }
+        // alert(JSON.stringify(JsonData));
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "http://localhost:3000/roomSetup/queryAllByUserName",
+        // url:"http://10.168.10.190:8080/HotelPMS/LoginCommonServlet",
+        data: {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+
+            // var obj = JSON.parse(data);
+            // //  alert(obj.code);
+            // var objs = eval(obj.msg);
+            // // var objs = eval(data);
+            // for (var j = 0; j < objs.length; j++) {
+            //     var aa = new Array();
+            //     // aa[0] = objs[j].id
+            //     aa[1] = objs[j].userName
+            //         // aa[2] = objs[j].password
+            //     aa[3] = objs[j].createTime
+            //         // aa[4] = objs[j].expireTime
+            //     aa[5] = objs[j].phoneNumber
+            //     aa[6] = objs[j].email
+            //     aa[7] = objs[j].hotelName
+            //     aa[8] = objs[j].hotelGrade
+            //         // aa[9] = objs[j].loginRole
+            //     aa[10] = objs[j].loginRoleLevel
+            // }
+            // var str = b.decode(aa[1]);
+            // document.getElementById("userName").value = str;
+            // document.getElementById("createTime").value = aa[3];
+            // // document.getElementById("expireTime").value = aa[4];
+            // document.getElementById("phoneNumber").value = aa[5];
+            // document.getElementById("email").value = aa[6];
+            // document.getElementById("hotelName").value = aa[7];
+            // document.getElementById("hotelGrade").value = aa[8];
+            // // document.getElementById("loginRole").value = aa[9];
+            // document.getElementById("loginRoleLevel").value = aa[10];
+        }
+    });
+    return false;
+}
+
+//人员管理
+function employeeManage(data) {
+    var base = new Base64();
+    var encodeStr = base.encode(data.userName0);
+    var encodeStr1 = base.encode(data.password0);
+    // alert("11");
+    var JsonData = {
+        "userName": getCookie('userName'),
+        "password": getCookie('password'),
+        "userName0": encodeStr,
+        "password0": encodeStr1,
+        "registerName": data.registerName,
+        "phoneNumber": data.phoneNumber,
+        "loginRole": data.loginRole,
+    }
+
+    // alert(JSON.stringify(JsonData));
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: getUrl() + "/HotelPMS/UserRegisterEmployeeServlet",
+        // url:"http://10.168.10.190:8080/HotelPMS/UserRegisterEmployeeServlet",
+        data: {
+            "strInsertRegisterEmployee": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data);
+            if (data == "200") {
+                alert("添加成功!")
+                reload();
+                return false;
+            }
+            alert("添加失败！")
+                // var obj = JSON.parse(data);
+                // // alert(data);
+                // var objs = eval(data);
+
+            // for (var j = 0; j < objs.length; j++) {
+            //     var aa = new Array();
+            //     // alert(objs[j].roomLineID);
+            //     // alert(objs[j].roomRoomType);
+            //     // alert(objs[j].roomRoomQuantity);
+            //     // alert(objs[j].roomRoomNumber);
+            //     // alert(objs[j].roomInitialPrice);
+            //     // alert(objs[j].roomCustomPrice);
+            //     // alert(objs[j].loginGrade);
+            //     aa[0] = objs[j].roomType
+            //     aa[1] = objs[j].roomName
+            //     aa[2] = objs[j].roomNumber
+            //     aa[3] = objs[j].roomInitalPrice
+            //     aa[4] = objs[j].roomSpecialDatePrice
+            //         // alert(aa);
+            //     setData(aa);
+            // }
+        }
+    });
+    return false;
+}
+
+function getRooms() {
+
+    var JsonData = {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+        }
+        // alert(getCookie('userName'));
+        // alert(getCookie('password'));
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "http://localhost:3000/roomSetup/queryAllByUserName",
+        //    url:"http://10.168.10.190:8080/HotelPMS/RoomSelectServlet",
+        data: {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            //  alert(data);
+            var obj = JSON.parse(data);
+            // alert(data);
+            var objs = eval(obj.msg);
+            for (var j = 0; j < objs.length; j++) {
+                var aa = new Array();
+                aa[0] = objs[j].roomType
+                aa[1] = objs[j].roomName
+                aa[2] = objs[j].roomNumber
+                aa[3] = objs[j].roomInitalPrice
+                aa[4] = objs[j].roomSpecialDatePrice
+                setData(aa);
+            }
+        }
+    });
+    return false;
+}
+// 按照传入时间生成30天表格
+function setData(getData) {
+    setTable(1, getData);
+}
+
+function setTable(trLineNumber, tdData) {
+    var _table = document.getElementById("houseStatusTable");
+    // _table.innerHTML = ""
+    var _row;
+    var _cell;
+    for (var i = 0; i < trLineNumber; i++) {
+        _row = document.createElement("tr");
+        document.getElementById("houseStatusTable").appendChild(_row);
+        for (var j = 0; j < tdData.length; j++) {
+            _cell = document.createElement("td");
+            // _cell.onclick = function() { getColumnDetail(this) }; //为每个单元格增加单击事件
+            _cell.innerText = tdData[j];
+            _row.appendChild(_cell);
+        }
+        _cell = document.createElement("td");
+        _cell.innerHTML = "<input type='button' value=\"修改\" onclick=\"ChangeRooms(this)\"class=\"layui-btn layui-btn-primary\"/> <input type='button' value=\"删除\" onclick=\"deleteRooms(this)\"class=\"layui-btn layui-btn-primary\"/>";
+        // _cell.innerText ="<input type='button' onclick=\"delRow(this)\"/>";
+        _row.appendChild(_cell);
+    }
+}
+
+function ChangeRooms(data) {
+    layer.open({
+        type: 1,
+        closeBtn: true,
+        shift: 2,
+        shadeClose: true,
+        content: $('#box1') //这里content是一个DOM，这个元素要放在body根节点下
+    });
+
+    // layer.open({
+    //     type: 1,
+    //     content: '传入任意的文本或html' //这里content是一个普通的String
+    // });
+}
+
+function insertRooms(data) {
+
+    var JsonData = {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+            "roomType": data.roomType,
+            "roomName": data.roomName,
+            "roomNumber": data.roomNumber,
+            "roomInitalPrice": data.roomInitalPrice,
+            "roomSpecialDatePrice": data.roomSpecialDatePrice,
+            "roomNote": data.roomNote,
+        }
+        // alert(JSON.stringify(JsonData)
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "http://localhost:3000/roomSetup/addRoom",
+        //  url:"http://10.168.10.190:8080/HotelPMS/RoomSetupServlet",
+        data: {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+            "roomType": data.roomType,
+            "roomName": data.roomName,
+            "roomNumber": data.roomNumber,
+            "roomInitalPrice": data.roomInitalPrice,
+            "roomSpecialDatePrice": data.roomSpecialDatePrice,
+            "roomNote": data.roomNote,
+        },
+        async: false,
+        error: function(request) {
+            alert("添加失败，请联系管理员");
+        },
+        success: function(data) {
+            // alert(data);
+            if (data == "800") {
+                alert("房间号冲突，请更换");
+                return false;
+            }
+            if (data == "200") {
+                alert("添加成功");
+                reload();
+                return false;
+            }
+        }
+    });
+    return false;
+}
+
+function deleteRooms(tdObj) {
+    if (confirm("确认删除吗")) {} else {
+        return;
+    }
+
+    //获取tr对象;
+    var tr = tdObj.parentNode.parentNode;
+    var trArray = new Array();
+    for (var i = 0; i < tr.cells.length; i++) {
+        trArray[i] = tr.cells[i].innerHTML;
+    }
+    alert(trArray[2])
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "http://localhost:3000/roomSetup/deleteByRoomNumber",
+        // url:"http://10.168.10.190:8080/HotelPMS/RoomDeleteServlet",
+        data: {
+            "userName": getCookie('userName') + "",
+            "password": getCookie('password') + "",
+            "roomNumber": trArray[2]
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            alert(data);
+            location.reload();
+        }
+    });
+    return false;
+}
+
+
+function form2(data) {
+    // alert("asdsdada");
+    var JsonData = {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+            "compensasenFeiZhuSolid": data.compensasenFeiZhuSolid,
+            // "compensasenFeiZhu": data.compensasenFeiZhu,
+            "compensasenYiLongSolid": data.compensasenYiLongSolid,
+            // "compensasenYiLong": data.compensasenYiLong,
+            "compensasenXieChengSolid": data.compensasenXieChengSolid,
+            // "ompensasenXieCheng": data.ompensasenXieCheng,
+            "compensasenQuNaErSolid": data.compensasenQuNaErSolid,
+            // "ompensasenQuNaEr": data.ompensasenQuNaEr,
+        }
+        // alert(JSON.stringify(JsonData))
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: getUrl() + "/HotelPMS/CompensasenSetupServlet",
+        // url: "http://10.168.10.190:8080/HotelPMS/CompensasenSetupServlet",
+        data: {
+            "strCompensasenSetup": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("添加失败，请联系管理员");
+        },
+        success: function(data) {
+            // alert(data);
+
+            if (data == "200") {
+                alert("添加成功");
+                reload();
+                return false;
+            } else if (data == "800") {
+                alert("已设置佣金比例!");
+                return false;
+            }
+        }
+    });
+    return false;
+}
+
+function getEmployee() {
+    // var b = new Base64();
+    var JsonData = {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+        }
+        // alert(getCookie('userName'));
+        // alert(getCookie('password'));
+    $.ajax({
+        cache: true,
+        type: "POST",
+        // url:"http://10.168.10.190:8080/HotelPMS/UserRegisterEmployeeSelectServlet",
+        url: getUrl() + "/HotelPMS/UserRegisterEmployeeSelectServlet",
+        data: {
+            "strUserRegisterEmployeeSelect": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data);
+            if (data == "250") {
+                alert("权限不够，请联系管理员！联系电话：0888-5191803")
+            }
+            //[{"id":"402808815d94c30e015d94c311950000","createTime":"Jul 31, 2017 2:29:58 AM",
+            //"expireTime":"Jul 31, 2017 2:29:58 AM","hotelName":"aaaaaa","hotelGrade":"0","loginRole":"2",
+            //"loginRoleLevel":"0"},{"id":"402808815d94c726015d94c72aa80000","createTime":"Jul 31, 2017 2:34:26 AM","expireTime":"Jul 31, 2017 2:34:26 AM",
+            //"hotelName":"aaaaaa","hotelGrade":"0","loginRole":"2","loginRoleLevel":"0"}]
+            var obj = JSON.parse(data);
+            // alert(data);
+            var objs = eval(data);
+            //[{"id":"402808815d967f01015d967f03dc0000","userName":"cccccccc","password":"password","createTime":"Jul 31, 2017 10:34:52 AM",
+            //"expireTime":"Jul 31, 2017 10:34:52 AM","hotelName":"aaaaaa","hotelGrade":"0","loginRole":"2","loginRoleLevel":"0"},
+            //{"id":"402808815d96802d015d968802300003","userName":"NjY2NjY\u003d","password":"NjY2NjY\u003d","createTime":"Jul 31, 2017 10:44:42 AM",
+            //"expireTime":"Jul 31, 2017 10:44:42 AM","phoneNumber":"131289412235","hotelName":"aaaaaa","registerName":"四轮定位","hotelGrade":"0","loginRole":"2","loginRoleLevel":"0"}]
+            for (var j = 0; j < objs.length; j++) {
+                var aa = new Array();
+                // alert(objs[j].roomLineID);
+                // alert(objs[j].roomRoomType);
+                // alert(objs[j].roomRoomQuantity);
+                // alert(objs[j].roomRoomNumber);
+                // alert(objs[j].roomInitialPrice);
+                // alert(objs[j].roomCustomPrice);
+                // alert(objs[j].loginGrade);
+                var b = new Base64();
+                aa[0] = b.decode(objs[j].userName);
+                //  aa[0] = objs[j].userName
+                // var str = b.decode(aa[0]);
+                aa[1] = objs[j].registerName
+                aa[2] = objs[j].phoneNumber
+                aa[3] = objs[j].createTime
+                if (objs[j].loginRole == 2)
+                    aa[4] = "员工"
+                else if (objs[j].loginRole == 1)
+                    aa[4] = "店长"
+                    // alert(aa);
+                setData2(aa);
+            }
+        }
+    });
+    return false;
+}
+// 按照传入时间生成30天表格
+function setData2(getData) {
+    setTable2(1, getData);
+}
+
+function setTable2(trLineNumber, tdData) {
+    var _table = document.getElementById("employeeTable");
+    // _table.innerHTML = ""
+    var _row;
+    var _cell;
+    for (var i = 0; i < trLineNumber; i++) {
+        _row = document.createElement("tr");
+        document.getElementById("employeeTable").appendChild(_row);
+        for (var j = 0; j < tdData.length; j++) {
+            _cell = document.createElement("td");
+            // _cell.onclick = function() { getColumnDetail(this) }; //为每个单元格增加单击事件
+            _cell.innerText = tdData[j];
+            _row.appendChild(_cell);
+        }
+        _cell = document.createElement("td");
+        // _cell.innerHTML = "<input type='button' value=\"修改\" onclick=\"ChangeRooms(this)\"class=\"layui-btn layui-btn-primary\"/> <input type='button' value=\"删除\" onclick=\"deleteRooms(this)\"class=\"layui-btn layui-btn-primary\"/>";
+        // _cell.innerText ="<input type='button' onclick=\"delRow(this)\"/>";
+        _row.appendChild(_cell);
+    }
+}

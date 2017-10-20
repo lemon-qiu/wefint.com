@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>登录</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <!--<link rel="stylesheet" href="../css/body.css" type="">-->
+    <link rel="stylesheet" href="../css/login.css" type="">
+    <script src="../js/base64.js"></script>
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <style>
+        .logo {
+            width: 340px;
+            height: 220px;
+            background: url("../img/ftlogo.png") no-repeat;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body class="beg-login-bg" onload="createCode();loginCheckCookieLogin();">
+    <!--logo-->
+    <!--<img src="../img/ft.png" class="logo">-->
+    <!--<div id="yzm" style="width:100%;">
+        <input type="button" id="code" onclick="createCode()" style="width:5%;position: relative;top:0px" />
+    </div>-->
+    <div class="beg-login-box">
+        <header>
+            <!--<div src="../img/ftlogo.png" class="login-logo">-->
+            <!--<img src="../img/fta.png" class="wz">-->
+            <h1>用户登陆</h1>
+        </header>
+
+        <div class="beg-login-main">
+            <form action="" class="layui-form" method="post">
+                <!--<input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />-->
+                <!--登录名-->
+                <div class="layui-form-item">
+                    <input type="text" name="userName" lay-verify="required" autocomplete="off" placeholder="这里输入登录名" class="layui-input">
+                </div>
+                <!--密码-->
+                <div class="layui-form-item">
+                    <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="这里输入密码" class="layui-input">
+                </div>
+                <!--验证码-->
+                <div class="layui-form-item">
+                    <div class="beg-pull-left">
+                        <input type="button" id="code" onclick="createCode()" class="layui-input" />
+                    </div>
+                    <div class="beg-pull-right">
+                        <input type="text" id="checkcode" name="checkcode" autocomplete="off" placeholder="验证码" class="layui-input">
+                    </div>
+                    <div class="beg-clear"></div>
+                </div>
+                <!--登录按钮-->
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-primary layui-input" lay-submit lay-filter="login">登录</button>
+                </div>
+                <!--注册按钮-->
+                <div class="beg-clear"></div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-primary layui-input" lay-submit lay-filter="register" onclick="window.open('./registermember.html')">注册</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <script>
+        // validate();
+        layui.use(['layer', 'form'], function() {
+            var layer = layui.layer,
+                $ = layui.jquery,
+                form = layui.form();
+
+            form.on('submit(login)', function(data) {
+                //alert(JSON.stringify(data.field));
+                //  if (validate()) {
+                memberLogin(data.field);
+                //  }
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

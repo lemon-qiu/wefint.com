@@ -1,0 +1,190 @@
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color:#4072ed;
+    opacity:0.8;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.closebtn{
+	border:none;
+    background-color:#4072ed;
+   
+}
+#x{
+	color:#ffffff;
+}
+#main {
+	
+    transition: margin-right .5s;
+    padding: 16px;
+    
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+#wz{
+  color:#ffffff;
+}
+#wz1{
+  color:#000000;
+}
+.header{
+	width:100%;
+	height:10%;
+	background-color:#021a26;
+	
+}
+.ft{
+    position: absolute;
+    width:5%;
+    height:10%;
+    left:0%;
+    top:0%;
+}
+
+.logo{
+	width:5%;
+	height:5%;
+    
+}
+.input1{
+	position: relative;
+	top:4%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input2{
+	position: relative;
+	top:6%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input3{
+	position: relative;
+	top:8%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input4{
+	position: relative;
+	top:10%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input5{
+	position: relative;
+	top:12%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input6{
+	position: relative;
+	top:14%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input7{
+	position: relative;
+	top:16%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input8{
+	position: relative;
+	top:18%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input9{
+	position: relative;
+	top:20%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.input10{
+	position: relative;
+	top:22%;
+	left:2%;
+	width:100%;
+	height:4%;
+}
+.btn1{
+	position: relative;
+	top:25%;
+	left:20%;
+}
+.queding{
+	width:60px;
+	height:30px;
+	border-radius: 10px;
+	background-color:#02c874;
+}
+.btn2{
+	position: relative;
+	top:21.9%;
+	left:50%;
+}
+.quxiao{
+	width:60px;
+	height:30px;
+	border-radius: 10px;
+	background-color:#ffffff;
+}
+th{
+	background-color:#f95b63;
+}
+td,th{
+	text-align:center;
+}
+.table{
+	position:absolute;
+	top:100px;
+}
+td{
+	height:50px;
+	width:300px;
+}
+.bianji:hover{
+	background-color:#eee;
+}
+.td{
+	width:100px;
+	background-color:#ffffff;
+}

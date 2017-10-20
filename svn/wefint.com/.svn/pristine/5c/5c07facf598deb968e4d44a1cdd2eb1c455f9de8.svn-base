@@ -1,0 +1,7 @@
+// dao/userSqlMapping.js
+// CRUD SQL语句
+var fileUpLoad = {
+    addFile: 'INSERT INTO pms_file_upload (Id,userName,password,filePath,fileName,fileType,fileClass) VALUES(?,?,?,?,?,?,?)',
+};
+
+module.exports = fileUpLoad;

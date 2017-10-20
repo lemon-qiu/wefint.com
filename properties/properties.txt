@@ -1,0 +1,9 @@
+[plugin_page_search]
+wholeword=0
+matchcase=1
+hightlight=1
+total=1
+
+[data]
+up=85
+down=5

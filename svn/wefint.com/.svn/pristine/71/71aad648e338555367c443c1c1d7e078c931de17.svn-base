@@ -1,0 +1,25 @@
+var express = require('express');
+var router = express.Router();
+
+var finance = require('../dao/financeDao');
+
+router.post('/page01', function(req, res, next) {
+    console.log(req.body)
+    finance.page01(req, res, next);
+});
+
+router.post('/page02', function(req, res, next) {
+    console.log(req.body)
+    finance.page02(req, res, next);
+});
+
+router.post('/checkPage01', function(req, res, next) {
+    console.log(req.body)
+    finance.checkPage01(req, res, next);
+});
+
+router.post('/checkPage02', function(req, res, next) {
+    console.log(req.body)
+    finance.checkPage02(req, res, next);
+});
+module.exports = router;

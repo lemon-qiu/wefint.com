@@ -1,0 +1,115 @@
+var code;
+
+function createCode() {
+    code = "";
+    var codeLength = 4;
+    var checkCode = document.getElementById("code");
+    var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F',
+        'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+    for (var i = 0; i < codeLength; i++) {
+        var index = Math.floor(Math.random() * 36);
+        code += random[index];
+    }
+    document.getElementById("code").value = code;
+}
+
+function validate() {
+    var inputCode = document.getElementById("checkcode").value.toUpperCase();
+    // alert("hhe" + inputCode);
+    if (inputCode.length <= 0) {
+        return false;
+    } else if (inputCode != code) {
+        alert("验证码错误!");
+        createCode();
+        document.getElementById("checkcode").value = "";
+        return false;
+    }
+    return true;
+}
+
+function memberLogin(data) {
+
+    var base = new Base64();
+    var encodeStr = base.encode(data.userName);
+    var encodeStr1 = base.encode(data.password);
+    // alert(JSON.stringify(JsonData));
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url: "http://localhost:3000/userLogin/queryByNameAndPassword",
+        // url: "http://10.168.10.190:8080/HotelPMS/UserLoginServlet",
+        data: {
+            "userName": encodeStr,
+            "password": encodeStr1,
+        },
+        async: false,
+        error: function(request) {
+            alert("请稍后");
+        },
+        success: function(data) {
+            // code: "200"
+            // msg: "[{"
+            // id ":"
+            // 402808815 d1aeea1015d1aeea3290000 ","
+            // userName ":"
+            // MTE = ","
+            // password ":"
+            // MTE = ","
+            // createTime ":"
+            // 2017 - 07 - 07 T02: 43: 53.000 Z ","
+            // expireTime ":"
+            // 2017 - 07 - 07 T02: 43: 53.000 Z ","
+            // phoneNumber ":"
+            // phoneNumber ","
+            // email ":"
+            // email ","
+            // hotelName ":"
+            // hotelName ","
+            // hotelLocationProvince ":"
+            // hotelLocationProvince ","
+            // hotelLocationCity ":"
+            // hotelLocationCity ","
+            // hotelLocationDistrict ":"
+            // hotelLocationDistrict ","
+            // hotelLocationDetails ":"
+            // hotelLocationDetails ","
+            // levelGrade ":"
+            // levelGrade ","
+            // registerName ":"
+            // registerName ","
+            // hotelGrade ":"
+            // hotelGrade ","
+            // upperHotelName ":"
+            // upperHotelName ","
+            // loginRole ":null,"
+            // loginRoleBelong ":null,"
+            // loginRoleLevel ":null}]"
+
+            // alert(data);
+            //第一层解析
+            var obj = JSON.parse(data);
+            // alert(obj.code);
+            // alert(obj.msg);
+            if ("405" == obj.code) {
+                alert("用户名或者密码不正确！");
+                return false;
+            }
+            if (obj.code == "200") {
+                //第二层解析
+                var obj0 = JSON.parse(obj.msg);
+                setCookie('userName', encodeStr, 7);
+                setCookie('password', encodeStr1, 7);
+                setCookie('hotelName', obj0.hotelName, 7);
+                setCookie('levelGrade', obj0.levelGrade, 7);
+                setCookie('hotelGrade', obj0.hotelGrade, 7);
+                setCookie('upperHotelName', obj0.upperHotelName, 7);
+                setCookie('loginRole', obj0.loginRole, 7);
+                setCookie('loginRoleLevel', obj0.loginRoleLevel, 7);
+                window.location.href = "./mainPannel.html";
+                return false;
+            }
+        }
+    });
+    return false;
+}

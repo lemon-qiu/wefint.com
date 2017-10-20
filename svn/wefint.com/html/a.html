@@ -1,0 +1,70 @@
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+    <title>点击</title>
+    <script type="text/javascript">
+        $(function() {
+            //用jQuery获取table中td值
+            $("#mytable td").click(function() {
+                alert("table td值：" + $(this).text());
+            });
+
+            //jQuery获取table中点击位置所在行的id
+            $("#mytable td").click(function() {
+                //td的id 
+                alert($(this).attr("id"));
+                //tr的id 
+                alert($(this).parent().attr("id"));
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <table id="mytable" width="708px;" cellpadding="5" cellspacing="1">
+        <tbody>
+            <tr bgcolor="#DEE9F4" id="tr_1">
+                <td align="center"> 日</td>
+                <td align="center"> 一 </td>
+                <td align="center"> 二 </td>
+                <td align="center"> 三 </td>
+                <td align="center"> 四 </td>
+                <td align="center"> 五 </td>
+                <td align="center"> 六 </td>
+            </tr>
+            <tr bgcolor="#DEE9F4" id="tr_2">
+                <td align="center"> </td>
+                <td align="center"> </td>
+                <td align="center"> </td>
+                <td align="center"> 1 </td>
+                <td align="center"> 2 </td>
+                <td align="center"> 3 </td>
+                <td align="center"> 4</td>
+            </tr>
+            <tr bgcolor="#DEE9F4" id="tr_3">
+                <td align="center"> 5 </td>
+                <td align="center"> 6 </td>
+                <td align="center"> 7 </td>
+                <td align="center"> 8 </td>
+                <td align="center"> 9 </td>
+                <td align="center" bgcolor="red">10</td>
+                <td align="center">11</td>
+            </tr>
+            <tr bgcolor="#DEE9F4" id="tr_4">
+                <td align="center"> 12 </td>
+                <td align="center"> 13 </td>
+                <td align="center"> 14 </td>
+                <td align="center"> 15 </td>
+                <td align="center"> 16 </td>
+                <td align="center"> 17 </td>
+                <td align="center"> 18 </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

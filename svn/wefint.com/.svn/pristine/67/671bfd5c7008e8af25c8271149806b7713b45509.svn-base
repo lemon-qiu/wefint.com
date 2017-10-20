@@ -1,0 +1,13 @@
+// dao/userSqlMapping.js
+// CRUD SQL语句
+var roomStatus = {
+    insert: 'INSERT INTO pms_user_register(id,userName, password, hotelName,phoneNumber,email) VALUES(?,?,?,?,?,?)',
+    update: 'update user set name=?, age=? where id=?',
+    delete: 'delete from user where id=?',
+    queryByDateQuantum: 'select * from pms_edit where userName=? and hasStayDate between ? and ?',
+    queryAll: 'select * from user',
+    checkIfUserNameIsExist: 'select * from pms_user_register where userName=?',
+    addRoomStatus: 'INSERT INTO pms_edit(id,copyId,roomId,clientType,cilentName,clientCellNumber,idCardNumber,clientSource,startDay,stayDays,endDay,hasStayDate,enterRoomPrice,truePayment,paymentWays,time,note,ifCanBeDeleted,isDeleted,isCancelledByNet,userName,isUnsubscribe)',
+};
+
+module.exports = roomStatus;

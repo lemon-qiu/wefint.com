@@ -1,0 +1,71 @@
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <title>账本</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <script src="../layui/layui.js"></script>
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/pageonload.js"></script>
+</head>
+
+<body>
+    <div class="form-group">
+        <label>File input</label>
+        <input type="file" name="file" id="file">
+        <p id="result"></p>
+        <img id="img" src="">
+    </div>
+    <button id="upload" class="btn btn-default">预览</button>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        function uploadFile() {
+            var file = document.getElementById("file")
+            var formData = new FormData();
+            formData.append('file', file.files[0]);
+            formData.append('userName', getCookie('userName'));
+            formData.append('password', getCookie('password'));
+            formData.append('fileType', "1");
+            formData.append('fileClass', "2");
+
+            $.ajax({
+                url: "http://localhost:3000/fileUpLoad/fileUpLoad",
+                type: 'POST',
+                data: formData,
+                // async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    var obj = JSON.parse(data);
+                    if ("200" == obj.code) {
+                        $('#result').html("上传成功！");
+                        $('#img').attr('src', obj.msg);
+                    } else {
+                        $('#result').html("上传失败！");
+                    }
+                    console.log('imgUploader upload success');
+                },
+                error: function() {
+                    $("#result").html("与服务器通信发生错误");
+                }
+            });
+        }
+
+        function postPage() {
+            var uploada = document.getElementById('upload');
+            uploada.addEventListener("click", function() {
+                uploadFile();
+            }, false);
+        }
+
+        window.onload = function() {
+            postPage();
+        }
+    </script>
+</body>
+
+</html>

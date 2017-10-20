@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>数据</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../css/data.css" media="all" />
+    <link rel="stylesheet" href="../css/floaticon.css" type="">
+    <script type="text/javascript" src="../js/Chart.js"></script>
+    <script type="text/javascript" src="../js/data.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+    <script src="../layui/layui.js" charset="utf-8"></script>
+    <script src="../js/pageonload.js"></script>
+</head>
+
+<body onload="">
+    <!--header-->
+    <ul class="layui-nav">
+        <li class="layui-nav-item layui-this">
+            <a href="javascript:;">数据</a>
+        </li>
+    </ul>
+    <div class="nav5" onclick="window.open('./mainPannel.html','_self')"><img src="../img/ppp.png" title="返回"></div>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">房间类型柱型图</li>
+            <li>额外花销</li>
+            <li>售出过夜vs出售过夜率</li>
+            <li>入住期率图</li>
+            <li>购买率</li>
+            <li>客户来源饼形图</li>
+            <li>最差的周和月</li>
+            <li>账本花销图</li>
+        </ul>
+
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <!--charts-->
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>
+                        房间类型柱型图
+                    </legend>
+                </fieldset>
+                <div id="roomType" class="chartModel">
+                    <script type="text/javascript">
+                        roomType();
+                    </script>
+                    <!--内容1-->
+                </div>
+            </div>
+
+
+            <div class="layui-tab-item">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>
+                        额外花销
+                    </legend>
+                </fieldset>
+                <div id="ExSpend" class="chartModel">
+                    <script type="text/javascript">
+                        ExSpend();
+                    </script>
+                    <!--内容1-->
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>
+                        售出过夜vs出售过夜率
+                    </legend>
+                </fieldset>
+                <div id="NsVsRates" class="chartModel">
+                    <script type="text/javascript">
+                        NsVsRates();
+                    </script>
+                </div>
+            </div>
+
+
+            <div class="layui-tab-item">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>
+                        入住期率柱状图
+                    </legend>
+                </fieldset>
+                <div id="stayRates" class="chartModel">
+                    <script type="text/javascript">
+                        stayRates();
+                    </script>
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>
+                        购买率
+                    </legend>
+                </fieldset>
+                <div id="purRates" class="chartModel">
+                    <script type="text/javascript">
+                        purRates();
+                    </script>
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <!--内容2-->
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>
+                        客户来源饼形图
+                    </legend>
+                </fieldset>
+                <!--charts-->
+                <div id="comstomSource" class="chartModel">
+                    <script type="text/javascript">
+                        comstomSource();
+                    </script>
+                    <!--内容2-->
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>最差的周和月</legend>
+                </fieldset>
+                <div id="worthWNM" class="chartModel"></div>
+                <script type="text/javascript">
+                    worthWNM();
+                </script>
+            </div>
+
+            <div class="layui-tab-item">
+                <!--内容5-->
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>账本花销折线图</legend>
+                </fieldset>
+                <!--charts-->
+                <div id="wholeVspure" class="chartModel"></div>
+
+                <script type="text/javascript">
+                    wholeVspure();
+                </script>
+                <!--内容5-->
+            </div>
+        </div>
+    </div>
+    <script>
+        //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function() {
+            var element = layui.element();
+        });
+    </script>
+</body>
+
+</html>

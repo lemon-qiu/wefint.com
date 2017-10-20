@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户中心</title>
+    <link rel="stylesheet" href="../layui/css/layui2.0.css" media="all" />
+    <link rel="stylesheet" href="../css/usercenter.css" />
+    <link rel="stylesheet" href="../css/floaticon.css" type="">
+    <script src="../layui/layui.js"></script>
+    <script src="../js/jquery-1.11.1.js"></script>
+</head>
+<body>
+<!--头部nav-->
+<div class="head-nav">
+    <ul class="layui-nav">
+        <li class="layui-nav-item"><a href="">用户中心</a></li>
+    </ul>
+    <div class="nav5" onclick="window.open('./mainPannel.html','_self')"><img src="../img/ppp.png" title="返回"></div>
+</div>
+<!--表单部分-->
+<div class="contain">
+    <form class="layui-form check-form" action="">
+        <!--身份证信息-->
+        <fieldset class="idcard ">
+            <legend>身份证信息（必填)</legend>
+                <div class="">
+                    <div class="layui-row">
+                        <div class="layui-col-md5">
+                            <!--姓名-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">姓名</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入姓名" >
+                                    <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                                    <i class="layui-icon displyone rediocn">&#x1006;</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md5 layui-col-md-offset1">
+                            <!--身份证号-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">身份证号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入身份证号" >
+                                    <i class="layui-icon   greeniocn displyone">&#xe618;</i>
+                                    <i class="layui-icon rediocn displyone">&#x1006;</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md5">
+                            <!--联系方式-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">手机号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入手机号" >
+                                    <i class="layui-icon   greeniocn displyone">&#xe618;</i>
+                                    <i class="layui-icon rediocn displyone">&#x1006;</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md5 layui-col-md-offset1">
+                            <!--亲属电话号码-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">亲属电话</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入亲属电话" >
+                                    <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                                    <i class="layui-icon rediocn displyone">&#x1006;</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md5">
+                            <!--朋友电话号码-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">朋友电话</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入朋友电话号码" >
+                                    <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                                    <i class="layui-icon rediocn displyone">&#x1006;</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md5 layui-col-md-offset1">
+                            <!--月收入金额-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">月收入情况</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入月收入金额" >
+                                    <i class="layui-icon   greeniocn displyone">&#xe618;</i>
+                                    <i class="layui-icon rediocn displyone">&#x1006;</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md5">
+                            <!--身份证-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">身份证</label>
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn" id="idcard1">
+                                        <i class="layui-icon">&#xe67c;</i>上传身份证正面
+                                    </button>
+                                    <button type="button" class="layui-btn" id="idcard2">
+                                        <i class="layui-icon">&#xe67c;</i>上传身份证背面
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </fieldset>
+        <!--婚姻状况-->
+        <fieldset class="marriagestatus">
+            <legend>婚姻状况（必填)</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--婚姻状况-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">婚姻状况</label>
+                        <div class="layui-input-block">
+                            <select name="marriage" lay-verify="required">
+                                <option value=""></option>
+                                <option value="0">已婚</option>
+                                <option value="1">未婚</option>
+                                <option value="2">离异</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--客栈情况-->
+        <fieldset class="innsituation">
+            <legend>客栈情况（必填）</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--客栈姓名-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">客栈姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入客栈姓名" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--客栈位置-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">客栈位置</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入客栈位置" >
+                            <i class="layui-icon   greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn displyone">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--客栈投入-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">客栈投入</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入客栈姓名" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--客栈房间数-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">客栈房间数</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入客栈房间数" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--营业执照号-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">营业执照号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入营业执照号" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--营业范围-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">营业范围</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入营业范围" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--上传客栈照片及营业执照照片-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">营业执照</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="test1">
+                                <i class="layui-icon">&#xe67c;</i>上传营业执照照片
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--承租情况-->
+        <fieldset class="innsituation">
+            <legend>承租情况（必填）</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--房东姓名-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房东姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入房东姓名" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--房租起始日-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房租起始日</label>
+                        <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+                            <input type="text" class="layui-input" id="starttime">
+                        </div>
+                        <!--<div class="layui-inline"> &lt;!&ndash; 注意：这一层元素并不是必须的 &ndash;&gt;-->
+                            <!--<input type="text" class="layui-input" id="endtime">-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--房东姓名-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房租到期日</label>
+                        <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+                            <input type="text" class="layui-input" id="starttime">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--房租交付方式-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">交付方式</label>
+                        <div class="layui-input-block">
+                            <select name="marriage" lay-verify="required">
+                                <option value="">请选择房租交付方式</option>
+                                <option value="0">已婚</option>
+                                <option value="1">未婚</option>
+                                <option value="2">离异</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--每年房租价格-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房租价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入每年房租价格" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--已支付押金-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">已支付押金</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入已支付押金" >
+                            <i class="layui-icon   greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn displyone">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--上传原始租赁合同照片-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">租赁合同</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="idcard1">
+                                <i class="layui-icon">&#xe67c;</i>上传原始租赁合同照片
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--客栈经营情况-->
+        <fieldset class="idcard">
+            <legend>客栈经营情况（必填）</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--个人月收入金额-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">个人月收入</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入个人月收入金额" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--月收入金额证明-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">月收入证明</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="idcard1">
+                                <i class="layui-icon">&#xe67c;</i>上传微信、支付宝或银行流水
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--客栈客房月收入-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">客房月收入</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入客栈客房月收入金额" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--客栈客房月收入金额证明-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">月收入证明</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="idcard1">
+                                <i class="layui-icon">&#xe67c;</i>上传OTA流水
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--近三个月水费-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">近三个月水费</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="idcard1">
+                                <i class="layui-icon">&#xe67c;</i>上传至少一张近期缴费单
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--近三个月电费-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">近三个月电费</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="idcard1">
+                                <i class="layui-icon">&#xe67c;</i>上传至少一张近期电费单
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--收款银行账户信息-->
+        <fieldset class="idcard">
+            <legend>收款银行账户信息（必填）</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--户名-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">户名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入户名" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--开户行-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">开户行</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入开户行" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--银行账户-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">银行账户</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入银行账户" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--上传银行卡正反面照片-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">银行卡照片</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="idcard1">
+                                <i class="layui-icon">&#xe67c;</i>上传银行卡正面照片
+                            </button>
+                            <button type="button" class="layui-btn" id="idcard2">
+                                <i class="layui-icon">&#xe67c;</i>上传银行卡反面照片
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--个人资产情况-->
+        <fieldset class="idcard">
+            <legend>个人资产情况</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--车子所在地-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">车子所在地</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入车子所在地" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--车型-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">车型</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入车型" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--车子所在地-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">车子所在地</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入车子所在地" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--上牌时间-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上牌时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入上牌时间" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--驾驶里程-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">驾驶里程</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入驾驶里程" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--是否贷款-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否贷款</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入是否贷款" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--贷款金额-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款金额" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--贷款时间-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款时间" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--贷款期限-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款期限</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款期限" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--贷款还款方式-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款还款方式</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款还款方式" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--房子所在地-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房子所在地</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入房子所在地" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--房子面积-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房子面积</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入房子面积" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--楼层-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">楼层</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入房子楼层" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--装修程度-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">装修程度</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入装修程度" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--是否贷款-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否贷款</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入是否贷款" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--贷款金额-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款金额" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--贷款时间-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款时间" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--贷款期限-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款期限</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款期限" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--贷款还款方式-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">贷款还款方式</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入贷款还款方式" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--房屋证明-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房屋证明</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="idcard1">
+                                <i class="layui-icon">&#xe67c;</i>上传房子照片及房产证照片
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--个人通讯信息-->
+        <fieldset class="idcard">
+            <legend>个人通讯信息</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--亲属电话号码-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">亲属电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入亲属电话" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--朋友电话号码-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">朋友电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入朋友电话号码" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!--其他个人补充信息-->
+        <fieldset class="idcard">
+            <legend>其他个人补充信息</legend>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--学历-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学历</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入学历" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--工作年限-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">工作年限</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入工作年限" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--文化程度-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文化程度</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入文化程度" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--经营主体外其他任职-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">其他任职</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入经营主体外其他任职" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--个人健康程度-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">健康程度</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入个人健康程度" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--上一单位性质及职务-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上一单位性质及职务</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入上一单位性质及职务" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--其他经营主体信息-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">其他经营主体信息</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入其他经营主体信息" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--上一单位性质及职务-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上一单位性质及职务</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入上一单位性质及职务" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--二销合作方-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">二销合作方</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入二销合作方" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--二销平均月收入-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">二销平均月收入</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入二销平均月收入" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--每月水费-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">每月水费</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入每月水费" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--每月电费-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">每月电费</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入每月电费" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md5">
+                    <!--每月布草花费-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">每月布草花费</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入每月布草花费" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md5 layui-col-md-offset1">
+                    <!--其他证照-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">其他证照</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="" required  lay-verify="required" autocomplete="off" class="layui-input"  placeholder="请输入其他证照" >
+                            <i class="layui-icon  displyone greeniocn">&#xe618;</i>
+                            <i class="layui-icon rediocn">&#x1006;</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+<!--身份证上传-->
+<script>
+    layui.use('upload', function(){
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#idcard1' //绑定元素
+            ,url: '/upload/' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+    });
+</script>
+<!--婚姻状况-->
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+    });
+</script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+@media screen and (min-width: 1201px) { 
+body {width: 1200px} 
+} 
+/* 设置了浏览器宽度不小于1201px时 abc 显示1200px宽度 */ 
+
+@media screen and (max-width: 1200px) { 
+body {width: 900px} 
+} 
+/* 设置了浏览器宽度不大于1200px时 abc 显示900px宽度 */ 
+
+@media screen and (max-width: 900px) { 
+body {width: 200px;} 
+} 
+/* 设置了浏览器宽度不大于900px时 abc 显示200px宽度 */ 
+
+@media screen and (max-width: 500px) { 
+body{width: 100px;} 
+} 
+/* 设置了浏览器宽度不大于500px时 abc 显示100px宽度 */ 

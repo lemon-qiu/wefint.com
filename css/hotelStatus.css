@@ -1,0 +1,117 @@
+#table1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#table2 {
+    width: 2400px;
+    text-align: center;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+div {
+    margin: 0px;
+    padding: 0px;
+}
+
+#header {
+    /*background-color: blue;*/
+    color: white;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 60px;
+    width: 100%;
+}
+
+#footer {
+    /*background-color: green;*/
+    color: white;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+#Content {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 60px;
+    bottom: 60px;
+    /*background: #0FF;*/
+}
+
+#Content-Left {
+    border: 1px solid #ccc;
+    height: 100%;
+    width: 200px;
+    float: left;
+    overflow: auto;
+    /*设置元素跟其他元素的距离为20像素*/
+    /* float: left; */
+    /*设置浮动，实现多列效果，div+Css布局中很重要的*/
+    /*background: #90C;*/
+}
+
+#Content-Main {
+    /* border: 1px solid green; */
+    width: max-content;
+    height: 100%;
+    /*设置元素跟其他元素的距离为20像素*/
+    /* float: left; */
+    overflow: auto;
+    /*设置浮动，实现多列效果，div+Css布局中很重要的*/
+    /*background: #e90;*/
+}
+
+td {
+    border: 1px solid #ccc;
+    width: 100px;
+    height: 50px;
+}
+
+tr {
+    border: 1px solid #ccc;
+    width: 80px;
+    height: 50px;
+}
+
+
+/* #timeChoose {
+    /* border: 1px solid red; 
+    margin-top: 2%;
+    margin-left: 10%;
+    height: 88px;
+} */
+
+#leftChoose {
+    width: 40px;
+    /* width: 5%; */
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+#rightChoose {
+    width: 40px;
+    /* width: 5%; */
+    float: left;
+    /*clear: both;*/
+    margin-top: 5px;
+}
+
+#nowTimeChoose {
+    background-color: #ccc;
+    width: 48%;
+    float: left;
+    margin-top: 5px;
+}

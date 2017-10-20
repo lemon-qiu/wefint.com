@@ -1,0 +1,88 @@
+//获得信息
+function getMes() {
+    var b = new Base64();
+    var JsonData = {
+            "userName": getCookie('userName'),
+            "password": getCookie('password'),
+        }
+        // alert(JSON.stringify(JsonData));
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: getUrl() + "/HotelPMS/LoginCommonServlet",
+        //  url:"http://10.168.10.190:8080/HotelPMS/LoginCommonServlet",
+        data: {
+            "strLoginCommon": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data);
+            var objs = eval(data);
+            for (var j = 0; j < objs.length; j++) {
+                var aa = new Array();
+                // aa[0] = objs[j].id
+                aa[1] = objs[j].userName
+                    // aa[2] = objs[j].password
+                aa[3] = objs[j].createTime
+                aa[4] = objs[j].expireTime
+                aa[5] = objs[j].phoneNumber
+                aa[6] = objs[j].email
+                aa[7] = objs[j].hotelName
+                aa[8] = objs[j].hotelGrade
+                aa[9] = objs[j].loginRole
+                aa[10] = objs[j].loginRoleLevel
+            }
+            var str = b.decode(aa[1]);
+            document.getElementById("userName").value = str;
+            document.getElementById("createTime").value = aa[3];
+            document.getElementById("expireTime").value = aa[4];
+            document.getElementById("phoneNumber").value = aa[5];
+            document.getElementById("email").value = aa[6];
+            document.getElementById("hotelName").value = aa[7];
+            document.getElementById("hotelGrade").value = aa[8];
+            document.getElementById("loginRole").value = aa[9];
+            document.getElementById("loginRoleLevel").value = aa[10];
+        }
+    });
+    return false;
+}
+//上传分数
+function setScore(data) {
+    // alert("niaho");
+    var JsonData = {
+         "userName": getCookie('userName'),
+            "password": getCookie('password'),
+            "hotelName": getCookie('hotelName'),
+            "idproofScoring": data.idproofScoring, //个人身份总评分
+            "tenantRatingScoring": data.tenantRatingScoring, //承租总评分
+            "salesScore": data.salesScore, //销售及月流水情况总评分
+            "salesScoring": data.salesScoring, //规模总评分
+            "totalCreditScore": data.totalCreditScore, //信用总评分
+            "resourceScoring": data.resourceScoring, //个人人脉评分
+        }
+        // console.log(JsonData);
+        // alert(JSON.stringify(JsonData));
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: getUrl() + "/HotelPMS/ScoringSetUpServlet",
+        //  url:"http://10.168.10.190:8080/HotelPMS/ScoringSetUpServlet",
+        data: {
+            "strScoringSetUp": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data);
+            if (data == "200") {
+                alert("上传成功")
+            }
+        }
+    });
+    return false;
+}

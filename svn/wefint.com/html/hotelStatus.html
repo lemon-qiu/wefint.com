@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>房屋状态</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../css/hotelStatus.css" type="">
+    <link rel="stylesheet" href="../css/floaticon.css" type="">
+    <link rel="stylesheet" href="../layer/skin/default/layer.css" type="">
+    <link rel="stylesheet" href="../css/floaticon.css" media="all" />
+    <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/hotelStatus.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../layui/layui.js" charset="utf-8"></script>
+    <script src="../layer/layer.js" charset="utf-8"></script>
+</head>
+
+
+<body class="beg-login-bg" onload="getNowDate();setTableHeaderAuto();getRooms();">
+    <div id="header">
+        <ul class="layui-nav">
+            <li class="layui-nav-item"><a href="">房屋状态</a></li>
+        </ul>
+
+        <div class="nav5" onclick="window.open('./mainPannel.html','_self')">
+            <img src="../img/ppp.png" title="返回">
+        </div>
+    </div>
+
+
+ <div id="Content">
+        <div id="Content-Left" onscroll="document.getElementById('Content-Main').scrollTop = this.scrollTop;">
+            <!--左边-->
+            <!-- <div id="timeChoose"> -->
+            <button id="leftChoose" class="layui-btn" onclick="leftChoose()"><i class="layui-icon"><</i></button>
+             <input id="nowTimeChoose" class="layui-input" placeholder="当前日期" value="" onporpertychange="nowTimeChoose(event)" >
+            <!-- <input id="nowTimeChoose" class="layui-input" placeholder="当前日期" value="" onclick="m({ elem: this, festival: true })"> -->
+            <button id="rightChoose" class="layui-btn" onclick="rightChoose()"><i class="layui-icon">></i></button>
+            <table id="table1">
+            </table>
+            <!--左边-->
+        </div>
+
+        <div id="Content-Main" onscroll="document.getElementById('Content-Left').scrollTop = this.scrollTop;">
+            <table id="table2">
+            </table>
+        </div>
+    </div>
+
+    <div id="footer">
+        <ul class="layui-nav ">
+            <li class="layui-nav-item "><a href="copyright.html">联系电话：0888-5191803  版权所有  Copyright by 圣境环球 </a>
+                <!-- <p>联系电话：0888-5191803</p> -->
+            </li>
+        </ul>
+    </div>
+
+
+    <script src="../layui/layui.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+        });
+    </script>
+    <script>
+        layui.use('form', function() {
+            var form = layui.form();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+// dao/userDao.js
+// 实现与MySQL交互
+var mysql = require('mysql');
+var $conf = require('../conf/db');
+var $util = require('../util/util');
+var $sql = require('./fileUpLoadSqlMapping');
+var generateUUID = require('../util/generateUUID');
+var muilter = require('../util/multerUtil');
+
+// 使用连接池，提升性能
+var pool = mysql.createPool($util.extend({}, $conf.mysql));
+
+// 向前台返回JSON方法的简单封装
+var jsonWrite = function(res, ret) {
+    console.log(ret)
+        //  ret = 'undefined'
+    if (typeof ret === 'undefined') {
+        res.json({
+            code: '1',
+            msg: '操作失败'
+        });
+    } else {
+        res.send(JSON.stringify(ret));
+    }
+};
+
+module.exports = {
+    fileUpLoad: function(req, res, next) {
+        var upLoadFile = muilter.single('file');
+        upLoadFile(req, res, function(err) {
+            console.log(req.body);
+            //添加错误处理
+            if (err) {
+                return console.log(err);
+            } else {
+                var fileFormat = (req.file.filename).split(".");
+                var Id = fileFormat[0];
+                var userName = req.body.userName;
+                var password = req.body.password;
+                var filePath = 'http://' + req.headers.host + '/images/' + req.file.filename;
+                var fileName = req.file.filename;
+                var fileType = req.body.fileType;
+                var fileClass = req.body.fileClass;
+
+                pool.getConnection(function(err, connection) {
+                    connection.query($sql.addFile, [Id, userName, password, filePath, fileName, fileType, fileClass], function(err, result) {
+                        if (result != "") {
+                            var url = 'http://' + req.headers.host + '/images/' + req.file.filename
+                            result = {
+                                code: 200,
+                                msg: url
+                            };
+                        } else {
+                            result = {
+                                code: "405",
+                                msg: "数据不存在！"
+                            };
+                        }
+                        jsonWrite(res, result);
+                        connection.release();
+                    });
+                });
+            }
+        });
+    }
+};

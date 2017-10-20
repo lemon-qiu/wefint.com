@@ -1,0 +1,67 @@
+function zzt(){
+	//alert("触发点击事件")
+	var a1 = document.getElementById("main");
+	var a2 = document.getElementById("main1");
+	var a3 = document.getElementById("main2");
+	var a4 = document.getElementById("main3");
+	var a5 = document.getElementById("main4"); 
+	a1.style.display="block";
+	a2.style.display="none";
+	a3.style.display="none";
+    a4.style.display="none";
+    a5.style.display="none";
+}
+function bxt(){
+	//alert("触发点击事件")
+	var a1 = document.getElementById("main");
+	var a2 = document.getElementById("main1");
+	var a3 = document.getElementById("main2");
+	var a4 = document.getElementById("main3");
+	var a5 = document.getElementById("main4"); 
+	a1.style.display="none";
+	a2.style.display="block";
+	a3.style.display="none";
+	a4.style.display="none";
+	a5.style.display="none";
+}
+
+function sthy(){
+	//alert("触发点击事件")
+	var a1 = document.getElementById("main");
+	var a2 = document.getElementById("main1");
+	var a3 = document.getElementById("main2");
+	var a4 = document.getElementById("main3");
+	var a5 = document.getElementById("main4");
+	a1.style.display="none";
+	a2.style.display="none";
+	a3.style.display="block";
+	a4.style.display="none";
+	a5.style.display="none";
+}
+
+function fxzs(){
+   //alert("触发点击事件")
+	var a1 = document.getElementById("main");
+	var a2 = document.getElementById("main1");
+	var a3 = document.getElementById("main2");
+	var a4 = document.getElementById("main3");
+	var a5 = document.getElementById("main4");
+	a1.style.display="none";
+	a2.style.display="none";
+	a3.style.display="none";
+	a4.style.display="block";
+	a5.style.display="none";
+}
+function zbhx(){
+	   //alert("触发点击事件")
+		var a1 = document.getElementById("main");
+		var a2 = document.getElementById("main1");
+		var a3 = document.getElementById("main2");
+		var a4 = document.getElementById("main3");
+		var a5 = document.getElementById("main4");
+		a1.style.display="none";
+		a2.style.display="none";
+		a3.style.display="none";
+		a4.style.display="none";
+		a5.style.display="block";
+	}

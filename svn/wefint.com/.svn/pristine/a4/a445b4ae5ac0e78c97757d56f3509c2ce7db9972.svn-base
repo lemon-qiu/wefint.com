@@ -1,0 +1,44 @@
+function getMess() {
+    var JsonData = {
+        "userName": getCookie('userName'),
+        "password": getCookie('password'),
+    }
+    $.ajax({
+        cache: true,
+        type: "POST",
+        // url: getUrl() + "/HotelPMS/RoomSelectServlet",
+        url: "http: //10.168.10.190:8080/HotelPMS/RoomSelectServlet",
+        data: {
+            "strSelectRoom": JSON.stringify(JsonData)
+        },
+        async: false,
+        error: function(request) {
+            alert("获取状态失败，请稍后");
+        },
+        success: function(data) {
+            // alert(data);
+            // var obj = JSON.parse(data);
+            // alert(data);
+            var objs = eval(data);
+
+            for (var j = 0; j < objs.length; j++) {
+                var aa = new Array();
+                // alert(objs[j].roomLineID);
+                // alert(objs[j].roomRoomType);
+                // alert(objs[j].roomRoomQuantity);
+                // alert(objs[j].roomRoomNumber);
+                // alert(objs[j].roomInitialPrice);
+                // alert(objs[j].roomCustomPrice);
+                // alert(objs[j].loginGrade);
+                aa[0] = objs[j].userName
+                aa[1] = objs[j].hotelName
+                aa[2] = objs[j].email
+                aa[3] = objs[j].roomNumber
+                aa[4] = objs[j].kezhandizhi
+                    // alert(aa);
+                setData(aa);
+            }
+        }
+    });
+    return false;
+}

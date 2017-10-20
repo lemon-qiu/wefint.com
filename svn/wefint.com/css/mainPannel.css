@@ -1,0 +1,87 @@
+.beg-mainPannel-bg {
+    background: url(../img/mainPannelBG.jpg) no-repeat center center fixed;
+    width: 90%;
+    height: 90%;
+    background-size: 100% 100%;
+    position: absolute;
+}
+
+.t0 {
+    text-align: center;
+    font-size: x-large;
+    color: white;
+}
+
+.d1 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: blue;*/
+    float: left;
+}
+
+.d2 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: red;*/
+    float: left;
+}
+
+.d3 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: blue;*/
+    float: left;
+}
+
+.d4 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: red;*/
+    /*float: left;*/
+    float: left;
+}
+
+.d5 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: yellow;*/
+    float: left;
+    /*clear: left;*/
+}
+
+.d6 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: green;*/
+    float: left;
+}
+
+.d7 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: green;*/
+    float: left;
+}
+
+.d8 {
+    width: 200px;
+    height: 200px;
+    margin-top: 9%;
+    margin-left: 12.5%;
+    /*background: green;*/
+    float: left;
+}
