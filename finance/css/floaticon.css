@@ -1,0 +1,10 @@
+.nav5 {
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    z-index: 88;
+    position: fixed;
+    right: 0;
+    top: 2%;
+    cursor: pointer
+}
