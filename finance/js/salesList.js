@@ -42,7 +42,7 @@ $(function () {
         });
 
         //弹出确认框
-        function layerAlert() {
+        function layerAlert(data) {
             layer.open({
                 type: 1
                 ,title: false //不显示标题栏
@@ -57,18 +57,14 @@ $(function () {
                 ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">确定要驳回吗？</div>'
                 ,success: function(layero){
                     var btn = layero.find('.layui-layer-btn');
-                    btn.find('.layui-layer-btn0').addClass('');
+                    btn.find('.layui-layer-btn0').addClass('rejeckSure');
                 }
             });
-
-            /*layer.confirm('is not?', function(index){
-                //do something
-
-                layer.close(index);
-            });*/
         }
 
-        function checkReject(data) {
+        $('.rejeckSure').on('click',function (data) {
+            console.log(data);
+        //function checkReject(data) {
             var msg = {
                 approveStatus: 2,
                 userId: data.userId
@@ -85,7 +81,7 @@ $(function () {
                 success: function (data) {
                 }
             })
-        };
+        });
 
     });
 
