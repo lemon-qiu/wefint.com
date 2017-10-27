@@ -9,16 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="../css/floaticon.css" type="">
-    <link rel="stylesheet" href="../css/hexagram.css" media="all" />
+    <link rel="stylesheet" href="../css/hexagram.css"  />
+    <link rel="stylesheet" href="../css/usercenter.css"/>
     <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
     <script src="../layui/layui.js" charset="utf-8"></script>
     <script src="../js/pageonload.js"></script>
     <script src="../js/hexagram.js"></script>
+
     <script type="text/javascript" src="../js/echarts.js"></script>
     <script src="../js/base64.js"></script>
+    <script src="../js/config.js"></script>
 </head>
 
 <body>
+<div class="shadow"></div>
     <div id="header">
         <ul class="layui-nav">
             <li class="layui-nav-item"><a href="">个人申请信息表</a></li>
@@ -27,142 +31,139 @@
             <img src="../img/ppp.png" title="返回">
         </div>
     </div>
+    <div class="content">
+        <div class="content-left">
+            <div class="content-left-top">
+                    <div class="tittle">
+                        个人基本信息:
+                    </div>
+                    <div class="dataile-info">
+                        <div class="layui-row">
+                            <div class="layui-col-md5">
+                                <!--姓名-->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">姓名:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="user_name" class="layui-input" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md5 layui-col-md-offset1">
+                                <!--身份证号-->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">身份证号:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="id_card" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-row">
+                            <div class="layui-col-md5">
+                                <!--联系方式-->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">手机号:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="phone_number" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md5 layui-col-md-offset1">
+                                <!--亲属电话号码-->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">客栈名称:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="relativeMobile" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-row">
+                            <div class="layui-col-md5">
+                                <!--朋友电话号码-->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">朋友电话:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="friendMobile" disabled="disabled">
 
-    <div id="Content">
-        <div id="Content-Left">
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-                <legend>申请人</legend>
-            </fieldset>
-            <div id="Content-Left-up">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md5 layui-col-md-offset1">
+                                <!--月收入金额-->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">月收入情况:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="monthIncome" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-row">
+                            <div class="layui-col-md5">
+                                <!--朋友电话号码-->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">疯特信用值:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input" id="fintcredit" disabled="disabled">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
             </div>
-
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-                <legend>信用评分</legend>
-            </fieldset>
-            <div id="Content-Left-down">
-                <!-- <div id="main" style="width: 500px;height:400px;">
-                </div> -->
-                <!--=====================================-->
-                <div id="main" style="width: 500px;height:400px;">
-                </div>
+            <div class="content-left-down">
+                <div id="main"></div>
             </div>
         </div>
-
-        <div id="Content-Main">
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-                <legend>选填上传信息</legend>
-            </fieldset>
-            <form class="layui-form" action="">
-                <div id="part2">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">个人信用</label>
-                        <div class="layui-input-inline">
-                            <!-- <label>选择文件</label> -->
-                            <input type="file" name="PERSONALCREDIT" id="PERSONALCREDIT" required lay-verify="required" autocomplete="off">
-                            <p id="result0"></p>
-                            <img id="img0" src="../img/link.png" width="100" height="100">
-                            <button id="upload0" class="layui-btn layui-btn-primary">预览</button>
-                        </div>
-
+        <div class="content-right">
+                <div class="content-right-top">
+                    <div class="btb-tofile">
+                        <button class="layui-btn" onclick="onWithdraw()">客栈房贷</button> <span class="remark">备注：</span> <span> 确定信息无误后点击进行客栈房贷。在下方输入金额可以进行额度提现。</span>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">房产</label>
-                        <div class="layui-input-inline">
-                            <!-- <label>选择文件</label> -->
-                            <input type="file" name="HOUSEPROPERTY" id="HOUSEPROPERTY" required lay-verify="required" autocomplete="off">
-                            <p id="result1"></p>
-                            <img id="img1" src="../img/link.png" width="100" height="100">
-                            <button id="upload1" class="layui-btn layui-btn-primary">预览</button>
-                        </div>
-
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">企业执照</label>
-                        <div class="layui-input-block">
-                            <!-- <div class="layui-input-inline"> -->
-                            <!-- <label>选择文件</label> -->
-                            <input type="file" name="ENTERPRISELICENSING" id="ENTERPRISELICENSING" required lay-verify="required" autocomplete="off">
-                            <p id="result2"></p>
-                            <img id="img2" src="../img/link.png" width="100" height="100">
-                            <button id="upload2" class="layui-btn layui-btn-primary">预览</button>
-                        </div>
-
+                    <div class="btb-tofile">
+                        <button class="layui-btn" onClick="window.location.href='usercenter1.html'" >用户中心</button> <span class="remark">备注：</span> <span> 查看信息，如发现信息结果有误 可点击到用户中心 申请重新提交信息。</span>
                     </div>
                 </div>
-
-                <div id="part3">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">电子邮箱</label>
-                        <div class="layui-input-inline">
-                            <input type="text" style="width:120%;" name="email" required lay-verify="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
-                        </div>
+                <div class="content-right-down" >
+                    <div class="remarkInfo" id="remarkInfo">
+                        <span>备注：</span> <span> 确定信息无误后点击进行客栈房贷。将进行额度提现。</span>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">汽车</label>
-                        <div class="layui-input-block">
-                            <input type="text" style="width:120%;" name="car" required lay-verify="required" autocomplete="off" class="layui-input">
+                    <div class="limit-contain" id="withdraw">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">最高可申请（元）:</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="maxLimit" autocomplete="off" class="layui-input" disabled value="10,000" id="appliedAmountMax">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">申请金额（元）:</label>
+                                <div class="layui-input-block">
+                                    <input type="number" required  lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input" min="1" max="10000" id="appliedAmount">
+                                </div>
+                            </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">同意申请请勾选:</label>
+                            <div class="layui-input-block checkboxbtn">
+                                <input type="checkbox" id="memberbasicTitle">
+                                <span onclick="memberbasicTitle()" class="showinfo">申请人基本信息</span>
+                                <input type="checkbox"  id="ViewServiceProtocol">
+                                <span onclick="ViewServiceProtocol()" class="showinfo">居间服务协议</span>
+                            </div>
                         </div>
-                    </div>
-
-                </div>
-
-                <div id="part4">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">企业信用</label>
-                        <div class="layui-input-block">
-                            <input type="text" style="width:120%;" name="companyCredit" required lay-verify="required|number" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">学历</label>
-                        <div class="layui-input-block">
-                            <input type="text" style="width:120%;" name="education" required lay-verify="required" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="part5">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">职业经历</label>
-                        <div class="layui-input-block">
-                            <input type="text" style="width:120%;" name="profession" required lay-verify="required" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">芝麻信用</label>
-                        <div class="layui-input-block">
-                            <input type="text" style="width:120%;" name="zhimaCredit" required lay-verify="required|number" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div id="part6">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">备注</label>
-                        <div class="layui-input-block">
-                            <textarea name="note" required lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
-                            <!-- <input type="text" name="note" required lay-verify="required" autocomplete="off" class="layui-input"> -->
-                        </div>
+                            <div class="layui-form-item updatafile">
+                                <div class="layui-input-block">
+                                    <button data-method="notice" class="layui-btn" onclick="DeterminedApply()">立即申请</button>
+                                    <button class="layui-btn layui-btn-primary">取消</button>
+                                </div>
+                            </div>
                     </div>
                 </div>
-
-                <div class="layui-inline">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">上传信息</button>
-                    </div>
-                </div>
-            </form>
-            <br><br>
-
-            <fieldset class="layui-elem-field layui-field-title">
-                <legend>Tips</legend>
-                <div class="layui-field-box">
-                    &nbsp;&nbsp; 亲，个人申请信息上传至返回需要3～5个工作日，请耐心等候～～
-                </div>
-            </fieldset>
-            <!-- </div> -->
         </div>
+    </div>
+
     </div>
 
     <div id="footer">
@@ -170,23 +171,19 @@
             <li class="layui-nav-item "><a href="#">联系电话：0888-5191803  版权所有  Copyright by 圣境环球</a></li>
         </ul>
     </div>
-    <script>
-        window.onload = function() {
-                postPage();
-            }
-            //Demo
-        layui.use('form', function() {
-            var form = layui.form();
 
-            //监听提交
-            form.on('submit(formDemo)', function(data) {
-                // layer.msg(JSON.stringify(data.field));
-                // alert(data.field);
-                submitFinanceData(data.field);
-                return false;
-            });
-        });
-    </script>
+<div class="module" id="module">
+    <div class="close">
+        <i class="layui-icon" style="font-size: 30px; color: #1E9FFF;" >&#x1007;</i>
+    </div>
+    <iframe frameborder="0" id="moduleIframe"></iframe>
+</div>
+
 </body>
-
+<script>
+   $($('.close')[0]).click(function() {
+      $('#module').hide();
+      $('.shadow').hide();
+   })
+</script>
 </html>

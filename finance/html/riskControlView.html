@@ -18,9 +18,9 @@
 </div>
 
 <div class="contain">
-    <form class="layui-form check-form" action="">
+    <form class="layui-form check-form" action="" method="post">
         <fieldset>
-            <legend>收款银行账户信息</legend>
+            <legend>个人基本信息</legend>
             <div class="layui-fluid">
                 <div class="layui-row">
                     <div class="layui-col-md6">
@@ -95,7 +95,21 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">月收入情况</label>
+                            <label class="layui-form-label">公司电话</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="companyTelephone" id="companyTelephone"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="user-number" value="true" title="正确" lay-filter="radios"  checked>
+                                        <input type="radio" name="user-number" value="false" title="错误" lay-filter="radios" >
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">家庭月收入（元）</label>
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="monthIncome" id="monthIncome"  autocomplete="off" class="layui-input" disabled></div>
@@ -121,6 +135,16 @@
                             <input type="radio" name="pic-id-card" value="true" title="正确" lay-filter="radios"  checked>
                             <input type="radio" name="pic-id-card" value="false" title="错误" lay-filter="radios" >
                         </div>-->
+                    </div>
+                    <div class="layui-col-md12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">个人征信照片</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id="referencePictures"></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -172,6 +196,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="layui-col-md6 hidden">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">配偶联系电话</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="spouseMobile" id="spouseMobile"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="layui-col-md12 hidden">
                         <div class="layui-form-item">
                             <label class="layui-form-label">上传身份证正反面</label>
@@ -187,37 +225,9 @@
                             <input type="radio" name="pic-id-card" value="false" title="错误" lay-filter="radios" >
                         </div>-->
                     </div>
-                    <div class="layui-col-md6 hidden">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">配偶联系电话</label>
-                            <div class="layui-input-block">
-                                <div>
-                                    <div class="layui-col-md8"><input type="text" name="spouseMobile" id="spouseMobile"  autocomplete="off" class="layui-input" disabled></div>
-                                    <!--<div class="layui-col-md4 txt-center">
-                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
-                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
-                                    </div>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md6 hidden">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">月收入</label>
-                            <div class="layui-input-block">
-                                <div>
-                                    <div class="layui-col-md8"><input type="text" name="spouseMonthIncome" id="spouseMonthIncome"  autocomplete="off" class="layui-input" disabled></div>
-                                    <!--<div class="layui-col-md4 txt-center">
-                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
-                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios" >
-                                    </div>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="layui-col-md12 hidden">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">上传婚姻证正反面</label>
+                            <label class="layui-form-label">上传婚姻证</label>
                             <div class="layui-input-block">
                                 <ul class="pics" >
                                     <li><img data-original="" src="" alt="" id="marryCert"></li>
@@ -239,7 +249,7 @@
                 <div class="layui-row">
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">客栈姓名</label>
+                            <label class="layui-form-label">客栈名字</label>
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="motelName" id="motelName"  autocomplete="off" class="layui-input" value="" disabled></div>
@@ -257,6 +267,20 @@
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="motelAddress" id="motelAddress"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">经营主体</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="mainProperty" id="mainProperty"  autocomplete="off" class="layui-input" disabled></div>
                                     <!--<div class="layui-col-md4 txt-center">
                                         <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
                                         <input type="radio" name="" value="false" title="错误" lay-filter="radios">
@@ -312,7 +336,7 @@
                             <label class="layui-form-label">客栈投入</label>
                             <div class="layui-input-block">
                                 <div>
-                                    <div class="layui-col-md8"><input type="text" name="motelAsstes" id="motelAsstes"  autocomplete="off" class="layui-input" disabled></div>
+                                    <div class="layui-col-md8"><input type="text" name="motelAssets" id="motelAssets"  autocomplete="off" class="layui-input" disabled></div>
                                     <!--<div class="layui-col-md4 txt-center">
                                         <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
                                         <input type="radio" name="" value="false" title="错误" lay-filter="radios">
@@ -327,6 +351,20 @@
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="motelRoomQuantity" id="motelRoomQuantity"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">入住率（%）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="occupieRate" id="occupieRate"  autocomplete="off" class="layui-input" disabled></div>
                                     <!--<div class="layui-col-md4 txt-center">
                                         <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
                                         <input type="radio" name="" value="false" title="错误" lay-filter="radios">
@@ -443,6 +481,34 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
+                            <label class="layui-form-label">剩余租期（年）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="leftRentYear" id="leftRentYear"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">已支付房租剩余期限（月）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="leftPaidRentalMonth" id="leftPaidRentalMonth"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
                             <label class="layui-form-label">房租交付方式</label>
                             <div class="layui-input-block">
                                 <div>
@@ -457,7 +523,7 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">每年房租价格</label>
+                            <label class="layui-form-label">每年房租价格（元）</label>
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="rentPerYear" id="rentPerYear"  autocomplete="off" class="layui-input" disabled></div>
@@ -471,10 +537,38 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">已支付押金</label>
+                            <label class="layui-form-label">已支付押金（元）</label>
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="deposit" id="deposit"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">转让费类型</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="resaleFeeFlag" id="resaleFeeFlag"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">转让费金额（元）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="resaleFee" id="resaleFee"  autocomplete="off" class="layui-input" disabled></div>
                                     <!--<div class="layui-col-md4 txt-center">
                                         <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
                                         <input type="radio" name="" value="false" title="错误" lay-filter="radios">
@@ -505,6 +599,34 @@
             <legend>客栈经营情况</legend>
             <div class="layui-fluid">
                 <div class="layui-row">
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客栈月收入（元）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="motelMonthIncome" id="motelMonthIncome"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客房月收入（元）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="roomMonthIncome" id="roomMonthIncome"  autocomplete="off" class="layui-input" disabled></div>
+                                    <!--<div class="layui-col-md4 txt-center">
+                                        <input type="radio" name="" value="true" title="正确" lay-filter="radios" checked>
+                                        <input type="radio" name="" value="false" title="错误" lay-filter="radios">
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="layui-col-md12">
                         <div class="layui-form-item">
                             <label class="layui-form-label">个人月收入证明</label>
@@ -708,8 +830,9 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">车子及行车证照片</label>
                             <div class="layui-input-block">
-                                <ul class="pics">
+                                <ul class="pics" >
                                     <li><img id="carPic" data-original="" src="" alt=""></li>
+                                    <li><img id="carCertPic" data-original="" src="" alt=""></li>
                                 </ul>
                             </div>
                         </div>
@@ -845,7 +968,7 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">工作年限</label>
+                            <label class="layui-form-label">工作年限（年）</label>
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="workExperiences" id="workExperiences"  autocomplete="off" class="layui-input" disabled></div>
@@ -897,10 +1020,34 @@
                 <div class="layui-row">
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">二销合作方</label>
+                            <label class="layui-form-label">客源合作方</label>
+                            <div class="layui-input-block divList" id="tourismCooperation">
+                                <div class="layui-col-md8"><input type="text" name="tourismCooperation"   autocomplete="off" class="layui-input" value="" disabled></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客户合作方</label>
+                            <div class="layui-input-block divList" id="customerCooperation">
+                                <div class="layui-col-md8"><input type="text" name="customerCooperation"  autocomplete="off" class="layui-input" value="" disabled></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">担保人</label>
+                            <div class="layui-input-block">
+                                <div class="layui-col-md8"><input type="text" name="bondsman" id="bondsman"  autocomplete="off" class="layui-input" value="" disabled></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">其他收入类型</label>
                             <div class="layui-input-block">
                                 <div>
-                                    <div class="layui-col-md8"><input type="text" name="commisionPartner" id="commisionPartner"  autocomplete="off" class="layui-input" value="" disabled></div>
+                                    <div class="layui-col-md8"><input type="text" name="monthIncomeType" id="monthIncomeType"  autocomplete="off" class="layui-input" value="" disabled></div>
 
                                 </div>
                             </div>
@@ -908,10 +1055,43 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">二销平均月收入</label>
+                            <label class="layui-form-label">其他月收入</label>
                             <div class="layui-input-block">
                                 <div>
                                     <div class="layui-col-md8"><input type="text" name="averageCommision" id="averageCommision"  autocomplete="off" class="layui-input" disabled></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客栈客源线上占比（%）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="onlinePercentage" id="onlinePercentage"  autocomplete="off" class="layui-input" disabled></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客栈客源线下占比（%）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="offlinePercentage" id="offlinePercentage"  autocomplete="off" class="layui-input" disabled></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">当地居住年限（年）</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="text" name="residenceYear" id="residenceYear"  autocomplete="off" class="layui-input" disabled></div>
 
                                 </div>
                             </div>
@@ -949,60 +1129,162 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="layui-col-md6">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">客栈客源线上占比</label>
-                            <div class="layui-input-block">
-                                <div>
-                                    <div class="layui-col-md8"><input type="text" name="onlinePercentage" id="onlinePercentage"  autocomplete="off" class="layui-input" disabled></div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md6">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">客栈客源线下占比</label>
-                            <div class="layui-input-block">
-                                <div>
-                                    <div class="layui-col-md8"><input type="text" name="offlinePercentage" id="offlinePercentage"  autocomplete="off" class="layui-input" disabled></div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-col-md6">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">当地居住年限</label>
-                            <div class="layui-input-block">
-                                <div>
-                                    <div class="layui-col-md8"><input type="text" name="residenceYear" id="residenceYear"  autocomplete="off" class="layui-input" disabled></div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </fieldset>
 
-        <fieldset class="remark">
-            <legend>备注</legend>
+        <fieldset class="remark checkBorder">
+            <legend>备注（驳回必填项）</legend>
             <div class="layui-col-md10">
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">错误信息</label>
                     <div class="layui-input-block">
-                        <textarea name="remark" id="remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea name="remark" id="remark" placeholder="请输入驳回原因" class="layui-textarea"></textarea>
                     </div>
                 </div>
             </div>
         </fieldset>
+
+        <fieldset class="checkBorder">
+            <legend>个人及主体信用（审核通过必填项）</legend>
+            <div class="layui-fluid">
+                <div class="layui-row">
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否逾期</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="isOverdue" value="0" title="是" lay-filter="radios">
+                                <input type="radio" name="isOverdue" value="1" title="否" lay-filter="radios">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否借款</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="isLoan" value="0" title="是" lay-filter="radios">
+                                <input type="radio" name="isLoan" value="1" title="否" lay-filter="radios">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">逾期次数</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="number" name="overdueTimes" id="overdueTimes"  autocomplete="off" class="layui-input"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否已还</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="isRepayment" value="0" title="是" lay-filter="radios">
+                                <input type="radio" name="isRepayment" value="1" title="否" lay-filter="radios">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否金融机构黑名单</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="isFinanceBlacklist" value="0" title="是" lay-filter="radios">
+                                <input type="radio" name="isFinanceBlacklist" value="1" title="否" lay-filter="radios">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="checkBorder">
+            <legend>法院诉讼（审核通过必填项）</legend>
+            <div class="layui-fluid">
+                <div class="layui-row">
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否有诉讼</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="isLawsuit" value="0" title="是" lay-filter="radios">
+                                <input type="radio" name="isLawsuit" value="1" title="否" lay-filter="radios">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">诉讼次数</label>
+                            <div class="layui-input-block">
+                                <div>
+                                    <div class="layui-col-md8"><input type="number" name="lawsuitTimes" id="lawsuitTimes"  autocomplete="off" class="layui-input"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">诉讼是否已处理</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="isDeal" value="0" title="是" lay-filter="radios">
+                                <input type="radio" name="isDeal" value="1" title="否" lay-filter="radios">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否法院黑名单</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="isCourtBlacklist" value="0" title="是" lay-filter="radios">
+                                <input type="radio" name="isCourtBlacklist" value="1" title="否" lay-filter="radios">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="checkBorder">
+            <legend>（审核通过必填项）</legend>
+            <div class="layui-fluid">
+                <div class="layui-row">
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款还款情况</label>
+                            <div class="layui-input-block">
+                                <select id="loanRepaymentSituation" lay-filter="">
+                                    <option>请选择</option>
+                                    <option value="0">正常类</option>
+                                    <option value="1">一般类</option>
+                                    <option value="2">关注类</option>
+                                    <option value="3">次级类</option>
+                                    <option value="4">损失类</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">公共记录</label>
+                            <div class="layui-input-block" id="publicRecordsInfo">
+                                <input type="checkbox" id="taxEvasion"  title="偷税漏税情况">
+                                <input type="checkbox" id="criminal" title="犯罪情况">
+                                <input type="checkbox" id="punishment" title="治安处罚情况">
+                                <input type="checkbox" id="otherLawsuit" title="其他不良诉讼">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
         <input type="hidden" name="userId" id="userId"/>
         <div class="layui-form-item check-submit">
             <div class="layui-input-block btnControl">
-                <button class="layui-btn" lay-submit lay-filter="checkPass">审核通过</button>
-                <button class="layui-btn layui-btn-danger" lay-submit lay-filter="checkReject" >驳回</button>
+                <button type="submit" class="layui-btn" lay-filter="checkPass" lay-submit id="checkPass">审核通过</button>
+                <button class="layui-btn layui-btn-danger" lay-submit lay-filter="checkPass2" id="checkPass2" style="display:none"></button>
+                <button type="submit" class="layui-btn layui-btn-danger" lay-submit lay-filter="checkReject1" id="checkReject1">驳回</button>
+                <button class="layui-btn layui-btn-danger" lay-submit lay-filter="checkReject2" id="checkReject2" style="display:none"></button>
             </div>
         </div>
     </form>
@@ -1010,6 +1292,7 @@
 <script src="../js/jquery-1.11.1.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/viewer.min.js"></script>
+<script src="../../js/config.js"></script>
 <script src="../js/riskControlList.js"></script>
 </body>
 </html>

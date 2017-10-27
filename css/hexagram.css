@@ -1,22 +1,13 @@
-body {
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
+*{
+    padding:0;
+    margin:0;
 
-div {
-    margin: 0px;
-    padding: 0px;
 }
-
 #header {
-    /*background-color: blue;*/
+    position: fixed;
+    top:0;
+    z-index: 9999;
     color: white;
-    position: absolute;
-    top: 0px;
-    left: 0px;
     height: 60px;
     width: 100%;
 }
@@ -26,112 +17,126 @@ div {
     color: white;
     width: 100%;
     height: 60px;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
+    position: fixed;
+    bottom: 0;
+}
+.content{
+    width:100%;
+    height:98vh;
+    display:flex;
+    justify-content: space-between;
+}
+.content-left{
+    width:30%;
+    height:100%;
+    border-right:1px solid #ccc;
+    background-color:#fff;
+}
+.content-left-top{
+    width:100%;
+    height:415px;
+    padding-top:70px;
+    border-bottom: 1px solid #ccc;
+}
+.tittle{
+    padding:10px;
+    font-size: 18px;
+    font-weight:600;
+}
+.dataile-info{
+    width:85%;
+}
+.dataile-info input{
+    border:none;
 }
 
-#Content {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    top: 60px;
-    bottom: 60px;
-    /* margin: 15px; */
-    /*background: #0FF;*/
+.content-left-down{
+    width:100%;
+    height:49%;
 }
 
-#Content-Left {
-    border: 1px solid #ccc;
-    height: 100%;
-    width: 25%;
-    float: left;
-    /*设置元素跟其他元素的距离为20像素*/
-    /* float: left; */
-    /*设置浮动，实现多列效果，div+Css布局中很重要的*/
-    /*background: #90C;*/
-}
 
-#Content-Left-up {
-    /* border: 1px solid rgb(245, 245, 245); */
-    height: 35%;
-    overflow: auto;
+#main{
+    width:100%;
+    height:100%;
 }
+.content-right{
+     width:70%;
+     padding-top:70px;
+ }
 
-#Content-Left-down {
-    /* border: 1px solid rgb(245, 245, 245); */
-    /* background-color: black; */
-    height: 65%;
-    width: 100%;
-    overflow: auto;
+.content-right-top{
+    width:100%;
+    height:415px;
+    border-bottom: 1px solid #ccc;
 }
-
-#Content-Main {
-    border: 1px solid green;
-    width: max-content;
-    height: 100%;
-    /*设置元素跟其他元素的距离为20像素*/
-    /* float: left; */
-    overflow: auto;
-    /*设置浮动，实现多列效果，div+Css布局中很重要的*/
-    /*background: #e90;*/
+.content-right-top .btb-tofile{
+    padding:80px;
+    width:80%;
 }
-
-#hotelName {
-    background-color: rgb(245, 245, 245);
-}
-
-#userName {
-    background-color: rgb(245, 245, 245);
-}
-
-#part1 {
-    border: 1px solid rgb(245, 245, 245);
-    padding: 10px;
-    margin: 15px;
-}
-
-#part2 {
-    border: 1px solid rgb(245, 245, 245);
-    padding: 10px;
-    margin: 15px;
-}
-
-#part3 {
-    border: 1px solid rgb(245, 245, 245);
-    padding: 10px;
-    margin: 15px;
-}
-
-#part4 {
-    border: 1px solid rgb(245, 245, 245);
-    padding: 10px;
-    margin: 15px;
-}
-
-#part5 {
-    border: 1px solid rgb(245, 245, 245);
-    padding: 10px;
-    margin: 15px;
-}
-
-#part6 {
-    border: none;
-    padding: 10px;
-    margin: 15px;
-}
-
-#LAY_demo_upload {
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.site-demo-upload {
-    /* border: 1px solid red; */
-    margin-top: 60px;
-    padding-left: 140px;
-}
-
-.layui-btn {
+.content-right-top .btb-tofile .remark{
     margin-left: 50px;
+}
+.remarkInfo{
+    width:60%;
+    margin:50px auto;
+}
+.limit-contain{
+    width:60%;
+    padding:60px;
+}
+.limit-contain input[disabled]{
+    border:none;
+    font-weight:bold;
+    color: #FF5722;
+}
+.updatafile{
+    margin:80px 60px;
+}
+
+.module{
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    top:10%;
+    left: 50%;
+    width:794px;
+    height:75vh;
+    background-color:#fff;
+    transform: translateX(-50%);
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+.checkboxbtn{
+    padding-top:10px;
+}
+.showinfo{
+    color:red;
+    cursor: pointer;
+    text-decoration:underline;
+}
+.module iframe{
+    width:100%;
+    height:100%;
+}
+.close{
+    display: inline;
+    position: absolute;
+    top:0;
+    right:35px;
+    cursor: pointer;
+    width:30px;
+    height:30px;
+    z-index: 100000;
+}
+.shadow{
+    display: none;
+    position: fixed;
+    top:0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    z-index: 100;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.8
 }

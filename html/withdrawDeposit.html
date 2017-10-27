@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>申请贷款</title>
+    <link rel="stylesheet" href="../layui/css/layui2.0.css" media="all"/>
+    <link rel="stylesheet" href="../finance/css/usercenter.css"/>
+    <link rel="stylesheet" href="../finance/css/floaticon.css" type="">
+    <!--<script src="../layui/layui.js"></script>-->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../js/base64.js"></script>
+    <script src="../finance/layui/layui.js" charset="utf-8"></script>
+    <script src="../js/return.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../js/withdrawDeposit.js"></script>
+</head>
+<body>
+<div>
+    <ul class="layui-nav">
+        <li class="layui-nav-item"><a href="">申请贷款</a></li>
+    </ul>
+</div>
+
+<div class="limit-contain">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">最高可申请（元）</label>
+            <div class="layui-input-block">
+               <input type="text" name="maxLimit" autocomplete="off" class="layui-input" disabled value="10,000">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请金额（元）</label>
+            <div class="layui-input-block">
+                <input type="number" name="title" required  lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input" min="1" max="10000">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="applyImmediately">立即申请</button>
+                <button class="layui-btn layui-btn-primary">取消</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

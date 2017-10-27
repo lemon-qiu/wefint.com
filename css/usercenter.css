@@ -25,3 +25,10 @@
     right: -20px;
     top: 12px;
 }
+.dosubmit{
+    text-align: center;
+    margin: 10px;
+}
+.moreImg >div{
+    float: left;
+}
