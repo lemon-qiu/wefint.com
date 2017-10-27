@@ -41,3 +41,6 @@ fieldset{
 .pics li img{
     height:100%;
 }
+.divList div{
+    margin-bottom:15px;
+}
