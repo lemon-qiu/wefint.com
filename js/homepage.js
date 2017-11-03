@@ -1,1 +1,0 @@
-function login(){window.location.href="./login.html"}function zhuce(){window.location.href="./zhuce.html"};
