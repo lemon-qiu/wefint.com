@@ -1,4 +1,8 @@
 $(function () {
+
+    /***
+     * layui Form
+     */
     layui.use('form', function () {
         var form = layui.form;
 
@@ -140,9 +144,10 @@ $(function () {
             })
         };
 
-
     });
-
+    /***
+     * layui Table
+     */
     layui.use('table', function () {
         var table = layui.table;
 
@@ -181,8 +186,42 @@ $(function () {
                 getCheckLevelOne(data);
             } else if (obj.event == 'checkLevelTwo') {
                 getCheckLevelTwo(data);
+            } else if(obj.event=='hasBeenLend'){
+                getHasBeenLend(data);
             }
         });
+    });
+
+
+    /***
+     * layui Upload
+     */
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        var imgs  = [];
+        //多图片上传
+        upload.render({
+            elem: '#test2'
+            ,auto:false
+            ,bindAction:'#submit'
+            ,multiple: true
+            ,choose: function(obj){
+                obj.preview(function(index, file, result){
+                    imgs.push(result);
+                });
+                console.log(imgs);
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                });
+            }
+            ,done: function(res){
+                //上传完毕
+            }
+        });
+
     });
 
     /********判断是否有错误radio*********/
@@ -223,7 +262,6 @@ $(function () {
         body.contents().find("#monthIncome").val(rows.monthIncome);//家庭月收入
         body.contents().find("#certFront").attr('src', rows.certFront);//上传身份证正面
         body.contents().find("#certBack").attr('src', rows.certBack);//上传身份证反面
-        body.contents().find("#referencePictures").attr('src', rows.referencePictures);//个人征信照片
         //婚姻状况
         var ms = '',marryStatusStr;
         if(rows.marryStatus === null || rows.marryStatus === ''){
@@ -495,6 +533,24 @@ $(function () {
         });
         layer.full(dd);
     }
+    //已放款
+    function getHasBeenLend() {
+        var dd = layer.open({
+            title:false,
+            type:2,
+            content:'../html/hasBeenLendView.html',
+            success:function (layero,index) {
+                var body = layer.getChildFrame('body', index); //巧妙的地方在这里哦
+                body.contents().find("#userId").val(rows.userId);
+
+                body.contents().find("#certFront").attr('src', rows.certFront);//上传身份证正面
+                body.contents().find("#certBack").attr('src', rows.certBack);//上传身份证反面
+            }
+        })
+        layer.full(dd);
+    }
+
+
     //得到图片组
     function setPics(pics,domId) {
         $.each(pics,function (i,url) {

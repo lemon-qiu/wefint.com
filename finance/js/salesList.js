@@ -179,7 +179,6 @@ $(function () {
         body.contents().find("#monthIncome").val(rows.monthIncome);//家庭月收入
         body.contents().find("#certFront").attr('src', rows.certFront);//上传身份证正面
         body.contents().find("#certBack").attr('src', rows.certBack);//上传身份证反面
-        body.contents().find("#referencePictures").attr('src', rows.referencePictures);//个人征信照片
         //婚姻状况
         var ms = '',marryStatusStr;
         if(rows.marryStatus === null || rows.marryStatus === ''){

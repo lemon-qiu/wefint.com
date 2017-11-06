@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>已放款</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../css/viewer.min.css">
+    <link rel="stylesheet" href="../css/checkPage.css" />
+
+</head>
+<body>
+<div>
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item"><a href="">已放款</a></li>
+    </ul>
+</div>
+
+<div class="contain">
+    <form class="layui-form check-form" action="">
+        <fieldset>
+            <legend>借款人资料</legend>
+            <div class="layui-fluid">
+                <div class="layui-row">
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款人申请表</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">身份证正反面</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id="certFront"></li>
+                                    <li ><img data-original="" src="" alt="" id="certBack"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">户口册复印件</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">婚姻证明</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">个人征信报告</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客栈经营执照</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客栈规模及客栈照片</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客栈租赁合同</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">三个月客栈租赁状况</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">六个月的个人或客栈流水情况</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款合同、借款转账凭证、收条</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款人借款评估报告</label>
+                            <div class="layui-input-block">
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn" id="test2">多图片上传</button>
+                                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                        预览图：
+                                        <div class="layui-upload-list" id="demo2"></div>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">测试</label>
+                            <div class="layui-input-block">
+                                <div class="layui-upload">
+                                    <input type="file" id="file" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item check-submit">
+                        <div class="layui-input-block btnControl">
+                            <button type="submit" class="layui-btn" lay-filter="checkPass" lay-submit id="submit">提交</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="../js/jquery-1.11.1.js"></script>
+<script src="../layui/layui.js"></script>
+<script src="../js/viewer.min.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../js/riskControlList.js"></script>
+
+<script type="text/javascript">
+    document.getElementById('file').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        var storeAs = 'upload-file';
+        console.log(file.name + ' => ' + storeAs);
+        OSS.urllib.request("http://your_sts_server/",
+            {method: 'GET'},
+            function (err, response) {
+                if (err) {
+                    return alert(err);
+                }
+                try {
+                    result = JSON.parse(response);
+                } catch (e) {
+                    return alert('parse sts response info error: ' + e.message);
+                }
+                var client = new OSS.Wrapper({
+                    accessKeyId: result.AccessKeyId,
+                    accessKeySecret: result.AccessKeySecret,
+                    stsToken: result.SecurityToken,
+                    endpoint: '<oss endpoint>',
+                    bucket: '<Your bucket name>'
+                });
+                client.multipartUpload(storeAs, file).then(function (result) {
+                    console.log(result);
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            });
+    });
+</script>
+</body>
+</html>
