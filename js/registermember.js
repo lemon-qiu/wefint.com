@@ -71,80 +71,128 @@ function validate() {
  * 滑动发送验证码
  * @param options
  */
-$.fn.drag = function(options){
-    var x, drag = this, isMove = false, defaults = {
+(function(window,document,undefined){
+    var dog = {//声明一个命名空间，或者称为对象
+        $:function(id){
+            return document.querySelector(id);
+        },
+        on:function(el,type,handler){
+            el.addEventListener(type,handler,false);
+        },
+        off:function(el,type,handler){
+            el.removeEventListener(type,handler,false);
+        }
     };
-    var options = $.extend(defaults, options);
-    //添加背景，文字，滑块
-    var html = '<div class="drag_bg"></div>'+
-        '<div class="drag_text" onselectstart="return false;" unselectable="on">拖动滑块验证</div>'+
-        '<div class="handler handler_bg"></div>';
-    this.append(html);
-
-    var handler = drag.find('.handler');
-    var drag_bg = drag.find('.drag_bg');
-    var text = drag.find('.drag_text');
-    var maxWidth = drag.width() - handler.width();  //能滑动的最大间距
-
-    //鼠标按下时候的x轴的位置
-    handler.mousedown(function(e){
-        isMove = true;
-        x = e.pageX - parseInt(handler.css('left'), 10);
-    });
-
-    //鼠标指针在上下文移动时，移动距离大于0小于最大间距，滑块x轴位置等于鼠标移动距离
-    $(document).mousemove(function(e){
-        var _x = e.pageX - x;
-        if(isMove){
-            if(_x > 0 && _x <= maxWidth){
-                handler.css({'left': _x});
-                drag_bg.css({'width': _x});
-            }else if(_x > maxWidth){  //鼠标指针移动距离达到最大时清空事件
-                dragOk();
-            }
+//封装一个滑块类
+    function Slider(){
+        var args = arguments[0];
+        for(var i in args){
+            this[i] = args[i]; //一种快捷的初始化配置
         }
-    }).mouseup(function(e){
-        isMove = false;
-        var _x = e.pageX - x;
-        if(_x < maxWidth){ //鼠标松开时，如果没有达到最大距离位置，滑块就返回初始位置
-            handler.css({'left': 0});
-            drag_bg.css({'width': 0});
-        }
-    });
-
-    //清空事件
-    function dragOk(){
-        var Data = $('#phoneNumber').val();
-        new ajaxHttp('POST',getUrl(2) + '/portal/getVirficationCode',Data,
-            function(data) {
-                alert("获取状态失败，请稍后");
-            }),
-            function(data) {
-                if(data.code === SUCCESS){
-                    handler.removeClass('handler_bg').addClass('handler_ok_bg');
-                    text.text('验证通过');
-                    drag.css({'color': '#fff'});
-                    handler.unbind('mousedown');
-                    $(document).unbind('mousemove');
-                    $(document).unbind('mouseup');
-                    text.text('发送成功');
-                    alert('成功');
-                }else if(data.code === 900007){
-                    alert('参数为空');
-                }else if(data.code === 200101){
-                    alert('用户已经存在');
-                }else if(data.code === 200500){
-                    alert('验证码错误');
-                }else if(data.code === 200501){
-                    alert('手机号出错');
-                }else if(data.code === 200502){
-                    alert('验证码发送失败');
-                }else if(data.code === 200503){
-                    alert('验证码失效');
-                }
-            }
+//直接进行函数初始化，表示生成实例对象就会执行初始化
+        this.init();
     }
+    Slider.prototype = {
+        constructor:Slider,
+        init:function(){
+            this.getDom();
+            this.dragBar(this.handler);
+        },
+        getDom:function(){
+            this.slider = dog.$('#'+this.id);
+            this.handler = dog.$('.handler');
+            this.bg = dog.$('.drag_bg');
+        },
+        dragBar:function(handler){
+            var that = this,
+                startX = 0,
+                lastX = 0,
+                doc = document,
+                width = this.slider.offsetWidth,
+                max = width - handler.offsetWidth,
+                drag = {
+                    down:function(e){
+                        var e = e||window.event;
+                        that.slider.classList.add('unselect');
+                        startX = e.clientX - handler.offsetLeft;
+                        console.log('startX: '+startX+' px');
+                        dog.on(doc,'mousemove',drag.move);
+                        dog.on(doc,'mouseup',drag.up);
+                        return false;
+                    },
+                    move:function(e){
+                        var e = e||window.event;
+                        lastX = e.clientX - startX;
+                        lastX = Math.max(0,Math.min(max,lastX)); //这一步表示距离大于0小于max，巧妙写法
+                        console.log('lastX: '+lastX+' px');
+                        if(lastX>=max){
+                            handler.classList.add('handler_ok_bg');
+                            that.slider.classList.add('slide_ok');
+                            dog.off(handler,'mousedown',drag.down);
+                            drag.up();
+                        }
+                        that.bg.style.width = lastX + 'px';
+                        handler.style.left = lastX + 'px';
+                    },
+                    up:function(e){
+                        var e = e||window.event;
+                        that.slider.classList.remove('unselect');
+                        if(lastX < width){
+                            that.bg.classList.add('ani');
+                            handler.classList.add('ani');
+                            that.bg.style.width = 0;
+                            handler.style.left = 0;
+                            setTimeout(function(){
+                                that.bg.classList.remove('ani');
+                                handler.classList.remove('ani');
+                            },300);
+                        }
+                        dog.off(doc,'mousemove',drag.move);
+                        dog.off(doc,'mouseup',drag.up);
+                    }
+                };
+            dog.on(handler,'mousedown',drag.down);
+        }
+    };
+    window.S = window.Slider = Slider;
+})(window,document);
+var defaults = {
+    id:'slider'
 };
+new S(defaults);
+
+//清空事件
+function dragOk(){
+    var Data = $('#phoneNumber').val();
+    new ajaxHttp('POST',getUrl(2) + '/portal/getVirficationCode',Data,
+        function(data) {
+            alert("获取状态失败，请稍后");
+        }),
+        function(data) {
+            if(data.code === SUCCESS){
+                handler.removeClass('handler_bg').addClass('handler_ok_bg');
+                text.text('验证通过');
+                drag.css({'color': '#fff'});
+                handler.unbind('mousedown');
+                $(document).unbind('mousemove');
+                $(document).unbind('mouseup');
+                text.text('发送成功');
+                alert('成功');
+            }else if(data.code === 900007){
+                alert('参数为空');
+            }else if(data.code === 200101){
+                alert('用户已经存在');
+            }else if(data.code === 200500){
+                alert('验证码错误');
+            }else if(data.code === 200501){
+                alert('手机号出错');
+            }else if(data.code === 200502){
+                alert('验证码发送失败');
+            }else if(data.code === 200503){
+                alert('验证码失效');
+            }
+        }
+}
 
 function memberRegister(data) {
     var D = new Base64();
