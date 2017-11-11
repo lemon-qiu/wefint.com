@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,163 +18,87 @@
 </div>
 
 <div class="contain">
-    <form class="layui-form check-form" action="">
+    <form class="layui-form check-form" id="formT">
         <fieldset>
             <legend>借款人资料</legend>
             <div class="layui-fluid">
                 <div class="layui-row">
 
-                    <div class="layui-col-md4">
+                    <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">借款人申请表</label>
+                            <label class="layui-form-label">借款合同</label>
                             <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,9);">
+                                <ul class="imgs-list"></ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="layui-col-md4">
+                    <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">身份证正反面</label>
+                            <label class="layui-form-label">借款转账凭证</label>
                             <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id="certFront"></li>
-                                    <li ><img data-original="" src="" alt="" id="certBack"></li>
-                                </ul>
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,10);">
+                                <ul class="imgs-list"></ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="layui-col-md4">
+                    <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">户口册复印件</label>
+                            <label class="layui-form-label">借款收条</label>
                             <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,11);">
+                                <ul class="imgs-list"></ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">婚姻证明</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">个人征信报告</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">客栈经营执照</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">客栈规模及客栈照片</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">客栈租赁合同</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">三个月客栈租赁状况</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">六个月的个人或客栈流水情况</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">借款合同、借款转账凭证、收条</label>
-                            <div class="layui-input-block">
-                                <ul class="pics">
-                                    <li><img data-original="" src="" alt="" id=""></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-col-md12">
+                    <div class="layui-col-md6">
                         <div class="layui-form-item">
                             <label class="layui-form-label">借款人借款评估报告</label>
                             <div class="layui-input-block">
-                                <div class="layui-upload">
-                                    <button type="button" class="layui-btn" id="test2">多图片上传</button>
-                                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                                        预览图：
-                                        <div class="layui-upload-list" id="demo2"></div>
-                                    </blockquote>
-                                </div>
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,12);">
+                                <ul class="imgs-list"></ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="layui-col-md12">
+                    <div class="layui-col-md6">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">测试</label>
+                            <label class="layui-form-label">咨询服务协议</label>
                             <div class="layui-input-block">
-                                <div class="layui-upload">
-                                    <input type="file" id="file" />
-                                </div>
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,13);">
+                                <ul class="imgs-list"></ul>
                             </div>
                         </div>
                     </div>
 
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">担保函</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,14);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">承诺函</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,15);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="userId" id="userId"/>
                     <div class="layui-form-item check-submit">
                         <div class="layui-input-block btnControl">
-                            <button type="submit" class="layui-btn" lay-filter="checkPass" lay-submit id="submit">提交</button>
+                            <button type="submit" class="layui-btn" lay-filter="sendToInvestor" lay-submit >提交</button>
                         </div>
                     </div>
 
@@ -183,43 +107,27 @@
         </fieldset>
     </form>
 </div>
-
+<div hidden>
+    <div id="ossfile"></div>
+    <div id="container">
+        <input type="button" id="postfiles" value="上传">
+        <input type="button" id="selectfiles" value="选择文件">
+    </div>
+    <input readonly="readonly" name="OSSAccessKeyId" value="LTAIxFAQ3g7BhPxF">
+    <br>
+    <input readonly="readonly" name="success_action_status" value="200">
+    <br>签名：<input name="signature" id="signature">
+    <br>回调：<input name="callback" id="callback">
+    <br>策略：<input name="policy" id="policy">
+    <br>KEY ：<input name="key" id="key">
+</div>
 <script src="../js/jquery-1.11.1.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/viewer.min.js"></script>
+<script src="../../js/pageonload.js"></script>
 <script src="../../js/config.js"></script>
+<script src="../js/plupload.full.min.js"></script>
 <script src="../js/riskControlList.js"></script>
-
-<script type="text/javascript">
-    document.getElementById('file').addEventListener('change', function (e) {
-        var file = e.target.files[0];
-        var storeAs = 'upload-file';
-        console.log(file.name + ' => ' + storeAs);
-        OSS.urllib.request("http://your_sts_server/",
-            {method: 'GET'},
-            function (err, response) {
-                if (err) {
-                    return alert(err);
-                }
-                try {
-                    result = JSON.parse(response);
-                } catch (e) {
-                    return alert('parse sts response info error: ' + e.message);
-                }
-                var client = new OSS.Wrapper({
-                    accessKeyId: result.AccessKeyId,
-                    accessKeySecret: result.AccessKeySecret,
-                    stsToken: result.SecurityToken,
-                    endpoint: '<oss endpoint>',
-                    bucket: '<Your bucket name>'
-                });
-                client.multipartUpload(storeAs, file).then(function (result) {
-                    console.log(result);
-                }).catch(function (err) {
-                    console.log(err);
-                });
-            });
-    });
-</script>
+<script src="../js/upload.js"></script>
 </body>
 </html>

@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>房屋状态</title>
+    <link rel="stylesheet" href="../layui/css/layui2.0.css" media="all"/>
+    <link rel="stylesheet" href="../css/floaticon.css" type="">
+    <script src="../finance/layui/layui.js" charset="utf-8"></script>
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../js/hotelStatus1.js"></script>
+</head>
+<body onload="">
+<div class="head">
+    <div class="head_left">
+        <img src="../images/hotelStatus/logo.png" alt="logo">
+        房屋状态
+    </div>
+    <div class="head_right">
+        <img src="../images/hotelStatus/backHome.png" alt="logo">
+    </div>
+</div>
+<div class="section">
+    <div class="content_left">
+        <div class="dateChoose">
+            <img src="../images/hotelStatus/rightBtn.png"
+                 alt="left" class="leftBtn">
+            <img src="../images/hotelStatus/leftBtn.png"
+                 alt="right" class="rightBtn">
+            <input type="text" class="layui-input chooseDate" id="nowTimeChoose" placeholder="选择日期">
+        </div>
+        <table id="left_table">
+            <tr>
+                <td>独居标准间2</td>
+                <td>2号房</td>
+            </tr>
+        </table>
+    </div>
+    <div class="content_right">
+        <div class="dateChooseRight">
+            <div><p>2017-10-01</p>
+                <p>星期五</p></div>
+            <div><p>2017-10-01</p>
+                <p>星期五</p></div>
+            <div><p>2017-10-01</p>
+                <p>星期五</p></div>
+            <div><p>2017-10-01</p>
+                <p>星期五</p></div>
+        </div>
+        <div id="table_content">
+            <div class="dataRight">
+                <div>
+                    <div class="checkOut">已退房</div>
+                </div>
+                <div>
+                    <div class="checkSubscribe">已预定</div>
+                </div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dataRight">
+                <div>
+                    <div class="checkIn">已入住</div>
+                </div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer_left">
+        <div>
+            <img src="../images/hotelStatus/call.png" alt="call">
+            028-5191803
+        </div>
+        <div>
+            <img src="../images/hotelStatus/help.png" alt="call">
+            帮助
+        </div>
+    </div>
+    <div class="footer_right">
+        <p>版权所有Copyright By 圣境环球</p>
+    </div>
+</div>
+<script>
+    function initPageData() {
+        // 根据左边表单数据的量创建右边的表单
+        let leftTableTr = $('#left_table').children().children();
+        let tableContent = $('#table_content');
+        let strNode = '';
+        for (let i = 0; i < leftTableTr.length; i++) {
+            strNode += ' <div class="dataRight"></div>';
+            tableContent.html(strNode)
+        }
+//        // 根据div个数计算 整个宽度
+        let dateChooseRight = $('.dateChooseRight');
+        let dataRight = $('.dataRight');
+        let divlength = dateChooseRight.children();
+        let width = (divlength.length) * 226;
+        dateChooseRight.css({'width': width});
+        dataRight.css({'width': width});
+        //
+        let strNodeTD = '';
+        if (dataRight.length > 0) {
+            for (let i = 0; i < divlength.length; i++) {
+                strNodeTD += '<div></div>';
+                dataRight.html(strNodeTD)
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

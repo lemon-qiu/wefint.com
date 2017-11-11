@@ -12,6 +12,16 @@ fieldset{
      border: 1px solid #d1d1d1;
     padding:20px 0;
  }
+.nav5 {
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    z-index: 88;
+    position: fixed;
+    right: 0;
+    top: 2%;
+    cursor: pointer;
+}
 /***********重写layui样式****************/
 .layui-form-label{
     width:126px;
@@ -43,4 +53,14 @@ fieldset{
 }
 .divList div{
     margin-bottom:15px;
+}
+
+/*****************图片上传*******************/
+.imgs-list{
+    height:200px;
+}
+.imgs-list li{
+    float: left;
+    margin:10px 5px 0 0;
+    border:1px solid #e5e5e5;
 }

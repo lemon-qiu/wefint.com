@@ -1,0 +1,70 @@
+/*公用类*/
+
+.displyone{
+    display: none;
+}
+.greeniocn{
+    color: green;
+}
+.rediocn{
+    color: red;
+}
+/***********重写layui样式****************/
+.layui-form-label{
+    width:126px;
+}
+.layui-input-block{
+    margin-left: 156px;
+}
+/**********审核页样式****************/
+.check-form fieldset{
+    border: 1px solid #d1d1d1;
+}
+.layui-icon{
+    position: absolute;
+    right: -20px;
+    top: 12px;
+}
+.dosubmit{
+    text-align: center;
+    margin: 10px;
+}
+.moreImg >div{
+    float: left;
+}
+.bootProcess{
+    width:30%;
+    margin: 15px auto;
+    text-decoration: underline;
+    color:red;
+    cursor:pointer ;
+}
+#modal{
+    display: none;
+    width:95%;
+    overflow: hidden;
+    padding:15px;
+}
+#modal .readitInfo >div{
+    width:100%;
+}
+#modal .readitInfo >div img{
+    width:100%;
+    margin-top:20px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: #bee1eb;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #00aff0;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9c3
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #00aff0
+}

@@ -186,13 +186,13 @@
 		transform: translate3d(0,0,0);
 	/* Set your background with this */
 
-		background: #348cb2 url("images/bg.jpg") bottom left;
+		background: url("images/cloud.png") bottom left;
 		background-repeat: repeat-x;
 		height: 100%;
 		left: 0;
 		opacity: 1;
 		position: fixed;
-		top: 0;
+		top: -410px;
 	}
 
 	@-moz-keyframes bg {
@@ -312,7 +312,8 @@
 		-ms-animation: overlay 1.5s 1.5s forwards;
 		animation: overlay 1.5s 1.5s forwards;
 		background-attachment: fixed, fixed;
-		background-image: url("images/overlay-pattern.png"), url("images/overlay.svg");
+		/*background-image: #348cb2 url("images/overlay-pattern.png"), url("images/overlay.svg");*/
+		background-image:url("images/bg.jpg");
 		background-position: top left, center center;
 		background-repeat: repeat, no-repeat;
 		background-size: auto, cover;
@@ -322,6 +323,7 @@
 		position: fixed;
 		top: 0;
 		width: 100%;
+		z-index: -1;
 	}
 
 /* Main */
@@ -628,6 +630,34 @@
 				border: 0;
 				display: inline-block;
 			}
+			#header nav li:nth-child(1) a:hover:before{
+				color: #19a9f1;
+				border: solid 1px #19a9f1;
+			}
+			#header nav li:nth-child(2) a:hover:before{
+				color: #5FB878;
+				border: solid 1px #5FB878;
+			}
+			#header nav li:nth-child(3) a:hover:before{
+				color: #e6162d;
+				border: solid 1px #e6162d;
+			}
+			 #header nav li:nth-child(4) a:hover:before{
+				 color: #e55608;
+				 border: solid 1px #e55608;
+			 }
+			#header nav li:nth-child(5) a:hover:before{
+				color: #51c332;
+				border: solid 1px #51c332;
+			}
+			#header nav li:nth-child(6) a:hover:before{
+				color: #e43c5c;
+				border: solid 1px #e43c5c;
+			}
+			#header nav li:nth-child(7) a:hover:before{
+				 color: #19a9f1;
+				 border: solid 1px #19a9f1;
+			 }
 
 				#header nav a:before {
 					-moz-transition: all 0.2s ease-in-out;

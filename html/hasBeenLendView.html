@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>已放款</title>
+    <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../finance/css/checkPage.css" />
+    <link rel="stylesheet" href="../finance/css/viewer.min.css">
+
+</head>
+<body>
+<div>
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item"><a href="">已放款</a></li>
+    </ul>
+    <div class="nav5" onclick="window.open('./mainPannel.html','_self')">
+        <img src="../img/ppp.png" title="返回">
+    </div>
+</div>
+
+<div class="contain">
+    <form class="layui-form check-form" id="formT">
+        <fieldset>
+            <legend>借款人资料</legend>
+            <div class="layui-fluid">
+                <div class="layui-row">
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款合同</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,9);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款转账凭证</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,10);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款收条</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,11);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">借款人借款评估报告</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,12);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">咨询服务协议</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,13);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">担保函</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,14);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">承诺函</label>
+                            <div class="layui-input-block">
+                                <input type="button"  class="layui-btn" value="上传图片" onclick="updatePhoto(this,15);">
+                                <ul class="imgs-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="userId" id="userId"/>
+                    <div class="layui-form-item check-submit">
+                        <div class="layui-input-block btnControl">
+                            <button type="submit" class="layui-btn" lay-filter="sendToInvestor" lay-submit >提交</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div hidden>
+    <div id="ossfile"></div>
+    <div id="container">
+        <input type="button" id="postfiles" value="上传">
+        <input type="button" id="selectfiles" value="选择文件">
+    </div>
+    <input readonly="readonly" name="OSSAccessKeyId" value="LTAIxFAQ3g7BhPxF">
+    <br>
+    <input readonly="readonly" name="success_action_status" value="200">
+    <br>签名：<input name="signature" id="signature">
+    <br>回调：<input name="callback" id="callback">
+    <br>策略：<input name="policy" id="policy">
+    <br>KEY ：<input name="key" id="key">
+</div>
+<script src="../js/jquery-1.11.1.js"></script>
+<script src="../finance/layui/layui.js"></script>
+<script src="../js/viewer.min.js"></script>
+<script src="../js/pageonload.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/plupload.full.min.js"></script>
+<script src="../js/riskControlList.js"></script>
+<script src="../js/upload.js"></script>
+</body>
+</html>

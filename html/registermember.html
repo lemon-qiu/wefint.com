@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../css/registermember.css" type="">
+    <script src="../js/base64.js"></script>
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script src="../js/registermember.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../layui/layui.js"></script>
+</head>
+
+<body class="beg-login-bg">
+    <!--logo-->
+    <!--<img src="../img/ft.png" class="logo">-->
+    <!--<div id="yzm" style="width:100%;">
+        <input type="button" id="code" onclick="createCode()" style="width:5%;position: relative;top:0px" />
+    </div>-->
+    <div class="beg-login-box">
+        <header>
+            <!--<div src="../img/ftlogo.png" class="login-logo">-->
+            <!--<img src="../img/fta.png" class="wz">-->
+            <h1>用户注册</h1>
+        </header>
+        <!--注册信息-->
+        <div class="beg-login-main">
+            <form action="/manage/login" class="layui-form" method="post">
+                <!--<input name="__RequestVerificationToken" type="hidden" value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81" />-->
+                <!--用户名-->
+                <div class="layui-form-item">
+                    <!--<label class="register-text">用户名</label>-->
+                    <input type="text" name="userName" lay-verify="required" autocomplete="off" placeholder="请输入登录名" class="layui-input">
+                </div>
+                <!--密码-->
+                <div class="layui-form-item">
+                    <!--<label class="register-text">密码</label>-->
+                    <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                </div>
+                <!--再次输入密码-->
+                <div class="layui-form-item">
+                    <!--<label class="register-text">再次输入密码</label>-->
+                    <input type="password" name="password2" lay-verify="required" autocomplete="off" placeholder="请再次输入密码" class="layui-input">
+                </div>
+                <!--客栈名称-->
+                <div class="layui-form-item">
+                    <!--<label class="register-text">客栈名称</label>-->
+                    <input type="text" name="hotelName" lay-verify="required" autocomplete="off" placeholder="请输入客栈名称" class="layui-input">
+                </div>
+                <!--电子邮件-->
+                <div class="layui-form-item">
+                    <!--<label class="register-text">电子邮件</label>-->
+                    <input type="text" name="email" lay-verify="email" autocomplete="off" placeholder="请输入电子邮件" class="layui-input">
+                </div>
+                <!--手机号码-->
+                <div class="layui-form-item">
+                    <!--<label class="register-text">手机号码</label>-->
+                    <input type="text" name="phoneNumber" lay-verify="phone" autocomplete="off" placeholder="请输入手机号码" class="layui-input">
+                </div>
+                <style>
+                    #drag{
+                        position: relative;
+                        background-color: #e8e8e8;
+                        width: 300px;
+                        height: 34px;
+                        line-height: 34px;
+                        text-align: center;
+                    }
+                    #drag .handler{
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                        width: 40px;
+                        height: 32px;
+                        border: 1px solid #ccc;
+                        cursor: move;
+                    }
+                    .handler_bg{
+                        background: #fff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0ZDhlNWY5My05NmI0LTRlNWQtOGFjYi03ZTY4OGYyMTU2ZTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTEyNTVEMURGMkVFMTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTEyNTVEMUNGMkVFMTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MTc5NzNmZS02OTQxLTQyOTYtYTIwNi02NDI2YTNkOWU5YmUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NGQ4ZTVmOTMtOTZiNC00ZTVkLThhY2ItN2U2ODhmMjE1NmU2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+YiRG4AAAALFJREFUeNpi/P//PwMlgImBQkA9A+bOnfsIiBOxKcInh+yCaCDuByoswaIOpxwjciACFegBqZ1AvBSIS5OTk/8TkmNEjwWgQiUgtQuIjwAxUF3yX3xyGIEIFLwHpKyAWB+I1xGSwxULIGf9A7mQkBwTlhBXAFLHgPgqEAcTkmNCU6AL9d8WII4HOvk3ITkWJAXWUMlOoGQHmsE45ViQ2KuBuASoYC4Wf+OUYxz6mQkgwAAN9mIrUReCXgAAAABJRU5ErkJggg==") no-repeat center;
+                    }
+                    .handler_ok_bg{
+                        background: #fff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0ZDhlNWY5My05NmI0LTRlNWQtOGFjYi03ZTY4OGYyMTU2ZTYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDlBRDI3NjVGMkQ2MTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDlBRDI3NjRGMkQ2MTFFNEI5NDBCMjQ2M0ExMDQ1OUYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDphNWEzMWNhMC1hYmViLTQxNWEtYTEwZS04Y2U5NzRlN2Q4YTEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NGQ4ZTVmOTMtOTZiNC00ZTVkLThhY2ItN2U2ODhmMjE1NmU2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+k+sHwwAAASZJREFUeNpi/P//PwMyKD8uZw+kUoDYEYgloMIvgHg/EM/ptHx0EFk9I8wAoEZ+IDUPiIMY8IN1QJwENOgj3ACo5gNAbMBAHLgAxA4gQ5igAnNJ0MwAVTsX7IKyY7L2UNuJAf+AmAmJ78AEDTBiwGYg5gbifCSxFCZoaBMCy4A4GOjnH0D6DpK4IxNSVIHAfSDOAeLraJrjgJp/AwPbHMhejiQnwYRmUzNQ4VQgDQqXK0ia/0I17wJiPmQNTNBEAgMlQIWiQA2vgWw7QppBekGxsAjIiEUSBNnsBDWEAY9mEFgMMgBk00E0iZtA7AHEctDQ58MRuA6wlLgGFMoMpIG1QFeGwAIxGZo8GUhIysmwQGSAZgwHaEZhICIzOaBkJkqyM0CAAQDGx279Jf50AAAAAABJRU5ErkJggg==") no-repeat center;
+                    }
+                    #drag .drag_bg{
+                        background-color: #7ac23c;
+                        height: 34px;
+                        width: 0px;
+                    }
+                    #drag .drag_text{
+                        position: absolute;
+                        top: 0px;
+                        width: 300px;
+                        -moz-user-select: none;
+                        -webkit-user-select: none;
+                        user-select: none;
+                        -o-user-select:none;
+                        -ms-user-select:none;
+                    }
+                </style>
+                <!--验证码-->
+                <div class="layui-form-item">
+                    <div class="layui-form-item">
+                        <!--<input type="button" id="code" onclick="createCode()" class="layui-input" value="发送验证码"/>-->
+                        <div id="drag"></div>//发送验证码滑块
+                        <script>$('#drag').drag();</script>
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="text" id="verificationCode" name="phoneNumber" lay-verify="required" autocomplete="off" placeholder="请输入验证码" class="layui-input">
+                    </div>
+                    <!--注册按钮-->
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-primary layui-input regis-btn" lay-submit lay-filter="register">注册</button>
+                        <input type="checkbox" name="" lay-skin="primary" checked title="请勾选"> <a href="http://www.wefint.com/html/serveiceinfo.html" class="clause">疯特服务条款</a>
+
+                    </div>
+                    <div class="beg-clear"></div>
+                </div>
+            </form>
+            </div>
+
+        </div>
+        <script type="text/javascript" src="../layui/layui.js"></script>
+        <script>
+            layui.use(['layer', 'form'], function() {
+                var layer = layui.layer,
+                    $ = layui.jquery,
+                    form = layui.form();
+
+                form.on('submit(register)', function(data) {
+                    // alert(data.field.checkcode);
+                    // validate();
+                    //  layer.msg(JSON.stringify(data.field));
+                    if (validate()) {
+                        if (data.field.password == data.field.password2) {
+                            memberRegister(data.field);
+                        } else {
+                            alert("密码不一致,请重新输入");
+                        }
+                    }
+                    return false;
+                });
+            });
+        </script>
+</body>
+
+</html>

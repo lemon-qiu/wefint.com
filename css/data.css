@@ -1,0 +1,23 @@
+.chartModel {
+    width: 700px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.body {
+    text-align: center
+}
+
+#new {
+    border: 1px solid red;
+}
+.layui-form-item .layui-input-inline{
+    width:11%;
+}
+#modal{
+    display: none;
+    width:80%;
+    height:90%;
+    padding-top:15px;
+}
+

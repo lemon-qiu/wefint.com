@@ -12,11 +12,12 @@ $(function () {
 
         //审核通过
         form.on('submit(checkPass)', function (data) {
-            if(requiredInfo()==false){
+            /*if(requiredInfo()==false){
                 layer.msg('后三项不能为空。');
             }else {
                 layerAlertPass();
-            }
+            }*/
+            layerAlertPass();
             return false;
         });
         form.on('submit(checkPass2)', function (data) {
@@ -67,7 +68,7 @@ $(function () {
 
             var jsontext = JSON.stringify(msg);
             $.ajax({
-                url: url+'/updateApproveStatus',
+                url: getUrl(5)+'/updateApproveStatus',
                 method: 'post',
                 contentType: 'application/json;charset=utf-8',
                 data: jsontext,
@@ -130,7 +131,7 @@ $(function () {
             };
             var jsontext = JSON.stringify(msg);
             $.ajax({
-                url:url+'/updateApproveStatus',
+                url:getUrl(5)+'/updateApproveStatus',
                 method: 'post',
                 contentType: 'application/json;charset=utf-8',
                 data: jsontext,
@@ -144,8 +145,65 @@ $(function () {
             })
         };
 
+
+        /***************已放款***************/
+        form.on('submit(sendToInvestor)', function (data) {
+            var imgs = $('.imgs-list');
+            var len = imgs.length;
+            var typeStatus,empLen=0;
+            for(var i = 0;i<len;i++){//判断是否上传完每个上传项
+                if($(imgs[i]).is(':empty')=== false){
+                    empLen+=1;
+                }else {
+                    empLen+=0;
+                }
+            }
+            if(empLen === len){
+                typeStatus =  5;
+                sendToInvestor(data.field,typeStatus);
+            }else {
+                layer.msg('请上传完图片');
+                return false;
+            }
+            return false;
+        });
+
+        function sendToInvestor(data,typeStatus) {
+            var msg = {
+                userId: data.userId,
+                approveStatus:typeStatus,
+            }
+            var jsontext = JSON.stringify(msg);
+            $.ajax({
+                url:getUrl(5)+'/updateApproveStatus',
+                method: 'post',
+                contentType: 'application/json;charset=utf-8',
+                data: jsontext,
+                dataType:'json',
+                error: function (request) {
+                    parent.document.location.reload();
+                },
+                success: function (data) {
+                    parent.document.location.reload();
+                }
+            })
+        }
+
+        /**
+         * 获得img src
+         * @param Ul的id
+         */
+        function getImgs(id) {
+            var imgs = [],i=0,
+                len = $('#'+ id +' li').length;
+            for(i = 1;i < len+1 ;i++ ){
+                imgs.push( $('#'+ id +' li:nth-child('+ i +') img')[0].src);
+            }
+            console.log(imgs);
+        }
     });
     /***
+     * 二级审核列表页面显示
      * layui Table
      */
     layui.use('table', function () {
@@ -155,7 +213,7 @@ $(function () {
         table.render({
             elem: '#hotel-list'
             , id: 'id'
-            , url: url+'/getMerchantInfoList?approveStatus=1'
+            , url: getUrl(5)+'/getRiskControlList'
             , cols: [[
                 {field: 'id', title: '#', width: 80, sort: true}
                 , {field: 'userName', title: '姓名', width: 200, sort: true}
@@ -192,37 +250,6 @@ $(function () {
         });
     });
 
-
-    /***
-     * layui Upload
-     */
-    layui.use('upload', function() {
-        var $ = layui.jquery
-            , upload = layui.upload;
-
-        var imgs  = [];
-        //多图片上传
-        upload.render({
-            elem: '#test2'
-            ,auto:false
-            ,bindAction:'#submit'
-            ,multiple: true
-            ,choose: function(obj){
-                obj.preview(function(index, file, result){
-                    imgs.push(result);
-                });
-                console.log(imgs);
-                //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
-                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
-                });
-            }
-            ,done: function(res){
-                //上传完毕
-            }
-        });
-
-    });
 
     /********判断是否有错误radio*********/
     function sub_check() {
@@ -262,6 +289,7 @@ $(function () {
         body.contents().find("#monthIncome").val(rows.monthIncome);//家庭月收入
         body.contents().find("#certFront").attr('src', rows.certFront);//上传身份证正面
         body.contents().find("#certBack").attr('src', rows.certBack);//上传身份证反面
+        body.contents().find("#householdRegister").attr('src', rows.householdRegister);//上传户口本
         //婚姻状况
         var ms = '',marryStatusStr;
         if(rows.marryStatus === null || rows.marryStatus === ''){
@@ -298,7 +326,25 @@ $(function () {
         //客栈情况
         body.contents().find("#motelName").val(rows.motelName);//客栈名字
         body.contents().find("#motelAddress").val(rows.motelAddress);//客栈地址
-        var mp = '',mainPropertyStr;
+
+        function getSelect(param,arrys) {
+            var mp = '',
+                tmp;
+            if(param === null || param === ''){
+                tmp = null;
+            }else {
+                tmp=parseInt(param);
+            }
+            for(var i =0;i<arrys.length;i++){
+                if(tmp === i){
+                    tmp = arrys[i];
+                }else {
+                    tmp = null;
+                }
+            }
+        }
+        getSelect(rows.mainProperty,['国有及国家投资企业','集体企业','私营企业','个体工商者'])
+        /*var mp = '',mainPropertyStr;
         if(rows.mainProperty === null || rows.mainProperty === ''){
             mainPropertyStr = null;
         }else {
@@ -310,8 +356,9 @@ $(function () {
             case '1' : mp = '集体企业';break;
             case '2' : mp = '私营企业';break;
             case '3' : mp = '个体工商者';break;
-        }
+        }*/
         body.contents().find("#mainProperty").val(mp);//经营主体
+        
         body.contents().find("#motelProviceName").val(rows.motelProviceName);//省份
         body.contents().find("#motelCityName").val(rows.motelCityName);//城市
         body.contents().find("#motelAreaName").val(rows.motelAreaName);//区/县
@@ -413,6 +460,23 @@ $(function () {
         body.contents().find("#houseSquare").val(rows.houseSquare);//房子面积
         body.contents().find("#houseFloors").val(rows.houseFloors);//楼层
         var hd = '',houseDecoLevelStr ;
+        function getselect(dataName , idName,obj) {
+            if(dataName === null || dataName === ''){
+                idName = null;
+            }else {
+                idName=dataName.toString()
+            }
+            for(let i=0;i<obj.length;i++){
+                if(idName === null){
+                    hd = '';
+                }else{
+                    switch (idName){
+                        case i: hd=obj[i];break;
+                    }
+                }
+            }
+        }
+        getselect(rows.houseDecoLevel,houseDecoLevelStr)
         if(rows.houseDecoLevel === null || rows.houseDecoLevel === ''){
             houseDecoLevelStr = null;
         }else {
@@ -508,7 +572,7 @@ $(function () {
             body.contents().find(".remark").hide();
         }
     }
-    
+
     //二级检查
     function getCheckLevelTwo(rows) {
         var dd = layer.open({
@@ -533,8 +597,8 @@ $(function () {
         });
         layer.full(dd);
     }
-    //已放款
-    function getHasBeenLend() {
+    /*********已放款数据回显************/
+    function getHasBeenLend(rows) {
         var dd = layer.open({
             title:false,
             type:2,
@@ -542,12 +606,85 @@ $(function () {
             success:function (layero,index) {
                 var body = layer.getChildFrame('body', index); //巧妙的地方在这里哦
                 body.contents().find("#userId").val(rows.userId);
-
-                body.contents().find("#certFront").attr('src', rows.certFront);//上传身份证正面
-                body.contents().find("#certBack").attr('src', rows.certBack);//上传身份证反面
             }
         })
         layer.full(dd);
+    }
+
+    /**************已放款 获取OSS账户数据( 图片上传 )**************/
+    window.onload = function() {
+        $.ajax({
+            url: getUrl(4)+"/upload/getObjectAccess",
+            method: 'get',
+            contentType: 'application/json;charset=utf-8',
+            headers: {'wefinttoken': '0ddd9e12-c38b-11e7-ac90-c81f66bc7d83'},
+            dataType: 'json',
+            error: function(request) {
+                alert("获取状态失败，请稍后刷新页面");
+            },
+            success: function(data) {//获取数据
+                let objs = eval(data.content);
+                $('#policy').val(objs.policy);
+                $('#callback').val(objs.callback);
+                $('#signature').val(objs.signature);
+            }
+        });
+    }
+
+    /**
+     * 已放款风控二级审核通过后提交第三方
+     * 模拟图片上传
+     * @param ojb
+     */
+    var type;
+    window.updatePhoto= function(obj ,typeNum) {
+        let data = obj;
+        type = typeNum;
+        console.log('type1==='+ type);
+        var signature = $('#signature').val(),
+            callback = $('#callback').val(),
+            policy = $('#policy').val(),
+            key = $('#key').val();
+
+        $('#selectfiles').click();
+        var fileBtn = $('#selectfiles').next().children();
+        fileBtn.change(function() {
+            //点击上传
+            $('#postfiles').attr({'onclick':uploadImgs(data)})
+            $('#postfiles').click();
+        })
+    }
+
+    /**
+     * 保存图片到后台
+     * @param datas 传递的参数
+     */
+    window.savePhotos = function(datas){
+
+        var imgUrl,
+            userId=$('#userId').val();
+        imgUrl = datas.name;
+        var data = {
+            userId:userId,
+            url : imgUrl,
+            type:type,
+        };
+        console.log('type==='+ type);
+        console.log(data);
+        var jsontext = JSON.stringify(data);
+        $.ajax({
+            url: getUrl(6) + '/addPmsPic',
+            method: 'post',
+            data:jsontext,
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            error: function(request) {
+                alert("获取状态失败，请稍后刷新");
+            },
+            success: function(data) {//获取数据
+                console.log(data);
+            }
+        })
     }
 
 

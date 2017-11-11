@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>操作盘</title>
+    <link rel="stylesheet" href="../css/mainPannel.css" type="">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/base64.js"></script>
+    <script src="../js/pageonload.js"></script>
+</head>
+
+<body class="beg-mainPannel-bg">
+<div class="BG">
+    <div class="BGimg">
+
+    </div>
+</div>
+    <div class="main-pannel">
+        <div class="icon-modal">
+            <div class="icon-datail"
+                 onClick="window.location.href='hotelStatus.html'"
+                 onMouseOver="mouseover(this,'../img/houseConditionClick.png')"
+                 onMouseOut="mouseout(this,'../img/houseCondition.png')">
+                <img src="../img/houseCondition.png">
+                <p class="text-detaile">房态</p>
+            </div>
+            <div class="icon-datail" onClick="window.location.href='accountBook.html'"
+                 onMouseOver="mouseover(this,'../img/accountBookClick.png')"
+                 onMouseOut="mouseout(this,'../img/accountBook.png')">
+                <img src="../img/accountBook.png">
+                <p class="text-detaile">账本</p>
+            </div>
+            <div class="icon-datail" onClick="window.location.href='data.html'"
+                 onMouseOver="mouseover(this,'../img/dataClick.png')"
+                 onMouseOut="mouseout(this,'../img/data.png')">
+                <img src="../img/data.png">
+                <p class="text-detaile">数据</p>
+            </div>
+            <div class="icon-datail" onClick="window.location.href='hotelsetup.html'"
+                 onMouseOver="mouseover(this,'../img/settingClick.png')"
+                 onMouseOut="mouseout(this,'../img/setting.png')" >
+                <img src="../img/setting.png">
+                <p class="text-detaile">设置</p>
+            </div>
+        </div>
+        <div class="icon-modal">
+            <div class="icon-datail" onClick="window.location.href='hotelButler.html'"
+                 onMouseOver="mouseover(this,'../img/houseStewardClick.png')"
+                 onMouseOut="mouseout(this,'../img/houseSteward.png')" >
+                <img src="../img/houseSteward.png">
+                <p class="text-detaile">客栈管家</p>
+            </div>
+            <div class="icon-datail" onClick="window.location.href='http://shop.wefint.com/'"
+                 onMouseOver="mouseover(this,'../img/crazySellClick.png')"
+                 onMouseOut="mouseout(this,'../img/crazySell.png')">
+                <img src="../img/crazySell.png">
+                <p class="text-detaile">疯卖</p>
+            </div>
+            <div class="icon-datail" onClick="window.location.href='usercenter.html'"
+                 onMouseOver="mouseover(this,'../img/financialClick.png')"
+                 onMouseOut="mouseout(this,'../img/financial.png')">
+                <img src="../img/financial.png">
+                <p class="text-detaile">金融</p>
+            </div>
+            <div class="icon-datail" onClick="logout()"
+                 onMouseOver="mouseover(this,'../img/loginOutClick.png')"
+                 onMouseOut="mouseout(this,'../img/loginOut.png')">
+                <img src="../img/loginOut.png">
+                <p class="text-detaile">注销</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+function mouseover(obj,name) {
+    $($(obj).children()[0]).attr({'src':name});
+}
+function mouseout(obj,name) {
+    $($(obj).children()[0]).attr({'src':name});
+}
+</script>
+</html>

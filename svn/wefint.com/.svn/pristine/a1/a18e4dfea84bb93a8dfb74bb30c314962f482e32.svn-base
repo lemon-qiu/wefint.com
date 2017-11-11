@@ -1,1 +1,0 @@
-function retur(){window.location.href="./index.html"};

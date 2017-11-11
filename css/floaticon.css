@@ -1,0 +1,207 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.nav5 {
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    z-index: 88;
+    position: fixed;
+    right: 0;
+    top: 2%;
+    cursor: pointer
+}
+
+.head {
+    width: 100%;
+    height: 58px;
+    position: relative;
+    z-index: 9000;
+    display: flex;
+    justify-content: space-between;
+    background: url('../images/hotelStatus/head.png') no-repeat 0/100%;
+}
+.head_left,.head_right{
+    padding:10px 20px;
+    width:10%;
+    color:#fff;
+    font-size: 20px;
+}
+.head_right{
+    padding:5px 20px;
+    width:3%;
+}
+.section {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    overflow: hidden;
+    justify-content: flex-start;
+}
+
+.content_left {
+    position: relative;
+    z-index: 10;
+    width: 270px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 3px 0px 8px rgba(51, 51, 51, .3);
+}
+
+.content_left table {
+    width: 100%;
+}
+
+.content_left tr {
+    width: 100%;
+    height: 58px;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    overflow: hidden;
+}
+
+.dateChoose {
+    height: 58px;
+    width: 100%;
+    position: relative;
+}
+
+.chooseDate {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin-top: 5px;
+}
+
+.leftBtn {
+    position: absolute;
+    left: 2%;
+    top: 25%;
+}
+
+.rightBtn {
+    position: absolute;
+    right: 5%;
+    top: 25%;
+}
+
+.content_left td:nth-of-type(1) {
+    width: 65%;
+    border-left: 1px solid #EEE;
+    text-align: center;
+    color: #434343;
+}
+
+.content_left td:nth-of-type(2) {
+    border-left: 1px solid #EEE;
+    text-align: center;
+}
+
+.content_right {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #EEE;
+    overflow: auto;
+}
+
+.dateChooseRight {
+    width: 3000px;
+    height: 62px;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
+
+.dateChooseRight > div {
+    width: 225px;
+    border-right: 1px solid #DDD;
+    text-align: center;
+    color: #434343;
+}
+
+.dateChooseRight > div p:nth-of-type(1) {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.dateChooseRight > div p:nth-of-type(2) {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.dataRight {
+    width: 3000px;
+    height: 57.2px;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #DDD;
+}
+
+.dataRight > div {
+    width: 225px;
+    height: 100%;
+    border-right: 1px solid #DDD;
+}
+
+.footer {
+    width: 100%;
+    height: 50px;
+    background-color: #1d1a49;
+    position: fixed;
+    bottom: 0;
+    z-index: 9000;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_left {
+    width: 14%;
+    margin-left: 20px;
+    color: #fff;
+    display: flex;
+    font-size: 14px;
+    line-height: 50px;
+    justify-content: space-between;
+}
+
+.footer_right {
+    width: 20%;
+    margin-right: 30px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 50px;
+}
+
+/*退房标志*/
+.checkOut, .checkSubscribe, .checkIn {
+    width: 95%;
+    height: 70%;
+    margin: 10px auto;
+    background-color: #bbbbbb;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+}
+
+/*预定标志*/
+.checkSubscribe {
+    background-color: #01c9ad;
+}
+
+/*入住标志*/
+.checkIn {
+    background-color: #414cdc;
+}

@@ -1,0 +1,67 @@
+*{
+    margin:0;
+    padding:0;
+}
+.beg-mainPannel-bg {
+    width:100%;
+    height:100vh;
+}
+.BG{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.BGimg{
+    width:100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    background:url(../img/背景1.jpg) no-repeat 0/100%;
+    animation:myscale 5s ;
+    -webkit-animation:myscale 20s ;
+}
+@keyframes myscale
+{
+    from {width:120%;height:120%;}
+    to {width:100%;height:100%;}
+}
+@-webkit-keyframes myscale
+{
+    from {width:120%;height:120%;}
+    to {width:100%;height:100%;}
+}
+.main-pannel{
+    width:56%;
+    height:45%;
+    position: absolute;
+    left: 50%;
+    top:30%;
+    transform: translateX(-50%);
+}
+.icon-modal{
+    width:100%;
+    height:50%;
+    display: flex;
+    justify-content: space-around;
+}
+.icon-datail{
+    cursor: pointer;
+    width:25%;
+}
+.icon-datail img {
+    margin-top:8%;
+    width:48%;
+    height:56%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.text-detaile{
+    color:#fff;
+    font-size:18px;
+    margin-top:-5px;
+    text-align: center;
+}

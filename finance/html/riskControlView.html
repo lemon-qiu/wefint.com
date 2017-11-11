@@ -136,6 +136,16 @@
                             <input type="radio" name="pic-id-card" value="false" title="错误" lay-filter="radios" >
                         </div>-->
                     </div>
+                    <div class="layui-col-md12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">上传户口</label>
+                            <div class="layui-input-block">
+                                <ul class="pics">
+                                    <li><img data-original="" src="" alt="" id="householdRegister"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </fieldset>
@@ -1135,7 +1145,7 @@
             </div>
         </fieldset>
 
-        <fieldset class="checkBorder">
+        <!--<fieldset class="checkBorder">
             <legend>个人及主体信用（审核通过必填项）</legend>
             <div class="layui-fluid">
                 <div class="layui-row">
@@ -1187,9 +1197,9 @@
                     </div>
                 </div>
             </div>
-        </fieldset>
+        </fieldset>-->
 
-        <fieldset class="checkBorder">
+        <!--<fieldset class="checkBorder">
             <legend>法院诉讼（审核通过必填项）</legend>
             <div class="layui-fluid">
                 <div class="layui-row">
@@ -1232,9 +1242,9 @@
                     </div>
                 </div>
             </div>
-        </fieldset>
+        </fieldset>-->
 
-        <fieldset class="checkBorder">
+        <!--<fieldset class="checkBorder">
             <legend>（审核通过必填项）</legend>
             <div class="layui-fluid">
                 <div class="layui-row">
@@ -1260,13 +1270,14 @@
                                 <input type="checkbox" id="taxEvasion"  title="偷税漏税情况">
                                 <input type="checkbox" id="criminal" title="犯罪情况">
                                 <input type="checkbox" id="punishment" title="治安处罚情况">
-                                <input type="checkbox" id="otherLawsuit" title="其他不良诉讼">
+                                <input type="checkbox" i
+                                       d="otherLawsuit" title="其他不良诉讼">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </fieldset>
+        </fieldset>-->
 
         <input type="hidden" name="userId" id="userId"/>
         <div class="layui-form-item check-submit">
@@ -1281,6 +1292,7 @@
 </div>
 <script src="../js/jquery-1.11.1.js"></script>
 <script src="../layui/layui.js"></script>
+<script src="../../js/pageonload.js"></script>
 <script src="../js/viewer.min.js"></script>
 <script src="../../js/config.js"></script>
 <script src="../js/riskControlList.js"></script>
