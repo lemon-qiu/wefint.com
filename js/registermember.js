@@ -126,10 +126,12 @@ function validate() {
                         lastX = Math.max(0,Math.min(max,lastX)); //这一步表示距离大于0小于max，巧妙写法
                         console.log('lastX: '+lastX+' px');
                         if(lastX>=max){
+                            console.log(11);
                             handler.classList.add('handler_ok_bg');
                             that.slider.classList.add('slide_ok');
                             dog.off(handler,'mousedown',drag.down);
                             drag.up();
+                            sendCode();//发送验证码
                         }
                         that.bg.style.width = lastX + 'px';
                         handler.style.left = lastX + 'px';
@@ -161,8 +163,10 @@ var defaults = {
 };
 new S(defaults);
 
-//清空事件
-function dragOk(){
+/**
+ *发送验证码
+ */
+function sendCode(){
     var Data = $('#phoneNumber').val();
     new ajaxHttp('POST',getUrl(2) + '/portal/getVirficationCode',Data,
         function(data) {
