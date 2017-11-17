@@ -36,7 +36,7 @@ function set_upload_param(up)
         console.log('reset uploader')
 }
 
-var imgId,imgUrl;
+var imgId,imgUrl,imgArrays = [];
 var uploader = new plupload.Uploader({
     runtimes: 'html5,flash,silverlight,html4',
     browse_button: 'selectfiles',
@@ -70,32 +70,7 @@ var uploader = new plupload.Uploader({
         },
 
         FilesAdded: function(up, files) {
-            plupload.each(files, function(file) {
 
-                var $li = $(
-                    '<li id="' + file.id + '" style="position: relative;"  onmouseout="$(\'' + '#deleteIcon' + file.id + '\').css(\'' + 'display' + '\',' + '\'none' + '\');$(\'' + '#delMsk' + file.id + '\').css(\'' + 'display' + '\',' + '\'none' + '\');" onmousemove="$(\'' + '#deleteIcon' + file.id + '\').css(\'' + 'display' + '\',\'' + 'block' + '\');$(\'' + '#delMsk' + file.id + '\').css(\'' + 'display' + '\',' + '\'block' + '\')" id="' + file.id + '"  class="u-photos">' +
-                    '<div style="display: none;"  id="delMsk' + file.id + '" class="u-msk"></div>' +
-                    '<div title="删除" style="display: none;cursor:pointer;right: 0px;position: absolute" onclick="removePhoto(\'' + file.id + '\');" id="deleteIcon' + file.id + '" class="u-del" onclick="uploader.removeFile(' + file + ' )"></div>' +
-                    '<a id="file-' + file.id + '" href="####"></a>' +
-                    '</li>'
-                    ),
-                    $img = $li.find('img');
-
-                // $list为容器jQuery实例
-                //$('#photos').append($li);
-                $(imgId).next().append($li);
-                !function() {
-                    previewImage(file, function(imgsrc) {
-                        $('#file-' + file.id).append('<img width=\'200px\' height=\'160px\'  src="' + imgsrc + '" />');
-                    })
-                }();
-            });
-
-            /*plupload.each(files, function(file) {
-                document.getElementById('photos').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ')<b></b>'
-                    +'<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
-                    +'</div>';
-            });*/
         },
 
         UploadProgress: function(up, file) {
@@ -103,24 +78,95 @@ var uploader = new plupload.Uploader({
         },
 
         FileUploaded: function(up, file, info) {
-            console.log(info)
+            console.log('图片信息====',file,info)
             set_upload_param(up);
             var datas = JSON.parse(info.response).content;
             imgUrl = datas.name;
+            /*var imgData = {
+                userId:userId,
+                url : imgUrl,
+                type:thisType,
+            };
+            imgArrays.push(datas);*/
             savePhotos(datas);//公司数据库存入图片
+
+            /**
+             * 图片反显
+             */
+            var $li = $(
+                '<li id="' + file.id + '" style="position: relative;"  onmouseout="$(\'' + '#deleteIcon' + file.id + '\').css(\'' + 'display' + '\',' + '\'none' + '\');$(\'' + '#delMsk' + file.id + '\').css(\'' + 'display' + '\',' + '\'none' + '\');" onmousemove="$(\'' + '#deleteIcon' + file.id + '\').css(\'' + 'display' + '\',\'' + 'block' + '\');$(\'' + '#delMsk' + file.id + '\').css(\'' + 'display' + '\',' + '\'block' + '\')" id="' + file.id + '"  class="u-photos">' +
+                '<div style="display: none;"  id="delMsk' + file.id + '" class="u-msk"></div>' +
+                '<div title="删除" style="display: none;cursor:pointer;right: 0px;position: absolute" onclick= removePhoto(`${imgUrl}`,this); id="deleteIcon' + file.id + '" class="u-del" ><i class="layui-icon" style="font-size:26px;background: #fff; ">&#x1007;</i> </div>' +
+                '<a id="file-' + file.id + '" href="####"></a>' +
+                '</li>'
+                ),
+                $img = $li.find('img');
+
+            // $list为容器jQuery实例
+            $(imgId).next().append($li);
+            !function() {
+                previewImage(file, function(imgsrc) {
+                    $('#file-' + file.id).append('<img width=\'200px\' height=\'160px\'  src="' + imgsrc + '" />');
+                })
+            }();
+
+
         },
 
         Error: function(up, err) {
             console.log(err);
+            set_upload_param(up);
             if(err.code == -602){
                 layer.msg('图片重复上传了，请重试');
+            }else if(err.code == -200){
+                layer.msg('状态出错，请重试');
+            }else{
+                layer.msg('状态出错，请重试');
             }
-            set_upload_param(up);
         }
     }
 });
-
 uploader.init();
+
+/**
+ * 删除图片
+ * @param obj 图片url
+ * @param thisItem 点击的当前对象
+ */
+function removePhoto(obj,thisItem) {
+    console.log(obj);
+    var data = {
+        url:obj,
+    }
+    var jsontext = JSON.stringify(data);
+    $.ajax({//本地删除成功
+        url: getUrl(4)+"/deletePmsPicByUrl",
+        method: 'post',
+        contentType: 'application/json;charset=utf-8',
+        headers: {'wefinttoken': getCookie('token')},
+        dataType: 'json',
+        data:jsontext,
+        error: function(result) {
+            alert("删除失败，请重试。");
+        },
+        success: function(result) {
+            $.ajax({//OSS删除成功
+                url: getUrl(6)+"/upload/delete",
+                method: 'post',
+                contentType: 'application/json;charset=utf-8',
+                headers: {'wefinttoken': getCookie('token')},
+                dataType: 'json',
+                data:jsontext,
+                error:function(result) {
+                    alert("删除失败，请重试！");
+                },
+                success:function() {
+                    $(thisItem).parent('li').remove();
+                }
+            });
+        }
+    });
+}
 
 
 function previewImage(file, callback) {//file为plupload事件监听函数参数中的file对象,callback为预览图片准备完成的回调函数

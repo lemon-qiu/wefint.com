@@ -20,7 +20,7 @@
     position: absolute;
     top:0;
     left: 0;
-    background:url(../img/背景1.jpg) no-repeat 0/100%;
+    background:url('http://image.wefint.com/main.jpg') no-repeat 0/100%;
     animation:myscale 5s ;
     -webkit-animation:myscale 20s ;
 }

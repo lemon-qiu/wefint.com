@@ -23,7 +23,7 @@ function getMes() {
         let b = new Base64();
         if (data.code === SUCCESSFULUSERLOGIN) {
             let objs = eval(data.content);
-            $('#userName').val(b.decode(objs.userName));
+            $('#userName').val(objs.userName);
             $('#createTime').val(objs.createTime);
             $('#phoneNumber').val(objs.phoneNumber);
             $('#email').val(objs.email);
@@ -99,7 +99,7 @@ function getRooms() {
                     hotel_room[1] = objs[j].roomName;
                     hotel_room[2] = objs[j].roomNumber;
                     hotel_room[3] = objs[j].roomInitalPrice;
-                    hotel_room[4] = objs[j].roomSpecialDatePrice;
+                    // hotel_room[4] = objs[j].roomSpecialDatePrice;
                     setData(hotel_room)
                 }
             }
@@ -252,10 +252,11 @@ function getCommisionMes() {
             $("#compensasenYiLongSolid").val('0')
         } else {
             let objs = eval(data.content);
+            $('#compensasenQuNaErSolid').attr({'data':objs.compensasenId});
             $("#compensasenQuNaErSolid").val(objs.compensasenQuNaErSolid);
             $("#compensasenXieChengSolid").val(objs.compensasenXieChengSolid);
             $("#compensasenFeiZhuSolid").val(objs.compensasenFeiZhuSolid);
-            $("#compensasenYiLongSolid").val(objs.compensasenYiLongSolid)
+            $("#compensasenYiLongSolid").val(objs.compensasenYiLongSolid);
             if ($("#compensasenYiLongSolid").val() != '') {
                 $('#form2').hide();
             } else {
@@ -279,6 +280,7 @@ function changeCommision(B) {
         "compensasenYiLongSolid": B.compensasenYiLongSolid,
         "compensasenXieChengSolid": B.compensasenXieChengSolid,
         "compensasenQuNaErSolid": B.compensasenQuNaErSolid,
+        'compensasenId': $('#compensasenQuNaErSolid').attr('data')
     };
     new ajaxHttp("POST", getUrl(3) + "/compensasen/update", Data, function(C) {
         alert("添加失败，请联系管理员")
@@ -309,7 +311,7 @@ function form2(B) {
         "compensasenXieChengSolid": B.compensasenXieChengSolid,
         "compensasenQuNaErSolid": B.compensasenQuNaErSolid,
     };
-    if (Data.compensasenFeiZhuSolid === '' && Data.compensasenYiLongSolid === '' && Data.compensasenXieChengSolid === '' && Data.compensasenQuNaErSolid === '') {
+    if (Data.compensasenFeiZhuSolid !== '' || Data.compensasenYiLongSolid !== '' || Data.compensasenXieChengSolid !== '' || Data.compensasenQuNaErSolid !== '') {
 
         new ajaxHttp("POST", getUrl(3) + "/compensasen/add", Data, function(C) {
             alert("添加失败，请联系管理员")
@@ -332,7 +334,7 @@ function form2(B) {
         });
         return false
     } else {
-        alert('佣金已经添加完毕，不能再添加。 如需更改，请点击修改按钮')
+        alert('请填写至少一个佣金比例')
     }
 }
 
@@ -355,7 +357,7 @@ function getEmployee() {
                 for (let j = 0; j < objs.length; j++) {
                     let STAFFSINFORMATION = [];   // 所有得员工信息的数组
                     let b = new Base64();
-                    STAFFSINFORMATION[0] = b.decode(objs[j].userName);
+                    STAFFSINFORMATION[0] = objs[j].userName;
                     if (objs[j].registerName === '') {
                         STAFFSINFORMATION[1] = '';
                         alert('员工信息必填项空缺，请完善')

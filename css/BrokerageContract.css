@@ -17,6 +17,10 @@
 .tittle {
     text-align: center
 }
+table td{
+    height:20px;
+    padding:3px 5px;
+}
 .ifont {
     width: 96%;
     color: #000;

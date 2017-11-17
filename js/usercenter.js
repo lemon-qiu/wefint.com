@@ -5,6 +5,7 @@
  * @Time: 16:57
  */
 (function() {
+    let   approveStatuscall ='';
     layui.use(['laydate', 'form', 'layedit', 'jquery'], function() {
         let laydate = layui.laydate
             , form = layui.form
@@ -20,6 +21,12 @@
         });
         laydate.render({
             elem: '#platesStartDate'
+        });
+        laydate.render({
+            elem: '#carLoanStartDate'
+        });
+        laydate.render({
+            elem: '#loanStartDate'
         });
         /**
          *  layui 渲染下拉框选择状态的方法
@@ -55,7 +62,6 @@
             if (parseInt(d.value) === 0) {
                 $('#resaleFee').attr({'placeholder': '请输入转让费金额（元）'})
             } else if (parseInt(d.value) === 1) {
-                console.log('=========')
                 $('#resaleFee').attr({'placeholder': '请输入转让费金额（百分比）'})
             }
         });
@@ -70,13 +76,14 @@
                  * @param err
                  */
                 function(data, err) {
+                    approveStatuscall = data.approveStatus;
                     // @param searchUrl   定义需要跳转的页面 特别是参数需要注意
                     let searchUrl = encodeURI("./hexagram.html?userName=" + data.userName + '&' + 'certNo=' + data.certNo + '&' + 'mobile=' + data.mobile + '&' + 'motelName=' + data.motelName + '&' + 'friendMobile=' + data.friendMobile + '&' + 'averageCommision=' + data.monthIncome + '&' + 'userId=' + userId);
                     // 获取全局的按钮
                     let HTMLALLBUTTON = $('button');    // 获取全局所有的按钮
                     let HTMLALLINPUT = $('input');      // 获取全局所有的输入框
                     // 定义审核的状态
-                    checkPageStatus(data.approveStatus, HTMLALLINPUT, HTMLALLBUTTON, searchUrl);  //检查页面状态 根据不同状态 显示不同效果
+                     checkPageStatus(data.approveStatus, HTMLALLINPUT, HTMLALLBUTTON, searchUrl);  //检查页面状态 根据不同状态 显示不同效果  用户中心1必须判断
                     let strcustomer = data.customerCooperation;
                     let strtourism = data.tourismCooperation;
                     if (strcustomer) {   // 客户合作方
@@ -98,7 +105,7 @@
                     $('#monthIncome').val(data.monthIncome); // 月收入金额
                     clickSelect(data.marryStatus, 'marryStatus'); // 婚姻状况
                     getOnePhoto(data.marryCert, 'marryCert'); // 婚姻证明
-                    data.approveStatus = '0'; // 审核状;
+                    // data.approveStatus = '0'; // 审核状;
                     $('#spouseName').val(data.spouseName); // 配偶姓名
                     $('#spouseMobile').val(data.spouseMobile); // 配偶电话
                     $('#spouseCertNo').val(data.spouseCertNo);  // 配偶身份证号码
@@ -113,9 +120,8 @@
                     getOnePhoto(data.motelCert, 'motelCert'); // 营业执照照片
                     $('#motelBusinessScale').val(data.motelBusinessScale); //  客栈经营范围
                     getOnePhoto(data.motelPic, 'motelPic'); // 客栈照片
-                    $('#motelProvice').val(data.motelProvice); // 客栈所在省;
-                    $('#motelCity').val(data.motelCity); // 客栈所在市;
-                    $('#motelArea').val(data.motelArea);// 客栈所在区;
+                    clickSelect(data.motelProvice, 'motelProvice'); // 客栈所在省;
+                    linkageToChoose('motelProvice',data.motelCity,'motelCity',data.motelArea,'motelArea'); // 省市联动选择的方法
                     $('#motelAddress').val(data.motelAddress); // 客栈详细地址
                     $('#leftRentYear').val(data.leftRentYear);  // 剩余租期
                     clickSelect(data.resaleFeeFlag, 'resaleFeeFlag'); //转让费类型
@@ -138,6 +144,8 @@
                     $('#bankAccount').val(data.bankAccount);        // 银行卡账号
                     getOnePhoto(data.cardFront, 'cardFront');       // 银行卡正面照片
                     getOnePhoto(data.cardBack, 'cardBack');         // 银行卡反面照片
+
+
                     clickSelect(data.educationDegree, 'educationDegree'); //学历情况
                     $('#workExperiences').val(data.workExperiences);
                     $('#otherJobs').val(data.otherJobs);
@@ -154,9 +162,10 @@
                     clickSelect(data.houseDecoLevel, 'houseDecoLevel'); // 装修程度
                     clickSelect(data.ifnotLoan, 'ifnotLoan'); // 房子是否贷款
                     $('#loanAmt').val(data.loanAmt);                        // 贷款金额
-                    $('#loanStartDate').val(data.loanStartDate);               // 贷款时间
+                    $('#loanStartDate').val(data.loanStartDate);               // 房子贷款时间
                     $('#loanDuration').val(data.loanDuration);                  // 贷款期限 （月）
                     $('#loanPaymentOption').val(data.loanPaymentOption);           // 贷款还款方式
+
                     getOnePhoto(data.housePic, 'housePic'); // 房屋证明
                     getOnePhoto(data.houseCertPic, 'houseCertPic'); // 房产证明
                     $('#carAddress').val(data.carAddress);                      // 车子所在地
@@ -165,11 +174,13 @@
                     $('#driverKm').val(data.driverKm);// 驾驶里程
                     clickSelect(data.carIfnotLoan, 'carIfnotLoan');
                     $('#carloanAmt').val(data.carloanAmt);          // 贷款金额
-                    $('#carLoanStartDate').val(data.carLoanStartDate);      // 贷款时间
+                    $('#carLoanStartDate').val(data.carLoanStartDate);      // 车子贷款时间
                     $('#carLoanDuration').val(data.carLoanDuration);       // 还款方式
                     $('#carLoanPaymentOption').val(data.carLoanPaymentOption); // 还款方式
                     getOnePhoto(data.carPic, 'carPic');// 车子照片
                     getOnePhoto(data.carCertPic, 'carCertPic'); // 驾驶证照片
+                    $('#perMonthWaterFee').val(data.perMonthWaterFee); // 每月水费
+                    $('#perMonthSheetsFee').val(data.perMonthSheetsFee); // 每月布花草费
 
                     arrPhotoView(data.personalIncome, 'weixinPhoto');
                     arrPhotoView(data.innIncome, 'incomePhoto');
@@ -256,7 +267,7 @@
             monthIncome: $('#monthIncome').val(),
             marryStatus: $('#marryStatus').val(),
             marryCert: $('#marryCert').attr('src'),
-            approveStatus: '0', // 审核状态
+            approveStatus:approveStatuscall, // 审核状态
             spouseName: $('#spouseName').val(),
             spouseMobile: $('#spouseMobile').val(),
             spouseCertNo: $('#spouseCertNo').val(),
@@ -333,6 +344,8 @@
             carLoanStartDate: $('#carLoanStartDate').val(),
             carLoanDuration: $('#carLoanDuration').val(),
             carLoanPaymentOption: $('#carLoanPaymentOption').val(),
+            perMonthWaterFee:$('#perMonthWaterFee').val(), // 每月水费
+            perMonthSheetsFee:$('#perMonthSheetsFee').val(), // 每月布草花费
             carPic: $('#carPic').attr('src'), // 车子照片
             carCertPic: $('#carCertPic').attr('src'),// 行车证照片
             //  以下 是多张照片上传时的数组字段
@@ -367,13 +380,15 @@
                     if (result === true) {
                         window.location.href = searchUrl;
                     } else {
-                        console.log(result);
+                        alert(result + '输入有误，请检查输入');
                     }
                 },
-                error: function(request, status, e) {
+                error: function(err) {
+                    alert(err + '输入有误，请检查输入');
                 }
             });
         } else if (JqUpdatabtn.text() === '确认修改') {
+            private.approveStatus = '0';
             $.ajax({
                 url: url + '/updateMerchantInfo',
                 type: 'post', // IE必须加上post
@@ -386,11 +401,11 @@
                     if (result === true) {
                         window.location.href = searchUrl;
                     } else {
-                        console.log(result);
+                        alert(result + '输入有误，请检查输入');
                     }
                 },
-                error: function(request, status, e) {
-                    alert(status + '输入有误，请检查输入');
+                error: function(err) {
+                    alert(err + '输入有误，请检查输入');
                 }
             });
         } else {
@@ -402,6 +417,7 @@
      * 选择图片方法
      * @param {object} obj  点击上传的按钮
      * @param {string} imgID  需要显示的容器
+     * @param judge    是否为多张上传
      */
     window.choosephoto = function(obj, imgID, judge) {
         $(obj).next().click();
@@ -414,12 +430,13 @@
                     //监听文件读取结束后事件
                     reader.onloadend = function(e) {
                         if (judge) {
-                            $($('.' + imgID)[0]).remove();
-                            dealImage(this.result, {width: 200, height: 200}, function(base) {
+                            console.log(imgID)
+                            $('.' + imgID).remove();
+                            dealImage(this.result, {width: 600, height: 900}, function(base) {
                                 $('#' + imgID)[0].innerHTML += '<div class="layui-upload-list"><img src="' + base + '" class="layui-upload-img"/><button class="layui-btn layui-btn-mini delete layui-btn-danger" onclick="deleteFather(this)">删除</button></div>';
                             })
                         } else {
-                            dealImage(e.target.result, {width: 200, height: 200}, function(base) {
+                            dealImage(e.target.result, {width: 600, height: 900}, function(base) {
                                 $('#' + imgID).attr("src", base)
                             })
                         }
@@ -481,7 +498,7 @@
         for (let i = 0; i < JqId.children().length; i++) {
             let imgSrc = $(JqId.children()[i]).children().attr("src");
             if (imgSrc !== null || imgSrc !== undefined) {
-                data.push(imgSrc)
+                data.push(imgSrc);
             }
         }
     }
@@ -570,15 +587,20 @@
      * @param idName  需要显示内容的ID
      */
     function arrPhotoView(dataName, idName) {
-        let JqId = $('#' + idName);
-        if (dataName) {
-            for (let i = 0; i < dataName.length; i++) {
-                if (dataName.length > 0) {
-                    $(JqId[0]).hide();
-                    JqId[0].innerHTML += '<div class="layui-upload-list"><img class="layui-upload-img" src="' + dataName[i] + '"> </div>'
-                }
+        let JqClass = $('.' + idName);
+        let JqId = $('#'+idName);
+        let innerImgArrUi = '';
+        JqClass.remove();
+        for(let i = 0; i < dataName.length; i++){
+            if(dataName[i]!== null){
+                innerImgArrUi += '<div class="layui-upload-list"><img src="' + dataName[i] + '" class="layui-upload-img"/><button class="layui-btn layui-btn-mini delete layui-btn-danger" onclick="deleteFather(this)">删除</button></div>'
+                JqId.html(innerImgArrUi)
+            }else{
+                innerImgArrUi = '<div class="layui-upload-list '+idName+'"><img class="layui-upload-img"></div>'
+                JqId.html(innerImgArrUi)
             }
         }
+
     }
 
     /**
@@ -586,8 +608,9 @@
      * @param dataName 后台数据的状态码
      * @param htmlinput 获取到的所有的input 按钮
      * @param htmlbutton 获取到的所有的 button 按钮
+     * @param searchUrl
      */
-    function checkPageStatus(dataName, htmlinput, htmlbutton, searchUrl) {
+    function checkPageStatus(dataName, htmlinput, htmlbutton, searchUrl) {  // 0.5 版本 用户中心  需要判断
         const GETENDTIRELYAPPROVESTAATUS = 4;           // 完全审核通过
         const GETPUTINAPPROVESTATUSONE = 0;             // 一级审核
         const GETPUTINAPPROVESTATUSTWO = 1;             // 二级审核
@@ -613,6 +636,32 @@
             // 切换为修改数据的状态
             $('#cuowu').show();
             $('#updatabtn').text('确认修改');
+        }
+    }
+    function linkageToChoose(firstId,secendData,secendId,thereData,thereId) {
+        let firstIdJq = $('#' + firstId);
+        if(firstIdJq!== ''){
+            setTimeout(function() {
+                clickSelect(secendData, secendId); // 客栈所在市;
+                if($('#'+ secendId)!== ''){
+                    setTimeout(function() {
+                        clickSelect(thereData, thereId); // 客栈所在区;
+                        // let allSelect = $('.requiredFields select');  // 版本号  0.5版本 用户中心1界面 不需要禁用
+                        // allSelect.attr({'disabled': 'disabled'});
+                        // let allInput = $('.requiredFields input');
+                        // let allButton = $('.requiredFields button');
+                        // allInput.attr({'disabled': 'disabled'});
+                        // allButton.attr({'disabled': 'disabled'});
+                        // allInput.css({'color': 'red'});
+                        // allInput.click(function() {
+                        //     alert('必填项已经不能修改')
+                        // });
+                        // allButton.click(function() {
+                        //     alert('必填项已经不能修改')
+                        // })
+                    },300)
+                }
+            },100)
         }
     }
 })();

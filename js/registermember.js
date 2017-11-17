@@ -15,7 +15,7 @@ const SUCCESS = '000000';
     document.getElementById("code").value = code
 }*/
 
-function createCode(){
+/*function createCode(){
     var phoneNumber = $('#phoneNumber').val();
     new ajaxHttp("POST", getUrl(3) + "/portal/findEmployee", Data,
         function(data) {
@@ -49,9 +49,10 @@ function createCode(){
                 alert('系统错误,请刷新浏览器')
             }
         });
-}
+}*/
 
-function validate() {
+
+/*function validate() {
     var A = document.getElementById("checkcode").value.toUpperCase();
     if (A.length <= 0) {
         return false
@@ -64,11 +65,11 @@ function validate() {
         }
     }
     return true
-}
+}*/
 
 
 /***
- * 滑动发送验证码
+ * 滑动发送短信
  * @param options
  */
 (function(window,document,undefined){
@@ -126,12 +127,40 @@ function validate() {
                         lastX = Math.max(0,Math.min(max,lastX)); //这一步表示距离大于0小于max，巧妙写法
                         console.log('lastX: '+lastX+' px');
                         if(lastX>=max){
-                            console.log(11);
                             handler.classList.add('handler_ok_bg');
                             that.slider.classList.add('slide_ok');
                             dog.off(handler,'mousedown',drag.down);
                             drag.up();
-                            sendCode();//发送验证码
+                            console.log(11);
+                            sendMsg();//发送短信获取验证码
+
+                            //倒计时60s
+                            function invokeSettime(obj){
+                                var countdown=60;
+                                settime(obj);
+                                function settime(obj) {
+                                    if (countdown == 0) {
+                                        $(obj).attr("disabled",false);
+                                        $(obj).text("从新获取验证码");
+                                        countdown = 60;
+                                        //滑块复位
+                                        that.bg.style.width =  '0px';
+                                        handler.style.left = '0px';
+                                        handler.classList.remove('handler_ok_bg');
+                                        that.slider.classList.remove('slide_ok');
+                                        return;
+                                    } else {
+                                        $(obj).attr("disabled",true);
+                                        $(obj).text("(" + countdown + ") s 后请重新发送");
+                                        countdown--;
+                                    }
+                                    setTimeout(function() {
+                                            settime(obj) }
+                                        ,1000)
+                                }
+                            }
+                            new invokeSettime("#time");
+
                         }
                         that.bg.style.width = lastX + 'px';
                         handler.style.left = lastX + 'px';
@@ -158,29 +187,38 @@ function validate() {
     };
     window.S = window.Slider = Slider;
 })(window,document);
-var defaults = {
-    id:'slider'
-};
-new S(defaults);
+
+$('#slider').on('mousedown',function() {
+    if($('#phoneNumber').val() === null || $('#phoneNumber').val() === ""){
+        alert('手机号不能为空');
+        return false;
+    }else if(!checkMobiles($.trim($('#phoneNumber').val()))) {
+        alert('手机号格式不对');
+    }else{
+        var defaults = {
+            id:'slider'
+        };
+        new S(defaults);
+    }
+})
+
+function checkMobiles(theForm) {
+    return /^((13|15|18|14|17)+\d{9})$/.test(theForm);
+}
 
 /**
- *发送验证码
+ *发送短信获取验证码
  */
-function sendCode(){
-    var Data = $('#phoneNumber').val();
+function sendMsg(){
+    var Data = {
+        phoneNumber:$('#phoneNumber').val(),
+    };
     new ajaxHttp('POST',getUrl(2) + '/portal/getVirficationCode',Data,
         function(data) {
             alert("获取状态失败，请稍后");
         }),
         function(data) {
             if(data.code === SUCCESS){
-                handler.removeClass('handler_bg').addClass('handler_ok_bg');
-                text.text('验证通过');
-                drag.css({'color': '#fff'});
-                handler.unbind('mousedown');
-                $(document).unbind('mousemove');
-                $(document).unbind('mouseup');
-                text.text('发送成功');
                 alert('成功');
             }else if(data.code === 900007){
                 alert('参数为空');
@@ -194,20 +232,38 @@ function sendCode(){
                 alert('验证码发送失败');
             }else if(data.code === 200503){
                 alert('验证码失效');
+            }else if(data.code === 200505){
+                alert('短信验证码超量，请联系管理员（由于阿里限制，每一天同一个手机，只可以发送10条数据）');
+            }else {
+                alert('系统错误');
             }
         }
 }
 
+
+/**
+ * 用户注册
+ * @param data
+ */
 function memberRegister(data) {
     var D = new Base64();
     var username = data.userName;
     var password = data.password;
-    var datas = {"userName": username, "password": password, "hotelName": data.hotelName, "phoneNumber": data.phoneNumber, "email": data.email,"verificationCode":data.verificationCode};
+    var datas = {
+        "userName": $('#userName').val(),
+        "password": $('#password').val(),
+        "hotelName": $('#hotelName').val(),
+        "phoneNumber": $('#phoneNumber').val(),
+        "email": $('#email').val(),
+        "verificationCode":$('#verificationCode').val()
+    };
+    console.log(datas);
     $.ajax({
         cache: true,
         type: "POST",
         url: getUrl(2)+"/portal/registerUser",
         data: datas,
+        headers: {'wefinttoken': getCookie('token')},
         async: false,
         error: function (result) {
             alert("注册失败，请稍后再试");
@@ -228,6 +284,8 @@ function memberRegister(data) {
             }else if (result.code== SUCCESS) {
                 alert("注册成功请登录");
                 window.location.href = "../html/login.html"
+            }else {
+                alert('系统错误');
             }
             return false
         }

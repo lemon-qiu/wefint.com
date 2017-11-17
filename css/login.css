@@ -128,3 +128,7 @@
 .regis-btn:hover{
     color: #fff;
 }
+/*******重写layer样式******/
+.layui-layer-dialog,.layui-layer-title{
+    border-radius: 10px!important;
+}

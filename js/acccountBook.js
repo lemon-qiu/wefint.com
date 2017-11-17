@@ -23,14 +23,14 @@ function getName() {
  */
 function getMonthAccount() {
     let nowDate = new Date();
-    let month =nowDate.getMonth()+1;
+    let month = nowDate.getMonth() + 1;
     let startDate = nowDate.getFullYear() + '-' + month + '-' + 1; // 当前月份 第一天
     let endDate = nowDate.getFullYear() + '-' + month + '-' + 30; // 当前月份最后一天
     $('#startDate').val(startDate);
     $('#endDate').val(endDate);
     let data = {
-        startDate:startDate,
-        endDate:endDate
+        startDate: startDate,
+        endDate: endDate
     };
     hotelFinancialChart(data) // 调用查询 所有收入的方法
 }
@@ -53,8 +53,9 @@ function submitAddBook(obj) {
         alert('服务器故障，正在处理，请稍后', err)
     }, (data) => {
         if (data.code === SUCCESSFULUSERLOGIN) {
-            alert('添加成功，请查看')
-            history.go(0);
+            confirm('添加成功，请注意查看', function() {
+                history.go(0);
+            });
         } else if (data.code === PARAMETERCANNOTBEEMPTY) {
             alert('请求的参数不能为空，请检查')
         } else if (data.code === INSUFFICIENTPRIVILEGE) {
@@ -93,6 +94,9 @@ function hotelFinancialChart(obj) {
             setTd(HOUSEINCOMETD, HOUSEINCOME, allField); // 调用settd方法 将数据循环显示到视图
             setTd(TALLYINCOMETD, TALLYINCOME, allField); // 调用settd方法 将数据循环显示到视图
             setTd(EXPENDITURETD, EXPENDITURE, allField); // 调用settd方法 将数据循环显示到视图
+            setTimeout(function() {
+                strikingBalance()
+            }, 400)
         } else if (data.code === PARAMETERCANNOTBEEMPTY) {
             alert('时间不能为空')
         } else if (data.code === INSUFFICIENTPRIVILEGE) {
@@ -106,7 +110,7 @@ function hotelFinancialChart(obj) {
 }
 
 /**
- * 根据时间获取 第三方收入的方法
+ * 根据时间获取第三方收入的方法
  * @param Data 传递获取OTA时间
  */
 function hotelFinancialChartOTA(Data) {
@@ -122,8 +126,8 @@ function hotelFinancialChartOTA(Data) {
             let COMMISSIONTD = $('#commission').children();  //  commission 下所有的TD
             let COMPENSASENTD = $('#compensasen').children();  //  compensasen 下所有的TD
             setTd(ACCOUNTTD, getdata, accountField);  // 调用account方法 将数据循环显示到视图
-            setTd(COMMISSIONTD, getdata, commissionField); // 调用commission方法 将数据循环显示到视图
-            setTd(COMPENSASENTD, getdata, compensasenField); // 调用compensasen方法 将数据循环显示到视图
+            setTd(COMMISSIONTD, getdata, compensasenField); // 调用commission方法 将数据循环显示到视图
+            setTd(COMPENSASENTD, getdata, commissionField); // 调用compensasen方法 将数据循环显示到视图
 
         } else if (data.code === PARAMETERCANNOTBEEMPTY) {
             alert('时间不能为空')
@@ -154,5 +158,21 @@ function setTd(tdname, objname, obj) {
                 }
             }
         })
+    }
+}
+
+
+function strikingBalance() {
+    let houseIncomeTd = $('#houseIncome').children();
+    let tallyIncomeTd = $('#tallyIncome').children();
+    let expendItureTd = $('#expendIture').children();
+    let lastbBalanceTd = $('#lastbBalance').children();
+    for (let i = 1; i < houseIncomeTd.length; i++) {
+        let houseIncomeTdNum = $(houseIncomeTd[i]).text();
+        let tallyIncomeTdNum = $(tallyIncomeTd[i]).text();
+        let expendItureTdNum = $(expendItureTd[i]).text();
+        let Addincome = parseInt(houseIncomeTdNum) + parseInt(tallyIncomeTdNum);
+        let lastbBalance =  parseInt(Addincome) - parseInt(expendItureTdNum);
+        $(lastbBalanceTd[i]).text(lastbBalance)
     }
 }

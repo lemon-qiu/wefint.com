@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>入住</title>
-    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="../css/houseStatusSetupLayer.css" media="all" />
-    <link rel="stylesheet" href="../css/booking.css" media="all" />
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/houseStatusSetupLayer.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/booking.css" media="all"  type="text/css" />
     <script src="../layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
     <script src="../layer/layer.js" charset="utf-8"></script>
@@ -18,9 +18,8 @@
     <script src="../js/pageonload.js"></script>
 </head>
 
-<body onload="chaxun()">
+<body onload="">
     <form class="layui-form" id="finaceform" action="">
-        <!-- <div class="layui-form-item"> -->
         <div class="layui-form-item">
             <label class="layui-form-label">预定/现住:</label>
             <div class="layui-input-inline">
@@ -33,7 +32,6 @@
             </div>
             <label class="layui-form-label">入住人手机:</label>
             <div class="layui-input-inline">
-                <!-- <input id="clientCellNumber" disabled type="text" name="roomInitalPrice" autocomplete="off" class="layui-input"> -->
                 <input id="clientCellNumber" disabled type="text" name="clientCellNumber" lay-verify="phone" autocomplete="off" class="layui-input">
                 <img src="../img/修改.png" onclick="editMesTel()">
             </div>
@@ -91,9 +89,6 @@
                 <button class="layui-btn" lay-submit lay-filter="insertHouse">入住</button>
                 <button class="layui-btn" lay-submit lay-filter="changeInfo">更改信息</button>
                  <button class="layui-btn" lay-submit lay-filter="deleteRoom">取消预定</button>
-                <!-- <button type="reset" class="layui-btn layui-btn-primary">取消</button> —> 
-
-                <!-- <button class="layui-btn" lay-submit lay-filter="cancel">取消</button> -->
             </div>
         </div>
     </form>

@@ -43,7 +43,7 @@ function submitInfo2(E) {
         }else if(data.code === PARAMETERCANNOTBEEMPTY){
             alert('请求的参数不能为空，请检查')
         }else if(data.code === INSUFFICIENTPRIVILEGE){
-            alert('用户权限不够，请联系管理员')
+            alert('用户权限不够，请拨打400-8083188联系客服')
         }else{
             alert(data.message)
         }
@@ -59,7 +59,6 @@ function getfendian() {
     new ajaxHttp('get', getUrl(2) + '/portal/getBranch', Data, (err) => {
         alert('用户没有登录，请登录')
     }, (data) => {
-        console.log(data)
         if (data.code === SUCCESSFULUSERLOGIN) {
             let objs = data.content;
             for (let j = 0; j < objs.length; j++) {
@@ -75,6 +74,8 @@ function getfendian() {
             alert('查询状态失败，请检查登录')
         }else if(data.code === INSUFFICIENTPRIVILEGE){
             alert('用户权限不够，请联系管理员')
+        }else if(data.code === DONTHAVEMESSAGE){
+            alert('暂无分店数据，请添加')
         }else{
             alert('服务器错误，请稍等')
         }

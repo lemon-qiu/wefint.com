@@ -1,13 +1,32 @@
-
+::-webkit-scrollbar {
+    width: 5px;
+    height:8px;
+}
+::-webkit-scrollbar-track {
+    background-color: #bee1eb;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #00aff0;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9c3
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #00aff0
+}
 * {
     margin: 0;
     padding: 0;
+}
+.hide{
+    display: none;
 }
 
 .nav5 {
     width: 50px;
     height: 50px;
-    border: 0px;
+    border: 0;
     z-index: 88;
     position: fixed;
     right: 0;
@@ -15,7 +34,7 @@
     cursor: pointer
 }
 
-.head {
+.head{
     width: 100%;
     height: 58px;
     position: relative;
@@ -25,32 +44,41 @@
     background: url('../images/hotelStatus/head.png') no-repeat 0/100%;
 }
 .head_left,.head_right{
+    cursor: pointer;
     padding:10px 20px;
-    width:10%;
+    width:20%;
     color:#fff;
     font-size: 20px;
+    cursor: pointer;
 }
 .head_right{
     padding:5px 20px;
     width:3%;
+    cursor: pointer;
 }
 .section {
     width: 100%;
-    height: 90vh;
+    height:90vh;
     display: flex;
     overflow: hidden;
     justify-content: flex-start;
 }
-
+@media screen and (max-width: 1450px) {
+    .section {
+        height:80vh;
+    }
+}
 .content_left {
     position: relative;
     z-index: 10;
-    width: 270px;
+    width: 15%;
     height: 100%;
     background-color: #fff;
     box-shadow: 3px 0px 8px rgba(51, 51, 51, .3);
 }
-
+.red{
+    color:red;
+}
 .content_left table {
     width: 100%;
 }
@@ -79,14 +107,16 @@
 
 .leftBtn {
     position: absolute;
-    left: 2%;
+    left: 15%;
     top: 25%;
+    cursor: pointer;
 }
 
 .rightBtn {
     position: absolute;
-    right: 5%;
+    right: 11%;
     top: 25%;
+    cursor: pointer;
 }
 
 .content_left td:nth-of-type(1) {
@@ -122,12 +152,18 @@
 }
 
 .dateChooseRight > div {
-    width: 225px;
+    position: relative;
+    width: 4%;
     border-right: 1px solid #DDD;
     text-align: center;
     color: #434343;
+    overflow: hidden;
 }
-
+@media screen and (max-width: 1450px) {
+    .dateChooseRight > div {
+        width: 2.6%;
+    }
+}
 .dateChooseRight > div p:nth-of-type(1) {
     margin-top: 15px;
     font-size: 16px;
@@ -149,11 +185,15 @@
 }
 
 .dataRight > div {
-    width: 225px;
+    width: 4%;
     height: 100%;
     border-right: 1px solid #DDD;
 }
-
+@media screen and (max-width: 1450px) {
+    .dataRight > div {
+        width: 2.6%;
+    }
+}
 .footer {
     width: 100%;
     height: 50px;
@@ -187,12 +227,12 @@
 .checkOut, .checkSubscribe, .checkIn {
     width: 95%;
     height: 70%;
-    margin: 10px auto;
+    margin: 0 auto;
     background-color: #bbbbbb;
     border-radius: 50px;
     text-align: center;
     line-height: 40px;
-    font-size: 16px;
+    font-size: 14px;
     color: #fff;
 }
 
@@ -204,4 +244,87 @@
 /*入住标志*/
 .checkIn {
     background-color: #414cdc;
+}
+.parent{
+    width:100%;
+    height:100%;
+    padding-top:10px;
+}
+.nowdateDiv{
+    cursor: pointer;
+}
+.modal{
+    margin-top:20px;
+    display:none;
+    width:100%;
+    height:90%;
+    background-color:#fff;
+}
+.row{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+}
+.row .layui-input-block{
+    width:100%;
+}
+.item{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+}
+.item .layui-input-block{
+    width:100%;
+}
+.updata{
+    margin:30px auto;
+}
+.copyId{
+    display: none;
+}
+.now_day{
+    position: absolute;
+    right:-18%;
+    top:55%;
+    width:30%;
+    height:30%;
+    border:1px solid #ddd;
+    color:red;
+    border-radius: 50px;
+    font-size: 12px;
+    text-align: left;
+    padding-left: 15px;
+}
+/***********图标样式**********/
+.icon-calendar{
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    font-size: 24px!important;
+}
+/******layui样式重写****/
+.check-form .layui-btn{
+    width:auto;
+}
+.layui-btn,.submits .layui-btn{
+    width:120px;
+}
+.mr30 .layui-input-block{
+    margin-right: 30px;
+}
+@media screen and (max-width: 1921px) {
+    .layui-layer{
+        width:55%; !important;
+    }
+}
+@media screen and (max-width: 1460px) {
+    .row .layui-form-item .layui-input-inline{
+        width:177px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .row .layui-form-item .layui-input-inline{
+        width:150px;
+    }
 }

@@ -49,11 +49,11 @@ function createMainTable(nowTime, n, maxnum) {
     let uiDateStr = '';
     let divStr = '';
     for (let i = 0; i < maxnum; i++) {
-        date +=1;
-        if(date > n){
+        date += 1;
+        if (date > n) {
             date = 1;
-            month ++;
-            if(month >12){
+            month++;
+            if (month > 12) {
                 month = 1;
                 year++
             }
@@ -122,18 +122,28 @@ function initPanel(nowTime) {
     new ajaxHttp("GET", getUrl(2) + "/roomStatus/findAll", data, function(C) {
         alert("查询失败，请联系管理员")
     }, function(data) {
-        if(data.code === SUCCESSFULUSERLOGIN){
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let leftTableTbody = $('#left_table').children();
+            let jsonData = data.content;
+            let uiStr = '';
+            for (let i = 0; i < jsonData.length; i++) {
+                let roomName = jsonData[i].roomName;
+                let roomNumber = jsonData[i].roomNumber + '号房';
+                uiStr += '  <tr><td>' + roomName + '</td><td>' + roomNumber + '</td></tr>';
+                leftTableTbody.html(uiStr)
 
-        }else if(data.code === PARAMETERCANNOTBEEMPTY){
-                alert('用户没有登录，请登录')
-        }else if(data.code === INSUFFICIENTPRIVILEGE){
-                alert('用户1权限不够，请联系管理员')
-        }else if(data.code === TIMEFORMATERROR){
-                alert('时间格式不正确，请查看')
-        }else if(data.code === ROOMOCCUPANCYCONFLICT){
-                alert('用户入住情况冲突，请联系管理员')
-        }else{
-                alert('系统故障，正在维护中，请稍后')
+            }
+            initPageData();
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户1权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else {
+            alert('系统故障，正在维护中，请稍后')
         }
         // let content = data.content;
         // createLeftTable(content);

@@ -7,25 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>设置</title>
-    <link rel="stylesheet" href="../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all"  type="text/css" />
     <!--<link rel="stylesheet" href="../css/hotelsetup.css" media="all" />-->
-    <link rel="stylesheet" href="../css/floaticon.css" type="">
-    <link rel="stylesheet" href="../layer/skin/default/layer.css" type="">
+    <link rel="stylesheet" href="../css/floaticon.css"  type="text/css" >
+    <link rel="stylesheet" href="../layer/skin/default/layer.css"  type="text/css" >
     <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
     <script src="../js/pageonload.js"></script>
     <script src="../layui/layui.js" charset="utf-8"></script>
     <script src="../layer/layer.js" charset="utf-8"></script>
     <script src="../js/base64.js"></script>
     <script src="../js/hotelsetup.js"></script>
-    <link rel="stylesheet" href="../css/data.css" media="all"/>
+    <link rel="stylesheet" href="../css/data.css" media="all"  type="text/css" />
 
 </head>
 
 <body class="beg-login-bg" onload="checkCookieLogin();getRooms();getCommisionMes();getMes();getEmployee()">
-<ul class="layui-nav">
-    <li class="layui-nav-item"><a href="">设置</a></li>
-</ul>
-<div class="nav5" onclick="window.open('./mainPannel.html','_self')"><img src="../img/ppp.png" title="返回"></div>
+<!--header-->
+<div class="head">
+    <div class="head_left" onClick="window.location.href='mainPannel.html'">
+        <img src="../images/hotelStatus/logo.png">后台信息管理
+    </div>
+    <div class="head_right">
+        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="javascript:history.go(-1);" >
+    </div>
+</div>
 <div class="layui-tab">
     <ul class="layui-tab-title">
         <li class="layui-this">房型设置</li>
@@ -58,9 +63,9 @@
                                class="layui-input">
                     </div>
 
-                    <label class="layui-form-label">周末价格:</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="roomSpecialDatePrice" required lay-verify="required|number" placeholder="单位“元”" autocomplete="off"
+                    <label class="layui-form-label hide">周末价格:</label>
+                    <div class="layui-input-inline hide">
+                        <input type="text" name="roomSpecialDatePrice" value="0" required lay-verify="required|number" placeholder="单位“元”" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
@@ -90,7 +95,7 @@
                     <th>房间名称</th>
                     <th>房间编号</th>
                     <th>初始价格</th>
-                    <th>周末价格</th>
+                    <!--<th >周末价格</th>-->
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -177,7 +182,7 @@
         <!--客栈信息-->
         <div class="layui-tab-item">
             <!--内容3-->
-            <form class="layui-form" action="">
+            <form class="layui-form mr30" action="">
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名:</label>
                     <div class="layui-input-block">
@@ -360,17 +365,30 @@
                 </div>
             </div>
         </div>
-        <div class="layui-row">
+        <div class="layui-row hide">
             <div class="layui-col-md5">
                 <div class="layui-form-item">
                     <label class="layui-form-label">周末价格</label>
                     <div class="layui-input-block">
-                        <input type="text" required  class="layui-input" id="roomSpecialDatePrice">
+                        <input type="text" required value="0"  class="layui-input" id="roomSpecialDatePrice">
                     </div>
                 </div>
             </div>
         </div>
     </form>
+</div>
+<div class="footer">
+    <div class="footer_left">
+        <div>
+            <img src="../images/hotelStatus/call.png" alt="call">028-5191803
+        </div>
+        <div>
+            <img src="../images/hotelStatus/help.png" alt="call">帮助
+        </div>
+    </div>
+    <div class="footer_right">
+        <p>版权所有Copyright By 圣境环球</p>
+    </div>
 </div>
 <script>
     //Demo

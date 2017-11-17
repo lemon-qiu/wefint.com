@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>用户注册</title>
-    <link rel="stylesheet" href="../layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="../css/registermember.css" type="">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/registermember.css"  type="text/css" >
     <script src="../js/base64.js"></script>
     <script src="../js/jquery-1.11.1.js"></script>
     <script src="../js/pageonload.js"></script>
@@ -34,12 +34,12 @@
                 <!--用户名-->
                 <div class="layui-form-item">
                     <!--<label class="register-text">用户名</label>-->
-                    <input type="text" name="userName" lay-verify="required" autocomplete="off" placeholder="请输入登录名" class="layui-input">
+                    <input type="text" name="userName" id="userName" lay-verify="required" autocomplete="off" placeholder="请输入登录名" class="layui-input">
                 </div>
                 <!--密码-->
                 <div class="layui-form-item">
                     <!--<label class="register-text">密码</label>-->
-                    <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                    <input type="password" name="password" id="password" lay-verify="required" autocomplete="off" placeholder="请输入密码" class="layui-input">
                 </div>
                 <!--再次输入密码-->
                 <div class="layui-form-item">
@@ -49,17 +49,17 @@
                 <!--客栈名称-->
                 <div class="layui-form-item">
                     <!--<label class="register-text">客栈名称</label>-->
-                    <input type="text" name="hotelName" lay-verify="required" autocomplete="off" placeholder="请输入客栈名称" class="layui-input">
+                    <input type="text" name="hotelName" id="hotelName" lay-verify="required" autocomplete="off" placeholder="请输入客栈名称" class="layui-input">
                 </div>
                 <!--电子邮件-->
                 <div class="layui-form-item">
                     <!--<label class="register-text">电子邮件</label>-->
-                    <input type="text" name="email" lay-verify="email" autocomplete="off" placeholder="请输入电子邮件" class="layui-input">
+                    <input type="text" name="email" id="email" lay-verify="email" autocomplete="off" placeholder="请输入电子邮件" class="layui-input">
                 </div>
                 <!--手机号码-->
                 <div class="layui-form-item">
                     <!--<label class="register-text">手机号码</label>-->
-                    <input type="text" name="phoneNumber" lay-verify="phone" autocomplete="off" placeholder="请输入手机号码" class="layui-input">
+                    <input type="text" name="phoneNumber" id="phoneNumber" lay-verify="phone" autocomplete="off" placeholder="请输入手机号码" class="layui-input">
                 </div>
                 <!--验证码-->
                 <div class="layui-form-item">
@@ -70,9 +70,13 @@
                             <div class="drag_text" onselectstart="return false;" unselectable="on">拖动滑块验证</div>
                             <div class="handler handler_bg"></div>
                         </div>
+
                     </div>
                     <div class="layui-form-item">
-                        <input type="text" id="verificationCode" name="phoneNumber" lay-verify="required" autocomplete="off" placeholder="请输入验证码" class="layui-input">
+                        <div id="time"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="text" id="verificationCode" name="verificationCode" lay-verify="required" autocomplete="off" placeholder="请输入验证码" class="layui-input">
                     </div>
                     <!--注册按钮-->
                     <div class="layui-form-item">
@@ -97,12 +101,10 @@
                     // alert(data.field.checkcode);
                     // validate();
                     //  layer.msg(JSON.stringify(data.field));
-                    if (validate()) {
-                        if (data.field.password == data.field.password2) {
-                            memberRegister(data.field);
-                        } else {
-                            alert("密码不一致,请重新输入");
-                        }
+                    if (data.field.password == data.field.password2) {
+                        memberRegister(data.field);
+                    } else {
+                        alert("密码不一致,请重新输入");
                     }
                     return false;
                 });

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借款协议</title>
+    <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/BrokerageContract.css"  type="text/css" >
+</head>
+<style>
+    .tittle{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+    }
+</style>
+<body>
+<h2 class="tittle">借款协议</h2>
+<div class="ifont">
+    合同编号：【 <span id="contractNo"></span>  】<br>
+    签约日期：【 <span class="signDates"></span>  】<br>
+    <br>
+    出借人（甲方） <br>
+    出借人姓名：<span id="enderName"></span> <br>
+    出借人身份证号码：<span id="enderCertNo"></span> <br>
+    <br>
+    借款人 (乙方) <br>
+    借款人姓名：<span id="userName"></span> <br>
+    借款人身份证号码：<span id="certNo"></span> <br>
+    借款人住所：<span id="motelAddress"></span> <br>
+    <br>
+    服务方(丙方)<br>
+    服务方名称：<span id="thirdPartyName"></span> <br>
+    住所：<span id="thirdPartyAddress"></span> <br>
+    <br>
+    鉴于：<br>
+    1、 丙方通过运营（www.wefint.com）及其开发并运营的疯特平台/系统，为甲、乙双方提供金融信息撮合及相关服务。<br>
+    2、 甲方和乙方同意成立借款关系。 <br>
+    3、 甲方、乙方系丙方平台注册用户，同意遵守丙方平台各项规则。<br>
+    现各方根据平等、自愿的原则，达成本协议如下：<br>
+    一、 借款 <br>
+    1.1.借款基本信息表 <br>
+   <table border="1" cellpadding="0" cellspacing="0">
+       <tr><td>借款用途 </td><td>短期流动性经营资金</td></tr>
+       <tr><td>借款金额 </td><td>小写：<span id="repaymentPrincipal"></span>元，大写：<span id="repaymentPrincipalBig"></span></td></tr>
+       <tr><td>起息日</td><td><span id="valueDateYear"></span>年 <span id="valueDateMonth"></span>月 <span id="valueDateDate"></span>日</td></tr>
+       <tr><td>到期日</td><td><span id="interestDayYear"></span>年 <span id="interestDayMonth"></span>月 <span id="interestDayDate"></span>日</td></tr>
+   </table><br>
+    1.2 丙方委托其合作的第三方支付机构或存管银行将甲方出借资金全部划付至乙方的资金账户之日，即视为乙方已经收到借款资金，乙方是否提现资金以及是否提现成功不影响本协议的效力、债权效力和利息起算。<br>
+    1.3 月利率计算标准：月利率计算标准:月利率＝年利率÷12<br>
+    二、 还款 <br>
+    2.1 还款计划表<br>
+    <table border="1" cellpadding="0" cellspacing="0">
+        <tr><td>还款日期 </td><td>还款本金 </td><td>还款利息 </td><td>服务费 </td></tr>
+        <tr><td><span id="repaymentDate"></span></td><td><span class="repaymentPrincipal"></span></td><td><span id="repaymentInterest"></span></td><td><span id="serviceCharge"></span></td></tr>
+    </table><br>
+    注：<br>
+    A、每期“还款金额”=每期应还本金+每期应还利息+每期借款人应交服务费<br>
+    B、基于丙方为乙方提供包括但不限于信息咨询、信用审核、交易信息管理服务等借款撮合相关服务，乙方应向丙方支付服务费，该服务费的具体收费方式、收费标准由丙方与乙方另行签署服务协议或乙方另行签署承诺书约定。 <br>
+    C、基于丙方为甲方提供包括但不限于咨询服务、回款提醒等出借撮合服务，甲方同意向丙方支付服务费，并授权丙方从乙方偿还的还款本息中扣除一定金额作为甲方向丙方支付的服务费，该服务费的具体收费方式、收费标准由丙方与甲方另行签署服务协议约定。<br>
+    2.2 乙方必须按照本协议的约定按时、足额偿还本金、利息及服务费（包括丙方服务费及丙方代收的其他方服务费，下同）。利息计算日即借款基本信息表约定的起息日。<br>
+    2.3 乙方依照以下第【按期付息到期还本 】 种方式偿还本息：<br>
+    2.3.1 按期等额本息还款：指每期按相等的金额偿还借款本息，其中每期借款利息按期初剩余借款本金计算并逐期结清。乙方选择以月作为一个还款周期。 <br>
+    每期等额本息还款额的计算公式如下：<br>
+    每月还款金额=借款金额 x[月利率 x(1+月利率)^ 还款月数 ]/[(1+月利率)^ 还款月数 -1]<br>
+    2.3.2 按期付息到期还本：是指利息按期支付，本金到期一次性偿还。乙方选择以月作为一个还款周期。<br>
+    每期利息的计算公式：<br>
+    每月利息=借款金额×月利率<br>
+    2.3.3 按期等额本金还款：指每期按相等的金额偿还借款本金，及当期剩余本金的全部利息，乙方选择以月作为一个还款周期，每期还款额计算公式为：<br>
+    每月还款金额 =借款金额/还款期数+上期剩余本金×月利率<br>
+    2.3.4 等本等息还款：<br>
+    每月还款金额=借款金额/借款期限+借款金额*月利率<br>
+    2.4 乙方应至少于约定的还款当日 18 点前，将应还借款本金及/或利息、服务费等应还款项足额充值至乙方资金账户。乙方不可撤销地授权丙方或与丙方合作的第三方支付机构或银行于还款日从乙方资金账户中将乙方的资金划转至甲方资金账户，划付完毕即视为本期还款成功。当乙方资金账户中的资金余额不足时，乙方不可撤销地授权丙方或与丙方合作的第三方支付机构或银行从乙方指定的银行还款账户中代扣差额（乙方应付款项与乙方资金账户中余额之差）。<br>
+    2.5 还款日不受法定假日或公休日影响，还款期届满必须还款。若还款日当月没有该日，则还款日为当月最后一天，节假日不顺延。<br>
+    2.6 如甲方为多个出借人，各出借人独立享有对乙方的借款债权；若乙方的任何一期还款不足以偿还包括但不限于本金、利息、违约金、逾期催收费用服务费等应付款项的，各出借人及平台有权单独对其未收回的借款本息或服务费向乙方追索。<br>
+    2.7 如乙方为多个借款人，任一借款人均负有清偿全部借款的义务，甲方有权向任一借款人追索本协议项下全部应付款项，包括但不限于本金、利息、违约金等。<br>
+    2.8 甲方、乙方同意丙方或丙方委托的第三方有权代甲方在有必要时对乙方进行催收工作，包括但不限于电话通知、发律师函、登门催讨、对乙方及丙方提起诉讼等。<br>
+    三、提前还款<br>
+    3.1 乙方有权通过丙方向甲方提前偿还全部或部分应付款项。<br>
+    3.2 提前清偿全部剩余借款<br>
+    乙方提前清偿全部剩余借款时，应支付截至提前还款日全部应还本息、服务费（含提前还款日所在当月的服务费）违约金等本协议约定款项。甲方有权收取乙方支付的截至提前还款日全部应还本息。<br>
+    3.3 提前偿还部分借款时<br>
+    3.3.1 提前部分还款应按如下顺序进行清偿：<br>
+    （1） 截至还款日的应付服务费（含提前还款日所在当月的服务费）；<br>
+    （2） 实际借款期间的利息（含提前还款日所在当月的利息）；<br>
+    （3） 借款本金；<br>
+    （4） 已发生的违约金。<br>
+    3.3.2 提前部分还款的，根据乙方已偿还完毕借款本金和利息的数额，后期应还借款本息数额相应扣减，但还款方法及期限不变。<br>
+    3.4 乙方提前还款当日，自乙方将提前还款金额存入乙方资金账户之时，丙方有权自行或委托丙方指定的第三方支付机构或存管银行将相应款项划付至甲方资金账户内，划付完毕即视为乙方履行完毕该笔还款义务。<br>
+    3.5 乙方提前还款的，应向丙方支付提前还款违约金，提前还款违约金为以下二者之和：<br>
+    （1）借款本金金额的【 0%】；<br>
+    （2）相当于乙方提前还款日至当期应还款日之间乙方应缴利息的金额。<br>
+    四、逾期还款<br>
+    4.1 鉴于需要为第三方支付或存管银行划付还款预留一定的时间，乙方同意于本协议约定的还款日当日 18 点前足额还款（包括本金、利息及/或服务费），即乙方应在当日 18 点前向乙方账户足额充值。乙方未按时足额支付应付款项造成甲方资金账户未收到应收款项的，则视为逾期。<br>
+    4.2 乙方未能按本协议约定足额偿还任何一期款项（注：本合同中的逾期还款，包括本金逾期,利息逾期，服务费逾期、或本金、利息及服务费均逾期中任何一种情况）的，除应继续支付应付款项外，每逾期一日，应按如下约定支付相应的违约金：<br>
+    逾期利息违约金：自利息逾期之日起算，按日按未还利息的万分之五支付违约金；<br>
+    逾期本金违约金：自本金逾期之日起算，根据当期未还本金数额，按日按【 1%】支付违约金）。<br>
+    4.3 借款期间，当乙方逾期归还任何一期应还本金、利息或者服务费超过 15 天或者累计三次以上逾期偿还本息或/及服务费时，为维护甲方合法权益，自逾期之日起，丙方有权代甲方通知乙方本协议项下借款立即全部提前到期，乙方应当立即偿还所欠借款本金、利息、违约金、服务费等全部应付款项。<br>
+    五、债权转让<br>
+    5.1 乙方逾期还款导致的债权转让<br>
+    5.1.1 借款期间因乙方逾期还款导致借款提前到期的，以及借款期满乙方未按期还款的，甲方同意授权丙方对逾期债权提供债权转让服务，授权范围包括但不限于：代为寻找债权受让人，代为签署债权转让协议，代为收取、冻结、划扣债权转让价款及债权转让服务费（若有），代为向借款人发送债权转让通知。甲方同意丙方届时有权向乙方发送债权转让通知（但无需另行通知甲方）。通知一经发送，即对乙方生效。<br>
+    5.1.2 丙方寻找的债权受让人受让甲方债权后，有权将甲方债权转让给第三方并由丙方向乙方发送债权转让通知。通知一经发送，即对乙方生效。债权受让方受让债权后可选择通过诉讼、仲裁或其他方式向乙方主张履行还款义务。<br>
+    5.1.3 乙方逾期还款情形下，乙方还款顺序为：服务费、利息、本金、违约金。<br>
+    5.1.4 乙方逾期还款后，丙方按照 6.1.1 款约定进行债权转让的，不收取债权转让服务费。<br>
+    5.2 甲方主动进行的债权转让<br>
+    5.2.1甲方有权将本协议项下的债权向他人转让。债权转让后， 甲方委托乙方通过包括但不限于电子邮件、特快专递、快递、平台公告、网站站内信息等灵活形式通知乙方。 乙方同意自丙方发出通知日起，代表乙方同意甲方的债权转让。乙方同意向债权受让人继续履行本协议的后续还款义务。<br>
+    5.2.2在甲方的债权转让后，乙方需对新债权人继续履行本协议下其对甲方的所有义务，不得以未接到债权转让通知为由拒绝履行还款义务。<br>
+    六、服务费和第三方费用<br>
+    6.1 基于丙方向甲乙双方提供包括但不限于信息咨询、信用审核、交易信息管理服务等借款撮合相关服务，甲乙双方同意向丙方支付服务费。服务费的具体收费方式、收费标准由丙方与乙方另行签署《借款服务协议》或乙方另行签署承诺书约定。<br>
+    6.2 乙方基于借款需要应向第三方支付的相关费用，例如身份认证费、保险费、家访费、划扣费等费用，由双方另行约定并由丙方代为收取。<br>
+    6.3 甲乙双方同意不可撤销地授权丙方或与丙方合作的第三方支付机构或存管银行有权直接从甲乙双方资金账户中扣划服务费及第三方费用。<br>
+    七、违约责任<br>
+    7.1 下述情形视为乙方严重违约：<br>
+    （1） 乙方违反其在本协议所做的任何承诺和保证并导致甲方债权可能无法全部实现或者甲方、债权受让人或丙方因此遭受实际损失的；<br>
+    （2）乙方擅自改变约定的借款用途；<br>
+    （3）乙方提供虚假资料或者故意隐瞒重要事实等骗取贷款的；<br>
+    （4）乙方发生经营亏损、财务状况严重恶化等情况，存在逃避、拒绝沟通或拒绝承认欠款事实等恶意行为，或者涉及或可能涉及重大经济纠纷、诉讼、仲裁，或者财产被依法查封、扣押、监管等，可能危及本协议项下债权实现的；<br>
+    （5）乙方在借款期限内歇业、解散、清算、停业整顿、被吊销营业执照、被撤销或被申请破产的；<br>
+    （6）乙方怠于管理和追索其到期债权，或以无偿或其他不适当方式处分现有主要财产、转移财产或其他逃避债务行为的；<br>
+    （7）乙方明确表示或以自己的行为表明不履行本合同项下的任何义务,如拒绝履行，无故失联等情形，失联是指在连续三个工作日内丙方每日三次向乙方预留手机或座机拨打电话，出现停机、关机、空号、不在服务区、无法接通等任一情况，且在以上三个工作日内乙方直系亲属或相关联系人无法提供乙方本人有效联系方式；<br>
+    （8）乙方因死亡、被宣告死亡、被宣告失踪、因触犯法律被追究刑事责任、出现重大疾病及事故或丧失民事行为能力后，其继承人、继受人、受遗赠人、监护人、财产代管人拒绝代其清偿债务或无人代其清偿债务；<br>
+    （9）乙方其他严重违反合同义务的行为。<br>
+    7.2 若乙方存在 8.1 条任一违约情形的，甲方同意并授权丙方有权通过站内信、短信、书面通知等方式通知乙方及/或丙方已发放借款全部提前到期。自丙方通知乙方之日起，本协议项下借款提前到期。78.3本协议项下的全部借款本息因乙方逾期还款或者存在8.1条约定的违约情况而被丙方通知提前到期的，乙方应在借款提前到期后三日内，清偿完毕本协议下尚未偿付的全部借款本金、利息、违约金及根据本协议和《借款服务协议》产生的其他全部费用。<br>
+    7.3 因乙方未依约履行还款义务而导致各方发起维权行为产生的费用（实现债权的费用）由乙方承担，包括但不限于诉讼费、财产保全费、执行费、仲裁费、律师代理费、差旅费、评估费、拍卖费等。<br>
+    7.4 乙方因逾期偿还借款或发生本条约定的其他违约情形，且经丙方或债权人催告后未能在合理期限内纠正违约行为的，丙方有权将乙方加入平台黑名单并将乙方逾期信息提供给与丙方合作的征信机构使用，同时有权将乙方的相关信息在媒体、报刊、杂志、网站、论坛等媒介上进行公布，及向乙方用人单位、公安机关、检察机关、法律机关等机构披露，由此造成的损失，丙方不承担任何责任。<br>
+    八、争议与解决<br>
+    8.1 如各方在本协议履行过程中发生争议，任何一方可将争议提交原告或被告住所地人民法院通过诉讼解决。<br>
+    8.2 甲方及甲方债权受让人不可撤销地委托丙方或丙方指定人员代为处理本协议项下甲方及债权受让人与乙方之间的全部争议，委托代理权限包括但不限于代为进行提出、承认、变更、放弃诉讼请求；接受调解、和解；代为领取诉讼文书及诉讼标的物；代为办理强制执行公证程序或抵质押手续。甲方同意丙方可将前述委托事项转委托给专业机构及人员（如律师事务所、律师等）启动诉讼程序。<br>
+    九、承诺与保证<br>
+    9.1 甲方、乙方及丙方各自在此确认其为具有完全民事权利能力和完全民事行为能力的自然人或为按照中国法律合法设立并有效存续的企业法人或其他机构，有权签订并履行本协议。<br>
+    9.2 甲方承诺并保证：提供的资金来源合法且全部为自有资金。<br>
+    9.3 乙方承诺并保证其向甲、丙双方提供的所有信息均为真实、完整和有效的，并根据本协议列明的借款用途使用借款资金。乙方承诺所借款项不用于包括但不限于赌博、吸毒、贩毒、卖淫嫖娼等任何违法活动。乙方提供虚假借款信息资料或将自己信息故意提供给他人骗取借款的，甲方、甲方债权受让人或丙方有权向有关机关举报追究乙方的刑事责任。<br>
+    9.4 借款发放后，乙方应配合做好贷后管理工作，根据丙方要求提交借款用途、收入及资信状况、借款资金流向等方面的证明材料。<br>
+    9.5 乙方同意，无论签署本协议之前还是之后，丙方均有权向有关个人征信信用数据库或有关征信单位、部门及个人查询乙方的信用状况，并同意丙方将其在借款还款过程中产生的信用信息（包括但不限于乙方及丙方个人基本信息、借款申请信息、借款合同信息以及履行还款义务情况）提供给与丙方合作的第三方征信机构等相关单位。<br>
+    9.6 甲乙双方各自承诺不会利用丙方运营的网络借款平台进行信用卡套现、洗钱、非法集资或其他不正当交易行为，否则应依法独立承担法律责任，丙方有权对甲乙双方资金账户进行冻结并配合司法机关采取其他一切必要的措施。<br>
+    9.7 甲方和乙方确认，甲乙双方各自授权和委托丙方根据本协议所采取的全部行动和措施的法律后果均归属于甲方和乙方；在任何情形下，丙方不是本协议项下任何借款或债务的债务人；丙方为甲乙双方的居间人，不承担非因丙方过错导致的任何责任。<br>
+    9.8 甲乙双方应在丙方平台绑定与自身信息相同的银行卡用于提现和归还甲方相关款项，因绑定银行卡错误或银行卡设置问题导致乙方无法提现，或第三方支付机构及监管银行（如有）无法完成款项代扣的，由甲乙方各自承担责任；因此造成乙方借款逾期的，乙方须另行按照本协议第四条的约定履行还款义务及承担相应责任。<br>
+    9.9 本协议各方确认并同意，委托丙方对本协议项下的所有金额进行计算。丙方对本协议项下任何金额的任何证明或确定，甲乙丙各方均予以认可。<br>
+    十、其他<br>
+    10.1 本协议经甲、乙、丙各方通过丙方网站系统以网络在线点击确认的方式订立，各方均认可电子签署及电子协议的效力（丙方不参与签署协议不影响本协议生效及本协议对甲方、乙方、丙方的约束力）。各方确认并同意由丙方提供的与本协议有关的书面文件或电子信息作为本协议有关事项的终局证明。<br>
+    10.2 甲乙双方同意以丙方住所地作为本协议的合同履行地。<br>
+    10.3 本协议项下所产生的税费由交易各方按照相关的法律法规自行承担。<br>
+    10.4 除本协议另有约定外，丙方应对甲方和乙方的信息及本协议内容保密，但因相关权力部门（包括但不限于法院、仲裁机构、金融监管机构等）要求，丙方有权披露。<br>
+    10.5 丙方公示的相关交易规则以及经过各方签署或确认的有关本协议的补充协议和附件是本协议组成部分，与本协议具有同等法律效力。<br>
+    10.6 本协议中的任何一条款如若违反现行适用的法律法规而被认定为无效或不具有强制执行效力，该等无效、不具有强制执行效力的条款并不影响本协议其他条款的效力。<br>
+    10.7 甲乙双方委托丙方保管所有与本协议有关的书面文件或电子信息，丙方将其保存在专用服务器上。甲乙双方均认可该保存条件下的协议效力。<br>
+    10.8 各方确认，丙方向甲方、乙方发送的债权转让通知、借款提前到期通知等各类通知，丙方有权以平台站内信、平台短信及/或通知、电子邮件、邮寄、短信、微信、电话等任何一种方式通知相关方。所有通知方式均具有同等法律效力。各方通讯方式或地址发生变更的，应当在变更后三日内将更新后的信息提供给丙方，否则，任何法律文件的发送仍以原有地址和方式作为有效依据，因此带来的损失或额外费用由信息提供方自行承担。<br>
+    <br>
+    甲方（出借人）：<span class="enderName"></span><br>
+    乙方（借款人）：<span class="userName"></span><br>
+    丙方（服务方）：<span class="thirdPartyName"></span><br>
+    签署日期：<span class="signDates"></span><br>
+</div>
+<div class="btns">
+    <input type="button" value="打印" id="stamp">
+</div>
+<script src="../js/jquery-1.11.1.js"></script>
+<script src="../finance/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/pageonload.js"></script>
+<script src="../js/agreement.js"></script>
+<script>
+    layui.use(['laydate', 'form', 'layedit', 'jquery'], function() {
+        let laydate = layui.laydate
+            , form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit;
+    });
+    /**
+     * 获取页面数据
+     * */
+    window.onload = function(e) {
+        let userId = getCookie('userName');
+        if(userId) {
+            $.ajax({
+                method: 'get',
+                url: getUrl(5) + '/loanAgreement?userId='+ userId,
+                contentType: 'application/json;charset=utf-8',
+                headers: {'wefinttoken': getCookie('token')},
+                error: function(datas) {
+                    alert('获取状态失败，请稍后。')
+                },
+                success: function(datas) {
+                    let spans = $('span'),
+                        spanLength = spans.length;
+                    let valueDate = new Date(datas.valueDate),//起息日
+                        interestDay = new Date(datas.interestDay),//到息日
+                        repaymentDate = new Date(datas.repaymentDate),//还款日期
+                        signDate = new Date(datas.signDate);//签署日期
+
+                    //let dateStr = valueDate.toLocaleDateString();
+                    console.log(valueDate.getFullYear(), valueDate.getMonth() + 1, valueDate.getDate());
+                    $('#valueDateYear').text(valueDate.getFullYear());
+                    $('#valueDateMonth').text(valueDate.getMonth() + 1);
+                    $('#valueDateDate').text(valueDate.getDate());
+                    $('#interestDayYear').text(interestDay.getFullYear());
+                    $('#interestDayMonth').text(interestDay.getMonth() + 1);
+                    $('#interestDayDate').text(interestDay.getDate());
+                    $('#repaymentDate').text(repaymentDate.getMonth() + 1 + '月' + repaymentDate.getDate() + '日');
+                    $('#repaymentPrincipalBig').text(intToChinese(datas.repaymentPrincipal.toString()));
+                    $('.signDates').text( signDate.getFullYear() + '年' + (signDate.getMonth()+ 1) + '月' + signDate.getDate() + '日');
+                    for (let i = 0; i < spanLength; i++) {
+                        $.each(datas, function(key, value) {
+                            if ($($(spans)[i]).attr('id') === key) {
+                                $('#'+key).text(value);
+                            }else if ($($(spans)[i]).attr('class') === key) {
+                                $('.'+key).text(value);
+                            }
+                        })
+                    }
+                }
+            })
+        }else {
+            alert('获取状态失败，请稍后!')
+        }
+    }
+
+/**
+*数字小写转大写
+*/
+function intToChinese ( str ) {str = str.replace(/[^\d\.]/g,'').replace(/^0/,'');
+    var Num = str;
+    if(Num=="") {
+        //输入框删减为空时，将大写金额的内容值设为原始状态，当然也可以根据需求进行修改
+        $("#dx").text("零元整");
+        return false;
+    }
+    part = String(Num).split(".");
+    newchar = "";
+    for(i=part[0].length-1;i>=0;i--){
+        if(part[0].length > 10){
+            alert("位数过大，无法计算");//前面如果有验证位数的，此处判断可去掉
+            return false;
+        }
+        tmpnewchar = ""
+        perchar = part[0].charAt(i);
+        switch(perchar){
+            case "0": tmpnewchar="零" + tmpnewchar ;break;
+            case "1": tmpnewchar="壹" + tmpnewchar ;break;
+            case "2": tmpnewchar="贰" + tmpnewchar ;break;
+            case "3": tmpnewchar="叁" + tmpnewchar ;break;
+            case "4": tmpnewchar="肆" + tmpnewchar ;break;
+            case "5": tmpnewchar="伍" + tmpnewchar ;break;
+            case "6": tmpnewchar="陆" + tmpnewchar ;break;
+            case "7": tmpnewchar="柒" + tmpnewchar ;break;
+            case "8": tmpnewchar="捌" + tmpnewchar ;break;
+            case "9": tmpnewchar="玖" + tmpnewchar ;break;
+        }
+        switch(part[0].length-i-1){
+            case 0: tmpnewchar = tmpnewchar +"元" ;break;
+            case 1: if(perchar!=0)tmpnewchar= tmpnewchar +"拾" ;break;
+            case 2: if(perchar!=0)tmpnewchar= tmpnewchar +"佰" ;break;
+            case 3: if(perchar!=0)tmpnewchar= tmpnewchar +"仟" ;break;
+            case 4: tmpnewchar= tmpnewchar +"万" ;break;
+            case 5: if(perchar!=0)tmpnewchar= tmpnewchar +"拾" ;break;
+            case 6: if(perchar!=0)tmpnewchar= tmpnewchar +"佰" ;break;
+            case 7: if(perchar!=0)tmpnewchar= tmpnewchar +"仟" ;break;
+            case 8: tmpnewchar= tmpnewchar +"亿" ;break;
+            case 9: tmpnewchar= tmpnewchar +"拾" ;break;
+        }
+        newchar = tmpnewchar + newchar;
+    }
+    if(Num.indexOf(".")!=-1){
+        if(part[1].length > 2) {
+            part[1] = part[1].substr(0,2)
+        }
+        for(i=0;i<part[1].length;i++){
+            tmpnewchar = ""
+            perchar = part[1].charAt(i)
+            switch(perchar){
+                case "0": tmpnewchar="零" + tmpnewchar ;break;
+                case "1": tmpnewchar="壹" + tmpnewchar ;break;
+                case "2": tmpnewchar="贰" + tmpnewchar ;break;
+                case "3": tmpnewchar="叁" + tmpnewchar ;break;
+                case "4": tmpnewchar="肆" + tmpnewchar ;break;
+                case "5": tmpnewchar="伍" + tmpnewchar ;break;
+                case "6": tmpnewchar="陆" + tmpnewchar ;break;
+                case "7": tmpnewchar="柒" + tmpnewchar ;break;
+                case "8": tmpnewchar="捌" + tmpnewchar ;break;
+                case "9": tmpnewchar="玖" + tmpnewchar ;break;
+            }
+            if(i==0)tmpnewchar =tmpnewchar + "角";
+            if(i==1)tmpnewchar = tmpnewchar + "分";
+            newchar = newchar + tmpnewchar;
+        }
+    }
+    while(newchar.search("零元") != -1){
+        newchar = newchar.replace("零零", "零");
+        newchar = newchar.replace("零亿", "亿");
+        newchar = newchar.replace("亿万", "亿");
+        newchar = newchar.replace("零万", "万");
+        newchar = newchar.replace("零元", "元");
+        newchar = newchar.replace("零角", "");
+        newchar = newchar.replace("零分", "");
+    }
+    if(newchar.charAt(newchar.length-1) == "元" || newchar.charAt(newchar.length-1) == "角"){
+        newchar = newchar+"整";
+    }
+    return newchar;
+}
+
+    $('#stamp').click(function() {
+        $('.btns').hide();
+        window.print();
+    })
+</script>
+</body>
+</html>

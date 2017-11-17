@@ -167,6 +167,8 @@
 		position: fixed;
 		top: 0;
 		width: 100%;
+		-webkit-background-size: 100%;
+		background-size: 100%;
 	}
 
 /* BG */
@@ -186,13 +188,12 @@
 		transform: translate3d(0,0,0);
 	/* Set your background with this */
 
-		background: url("images/cloud.png") bottom left;
+		background: url("images/cloud.png") top left;
 		background-repeat: repeat-x;
 		height: 100%;
 		left: 0;
 		opacity: 1;
 		position: fixed;
-		top: -410px;
 	}
 
 	@-moz-keyframes bg {
@@ -313,9 +314,9 @@
 		animation: overlay 1.5s 1.5s forwards;
 		background-attachment: fixed, fixed;
 		/*background-image: #348cb2 url("images/overlay-pattern.png"), url("images/overlay.svg");*/
-		background-image:url("images/bg.jpg");
-		background-position: top left, center center;
-		background-repeat: repeat, no-repeat;
+		background-image:url("images/bg.png");
+		background-position: center center;
+		background-repeat: no-repeat;
 		background-size: auto, cover;
 		height: 100%;
 		left: 0;
@@ -323,6 +324,7 @@
 		position: fixed;
 		top: 0;
 		width: 100%;
+		background-size: cover;
 		z-index: -1;
 	}
 
@@ -510,7 +512,7 @@
 		opacity: 0;
 		position: relative;
 		text-align: center;
-		top: -1em;
+		top: 0.5em;
 		vertical-align: middle;
 		width: 90%;
 	}
@@ -525,7 +527,7 @@
 		#header p {
 			font-size: 1.25em;
 			margin: 0.75em 0 0.25em 0;
-			opacity: 0.75;
+			font-weight: 500;
 		}
 
 		#header nav {

@@ -1,47 +1,50 @@
-//--------------------------------------------------------------------------- 
+/**
+ * @Created with fly.
+ * @User: z1163764648.com
+ * @Date: 2017/11/14
+ * @Time: 11:05
+ */
+
 function loadDate() {
-    // alert("dsahdsajk");
-    var user = {
+    let Data = {
         "userName": getCookie('userName'),
-        "password": getCookie('password'),
     };
-    var reArray = new Array();
-    var aa = new Array();
-    var bb = new Array();
-    // alert(JSON.stringify(user));
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/SelectRoomServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectRoomServlet",
-        data: {
-            "strRoomType": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误");
-        },
-        success: function(data) {
-            // alert(data);
-            reArray = data.split(",");
-            // alert("reArray.length=" + reArray.length)
-            for (var i = 0; i < reArray.length / 2; i++) {
-                aa[i] = reArray[i * 2];
-                bb[i] = reArray[i * 2 + 1];
+    let type = [];
+    let number = [];
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findHotelRoomCount', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            for (let i = 0; i < Jsdata.length; i++) {
+                type.push(Jsdata[i].roomType);
+                number.push(Jsdata[i].total);
+                roomType(type, number);
             }
-            roomType(aa, bb);
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
         }
-    });
+    })
 }
 
-function roomType(aa, bb) {
-    var myChart = echarts.init(document.getElementById('roomType'));
-    var option = {
+function roomType(type, number) {
+    let myChart = echarts.init(document.getElementById('roomType'));
+    let option = {
         color: ['#3398DB'],
         tooltip: {
             trigger: 'axis',
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             }
         },
         grid: {
@@ -50,343 +53,221 @@ function roomType(aa, bb) {
             bottom: '3%',
             containLabel: true
         },
-        xAxis: [{
-            type: 'category',
-            data: aa,
-            axisTick: {
-                alignWithLabel: true
+        xAxis: [
+            {
+                type: 'category',
+                data: type,
+                axisTick: {
+                    alignWithLabel: true
+                }
             }
-        }],
-        yAxis: [{
-            type: 'value'
-        }],
-        series: [{
-            name: '房间数量',
-            type: 'bar',
-            barWidth: '60%',
-            data: bb
-        }]
+        ],
+        yAxis: [
+            {
+                // type : 'category',
+                // data : ['10','20','30','40'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '40%',
+                data: number,
+            },
+
+        ],
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+                formatter: '{c}'
+            }
+        },
+        itemStyle: {
+            normal: {
+
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(17, 168,171, 1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(17, 168,171, 0.1)'
+                }]),
+                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                shadowBlur: 10
+            }
+        }
     };
     myChart.setOption(option);
 }
+
 //-----------------------------------------------------------------
 //额外花销
 //汇总收入和支出
 function expendSearch(data) {
-    //收入金额
-    var aa = loadDateExSpend(data);
-    //收入时间
-    var aatime = loadDateExSpendTime(data);
-    //支出金额
-    var bb = loadDateExSpend2(data);
-    //支出时间
-    var bbtime = loadDateExSpendTime2(data);
-    // console.log(aa);
-    // console.log(aatime);
-    // console.log(bb);
-    // console.log(bbtime);
-    ExSpend(aa, aatime, bb, bbtime);
-}
-//收入金额
-function loadDateExSpend(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
+    let Data = {
+        userName: getCookie('userName'),
+        startDate: data.startDate,
+        endDate: data.endDate,
     };
-    // alert("收入金额");
-    // alert(JSON.stringify(user));
-    var a = new Array();
-    $.ajax({
-        cache: true,
-        type: "POST",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectCountingBookServlet",
-        url: getUrl() + "/HotelPMS/SelectCountingBookServlet",
-        data: {
-            "strCountBook": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-            // alert("收入:" + data);
-            aa = data.split(",");
-            return aa;
-        }
-    });
-    return aa;
-}
-//收入 时间
-function loadDateExSpendTime(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
-    };
-    // alert("收入时间");
-    // alert(JSON.stringify(user));
-    // var reArray = new Array();
-    $.ajax({
-        cache: true,
-        type: "POST",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectCountingBookDateServlet",
-        url: getUrl() + "/HotelPMS/SelectCountingBookDateServlet",
-        data: {
-            "strSelectCountingBookDate": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-            // alert("收入时间:" + data);
-            aatime = data.split(",");
-            return aatime;
-        }
-    });
-    return aatime;
-}
-
-//支出金额
-function loadDateExSpend2(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
-    };
-    // alert("支出金额");
-    // alert(JSON.stringify(user));
-    $.ajax({
-        cache: true,
-        type: "POST",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectCountingBookPayServlet",
-        url: getUrl() + "/HotelPMS/SelectCountingBookPayServlet",
-        data: {
-            "strCountBookPay": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-            // alert("支出金额:" + data);
-            bb = data.split(",");
-            return bb;
-        }
-    });
-    return bb;
-}
-//支出时间
-function loadDateExSpendTime2(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
-    };
-    // alert("支出时间");
-    // alert(JSON.stringify(user));
-    $.ajax({
-        cache: true,
-        type: "POST",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectCountingBookPayDateServlet",
-        url: getUrl() + "/HotelPMS/SelectCountingBookPayDateServlet",
-        data: {
-            "strSelectCountingBookPayDate": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-            // alert("支出时间:" + data);
-            bbtime = data.split(",");
-            return bbtime;
-        }
-    });
-    return bbtime;
-
-}
-
-function ExSpend(aa, aatime, bb, bbtime) {
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('ExSpend'));
-    // 指定图表的配置项和数据
-    var colors = ['#5793f3', '#d14a61', '#675bba'];
-    var option = {
-        color: colors,
-        tooltip: {
-            trigger: 'none',
-            axisPointer: {
-                type: 'cross'
+    console.log(Data)
+    let date = [];
+    let income = [];
+    let expend = [];
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findExtraExpenses', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            for (let i = 0; i < Jsdata.length; i++) {
+                let DataArr = Jsdata[i].split(',')
+                date.push(DataArr[0]);
+                income.push(DataArr[1]);
+                expend.push(DataArr[2]);
             }
+            ExSpend(date, income, expend)
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
+        }
+    })
+
+}
+
+function ExSpend(date, income, expend) {
+    // 基于准备好的dom，初始化echarts实例
+    let myChart = echarts.init(document.getElementById('ExSpend'));
+    // 指定图表的配置项和数据
+    let option = {
+        title: {
+            text: '收入与支出分析表',
+            // subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
         },
         legend: {
             data: ['收入', '支出']
         },
-        grid: {
-            top: 70,
-            bottom: 50
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {},
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
         },
-        xAxis: [{
+        xAxis: {
             type: 'category',
-            axisTick: {
-                alignWithLabel: true
-            },
-            axisLine: {
-                onZero: false,
-                lineStyle: {
-                    color: colors[1]
+            boundaryGap: false,
+            data: date,
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name: '收入',
+                type: 'line',
+                data: income,
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
                 }
             },
-            axisPointer: {
-                label: {
-                    formatter: function(params) {
-                        return '收入  ' + params.value +
-                            (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                    }
+            {
+                name: '支出',
+                type: 'line',
+                data: expend,
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
                 }
-            },
-            data: aatime,
-        }, {
-            type: 'category',
-            axisTick: {
-                alignWithLabel: true
-            },
-            axisLine: {
-                onZero: false,
-                lineStyle: {
-                    color: colors[0]
-                }
-            },
-            axisPointer: {
-                label: {
-                    formatter: function(params) {
-                        return '支出  ' + params.value +
-                            (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                    }
-                }
-            },
-            data: bbtime,
-        }],
-        yAxis: [{
-            type: 'value'
-        }],
-        series: [{
-            name: '收入',
-            type: 'line',
-            xAxisIndex: 1,
-            smooth: true,
-            data: aa
-        }, {
-            name: '支出',
-            type: 'line',
-            smooth: true,
-            data: bb
-        }]
+            }
+        ]
     };
+
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 }
-//===================================================================================
+
 //售出过夜和出售过夜率
 function NsVsratesSearch(data) {
     //每天卖出的房间个数及对应的时间
-    var aa = loadDateNsVsRates(data);
-    var a = new Array();
-    var b = new Array();
-    for (var i = 0; i < aa.length / 2; i++) {
-        a[i] = aa[i * 2];
-        b[i] = aa[i * 2 + 1];
-    }
-    // console.log(a);
-    // console.log(b);
-    //卖出房间的总数
-    var bb = loadDateNsVsRates1(data);
-    var e = Number(bb);
-    // alert("e是" + typeof e);
-    //算比值
-    var c = new Array();
-    for (var j = 0; j < b.length; j++) {
-        c[j] = (Number(b[j]) / e).toFixed(2);
-    }
-    // console.log(c);
-    NsVsRates(a, b, c);
+    let Data = {
+        userName: getCookie('userName'),
+        startDate: data.nsVsratesStartDay,
+        endDate: data.nsVsratesEndDay,
+    };
+    // NsVsRates(['2017-01-05','2017-01-08'],['5','2','3'],['50','40','20'])
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findSoldRate', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        let date = [];
+        let dateNumber = [];
+        let occupancyRate = [];
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            for (let i = 0; i < Jsdata.length; i++) {
+                let DataArr = Jsdata[i].split(',')
+                date.push(DataArr[0]);
+                dateNumber.push(DataArr[1]);
+                occupancyRate.push(DataArr[2]);
+            }
+            NsVsRates(date, dateNumber, occupancyRate)
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
+        }
+    })
+}
 
-}
-//每天卖出的房间个数及对应的时间
-function loadDateNsVsRates(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
-    };
-    // alert(JSON.stringify(user));
-    // var reArray = new Array();
-    // var aa = new Array();
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/SelectRoomSaleServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectRoomSaleServlet",
-        data: {
-            "strRoomSale": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-          //  alert("每天房间:" + data);
-            aa = data.split(",");
-            //  alert(aa+"数量");
-            return aa;
-        }
-    });
-    return aa;
-}
-//这段时间内卖出的所有的房间的个数
-function loadDateNsVsRates1(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
-    };
-    // alert(JSON.stringify(user));
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/SelectRoomAllSaleServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectRoomAllSaleServlet",
-        data: {
-            "strAllRoomSale": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-           // alert("卖出房间的总个数:" + data);
-            // bb = data.split(",");
-            // alert(bb+"所有数量");
-            bb = data;
-            return bb;
-        }
-    });
-    return bb;
-}
+
 //售出过夜vs出售过夜率
 function NsVsRates(a, b, c) {
-    // alert("aaaaaa"+aa);
-    // alert("bbbbbb"+bb);
-    var myChart = echarts.init(document.getElementById('NsVsRates'));
-    var option = {
+    let myChart = echarts.init(document.getElementById('NsVsRates'));
+    let option = {
         title: {
             text: ''
         },
@@ -402,11 +283,6 @@ function NsVsRates(a, b, c) {
         legend: {
             data: ['售出过夜', '出售过夜率']
         },
-        // toolbox: {
-        //     feature: {
-        //         saveAsImage: {}
-        //     }
-        // },
         grid: {
             left: '3%',
             right: '4%',
@@ -447,53 +323,52 @@ function NsVsRates(a, b, c) {
     };
     myChart.setOption(option);
 }
+
 //========================================================================
 //入住期率柱状图
 function loadStayRatesDate(data) {
     // alert("入住期率founction");
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
+    let Data = {
+        userName: getCookie('userName'),
+        startDate: data.RatesStartDay,
+        endDate: data.RatesEndDay,
     };
-    var reArray = new Array();
-    var cc = new Array();
-    var dd = new Array();
-    // alert(JSON.stringify(user));
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/SelectBuyServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectBuyServlet",
-        data: {
-            "strSelectBuy": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-            // alert("data是" + data);
-            reArray = data.split(",");
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findOccupancyRate', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        let dataArr = [];
+        let dateNumber = '';
+        let occupancyRate = '';
+        let occupancyRateNumber = '';
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            dataArr = Jsdata.split(',');
+            dateNumber = parseInt(dataArr[0]);
+            occupancyRate = parseInt(dataArr[1]);
+            occupancyRateNumber = dateNumber / occupancyRate;
+            stayRates(parseInt(occupancyRateNumber))
 
-            // alert(reArray.length)
-            for (var i = 0; i < reArray.length / 2; i++) {
-                cc[i] = reArray[i * 2];
-                dd[i] = reArray[i * 2 + 1];
-            }
-            // alert("ccccc" + typeof cc);
-            // alert("dddd" + typeof dd);
-            var ff = ((cc / dd) * 100).toFixed(2);
-            stayRates(ff);
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
         }
-    });
+    })
 }
+
 //入住期率
 function stayRates(ff) {
     // alert("入住期率cc是" + cc);
     // alert("入住期率dd是" + dd);
-    var myChart = echarts.init(document.getElementById('stayRates'));
+    let myChart = echarts.init(document.getElementById('stayRates'));
     option = {
         tooltip: {
             trigger: 'item',
@@ -528,8 +403,8 @@ function stayRates(ff) {
                 }
             },
             data: [
-                { value: 100, name: '卖出房间总数' },
-                { value: ff, name: '入住期率' },
+                {value: 100, name: '卖出房间总数'},
+                {value: ff, name: '入住期率'},
             ]
         }]
     };
@@ -538,323 +413,263 @@ function stayRates(ff) {
 
 //========================================================================
 //购买率
-// function loadPurRatesDate() {
-//     var reArray1 = buyPow();
-//     var reArray2 = buyPowSum();
-//     var a = new Array();
-//     var b = new Array();
-//     var d = new Array();
-//     var e = new Array();
-//     for (var i = 0; i < reArray1.length / 2; i++) {
-//         a[i] = aa[i * 2];
-//         b[i] = aa[i * 2 + 1];
-//     }
-//     for (var i = 0; i < reArray2.length / 2; i++) {
-//         d[i] = bb[i * 2];
-//         e[i] = bb[i * 2 + 1];
-//     }
-//     alert("a是" + a);
-//     alert("b是" + b);
-//     alert("d是" + d);
-//     alert("e是" + e);
-//     purRates(a, b, d, e);
-// }
 function purRatesSearch(data) {
-    var aa = buyPow(data);
-    var bb = buyPowSum(data);
-    console.log(aa);
-    console.log(bb);
-    var cc = new Array();
-    var dd = new Array();
-
-    for (var i = 0; i < bb.length / 2; i++) {
-        cc[i] = bb[i * 2];
-        dd[i] = bb[i * 2 + 1];
-    }
-    //console.log(cc);
-    //console.log(dd);
-
-    //算除法
-    var ee = new Array();
-    for (var i = 0; i < dd.length; i++) {
-        ee[i] = (Number(dd[i]) / Number(aa)).toFixed(2);
-    }
-    console.log(ee);
-   // alert("cc的类型是:" + typeof cc)
-    purRates(cc, ee);
-
-}
-//该时间段内售出的总房间数
-function buyPow(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
+    let Data = {
+        userName: getCookie('userName'),
+        startDate: data.purRatesStartDay,
+        endDate: data.purRatesEndDay,
     };
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/SelectOccupancyServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectOccupancyServlet",
-        data: {
-            "strSelectOccupancy": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-           // alert("该时间段内售出的总房间数:" + data)
-            aa = data;
-            return aa
-        }
-    });
-    return aa
-}
-//该段时间内所有的房间以及卖出的数量
-function buyPowSum(data) {
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
-    };
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/SelectRoomSaleServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectRoomSaleServlet",
-        data: {
-            "strRoomSale": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-           // alert("该段时间内所有的房间以及卖出的数量:" + data);
-            bb = data.split(",");
-            // for (var i = 0; i < reArray.length / 2; i++) {
-            //     cc[i] = reArray[i * 2];
-            //     dd[i] = reArray[i * 2 + 1];
-            // }
-            return bb
-        }
-    });
-    return bb
-}
-// function loadPurRatesDate() {
-//     // alert("dsahdsajk");
-//     var user = {
-//         "userName": getCookie('userName'),
-//         "password": getCookie('password'),
-//         // "userName": "998",
-//         // "password": "password",
-//     };
-//     var reArray = new Array();
-//     var cc = new Array();
-//     // alert(JSON.stringify(user));
-//     $.ajax({
-//         cache: true,
-//         type: "POST",
-//         //  url: getUrl() + "/HotelPMS/SelectBuyServlet",
-//         url: "http://localhost:8080/HotelPMS/SelectBuyServlet",
-//         data: {
-//             "strSelectBuy": JSON.stringify(user)
-//         },
-//         async: false,
-//         error: function(request) {
-//             alert("数据错误，请稍后");
-//         },
-//         success: function(data) {
-//             // alert(data);
-//             cc = data.split(",");
-//             purRates(cc);
-//         }
-//     });
-// }
+    // purRates(['5','3','4'],['2','0','9'])
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findPurchaseRate', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        let dataArr = [];
 
-
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            dataArr = Jsdata.split(',');
+            purRates(parseInt(dataArr[1]) - 1)
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
+        }
+    })
+}
 
 // 购买率
-function purRates(cc, ee) {
-   // alert("购买率" + cc + "购买率" + ee);
-    var myChart = echarts.init(document.getElementById('purRates'));
-    // var data = [
-    //     [
-
-    //         [ee[0], ee[1], ee[2]],
-    //         [ee[0], ee[1], ee[2]],
-    //         // [cc[0], cc[1], cc[2]],
-
-    //         // [ee, cc, 321773631, 'China', 2017],
-    //         // [ee, cc, 321773631, 'China', 2017],
-    //         // [ee, cc, 321773631, 'China', 2017],
-    //         // [ee, cc, 321773631, 'China', 2017]
-
-    //     ]
-    // ];
-
-    var option = {
-        backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-            offset: 0,
-            color: '#f7f8fa'
-        }, {
-            offset: 1,
-            color: '#cdd0d5'
-        }]),
-        title: {
-            text: '购买率'
-        },
-        legend: {
-            right: 10,
-            data: ['2017']
-        },
-        xAxis: {
-
-            type: 'category',
-            data: cc,
-            axisTick: {
-                alignWithLabel: true
+function purRates(data) {
+    // alert("购买率" + cc + "购买率" + ee);
+    let myChart = echarts.init(document.getElementById('purRates'));
+    let option = {
+        "title": {
+            "text": '购买率',
+            "top": '85%',
+            "left": '45%',
+            "textStyle": {
+                "fontSize": 28,
+                "fontWeight": "bold",
+                "color": "#bcbfff"
             }
-            // splitLine: {
-            //     lineStyle: {
-            //         data: [cc[0], cc[1], cc[2]],
-            //         // type: 'dashed'
-            //     }
-            // }
         },
-        yAxis: {
-            type: 'value',
-            // splitLine: {
-            //     lineStyle: {
-            //         type: 'dashed'
-            //     }
-            // },
-            scale: true
+        "tooltip": {
+            "trigger": 'item',
+            "formatter": "{a} : ({d}%)"
         },
-        series: [{
-                // name: '2017',
-                data: ee,
-                type: 'scatter',
-                symbolSize: function(data) {
-                    return Math.sqrt(data[2]) * 20;
-                },
-                label: {
-                    emphasis: {
-                        show: true,
-                        formatter: function(param) {
-                            return param.data[3];
+        "series": [{
+            "name": "购买率",
+            "center": [
+                "50%",
+                "50%"
+            ],
+            "radius": [
+                "49%",
+                "50%"
+            ],
+            "clockWise": false,
+            "hoverAnimation": false,
+            "type": "pie",
+            "data": [{
+                "value": 1,
+                "name": "",
+                "label": {
+                    "normal": {
+                        "show": true,
+                        "formatter": '{d} %',
+                        "textStyle": {
+                            "fontSize": 28,
+                            "fontWeight": "bold"
                         },
-                        position: 'top'
+                        "position": "center"
                     }
                 },
-                itemStyle: {
-                    normal: {
-                        shadowBlur: 10,
-                        shadowColor: 'rgba(120, 36, 50, 0.5)',
-                        shadowOffsetY: 5,
-                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                "labelLine": {
+                    "show": false
+                },
+                "itemStyle": {
+                    "normal": {
+                        "color": "#5886f0",
+                        "borderColor": new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                             offset: 0,
-                            color: 'rgb(251, 118, 123)'
+                            color: '#00a2ff'
                         }, {
                             offset: 1,
-                            color: 'rgb(204, 46, 72)'
-                        }])
+                            color: '#70ffac'
+                        }]),
+                        "borderWidth": 25
+                    },
+                    "emphasis": {
+                        "color": "#5886f0",
+                        "borderColor": new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#85b6b2'
+                        }, {
+                            offset: 1,
+                            color: '#6d4f8d'
+                        }]),
+                        "borderWidth": 25
+                    }
+                },
+            }, {
+                "name": " ",
+                "value": data,
+                "itemStyle": {
+                    "normal": {
+                        "label": {
+                            "show": false
+                        },
+                        "labelLine": {
+                            "show": false
+                        },
+                        "color": 'rgba(0,0,0,0)',
+                        "borderColor": 'rgba(0,0,0,0)',
+                        "borderWidth": 0
+                    },
+                    "emphasis": {
+                        "color": 'rgba(0,0,0,0)',
+                        "borderColor": 'rgba(0,0,0,0)',
+                        "borderWidth": 0
                     }
                 }
-            },
-            // {
-            //     name: '',
-            //     data: data[1],
-            //     type: 'scatter',
-            //     symbolSize: function(data) {
-            //         return Math.sqrt(data[2]) / 5e2;
-            //     },
-            //     label: {
-            //         emphasis: {
-            //             show: true,
-            //             formatter: function(param) {
-            //                 return param.data[3];
-            //             },
-            //             position: 'top'
-            //         }
-            //     },
-            //     itemStyle: {
-            //         normal: {
-            //             shadowBlur: 10,
-            //             shadowColor: 'rgba(25, 100, 150, 0.5)',
-            //             shadowOffsetY: 5,
-            //             color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-            //                 offset: 0,
-            //                 color: 'rgb(129, 227, 238)'
-            //             }, {
-            //                 offset: 1,
-            //                 color: 'rgb(25, 183, 207)'
-            //             }])
-            //         }
-            //     }
-            // }
-        ]
+            }]
+        }, {
+            "name": "购买率",
+            "center": [
+                "50%",
+                "50%"
+            ],
+            "radius": [
+                "59%",
+                "60%"
+            ],
+            "clockWise": false,
+            "hoverAnimation": false,
+            "type": "pie",
+            "data": [{
+                "value": 1,
+                "name": "",
+                "label": {
+                    "normal": {
+                        "show": true,
+                        "formatter": '{d} %',
+                        "textStyle": {
+                            "fontSize": 28,
+                            "fontWeight": "bold"
+                        },
+                        "position": "center"
+                    }
+                },
+                "labelLine": {
+                    "show": false
+                },
+                "itemStyle": {
+                    "normal": {
+                        "color": "#5886f0",
+                        "borderColor": new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#00a2ff'
+                        }, {
+                            offset: 1,
+                            color: '#70ffac'
+                        }]),
+                        "borderWidth": 1
+                    },
+                    "emphasis": {
+                        "color": "#5886f0",
+                        "borderColor": new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#85b6b2'
+                        }, {
+                            offset: 1,
+                            color: '#6d4f8d'
+                        }]),
+                        "borderWidth": 1
+                    }
+                },
+            }, {
+                "name": " ",
+                "value": data,
+                "itemStyle": {
+                    "normal": {
+                        "label": {
+                            "show": false
+                        },
+                        "labelLine": {
+                            "show": false
+                        },
+                        "color": 'rgba(0,0,0,0)',
+                        "borderColor": 'rgba(0,0,0,0)',
+                        "borderWidth": 0
+                    },
+                    "emphasis": {
+                        "color": 'rgba(0,0,0,0)',
+                        "borderColor": 'rgba(0,0,0,0)',
+                        "borderWidth": 0
+                    }
+                }
+            }]
+        }]
     };
     myChart.setOption(option);
 }
+
 //-------------------------------------------------------------------------------------------------------
 //客户来源饼图
-// function loadComstomSourceDateMain() {
-//     var aa = loadComstomSourceDate();
-//     var bb = loadComstomSourceDate2();
-//     comstomSource(aa, bb);
-// }
-function clientSource(data) {
-    var aa = loadComstomSourceDate(data);
-    var bb = loadComstomSourceDate2(data);
-    comstomSource(aa, bb);
-}
 
-function loadComstomSourceDate(data) {
-    // alert("开始1");
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
+function clientSource(data) {
+    let Data = {
+        userName: getCookie('userName'),
+        startDate: data.clientSourceStartDay,
+        endDate: data.clientSourceEndDay,
     };
-    var reArray = new Array();
-    var aa = new Array();
-    // alert(JSON.stringify(user));
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/SelectClientSourceServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/SelectClientSourceServlet",
-        data: {
-            "strClientSource": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-            // alert("aaaaaaa" + data);
-            aa = data;
-            // alert("所有客户来源"+aa);
+
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findPurchaseRate', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        let dateArr = '';
+        let dateNumber = 0;
+        let occupancyRate = 0;
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            dateArr = Jsdata.split(',');
+            dateNumber = parseInt(dateArr[0]);
+            occupancyRate = parseInt(dateArr[1]);
+
+            comstomSource(dateNumber, occupancyRate)
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
         }
-    });
-    return aa;
+    })
 }
 
 function loadComstomSourceDate2(data) {
     // alert("开始b");
-    var user = {
+    let user = {
         "userName": getCookie('userName'),
         "password": getCookie('password'),
         "a": data.a,
         "b": data.b,
     };
-    var reArray = new Array();
-    var bb = new Array();
+    let reArray = new Array();
+    let bb = new Array();
     // alert(JSON.stringify(user));
     $.ajax({
         cache: true,
@@ -879,8 +694,8 @@ function loadComstomSourceDate2(data) {
 
 
 function comstomSource(aa, bb) {
-    var myChart = echarts.init(document.getElementById('comstomSource'));
-    var option = {
+    let myChart = echarts.init(document.getElementById('comstomSource'));
+    let option = {
         backgroundColor: '#2c343c',
 
         title: {
@@ -912,10 +727,10 @@ function comstomSource(aa, bb) {
             radius: '55%',
             center: ['50%', '50%'],
             data: [{
-                value: aa,
+                value: aa-bb,
                 name: '所有客户来源'
             }, {
-                value: aa - bb,
+                value: bb,
                 name: 'OTA客户来源'
             }].sort(function(a, b) {
                 return a.value - b.value;
@@ -962,92 +777,70 @@ function comstomSource(aa, bb) {
 
 //------------------------------------------------------------------------------
 function mostBad(data) {
-    //计算天数差的函数，通用  
-    var a = data.a;
-    var b = data.b;
-    //alert(a)
-    //alert(b)
-        //函数
-    var aa = loadMostBadResult(data);
-    var bb = loadMostBadResult1(data);
-    var cc = loadMostBadResult2(data);
-    // var chooseDate = aa;
-    // chooseDate.substring(0,3);
-    var myDate = new Date();
-    myDate.setFullYear(a.substring(0, 4), a.substring(5, 7), a.substring(8, 10));
-    var myDate1 = new Date();
-    myDate1.setFullYear(b.substring(0, 4), b.substring(5, 7), b.substring(8, 10));
-    var day = Date.parse(myDate1) - Date.parse(myDate);
-    var days = (day / (1000 * 60 * 60 * 24)) + 1;
-    // alert(days);
-    if (days <= 7) {
-       // alert("我是7天");
-      //  alert("aa是" + aa);
-        var head = "一";
-        var dd = new Array();
-        var ee = new Array();
-        for (var i = 0; i < aa.length / 2; i++) {
-            dd[i] = aa[i * 2];
-            ee[i] = aa[i * 2 + 1];
+    let Data = {
+        userName: getCookie('userName'),
+        startDate: data.mostBadStartDay,
+        endDate: data.mostBadEndDay,
+    };
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findMonthsSaleDetails', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        let dateArr = [];
+        let dateNumber = [];
+        let dateArr2 = [];
+        let dateNumber2 = [];
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            for (let i = 0; i < Jsdata.length; i++) {
+                let DataArr = Jsdata[i].split(',')
+                dateArr.push(DataArr[0]);
+                dateNumber.push(DataArr[1]);
+            }
+            new ajaxHttp('get', getUrl(2) + '/hotelData/findWeeksSaleDetails', Data, (err) => {
+                alert('系统故障，正在维护中，请稍后', err)
+            }, (data) => {
+                if (data.code === SUCCESSFULUSERLOGIN) {
+                    let Jsdata = data.content;
+                    for (let i = 0; i < Jsdata.length; i++) {
+                        let DataArr = Jsdata[i].split(',')
+                        dateArr2.push(DataArr[0]);
+                        dateNumber2.push(DataArr[1]);
+                    }
+                } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+                    alert('用户没有登录，请登录')
+                } else if (data.code === INSUFFICIENTPRIVILEGE) {
+                    alert('用户权限不够，请联系管理员')
+                } else if (data.code === TIMEFORMATERROR) {
+                    alert('时间格式不正确，请查看')
+                } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+                    alert('用户入住情况冲突，请联系管理员')
+                } else if (data.code === NOTOUTOFTIME) {
+                    alert('输入预定天数超时（超过30天）');
+                } else {
+                    alert('系统故障，正在维护中，请稍后')
+                }
+            });
+            worthWNM(dateArr, dateNumber);
+            worthWNM2(dateArr2, dateNumber2)
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
         }
-        // console.log(head);
-        // console.log(dd);
-        // console.log(ee);
-        worthWNM(head, dd, ee);
-    } else if (days > 7 && days <= 31) {
-       // alert("我是30天");
-        var head = new Array();
-        var dd = new Array();
-        var ee = new Array();
-        for (var i = 0; i < bb.length / 3; i++) {
-            head[i] = bb[i * 3];
-            dd[i] = bb[i * 3 + 1];
-            ee[i] = bb[i * 3 + 2];
-        }
-        //==============================================
-        // function removeDuplicatedItem3(head) {
-        //     var ret = [];
-
-        //     head.forEach(function(e, i, head) {
-        //         if (head.indexOf(e) === i) {
-        //             ret.push(e);
-        //         }
-        //     });
-
-        //     return ret;
-        // }
-        // let arr = [1, 2, 3, 3];
-        let arr = head;
-        let resultarr = [...new Set(arr)];
-        //console.log(resultarr); //[1,2,3]
-        // let head = resultarr;
-        //==============================================
-        // console.log(head);
-        //console.log(dd);
-        //console.log(ee);
-        worthWNM(resultarr, dd, ee);
-    } else {
-       // alert("我是按月算");
-        var head = new Array();
-        var dd = new Array();
-        var ee = new Array();
-        for (var i = 0; i < cc.length / 3; i++) {
-            head[i] = cc[i * 3];
-            dd[i] = cc[i * 3 + 1];
-            ee[i] = cc[i * 3 + 2];
-        }
-        let arr = head;
-        let resultarr = [...new Set(arr)];
-        //console.log(resultarr); //[1,2,3]
-        // console.log(head);
-        //console.log(dd);
-        //console.log(ee);
-        worthWNM(resultarr, dd, ee);
-    }
+    })
 }
+
 //七天 按天显示数据
 function loadMostBadResult(data) {
-    var user = {
+    let user = {
         "userName": getCookie('userName'),
         "password": getCookie('password'),
         "a": data.a,
@@ -1074,9 +867,10 @@ function loadMostBadResult(data) {
     });
     return aa;
 }
+
 //一月 按周显示数据
 function loadMostBadResult1(data) {
-    var user = {
+    let user = {
         "userName": getCookie('userName'),
         "password": getCookie('password'),
         "a": data.a,
@@ -1104,9 +898,10 @@ function loadMostBadResult1(data) {
     return bb;
 
 }
+
 //一年 按月显示数据
 function loadMostBadResult2(data) {
-    var user = {
+    let user = {
         "userName": getCookie('userName'),
         "password": getCookie('password'),
         "a": data.a,
@@ -1126,319 +921,381 @@ function loadMostBadResult2(data) {
             alert("数据错误，请稍后");
         },
         success: function(data) {
-           // alert("ccccc" + data);
+            // alert("ccccc" + data);
             cc = data.split(",");
             return cc;
         }
     });
     return cc;
 }
+
 //
-function worthWNM(resultarr, dd, ee) {
-    // console.log(head);
-    // console.log(dd);
-    // console.log(ee);
-    var myChart = echarts.init(document.getElementById('worthWNM'));
-    // 基于准备好的dom，初始化echarts实例
-    // 指定图表的配置项和数据
-    var hours = dd;
-    // ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-    //     '7a', '8a', '9a', '10a', '11a',
-    //     '12p', '1p', '2p', '3p', '4p', '5p',
-    //     '6p', '7p', '8p', '9p', '10p', '11p'
-    // ];
-    var days = resultarr;
-    // ['Saturday', 'Friday', 'Thursday',
-    //     'Wednesday', 'Tuesday', 'Monday', 'Sunday'
-    // ];
 
-    var data = ee;
-    // [
-    //     [0, 0, 5],
-    //     [0, 1, 1],
-    //     [0, 2, 0],
-    //     [0, 3, 0],
-    //     [0, 4, 0],
-    //     [0, 5, 0],
-    //     [0, 6, 0],
-    //     [0, 7, 0],
-    //     [0, 8, 0],
-    //     [0, 9, 0],
-    //     [0, 10, 0],
-    //     [0, 11, 2],
-    //     [0, 12, 4],
-    //     [0, 13, 1],
-    //     [0, 14, 1],
-    //     [0, 15, 3],
-    //     [0, 16, 4],
-    //     [0, 17, 6],
-    //     [0, 18, 4],
-    //     [0, 19, 4],
-    //     [0, 20, 3],
-    //     [0, 21, 3],
-    //     [0, 22, 2],
-    //     [0, 23, 5],
-
-    //     [1, 0, 7],
-    //     [1, 1, 0],
-    //     [1, 2, 0],
-    //     [1, 3, 0],
-    //     [1, 4, 0],
-    //     [1, 5, 0],
-    //     [1, 6, 0],
-    //     [1, 7, 0],
-    //     [1, 8, 0],
-    //     [1, 9, 0],
-    //     [1, 10, 5],
-    //     [1, 11, 2],
-    //     [1, 12, 2],
-    //     [1, 13, 6],
-    //     [1, 14, 9],
-    //     [1, 15, 11],
-    //     [1, 16, 6],
-    //     [1, 17, 7],
-    //     [1, 18, 8],
-    //     [1, 19, 12],
-    //     [1, 20, 5],
-    //     [1, 21, 5],
-    //     [1, 22, 7],
-    //     [1, 23, 2],
-
-    //     [2, 0, 1],
-    //     [2, 1, 1],
-    //     [2, 2, 0],
-    //     [2, 3, 0],
-    //     [2, 4, 0],
-    //     [2, 5, 0],
-    //     [2, 6, 0],
-    //     [2, 7, 0],
-    //     [2, 8, 0],
-    //     [2, 9, 0],
-    //     [2, 10, 3],
-    //     [2, 11, 2],
-    //     [2, 12, 1],
-    //     [2, 13, 9],
-    //     [2, 14, 8],
-    //     [2, 15, 10],
-    //     [2, 16, 6],
-    //     [2, 17, 5],
-    //     [2, 18, 5],
-    //     [2, 19, 5],
-    //     [2, 20, 7],
-    //     [2, 21, 4],
-    //     [2, 22, 2],
-    //     [2, 23, 4],
-
-    //     [3, 0, 7],
-    //     [3, 1, 3],
-    //     [3, 2, 0],
-    //     [3, 3, 0],
-    //     [3, 4, 0],
-    //     [3, 5, 0],
-    //     [3, 6, 0],
-    //     [3, 7, 0],
-    //     [3, 8, 1],
-    //     [3, 9, 0],
-    //     [3, 10, 5],
-    //     [3, 11, 4],
-    //     [3, 12, 7],
-    //     [3, 13, 14],
-    //     [3, 14, 13],
-    //     [3, 15, 12],
-    //     [3, 16, 9],
-    //     [3, 17, 5],
-    //     [3, 18, 5],
-    //     [3, 19, 10],
-    //     [3, 20, 6],
-    //     [3, 21, 4],
-    //     [3, 22, 4],
-    //     [3, 23, 1],
-
-    //     [4, 0, 1],
-    //     [4, 1, 3],
-    //     [4, 2, 0],
-    //     [4, 3, 0],
-    //     [4, 4, 0],
-    //     [4, 5, 1],
-    //     [4, 6, 0],
-    //     [4, 7, 0],
-    //     [4, 8, 0],
-    //     [4, 9, 2],
-    //     [4, 10, 4],
-    //     [4, 11, 4],
-    //     [4, 12, 2],
-    //     [4, 13, 4],
-    //     [4, 14, 4],
-    //     [4, 15, 14],
-    //     [4, 16, 12],
-    //     [4, 17, 1],
-    //     [4, 18, 8],
-    //     [4, 19, 5],
-    //     [4, 20, 3],
-    //     [4, 21, 7],
-    //     [4, 22, 3],
-    //     [4, 23, 0],
-
-    //     [5, 0, 2],
-    //     [5, 1, 1],
-    //     [5, 2, 0],
-    //     [5, 3, 3],
-    //     [5, 4, 0],
-    //     [5, 5, 0],
-    //     [5, 6, 0],
-    //     [5, 7, 0],
-    //     [5, 8, 2],
-    //     [5, 9, 0],
-    //     [5, 10, 4],
-    //     [5, 11, 1],
-    //     [5, 12, 5],
-    //     [5, 13, 10],
-    //     [5, 14, 5],
-    //     [5, 15, 7],
-    //     [5, 16, 11],
-    //     [5, 17, 6],
-    //     [5, 18, 0],
-    //     [5, 19, 5],
-    //     [5, 20, 3],
-    //     [5, 21, 4],
-    //     [5, 22, 2],
-    //     [5, 23, 0],
-
-    //     [6, 0, 1],
-    //     [6, 1, 0],
-    //     [6, 2, 0],
-    //     [6, 3, 0],
-    //     [6, 4, 0],
-    //     [6, 5, 0],
-    //     [6, 6, 0],
-    //     [6, 7, 0],
-    //     [6, 8, 0],
-    //     [6, 9, 0],
-    //     [6, 10, 1],
-    //     [6, 11, 0],
-    //     [6, 12, 2],
-    //     [6, 13, 1],
-    //     [6, 14, 3],
-    //     [6, 15, 4],
-    //     [6, 16, 0],
-    //     [6, 17, 0],
-    //     [6, 18, 0],
-    //     [6, 19, 0],
-    //     [6, 20, 1],
-    //     [6, 21, 2],
-    //     [6, 22, 2],
-    //     [6, 23, 6]
-    // ];
-
-    var option = {
-        tooltip: {
-            position: 'top'
+function worthWNM(date, number) {
+    let myChart = echarts.init(document.getElementById('worthWNM'));
+    let option = {
+        backgroundColor: '#394056',
+        title: {
+            text: '最差的月',
+            textStyle: {
+                fontWeight: 'normal',
+                fontSize: 16,
+                color: '#F1F1F3'
+            },
+            left: '6%'
         },
-        title: [],
-        singleAxis: [],
-        series: []
-    };
-
-    echarts.util.each(days, function(day, idx) {
-        option.title.push({
-            textBaseline: 'middle',
-            top: (idx + 0.5) * 100 / 7 + '%',
-            text: day
-        });
-        option.singleAxis.push({
-            left: 150,
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            }
+        },
+        legend: {
+            icon: 'rect',
+            itemWidth: 14,
+            itemHeight: 5,
+            itemGap: 13,
+            data: ['最差的月'],
+            right: '4%',
+            textStyle: {
+                fontSize: 12,
+                color: '#F1F1F3'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [{
             type: 'category',
             boundaryGap: false,
-            data: dd, //
-            top: (idx * 100 / 7 + 5) + '%',
-            height: (100 / 7 - 10) + '%',
-            axisLabel: {
-                interval: 2
-            }
-        });
-        option.series.push({
-            singleAxisIndex: idx,
-            coordinateSystem: 'singleAxis',
-            type: 'scatter',
-            data: ee, //
-            symbolSize: function(dataItem) {
-                return dataItem[0] * 6;
-            }
-        });
-    });
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            data: date,
+        }, {
+            axisPointer: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            axisTick: {
+                show: false
+            },
 
-    // echarts.util.each(data, function(dataItem) {
-    //     option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
-    // });
+            position: 'bottom',
+            offset: 20,
+            data: ['', '', '', '', '', '', '', '', '', '', {
+                value: '',
+                textStyle: {
+                    align: 'left'
+                }
+            }, '']
+        }],
+        yAxis: [{
+            type: 'value',
+            name: '单位（%）',
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            axisLabel: {
+                margin: 10,
+                textStyle: {
+                    fontSize: 14
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            }
+        }],
+        series: [{
+            name: '房间售出数量',
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(137, 189, 27, 0.3)'
+                    }, {
+                        offset: 0.8,
+                        color: 'rgba(137, 189, 27, 0)'
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'rgb(137,189,27)',
+                    borderColor: 'rgba(137,189,2,0.27)',
+                    borderWidth: 12
+
+                }
+            },
+            data: number,
+        }]
+    };
     myChart.setOption(option);
 }
 
+function worthWNM2(date, number) {
+    let myChart = echarts.init(document.getElementById('worthWNM2'));
+    let option = {
+        backgroundColor: '#394056',
+        title: {
+            text: '最差的周',
+            textStyle: {
+                fontWeight: 'normal',
+                fontSize: 16,
+                color: '#F1F1F3'
+            },
+            left: '6%'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            }
+        },
+        legend: {
+            icon: 'rect',
+            itemWidth: 14,
+            itemHeight: 5,
+            itemGap: 13,
+            data: ['最差的周'],
+            right: '4%',
+            textStyle: {
+                fontSize: 12,
+                color: '#F1F1F3'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [{
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            data: date,
+        }, {
+            axisPointer: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            axisTick: {
+                show: false
+            },
 
+            position: 'bottom',
+            offset: 20,
+            data: ['', '', '', '', '', '', '', '', '', '', {
+                value: '',
+                textStyle: {
+                    align: 'left'
+                }
+            }, '']
+        }],
+        yAxis: [{
+            type: 'value',
+            name: '单位（%）',
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            axisLabel: {
+                margin: 10,
+                textStyle: {
+                    fontSize: 14
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            }
+        }],
+        series: [{
+            name: '房间售出数量',
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(137, 189, 27, 0.3)'
+                    }, {
+                        offset: 0.8,
+                        color: 'rgba(137, 189, 27, 0)'
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'rgb(137,189,27)',
+                    borderColor: 'rgba(137,189,2,0.27)',
+                    borderWidth: 12
 
+                }
+            },
+            data: number,
+        }]
+    };
+    myChart.setOption(option);
+}
 
 //---------------------------------------------------
 //将aa,bb,cc放在一起
 function accountBookPay(data) {
-    var aa = loadDatewholeVspure(data);
-    var bb = loadDatewholeVspure1(data);
-    var cc = loadDatewholeVspure2(data);
-    var f = Number(aa);
-    var g = Number(bb);
-    var h = Number(cc);
-    var d = f + g;
-    var e = f + g - h;
-    // alert("dddddd" + d + "eeee" + e);
-    // alert("d的类型是：" + typeof d)
-    wholeVspure(d, e);
 
-}
-
-//房间总收入
-function loadDatewholeVspure(data) {
-    // alert("我是第一个函数")
-    var user = {
-        "userName": getCookie('userName'),
-        "password": getCookie('password'),
-        "a": data.a,
-        "b": data.b,
+    let Data = {
+        userName: getCookie('userName'),
+        startDate: data.accountBookPayStartDay,
+        endDate: data.accountBookPayEndDay,
     };
-    var reArray = new Array();
-    var aa = new Array();
-    //   alert(JSON.stringify(user));
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: getUrl() + "/HotelPMS/EditSumBillServlet",
-        // url: "http://10.168.10.190:8080/HotelPMS/EditSumBillServlet",
-        data: {
-            "strEditSumBill": JSON.stringify(user)
-        },
-        async: false,
-        error: function(request) {
-            alert("数据错误，请稍后");
-        },
-        success: function(data) {
-            // alert(data);
-            aa = data;
-            // alert("所有客户来源aa" + aa);
-        }
-    });
-    return aa;
-}
 
+    new ajaxHttp('get', getUrl(2) + '/hotelData/findProfitComparison', Data, (err) => {
+        alert('系统故障，正在维护中，请稍后', err)
+    }, (data) => {
+        let dateArr = [];
+        let incomeNumber = 0;
+        let outNumber = 0;
+        let houseaccount = 0;
+        if (data.code === SUCCESSFULUSERLOGIN) {
+            let Jsdata = data.content;
+            dateArr = Jsdata.split(',');
+            houseaccount = dateArr[0];
+            incomeNumber = dateArr[1];
+            outNumber = dateArr[2];
+            let e= parseInt(houseaccount) +  parseInt(incomeNumber);
+            let d= e - parseInt(outNumber)
+            wholeVspure(d, e)
+        } else if (data.code === PARAMETERCANNOTBEEMPTY) {
+            alert('用户没有登录，请登录')
+        } else if (data.code === INSUFFICIENTPRIVILEGE) {
+            alert('用户权限不够，请联系管理员')
+        } else if (data.code === TIMEFORMATERROR) {
+            alert('时间格式不正确，请查看')
+        } else if (data.code === ROOMOCCUPANCYCONFLICT) {
+            alert('用户入住情况冲突，请联系管理员')
+        } else if (data.code === NOTOUTOFTIME) {
+            alert('输入预定天数超时（超过30天）');
+        } else {
+            alert('系统故障，正在维护中，请稍后')
+        }
+    })
+
+
+//     let aa = loadDatewholeVspure(data);
+//     let bb = loadDatewholeVspure1(data);
+//     let cc = loadDatewholeVspure2(data);
+//     let f = Number(aa);
+//     let g = Number(bb);
+//     let h = Number(cc);
+//     let d = f + g;
+//     let e = f + g - h;
+//     // alert("dddddd" + d + "eeee" + e);
+//     // alert("d的类型是：" + typeof d)
+//     wholeVspure(d, e);
+//
+// }
+//
+// //房间总收入
+// function loadDatewholeVspure(data) {
+//     // alert("我是第一个函数")
+//     let user = {
+//         "userName": getCookie('userName'),
+//         "password": getCookie('password'),
+//         "a": data.a,
+//         "b": data.b,
+//     };
+//     let reArray = new Array();
+//     let aa = new Array();
+//     //   alert(JSON.stringify(user));
+//     $.ajax({
+//         cache: true,
+//         type: "POST",
+//         url: getUrl() + "/HotelPMS/EditSumBillServlet",
+//         // url: "http://10.168.10.190:8080/HotelPMS/EditSumBillServlet",
+//         data: {
+//             "strEditSumBill": JSON.stringify(user)
+//         },
+//         async: false,
+//         error: function(request) {
+//             alert("数据错误，请稍后");
+//         },
+//         success: function(data) {
+//             // alert(data);
+//             aa = data;
+//             // alert("所有客户来源aa" + aa);
+//         }
+//     });
+//     return aa;
+}
 
 
 //小账本总收入
 function loadDatewholeVspure1(data) {
     // alert("开始1");
-    var user = {
+    let user = {
         "userName": getCookie('userName'),
         "password": getCookie('password'),
         "a": data.a,
         "b": data.b,
     };
-    var reArray = new Array();
-    var aa = new Array();
+    let reArray = new Array();
+    let aa = new Array();
     // alert(JSON.stringify(user));
     $.ajax({
         cache: true,
@@ -1462,18 +1319,17 @@ function loadDatewholeVspure1(data) {
 }
 
 
-
 //小账本总支出
 function loadDatewholeVspure2(data) {
     // alert("开始2");
-    var user = {
+    let user = {
         "userName": getCookie('userName'),
         "password": getCookie('password'),
         "a": data.a,
         "b": data.b,
     };
-    var reArray = new Array();
-    var aa = new Array();
+    let reArray = new Array();
+    let aa = new Array();
     // alert(JSON.stringify(user));
     $.ajax({
         cache: true,
@@ -1497,15 +1353,10 @@ function loadDatewholeVspure2(data) {
 }
 
 
-
-
-
-
-
 //账本花销折线图
 function wholeVspure(d, e) {
-    var myChart = echarts.init(document.getElementById('wholeVspure'));
-    var option = {
+    let myChart = echarts.init(document.getElementById('wholeVspure'));
+    let option = {
         title: {
             text: '总利润vs净利润',
             subtext: '',
@@ -1527,10 +1378,10 @@ function wholeVspure(d, e) {
             center: ['50%', '60%'],
             data: [{
                 value: d,
-                name: '总利润'
+                name: '净利润'
             }, {
                 value: e,
-                name: '净利润'
+                name: '总利润'
             },],
             itemStyle: {
                 emphasis: {
@@ -1542,4 +1393,31 @@ function wholeVspure(d, e) {
         }]
     };
     myChart.setOption(option);
+}
+
+function getNowTime() {
+    let time = new Date();
+    let allInput = $('input');
+    let allButton = $('button');
+    for(let i = 0 ; i < allInput.length;i++){
+        $(allInput[i]).val(fmtDate(time))
+    }
+    for(let j = 0 ; j<allButton.length;j++){
+        // $(allButton[j]).click()
+    }
+}
+
+/**
+ * 将时间戳转化为标准时间
+ * @param obj  传递的时间戳
+ * @returns {string}
+ */
+function fmtDate(obj) {
+    if (obj) {
+        let date = new Date(obj);
+        let y = 1900 + date.getYear();
+        let m = "0" + (date.getMonth() + 1);
+        let d = "0" + date.getDate();
+        return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
+    }
 }

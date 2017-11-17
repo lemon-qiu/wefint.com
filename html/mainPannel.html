@@ -4,80 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <title>操作盘</title>
-    <link rel="stylesheet" href="../css/mainPannel.css" type="">
+    <link rel="stylesheet" href="../css/mainPannel.css"  type="text/css" >
     <script src="../js/jquery.min.js"></script>
     <script src="../js/base64.js"></script>
     <script src="../js/pageonload.js"></script>
 </head>
 
-<body class="beg-mainPannel-bg">
+<body class="beg-mainPannel-bg" onload="loadTOSuer()">
 <div class="BG">
     <div class="BGimg">
 
     </div>
 </div>
-    <div class="main-pannel">
-        <div class="icon-modal">
-            <div class="icon-datail"
-                 onClick="window.location.href='hotelStatus.html'"
-                 onMouseOver="mouseover(this,'../img/houseConditionClick.png')"
-                 onMouseOut="mouseout(this,'../img/houseCondition.png')">
-                <img src="../img/houseCondition.png">
-                <p class="text-detaile">房态</p>
-            </div>
-            <div class="icon-datail" onClick="window.location.href='accountBook.html'"
-                 onMouseOver="mouseover(this,'../img/accountBookClick.png')"
-                 onMouseOut="mouseout(this,'../img/accountBook.png')">
-                <img src="../img/accountBook.png">
-                <p class="text-detaile">账本</p>
-            </div>
-            <div class="icon-datail" onClick="window.location.href='data.html'"
-                 onMouseOver="mouseover(this,'../img/dataClick.png')"
-                 onMouseOut="mouseout(this,'../img/data.png')">
-                <img src="../img/data.png">
-                <p class="text-detaile">数据</p>
-            </div>
-            <div class="icon-datail" onClick="window.location.href='hotelsetup.html'"
-                 onMouseOver="mouseover(this,'../img/settingClick.png')"
-                 onMouseOut="mouseout(this,'../img/setting.png')" >
-                <img src="../img/setting.png">
-                <p class="text-detaile">设置</p>
-            </div>
+<div class="main-pannel">
+    <div class="icon-modal">
+        <div class="icon-datail"
+             onClick="window.location.href='hotelStatus.html'"
+             onMouseOver="mouseover(this,'../img/houseConditionClick.png')"
+             onMouseOut="mouseout(this,'../img/houseCondition.png')">
+            <img src="../img/houseCondition.png">
+            <p class="text-detaile">房态</p>
         </div>
-        <div class="icon-modal">
-            <div class="icon-datail" onClick="window.location.href='hotelButler.html'"
-                 onMouseOver="mouseover(this,'../img/houseStewardClick.png')"
-                 onMouseOut="mouseout(this,'../img/houseSteward.png')" >
-                <img src="../img/houseSteward.png">
-                <p class="text-detaile">客栈管家</p>
-            </div>
-            <div class="icon-datail" onClick="window.location.href='http://shop.wefint.com/'"
-                 onMouseOver="mouseover(this,'../img/crazySellClick.png')"
-                 onMouseOut="mouseout(this,'../img/crazySell.png')">
-                <img src="../img/crazySell.png">
-                <p class="text-detaile">疯卖</p>
-            </div>
-            <div class="icon-datail" onClick="window.location.href='usercenter.html'"
-                 onMouseOver="mouseover(this,'../img/financialClick.png')"
-                 onMouseOut="mouseout(this,'../img/financial.png')">
-                <img src="../img/financial.png">
-                <p class="text-detaile">金融</p>
-            </div>
-            <div class="icon-datail" onClick="logout()"
-                 onMouseOver="mouseover(this,'../img/loginOutClick.png')"
-                 onMouseOut="mouseout(this,'../img/loginOut.png')">
-                <img src="../img/loginOut.png">
-                <p class="text-detaile">注销</p>
-            </div>
+        <div class="icon-datail" onClick="window.location.href='accountBook.html'"
+             onMouseOver="mouseover(this,'../img/accountBookClick.png')"
+             onMouseOut="mouseout(this,'../img/accountBook.png')">
+            <img src="../img/accountBook.png">
+            <p class="text-detaile">账本</p>
+        </div>
+        <div class="icon-datail" onClick="window.location.href='data.html'"
+             onMouseOver="mouseover(this,'../img/dataClick.png')"
+             onMouseOut="mouseout(this,'../img/data.png')">
+            <img src="../img/data.png">
+            <p class="text-detaile">数据</p>
+        </div>
+        <div class="icon-datail" onClick="window.location.href='hotelsetup.html'"
+             onMouseOver="mouseover(this,'../img/settingClick.png')"
+             onMouseOut="mouseout(this,'../img/setting.png')">
+            <img src="../img/setting.png">
+            <p class="text-detaile">设置</p>
         </div>
     </div>
+    <div class="icon-modal">
+        <div class="icon-datail" onClick="window.location.href='hotelButler.html'"
+             onMouseOver="mouseover(this,'../img/houseStewardClick.png')"
+             onMouseOut="mouseout(this,'../img/houseSteward.png')">
+            <img src="../img/houseSteward.png">
+            <p class="text-detaile">客栈管家</p>
+        </div>
+        <div class="icon-datail" onClick="window.location.href='crazySell.html'"
+             onMouseOver="mouseover(this,'../img/crazySellClick.png')"
+             onMouseOut="mouseout(this,'../img/crazySell.png')">
+            <img src="../img/crazySell.png">
+            <p class="text-detaile">疯卖</p>
+        </div>
+        <div id="financial" class="icon-datail" onClick="window.location.href='usercenter.html'"
+             onMouseOver="mouseover(this,'../img/financialClick.png')"
+             onMouseOut="mouseout(this,'../img/financial.png')">
+            <img src="../img/financial.png">
+            <p class="text-detaile">金融</p>
+        </div>
+        <div class="icon-datail" onClick="logout()"
+             onMouseOver="mouseover(this,'../img/loginOutClick.png')"
+             onMouseOut="mouseout(this,'../img/loginOut.png')">
+            <img src="../img/loginOut.png">
+            <p class="text-detaile">注销</p>
+        </div>
+    </div>
+</div>
 </body>
 <script>
-function mouseover(obj,name) {
-    $($(obj).children()[0]).attr({'src':name});
-}
-function mouseout(obj,name) {
-    $($(obj).children()[0]).attr({'src':name});
-}
+    function mouseover(obj, name) {
+        $($(obj).children()[0]).attr({'src': name});
+    }
+
+    function mouseout(obj, name) {
+        $($(obj).children()[0]).attr({'src': name});
+    }
+
+    function loadTOSuer() {
+        let userId = getCookie("userName");
+        $.post(getUrl(4) + "/getMerchantInfoByUserId", {userId: userId},
+            function(data, err) {
+                const GETENDTIRELYAPPROVESTAATUS = 4;           // 完全审核通过
+                const GETENDTIRELYAPPROVESFIVE = 5;             // 审核通过并且提交到资方
+                const GETPUTINAPPROVESTATUSONE = 0;             // 一级审核
+                const GETPUTINAPPROVESTATUSTWO = 1;             // 二级审核
+                const GETPUTINAPPROVESTATUSTHREE = 2;            // 一级驳回
+                const GETPUTINAPPROVESTATUSFOUR = 3;             // 二级驳回
+                let approveStatus = data.approveStatus;
+                let searchUrl = encodeURI("./hexagram.html?userName=" + data.userName + '&' + 'certNo=' + data.certNo + '&' + 'mobile=' + data.mobile + '&' + 'motelName=' + data.motelName + '&' + 'friendMobile=' + data.friendMobile + '&' + 'averageCommision=' + data.monthIncome + '&' + 'userId=' + userId);
+                if (approveStatus === GETENDTIRELYAPPROVESTAATUS || approveStatus === GETENDTIRELYAPPROVESFIVE) {
+                    $('#financial').attr({'onClick': "window.location.href='"+searchUrl+"'"})
+
+                } else if (approveStatus === GETPUTINAPPROVESTATUSONE || approveStatus === GETPUTINAPPROVESTATUSTWO) {
+                    $('#financial').attr({'onClick': "window.location.href='"+searchUrl+"'"})
+
+                } else if (approveStatus === GETPUTINAPPROVESTATUSTHREE || approveStatus === GETPUTINAPPROVESTATUSFOUR) {
+                    // 切换为修改数据的状态
+                    $('#financial').attr({'onClick': "window.location.href='usercenter.html'"})
+                }
+            }
+        )
+    };
+
 </script>
 </html>

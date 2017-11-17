@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>用户中心</title>
-    <link rel="stylesheet" href="../layui/css/layui2.0.css" media="all"/>
-    <link rel="stylesheet" href="../css/usercenter.css"/>
-    <link rel="stylesheet" href="../css/floaticon.css" type="">
+    <link rel="stylesheet" href="../layui/css/layui2.0.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/usercenter.css"  type="text/css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css" type="text/css" >
+    <link rel="stylesheet" href="../css/floaticon.css"  type="text/css" >
     <!--<script src="../layui/layui.js"></script>-->
     <script src="../js/jquery.min.js"></script>
     <script src="../finance/layui/layui.js" charset="utf-8"></script>
@@ -60,14 +61,13 @@
         display: none;
     }
 </style>
-<body onselectstart="return false">
-<!--头部nav-->
-<div class="head-nav">
-    <ul class="layui-nav">
-        <li class="layui-nav-item"><a href="">用户中心</a></li>
-    </ul>
-    <div class="nav5" onclick="window.open('./mainPannel.html','_self')">
-        <img src="../img/ppp.png" title="返回">
+<body>
+<div class="head">
+    <div class="head_left" onClick="window.location.href='mainPannel.html'">
+        <img src="../images/hotelStatus/logo.png">用户借贷中心
+    </div>
+    <div class="head_right">
+        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="javascript:history.go(-1);" >
     </div>
 </div>
 <!--表单部分-->
@@ -498,6 +498,7 @@
                             <div class="layui-input-block">
                                 <input type="text" class="layui-input" id="rentStartDate"
                                        lay-verify="required"  placeholder="yyyy-MM-dd">
+                                <i class="iconfont icon-calendar"></i>
                             </div>
                             <!--<div class="layui-inline"> &lt;!&ndash; 注意：这一层元素并不是必须的 &ndash;&gt;-->
                             <!--<input type="text" class="layui-input" id="endtime">-->
@@ -529,6 +530,7 @@
                                        class="layui-input"
                                        placeholder="请输入已支付房租剩余期限（月）"
                                        id="leftPaidRentalMonth">
+                                <i class="iconfont icon-calendar"></i>
                             </div>
                         </div>
                     </div>
@@ -543,6 +545,7 @@
                             <div class="layui-input-block"> <!-- 注意：这一层元素并不是必须的 -->
                                 <input type="text" class="layui-input" lay-verify="required"
                                        id="rentEndDate" placeholder="yyyy-MM-dd">
+                                <i class="iconfont icon-calendar"></i>
                             </div>
                         </div>
                     </div>
@@ -646,7 +649,7 @@
                     </div>
                     <div class="layui-col-md5">
                         <!--客栈客房月收入-->
-                        <div class="layui-form-item layui-col-md-offset1">
+                        <div class="layui-form-item layui-col-md-offset2">
                             <label class="layui-form-label">客房月收入</label>
                             <div class="layui-input-block">
                                 <input type="text" name=""  lay-verify="required｜number"
@@ -1052,8 +1055,8 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">贷款时间</label>
                                 <div class="layui-input-block">
-                                    <input type="number" class="layui-input"
-                                           placeholder="请输入贷款时间" id="loanStartDate" max="20">
+                                    <input type="text" class="layui-input"
+                                           placeholder="请输入贷款时间" id="loanStartDate">
                                 </div>
                             </div>
                         </div>
@@ -1390,10 +1393,7 @@
                     </div>
                 </div>
             </fieldset>
-
-
         </div>
-
         <fieldset class="remark" id="cuowu">
             <legend>备注</legend>
             <div class="layui-col-md10">
@@ -1406,8 +1406,8 @@
             </div>
         </fieldset>
         <div class="layui-form-item dosubmit">
-            <div class="layui-input-block">
-                <button class="layui-btn" id="updatabtn"  lay-submit lay-filter="updatafile">立即提交</button>
+            <div class="layui-input-block submits">
+                <button class="layui-btn" type="button" id="updatabtn"  lay-submit lay-filter="updatafile">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>

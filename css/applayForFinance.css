@@ -17,6 +17,7 @@
     background-color: #00aff0
 }
 table{
+    width:100%;
     border: 1px solid #7a7a7a;
     border-left:none;
     border-top: none;
@@ -33,7 +34,7 @@ th,td{
     padding:5px;
 }
 td{
-    width:100px;
+    width:2%;
     color:red;
 }
 .titleBg{
@@ -41,11 +42,10 @@ td{
 }
 .info{
     display: inline-block;
-    min-width: 100px;
     border-bottom: 1px solid #333;
     color: red;
     font-weight: normal;
-    margin:10px 30px 0 0;
+    /*margin:10px 30px 0 0;*/
 }
 .btns{
     text-align: center;

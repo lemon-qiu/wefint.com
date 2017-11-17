@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>房屋状态</title>
+    <link rel="stylesheet" href="../layui/css/layui2.0.css" media="all"  type="text/css" />
+    <script src="../finance/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../css/floaticon.css"  type="text/css" >
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/pageonload.js"></script>
+    <script>
+        if (getCookie("token") === "" || getCookie('token') === undefined || getCookie('token') === null) {
+            window.location.href = "./login.html";
+        }
+    </script>
+	<style type="text/css">
+    *{
+            margin:0;
+            padding:0;
+     }
+	.ContentDiv{
+        display:flex;
+        justify-content: space-between;
+	}
+	.leftDiv{
+		width:20%;
+	}
+    .MainDiv{
+        width:80%;
+        overflow: scroll;
+    }
+	table.LeftTableDiv{
+
+		border: 1px solid #ccc;
+	}
+    .mainTableDiv{
+        width:4100px;
+
+    }
+	table.LeftTableDiv td {
+		width:8%;
+		height:40px;
+		border: 1px solid #fff;
+		text-align: center;
+	}
+	table.mainTableDiv td {
+        display: inline-block;
+        width:80px;
+		padding:5px 25px;
+        font-size:12px;
+		height:28px;		
+		text-align: center;
+	}	
+	::-webkit-scrollbar {
+    width: 5px;
+	}
+	::-webkit-scrollbar-track {
+	    background-color: #bee1eb;
+	}
+	::-webkit-scrollbar-thumb {
+	    background-color: #00aff0;
+	    border-radius: 3px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+	    background-color: #9c3
+	}
+	::-webkit-scrollbar-thumb:active {
+	    background-color: #00aff0
+	}
+	</style>
+
+</head>
+
+
+<body class="beg-login-bg"><!-- onload="getNowDate();setTableHeaderAuto();getRooms();"  -->
+    <div id="header">
+        <ul class="layui-nav">
+            <li class="layui-nav-item"><a href="">房屋状态</a></li>
+        </ul>
+  <!--  <input type="button" onclick="downloadFile()" value="下载"/>-->
+        <div class="nav5" onclick="window.open('./mainPannel.html','_self')">
+            <img src="../img/ppp.png" title="返回">
+        </div>
+    </div>
+ <div id="Content" class="ContentDiv">
+        <div id="Content-Left" class="leftDiv">
+            <!--左边-->
+               <input type="text" class="layui-input" id="nowTimeChoose" placeholder="选择日期">
+            <table id="table1" class="LeftTableDiv">
+            </table>
+            <!--左边-->
+        </div>
+        <div id="Content-Main" class="MainDiv">
+            <table id="table2" class="mainTableDiv">
+            	<tr>
+            	</tr>
+            </table>
+        </div>
+    </div>
+    <div id="footer" style="position: fixed;bottom: 0;z-index: 900;width: 100%">
+        <ul class="layui-nav ">
+            <li class="layui-nav-item " ><a href="copyright.html">联系电话：0888-5191803  版权所有  Copyright by 圣境环球 </a>
+                <!-- <p>联系电话：0888-5191803</p> -->
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script src="../js/hotelStatus.js"></script>
+</html>

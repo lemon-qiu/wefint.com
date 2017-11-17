@@ -1,6 +1,6 @@
 .chartModel {
-    width: 700px;
-    height: 600px;
+    width:1000px;
+    height: 800px;
     margin: 0 auto;
 }
 
@@ -19,5 +19,14 @@
     width:80%;
     height:90%;
     padding-top:15px;
+}
+#worthWNM{
+    position: relative;
+    margin-left: 21px;
+}
+#worthWNM2{
+    position: absolute;
+    right:25px;
+    top:254px;
 }
 

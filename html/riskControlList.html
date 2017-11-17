@@ -5,21 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>客户信息列表</title>
-    <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="../finance/css/checkPage.css" />
+    <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/floaticon.css"  type="text/css" >
+    <link rel="stylesheet" href="../finance/css/checkPage.css"  type="text/css" />
 </head>
-<body>
+<body onload="checkCookieLogin();">
 <div>
-    <ul class="layui-nav">
-        <li class="layui-nav-item"><a href="">客户信息列表</a></li>
-    </ul>
-    <div class="nav5" onclick="window.open('./mainPannel.html','_self')">
-        <img src="../img/ppp.png" title="返回">
+    <div class="head">
+        <div class="head_left" onclick="logout()">
+            <img src="../images/hotelStatus/logo.png" alt="logo">
+            客户信息列表
+        </div>
     </div>
 </div>
 
 <div class="contain">
     <table class="layui-hide" id="hotel-list" lay-filter="hotelTable"></table>
+</div>
+<div class="footer">
+    <div class="footer_left">
+        <div>
+            <img src="../images/hotelStatus/call.png" alt="call">028-5191803
+        </div>
+        <div>
+            <img src="../images/hotelStatus/help.png" alt="call">帮助
+        </div>
+    </div>
+    <div class="footer_right">
+        <p>版权所有Copyright By 圣境环球</p>
+    </div>
 </div>
 
 <script type="text/html" id="barDemo">
@@ -32,7 +46,7 @@
     <a class="layui-btn layui-btn-mini layui-btn-mini" lay-event="checkLevelTwo">二级审核</a>
     {{# }else if(d.approveStatus == 4){ }}
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-mini layui-btn-mini" lay-event="hasBeenLend">已放款</a>
+    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="hasBeenLend">已放款</a>
     {{# }else{ }}
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     {{# } }}

@@ -14,7 +14,10 @@ let PARAMETERCANNOTBEEMPTY = '900007'; // 请求的参数不能为空
 let INSUFFICIENTPRIVILEGE = '200102'; // 权限不够
 let DATAALREADYEXISTS = '200103';  // 业务数据已经存在
 let TIMEFORMATERROR = '200104' ; // 时间格式错误
+let DONTHAVEMESSAGE = '200106';  // 无业务数据
 let ROOMOCCUPANCYCONFLICT = '200105'; // 用户入住情况冲突
+let NOTOUTOFTIME = '200504';  //输入预定天数超时（超过30天）
+let USERCHOOSETIMENOTNOWTIME = '200506';  // 用户入住时间必须为当天时间才能入住
 
 /**
  *
@@ -164,18 +167,24 @@ function getUrl(type) {
     if (type === 1) { // 登录
         return "http://192.168.0.8:48080"
     } else if (type === 2) { // 注册
-        return "http://192.168.0.130:30000"
+        //return "http://192.168.0.130:30000"
+        return "http://192.168.0.9:30000"
     } else if (type === 3) { // 设置
-        return "http://192.168.0.102:30000"
+        //return "http://192.168.0.130:30000"
+        return "http://192.168.0.9:30000"
     } else if(type === 4){
-        return "http://192.168.0.8:30050"//金融图片上传
+        return "http://192.168.0.158:20000"//金融图片上传
+        //return "http://192.168.0.10:20000"//金融图片上传
     } else if(type === 5 ){
-        return "http://192.168.0.157:20000"//金融审核
-        //return "http://119.23.41.105:20000"
+        return "http://192.168.0.158:20000"//金融审核
+        //return "http://192.168.0.10:20000"//金融审核
     } else if(type === 6 ){
-        return "http://192.168.0.157:20000" //OSS账户信息
+        return "http://192.168.0.100:30050" //OSS账户信息
     }else if(type === 7 ){
         return "http://wefint.oss-cn-qingdao.aliyuncs.com" //OSS上传图片
+    }else if(type === 8 ){
+        return "http://192.168.0.100:30050" //金融图片下载
+        //return "http://115.28.115.6:30050" //金融图片下载
     }
 
 };
@@ -216,17 +225,28 @@ window.confirm = function(msg,fn) {
  * @constructor
  */
 function ajaxHttp(methoud,url,Data,errfn,sucfn) {
-    $.ajax({
-        cache: true,
-        type: methoud,
-        url: url,
-        data: Data,
-        async: false,
-        headers: {'wefinttoken': getCookie('token')},
-        //headers: {'wefinttoken': '0ddd9e12-c38b-11e7-ac90-c81f66bc7d83'},
-        error: errfn,
-        success: sucfn,
-    });
+    if(Data){
+        $.ajax({
+            cache: true,
+            type: methoud,
+            url: url,
+            data: Data,
+            async: false,
+            headers: {'wefinttoken': getCookie('token')},
+            error: errfn,
+            success: sucfn,
+        });
+    }else {
+        $.ajax({
+            cache: true,
+            type: methoud,
+            url: url,
+            async: false,
+            headers: {'wefinttoken': getCookie('token')},
+            error: errfn,
+            success: sucfn,
+        });
+    }
 }
 
 
@@ -236,10 +256,11 @@ function ajaxHttp(methoud,url,Data,errfn,sucfn) {
  *
  * @returns {null}
  * @constructor
+ * @param e  window 对象
  */
-function GetQueryString(name) {
+function GetQueryString(name,e) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     let r = decodeURI(e.path[0].location.search).substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
+    if (r !== null) return unescape(r[2]);
     return null;
 }

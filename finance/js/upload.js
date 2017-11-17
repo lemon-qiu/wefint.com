@@ -70,6 +70,39 @@ var uploader = new plupload.Uploader({
         },
 
         FilesAdded: function(up, files) {
+           /* plupload.each(files, function(file) {
+
+                var $li = $(
+                    '<li id="' + file.id + '" style="position: relative;"  onmouseout="$(\'' + '#deleteIcon' + file.id + '\').css(\'' + 'display' + '\',' + '\'none' + '\');$(\'' + '#delMsk' + file.id + '\').css(\'' + 'display' + '\',' + '\'none' + '\');" onmousemove="$(\'' + '#deleteIcon' + file.id + '\').css(\'' + 'display' + '\',\'' + 'block' + '\');$(\'' + '#delMsk' + file.id + '\').css(\'' + 'display' + '\',' + '\'block' + '\')" id="' + file.id + '"  class="u-photos">' +
+                    '<div style="display: none;"  id="delMsk' + file.id + '" class="u-msk"></div>' +
+                    '<div title="删除" style="display: none;cursor:pointer;right: 0px;position: absolute" onclick="removePhoto(\'' + file.id + '\');" id="deleteIcon' + file.id + '" class="u-del" onclick="uploader.removeFile(' + file + ' )"></div>' +
+                    '<a id="file-' + file.id + '" href="####"></a>' +
+                    '</li>'
+                    ),
+                    $img = $li.find('img');
+
+                // $list为容器jQuery实例
+                //$('#photos').append($li);
+                $(imgId).next().append($li);
+                !function() {
+                    previewImage(file, function(imgsrc) {
+                        $('#file-' + file.id).append('<img width=\'200px\' height=\'160px\'  src="' + imgsrc + '" />');
+                    })
+                }();
+            });*/
+
+            /*plupload.each(files, function(file) {
+                document.getElementById('photos').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ')<b></b>'
+                    +'<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
+                    +'</div>';
+            });*/
+        },
+
+        UploadProgress: function(up, file) {
+
+        },
+
+        FileUploaded: function(up, file, info) {
             plupload.each(files, function(file) {
 
                 var $li = $(
@@ -91,18 +124,6 @@ var uploader = new plupload.Uploader({
                 }();
             });
 
-            /*plupload.each(files, function(file) {
-                document.getElementById('photos').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ')<b></b>'
-                    +'<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
-                    +'</div>';
-            });*/
-        },
-
-        UploadProgress: function(up, file) {
-
-        },
-
-        FileUploaded: function(up, file, info) {
             console.log(info)
             set_upload_param(up);
             var datas = JSON.parse(info.response).content;
