@@ -119,9 +119,13 @@ function hotelFinancialChartOTA(Data) {
     }, (data) => {
         if (data.code === SUCCESSFULUSERLOGIN) {
             let getdata = data.content;
-            let accountField = ['accountingFeiZhu', 'accountingQuNaEr', 'accountingXieCheng', 'accountingYiLong']; // 开始定义视图内所有的键值对应，调用方法是一一对象
-            let commissionField = ['compensasenFeiZhuSolid', 'compensasenQuNaErSolid', 'compensasenXieChengSolid', 'compensasenYiLongSolid']; // 定义视图内所有的键值对应
-            let compensasenField = ['commissionFeiZhu', 'commissionQuNaEr', 'commissionXieCheng', 'commissionYiLong']; // 开始定义视图内所有的键值对应，调用方法是一一对象
+            let accountField = ['accountingFeiZhu', 'accountingQuNaEr', 'accountingXieCheng',
+                'accountingYiLong','accountingMeiTuan','accountingTuJia','accountingAli']; // 开始定义视图内所有的键值对应，调用方法是一一对象
+            let commissionField = ['compensasenFeiZhuSolid', 'compensasenQuNaErSolid',
+                'compensasenXieChengSolid', 'compensasenYiLongSolid','compensasenMeiTuanSolid',
+                'compensasenTuJiaSolid','compensasenAliSolid']; // 定义视图内所有的键值对应
+            let compensasenField = ['commissionFeiZhu', 'commissionQuNaEr', 'commissionXieCheng', 'commissionYiLong','commissionMeiTuan',
+            'commissionTuJia','commissionAli']; // 开始定义视图内所有的键值对应，调用方法是一一对象
             let ACCOUNTTD = $('#account').children(); //  account 下所有的TD
             let COMMISSIONTD = $('#commission').children();  //  commission 下所有的TD
             let COMPENSASENTD = $('#compensasen').children();  //  compensasen 下所有的TD

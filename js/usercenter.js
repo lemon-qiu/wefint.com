@@ -5,7 +5,7 @@
  * @Time: 16:57
  */
 (function() {
-    let   approveStatuscall ='';
+    let approveStatuscall = '';
     layui.use(['laydate', 'form', 'layedit', 'jquery'], function() {
         let laydate = layui.laydate
             , form = layui.form
@@ -36,11 +36,11 @@
             if (d.value > 1) {
                 marryed.nextAll().hide();
                 $(marryed[1]).hide();
-                $('.closequire').attr({'lay-verify':''})
+                $('.closequire').attr({'lay-verify': ''})
             } else {
                 marryed.nextAll().show();
                 $(marryed[1]).show();
-                $('.closequire').attr({'lay-verify':'required'})
+                $('.closequire').attr({'lay-verify': 'required'})
             }
         });
         form.on('select(carIfnotLoan)', function(d) {
@@ -65,6 +65,16 @@
                 $('#resaleFee').attr({'placeholder': '请输入转让费金额（百分比）'})
             }
         });
+        form.verify({
+            img:function(value,item) {
+                if(item.src === ''){
+                    $(item).css('border','1px solid #FF5722');
+                    return '请上传图片';
+                }else if(item.src!==''){
+                    $(item).css('border','');
+                }
+            }
+        })
         // 页面加载时处理的方法  检查审核状态 根据状态处理
         window.onload = function() {
             $('#cuowu').hide();
@@ -82,8 +92,9 @@
                     // 获取全局的按钮
                     let HTMLALLBUTTON = $('button');    // 获取全局所有的按钮
                     let HTMLALLINPUT = $('input');      // 获取全局所有的输入框
+                    let HTMLALLSELECT = $('select');   //获取全局所有的选择框
                     // 定义审核的状态
-                     checkPageStatus(data.approveStatus, HTMLALLINPUT, HTMLALLBUTTON, searchUrl);  //检查页面状态 根据不同状态 显示不同效果  用户中心1必须判断
+                    checkPageStatus(data.approveStatus, HTMLALLINPUT, HTMLALLBUTTON, HTMLALLSELECT, searchUrl);  //检查页面状态 根据不同状态 显示不同效果  用户中心1必须判断
                     let strcustomer = data.customerCooperation;
                     let strtourism = data.tourismCooperation;
                     if (strcustomer) {   // 客户合作方
@@ -113,6 +124,7 @@
                     getOnePhoto(data.spouseCertBack, 'spouseCertBack');//配偶身份证反面
 
                     clickSelect(data.mainProperty, 'mainProperty'); // 主体性质
+                    clickSelect(data.hotelType, 'hotelType');//客栈类型
                     $('#motelName').val(data.motelName); // 客栈名称
                     $('#motelAssets').val(data.motelAssets); // 客栈详细地址
                     $('#motelRoomQuantity').val(data.motelRoomQuantity); // 客栈的房间数
@@ -121,7 +133,7 @@
                     $('#motelBusinessScale').val(data.motelBusinessScale); //  客栈经营范围
                     getOnePhoto(data.motelPic, 'motelPic'); // 客栈照片
                     clickSelect(data.motelProvice, 'motelProvice'); // 客栈所在省;
-                    linkageToChoose('motelProvice',data.motelCity,'motelCity',data.motelArea,'motelArea'); // 省市联动选择的方法
+                    linkageToChoose('motelProvice', data.motelCity, 'motelCity', data.motelArea, 'motelArea'); // 省市联动选择的方法
                     $('#motelAddress').val(data.motelAddress); // 客栈详细地址
                     $('#leftRentYear').val(data.leftRentYear);  // 剩余租期
                     clickSelect(data.resaleFeeFlag, 'resaleFeeFlag'); //转让费类型
@@ -173,7 +185,7 @@
                     $('#platesStartDate').val(fmtDate(data.platesStartDate));            // 上牌时间
                     $('#driverKm').val(data.driverKm);// 驾驶里程
                     clickSelect(data.carIfnotLoan, 'carIfnotLoan');
-                    $('#carloanAmt').val(data.carloanAmt);          // 贷款金额
+                    $('#carLoanAmt').val(data.carLoanAmt);          // 贷款金额
                     $('#carLoanStartDate').val(data.carLoanStartDate);      // 车子贷款时间
                     $('#carLoanDuration').val(data.carLoanDuration);       // 还款方式
                     $('#carLoanPaymentOption').val(data.carLoanPaymentOption); // 还款方式
@@ -252,7 +264,7 @@
         }
         /**
          *
-         * @type {{userId: string, userName: jQuery, certNo: jQuery, mobile: jQuery, relativeMobile: jQuery, friendMobile: jQuery, companyTelephone: jQuery, certFront: jQuery, certBack: jQuery, monthIncome: jQuery, marryStatus: jQuery, marryCert: jQuery, approveStatus: string, spouseName: jQuery, spouseMobile: jQuery, spouseCertNo: jQuery, referencePictures: jQuery, spouseCertFront: jQuery, spouseCertBack: jQuery, motelName: jQuery, motelAssets: jQuery, motelRoomQuantity: jQuery, motelCertNo: jQuery, motelCert: jQuery, motelBusinessScale: jQuery, motelPic: jQuery, motelProvice: jQuery, motelCity: jQuery, motelArea: jQuery, motelAddress: jQuery, leftRentYear: jQuery, leftPaidRentalMonth: jQuery, loanDuration: jQuery, loanPaymentOption: jQuery, monthIncomeType: jQuery, resaleFeeFlag: jQuery, occupieRate: jQuery, motelMonthIncome: jQuery, roomMonthIncome: jQuery, landlordName: jQuery, mainProperty: jQuery, rentStartDate: jQuery, resaleFee: jQuery, rentEndDate: jQuery, rentPaymentOption: jQuery, rentPerYear: jQuery, reMark: string, deposit: jQuery, rentContract: jQuery, accountName: jQuery, openBank: jQuery, bankAccount: jQuery, cardFront: jQuery, cardBack: jQuery, educationDegree: jQuery, workExperiences: jQuery, otherJobs: jQuery, personalHealth: jQuery, preWorkspace: jQuery, customerCooperation: string, tourismCooperation: string, bondsman: jQuery, averageCommision: jQuery, onlinePercentage: jQuery, offlinePercentage: jQuery, residenceYear: jQuery, houseAddress: jQuery, houseSquare: jQuery, houseFloors: jQuery, houseDecoLevel: jQuery, ifnotLoan: jQuery, loanAmt: jQuery, loanStartDate: jQuery, housePic: jQuery, houseCertPic: jQuery, carAddress: jQuery, carCatelog: jQuery, platesStartDate: jQuery, driverKm: jQuery, carIfnotLoan: jQuery, carloanAmt: jQuery, carLoanStartDate: jQuery, carLoanDuration: jQuery, carLoanPaymentOption: jQuery, carPic: jQuery, carCertPic: jQuery, personalIncome: Array, innIncome: Array, hydroelectric: Array, energy: Array, waterPayment: Array, energyPayment: Array, otherPhoto: Array}}
+         * @type {{userId: string, userName: jQuery, certNo: jQuery, mobile: jQuery, relativeMobile: jQuery, friendMobile: jQuery, companyTelephone: jQuery, certFront: jQuery, certBack: jQuery, monthIncome: jQuery, marryStatus: jQuery, marryCert: jQuery, approveStatus: string, spouseName: jQuery, spouseMobile: jQuery, spouseCertNo: jQuery, referencePictures: jQuery, spouseCertFront: jQuery, spouseCertBack: jQuery, motelName: jQuery, motelAssets: jQuery, motelRoomQuantity: jQuery, motelCertNo: jQuery, motelCert: jQuery, motelBusinessScale: jQuery, motelPic: jQuery, motelProvice: jQuery, motelCity: jQuery, motelArea: jQuery, motelAddress: jQuery, leftRentYear: jQuery, leftPaidRentalMonth: jQuery, loanDuration: jQuery, loanPaymentOption: jQuery, monthIncomeType: jQuery, resaleFeeFlag: jQuery, occupieRate: jQuery, motelMonthIncome: jQuery, roomMonthIncome: jQuery, landlordName: jQuery, mainProperty: jQuery, rentStartDate: jQuery, resaleFee: jQuery, rentEndDate: jQuery, rentPaymentOption: jQuery, rentPerYear: jQuery, reMark: string, deposit: jQuery, rentContract: jQuery, accountName: jQuery, openBank: jQuery, bankAccount: jQuery, cardFront: jQuery, cardBack: jQuery, educationDegree: jQuery, workExperiences: jQuery, otherJobs: jQuery, personalHealth: jQuery, preWorkspace: jQuery, customerCooperation: string, tourismCooperation: string, bondsman: jQuery, averageCommision: jQuery, onlinePercentage: jQuery, offlinePercentage: jQuery, residenceYear: jQuery, houseAddress: jQuery, houseSquare: jQuery, houseFloors: jQuery, houseDecoLevel: jQuery, ifnotLoan: jQuery, loanAmt: jQuery, loanStartDate: jQuery, housePic: jQuery, houseCertPic: jQuery, carAddress: jQuery, carCatelog: jQuery, platesStartDate: jQuery, driverKm: jQuery, carIfnotLoan: jQuery, carLoanAmt: jQuery, carLoanStartDate: jQuery, carLoanDuration: jQuery, carLoanPaymentOption: jQuery, carPic: jQuery, carCertPic: jQuery, personalIncome: Array, innIncome: Array, hydroelectric: Array, energy: Array, waterPayment: Array, energyPayment: Array, otherPhoto: Array}}
          */
         const private = {
             userId: getCookie("userName"),
@@ -267,7 +279,7 @@
             monthIncome: $('#monthIncome').val(),
             marryStatus: $('#marryStatus').val(),
             marryCert: $('#marryCert').attr('src'),
-            approveStatus:approveStatuscall, // 审核状态
+            approveStatus: approveStatuscall, // 审核状态
             spouseName: $('#spouseName').val(),
             spouseMobile: $('#spouseMobile').val(),
             spouseCertNo: $('#spouseCertNo').val(),
@@ -296,6 +308,7 @@
             roomMonthIncome: $('#roomMonthIncome').val(),
             landlordName: $('#landlordName').val(),
             mainProperty: $('#mainProperty').val(),
+            hotelType: $('#hotelType').val(),
             rentStartDate: $('#rentStartDate').val(),
             resaleFee: $('#resaleFee').val(),
             rentEndDate: $('#rentEndDate').val(),
@@ -340,12 +353,12 @@
             platesStartDate: $('#platesStartDate').val(),
             driverKm: $('#driverKm').val(),
             carIfnotLoan: $('#carIfnotLoan').val(),
-            carloanAmt: $('#carloanAmt').val(),
+            carLoanAmt: $('#carLoanAmt').val(),
             carLoanStartDate: $('#carLoanStartDate').val(),
             carLoanDuration: $('#carLoanDuration').val(),
             carLoanPaymentOption: $('#carLoanPaymentOption').val(),
-            perMonthWaterFee:$('#perMonthWaterFee').val(), // 每月水费
-            perMonthSheetsFee:$('#perMonthSheetsFee').val(), // 每月布草花费
+            perMonthWaterFee: $('#perMonthWaterFee').val(), // 每月水费
+            perMonthSheetsFee: $('#perMonthSheetsFee').val(), // 每月布草花费
             carPic: $('#carPic').attr('src'), // 车子照片
             carCertPic: $('#carCertPic').attr('src'),// 行车证照片
             //  以下 是多张照片上传时的数组字段
@@ -380,15 +393,15 @@
                     if (result === true) {
                         window.location.href = searchUrl;
                     } else {
-                        alert(result + '输入有误，请检查输入');
+                        alert('状态错误，请检查输入');
                     }
                 },
                 error: function(err) {
-                    alert(err + '输入有误，请检查输入');
+                    alert('状态错误，请检查输入');
                 }
             });
         } else if (JqUpdatabtn.text() === '确认修改') {
-            private.approveStatus = '0';
+            private.approveStatus = '6';
             $.ajax({
                 url: url + '/updateMerchantInfo',
                 type: 'post', // IE必须加上post
@@ -401,18 +414,17 @@
                     if (result === true) {
                         window.location.href = searchUrl;
                     } else {
-                        alert(result + '输入有误，请检查输入');
+                        alert('状态错误，请检查输入');
                     }
                 },
                 error: function(err) {
-                    alert(err + '输入有误，请检查输入');
+                    alert( '状态错误，请检查输入');
                 }
             });
         } else {
             console.log(JqUpdatabtn.text())
         }
     };
-
     /**
      * 选择图片方法
      * @param {object} obj  点击上传的按钮
@@ -421,7 +433,7 @@
      */
     window.choosephoto = function(obj, imgID, judge) {
         $(obj).next().click();
-        $(obj).next().change(function() {
+        $(obj).next().unbind('change').bind('change',function() {
             let file = this.files;
             for (let i = 0; i < file.length; i++) {
                 if (window.FileReader) {
@@ -443,6 +455,7 @@
                     };
                 }
             }
+            return false;
         })
     };
 
@@ -526,6 +539,7 @@
             return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
         }
     }
+
     /**
      * 使用layer的打开模态框的方法
      * @returns {string}
@@ -588,16 +602,18 @@
      */
     function arrPhotoView(dataName, idName) {
         let JqClass = $('.' + idName);
-        let JqId = $('#'+idName);
+        let JqId = $('#' + idName);
         let innerImgArrUi = '';
-        JqClass.remove();
-        for(let i = 0; i < dataName.length; i++){
-            if(dataName[i]!== null){
-                innerImgArrUi += '<div class="layui-upload-list"><img src="' + dataName[i] + '" class="layui-upload-img"/><button class="layui-btn layui-btn-mini delete layui-btn-danger" onclick="deleteFather(this)">删除</button></div>'
-                JqId.html(innerImgArrUi)
-            }else{
-                innerImgArrUi = '<div class="layui-upload-list '+idName+'"><img class="layui-upload-img"></div>'
-                JqId.html(innerImgArrUi)
+        if(dataName!==''&& dataName !== null){
+            JqClass.remove();
+            for (let i = 0; i < dataName.length; i++) {
+                if (dataName[i] !== null) {
+                    innerImgArrUi += '<div class="layui-upload-list"><img src="' + dataName[i] + '" class="layui-upload-img"/><button class="layui-btn layui-btn-mini delete layui-btn-danger" onclick="deleteFather(this)">删除</button></div>'
+                    JqId.html(innerImgArrUi)
+                } else {
+                    innerImgArrUi = '<div class="layui-upload-list ' + idName + '"><img class="layui-upload-img"></div>'
+                    JqId.html(innerImgArrUi)
+                }
             }
         }
 
@@ -610,19 +626,25 @@
      * @param htmlbutton 获取到的所有的 button 按钮
      * @param searchUrl
      */
-    function checkPageStatus(dataName, htmlinput, htmlbutton, searchUrl) {  // 0.5 版本 用户中心  需要判断
+    function checkPageStatus(dataName, htmlinput, htmlbutton, htmlselect, searchUrl) {  // 0.5 版本 用户中心  需要判断
         const GETENDTIRELYAPPROVESTAATUS = 4;           // 完全审核通过
         const GETPUTINAPPROVESTATUSONE = 0;             // 一级审核
         const GETPUTINAPPROVESTATUSTWO = 1;             // 二级审核
         const GETPUTINAPPROVESTATUSTHREE = 2;            // 一级驳回
         const GETPUTINAPPROVESTATUSFOUR = 3;             // 二级驳回
-        if (dataName === GETENDTIRELYAPPROVESTAATUS) {
+        const GETPUTINAPPROVESTATUSLOAN = 5;             //放款
+        if (dataName === GETENDTIRELYAPPROVESTAATUS || dataName === GETPUTINAPPROVESTATUSLOAN) {
             window.location.href = searchUrl;
             for (let i = 0; i < htmlinput.length; i++) {
                 $(htmlinput[i]).attr({'disabled': "disabled"})
+                console.log('input')
             }
             for (let i = 0; i < htmlbutton.length; i++) {
                 $(htmlbutton[i]).attr({'disabled': "disabled"})
+            }
+            for (let i = 0; i < htmlselect.length; i++) {
+                $(htmlselect[i]).attr({'disabled': "disabled"})
+                console.log('select')
             }
         } else if (dataName === GETPUTINAPPROVESTATUSONE || dataName === GETPUTINAPPROVESTATUSTWO) {
             window.location.href = searchUrl;
@@ -632,18 +654,22 @@
             for (let i = 0; i < htmlbutton.length; i++) {
                 $(htmlbutton[i]).attr({'disabled': "disabled"})
             }
+            for (let i = 0; i < htmlselect.length; i++) {
+                $(htmlselect[i]).attr({'disabled': "disabled"})
+            }
         } else if (dataName === GETPUTINAPPROVESTATUSTHREE || dataName === GETPUTINAPPROVESTATUSFOUR) {
             // 切换为修改数据的状态
             $('#cuowu').show();
             $('#updatabtn').text('确认修改');
         }
     }
-    function linkageToChoose(firstId,secendData,secendId,thereData,thereId) {
+
+    function linkageToChoose(firstId, secendData, secendId, thereData, thereId) {
         let firstIdJq = $('#' + firstId);
-        if(firstIdJq!== ''){
+        if (firstIdJq !== '') {
             setTimeout(function() {
                 clickSelect(secendData, secendId); // 客栈所在市;
-                if($('#'+ secendId)!== ''){
+                if ($('#' + secendId) !== '') {
                     setTimeout(function() {
                         clickSelect(thereData, thereId); // 客栈所在区;
                         // let allSelect = $('.requiredFields select');  // 版本号  0.5版本 用户中心1界面 不需要禁用
@@ -659,9 +685,37 @@
                         // allButton.click(function() {
                         //     alert('必填项已经不能修改')
                         // })
-                    },300)
+                    }, 300)
                 }
-            },100)
+            }, 100)
         }
     }
 })();
+function choosephoto(obj, imgID, judge) {
+    $(obj).next().click();
+    $(obj).bind('click',function() {
+        console.log('change');
+        let file = this.files;
+        for (let i = 0; i < file.length; i++) {
+            if (window.FileReader) {
+                let reader = new FileReader();
+                reader.readAsDataURL(file[i]);
+                //监听文件读取结束后事件
+                reader.onloadend = function(e) {
+                    if (judge) {
+                        console.log(imgID)
+                        $('.' + imgID).remove();
+                        dealImage(this.result, {width: 600, height: 900}, function(base) {
+                            $('#' + imgID)[0].innerHTML += '<div class="layui-upload-list"><img src="' + base + '" class="layui-upload-img"/><button class="layui-btn layui-btn-mini delete layui-btn-danger" onclick="deleteFather(this)">删除</button></div>';
+                        })
+                    } else {
+                        dealImage(e.target.result, {width: 600, height: 900}, function(base) {
+                            $('#' + imgID).attr("src", base)
+                        })
+                    }
+                };
+            }
+        }
+        return false;
+    })
+};

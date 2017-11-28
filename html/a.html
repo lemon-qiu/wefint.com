@@ -136,15 +136,16 @@
     };
     new S(defaults);
 
-    $('#repaymentPrincipalBig').text(intToChinese('5013.00'));
+    $('#repaymentPrincipalBig').text(intToChinese('0'));
     function intToChinese ( str ) {
         str = str.replace(/[^\d\.]/g,'').replace(/^0/,'');
         var Num = str;
-        if(Num=="") {
+        if(Num=="" || Num=='0') {
             //输入框删减为空时，将大写金额的内容值设为原始状态，当然也可以根据需求进行修改
-            $("#dx").text("零元整");
-            return false;
-        }
+            //$("#repaymentPrincipalBig").text("零元整");
+            var bigStr = "零元整";
+            return bigStr;
+        }else {
         part = String(Num).split(".");
         newchar = "";
         for(i=part[0].length-1;i>=0;i--){
@@ -217,6 +218,7 @@
             newchar = newchar+"整";
         }
         return newchar;
+        }
     }
 </script>
 </body>

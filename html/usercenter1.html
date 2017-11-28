@@ -70,7 +70,7 @@
         <img src="../images/hotelStatus/logo.png">用户借贷中心
     </div>
     <div class="head_right">
-        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="javascript:history.go(-1);" >
+        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="window.location.href='mainPannel.html'" >
     </div>
 </div>
 <!--表单部分-->
@@ -324,6 +324,21 @@
             <!--客栈情况-->
             <fieldset class="innsituation">
                 <legend>客栈情况（必填）</legend>
+                <div class="layui-row">
+                    <!--客栈类型-->
+                    <div class="layui-col-md5">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客栈类型</label>
+                            <div class="layui-input-block">
+                                <select lay-verify="required" id="hotelType" >
+                                    <option value=" ">请选择</option>
+                                    <option value="0">客栈</option>
+                                    <option value="1">酒店</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="layui-row">
                     <div class="layui-col-md5">
                         <!--客栈姓名-->
@@ -920,7 +935,7 @@
                                 <div class="layui-input-block">
                                     <input type="text" name=""
                                            class="layui-input"
-                                           placeholder="请输入贷款金额" id="carloanAmt">
+                                           placeholder="请输入贷款金额" id="carLoanAmt">
                                 </div>
                             </div>
                         </div>
@@ -1189,7 +1204,7 @@
                                     <option value="0">政府任职</option>
                                     <option value="1">国企任职</option>
                                     <option value="2">事业单位任职</option>
-                                    <option value="3">私企任职tion>
+                                    <option value="3">私企任职</option>
                                 </select>
                             </div>
                         </div>

@@ -22,6 +22,28 @@ fieldset{
     top: 2%;
     cursor: pointer;
 }
+.shadow{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 10000;
+    text-align: center;
+}
+.shadow i{
+    position: fixed;
+    font-size: 80px;
+    color: #0a0f8a;
+    top:30%;
+}
+.hidden{
+    display: none;
+}
+.title{
+    font-size: 18px;
+    font-weight: 500;
+    margin:34px 0 16px;
+}
 /***********重写layui样式****************/
 .layui-form-label{
     width:126px;

@@ -20,11 +20,11 @@
 .check-form fieldset{
     border: 1px solid #d1d1d1;
 }
-.layui-icon{
+/*.layui-icon{
     position: absolute;
     right: -20px;
     top: 12px;
-}
+}*/
 .dosubmit{
     text-align: center;
     margin: 10px;

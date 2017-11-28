@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>已放款列表</title>
+    <title>疯特科技</title>
     <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all"  type="text/css" />
     <link rel="stylesheet" href="../css/floaticon.css"  type="text/css" >
     <link rel="stylesheet" href="../finance/css/checkPage.css"  type="text/css" />
@@ -14,13 +14,13 @@
     <div class="head">
         <div class="head_left" onclick="logout()">
             <img src="../images/hotelStatus/logo.png" alt="logo">
-            已放款列表
+           催款列表
         </div>
     </div>
 </div>
 
 <div class="contain">
-    <table class="layui-hide" id="hotel-list" lay-filter="hotelTable"></table>
+    <table class="layui-hide" id="loan-list" lay-filter="loanTable"></table>
 </div>
 <div class="footer">
     <div class="footer_left">
@@ -36,16 +36,18 @@
     </div>
 </div>
 
-<script type="text/html" id="barDemo">
-
-    {{# if(d.approveStatus == 6){ }}
+<script type="text/html" id="loanBar">
     <a class="layui-btn layui-btn-mini" lay-event="download">下载</a>
-    {{# } }}
-
 </script>
-<script type="text/html" id="status">
-    {{# if(d.approveStatus == 6){ }}
-    已放款
+<script type="text/html" id="loanStatus">
+    {{# if(d.status == 0){ }}
+    发起申请
+    {{# } else if(d.status == 1){ }}
+    未全额还款
+    {{# } else if(d.status == 2){ }}
+    已全额还款
+    {{# }else if(d.status == 3){ }}
+    部分还款
     {{# } }}
 </script>
 <script src="../js/jquery-1.11.1.js"></script>

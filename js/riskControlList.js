@@ -1,5 +1,4 @@
 $(function () {
-
     /***
      * layui Form
      */
@@ -133,6 +132,12 @@ $(function () {
 
 
         /***************已放款***************/
+
+        /**
+         * 提交后验证是否上传完图片，
+         * 上传完成 提交后台修改状态
+         * sendToInvestor
+         */
         form.on('submit(sendToInvestor)', function (data) {
            // console.log(imgArrays);
             var imgs = $('.imgs-list');
@@ -155,6 +160,11 @@ $(function () {
             return false;
         });
 
+        /**
+         *  上传完图片，提交修改状态
+         * @param data 表单数据
+         * @param typeStatus 状态
+         */
         function sendToInvestor(data,typeStatus) {
             var msg = {
                 userId: data.userId,
@@ -168,10 +178,12 @@ $(function () {
                 data: jsontext,
                 dataType:'json',
                 error: function (request) {
-                    parent.document.location.reload();
+                    alert('上传失败，请重试')
                 },
                 success: function (data) {
-                    parent.document.location.reload();
+                    layer.msg('上传成功。',{time: 1000},function() {
+                        parent.document.location.reload();
+                    })
                 }
             })
         }
@@ -195,21 +207,20 @@ $(function () {
      */
     layui.use('table', function () {
         var table = layui.table;
-
-        //客栈注册列表
+        //信息列表
         table.render({
             elem: '#hotel-list'
             , id: 'id'
             , url: getUrl(5)+'/getRiskControlList'
             , cols: [[
-                {field: 'id', title: '#', width: 80, sort: true}
-                , {field: 'userName', title: '姓名', width: 200, sort: true}
+                {field: 'userName', title: '姓名', width: 200, sort: true}
                 , {field: 'certNo', title: '身份证号', width: 200, sort: true}
                 , {field: 'mobile', title: '联系方式', width: 200, sort: true}
                 , {field: 'motelName', title: '客栈名称', width: 300, sort: true}
                 , {field: 'motelProviceName', title: '省份', width: 80, sort: true}
                 , {field: 'motelCityName', title: '市级', width: 80, sort: true}
                 , {field: 'motelAreaName', title: '区/县', width: 150, sort: true}
+                , {field: 'createTime', title: '申请时间', width: 160, sort: true}
                 , {field: 'approveStatus', title: '状态', templet: '#status', width: 150}
                 , {fixed: 'right', title: '操作', width: 300, toolbar: '#barDemo'}
             ]]
@@ -221,8 +232,7 @@ $(function () {
             , limit: 5 //每页默认显示的数量
         });
 
-
-        //监听工具条
+        //信息列表监听工具条
         table.on('tool(hotelTable)', function (obj) {
             var data = obj.data;
             if (obj.event == 'detail') {
@@ -231,8 +241,145 @@ $(function () {
                 getCheckLevelOne(data);
             } else if (obj.event == 'checkLevelTwo') {
                 getCheckLevelTwo(data);
-            } else if(obj.event=='hasBeenLend'){
-                getHasBeenLend(data);
+            } else if(obj.event=='loan'){
+                console.log('1=====',data.userId);
+                reloadLoanList(data);
+            }
+        });
+
+        /**
+         * 展开当前放款列
+         * @param rows 表单数据
+         */
+        function reloadLoanList(rows) {
+            var userId = rows.userId;
+            console.log('2=====',userId);
+            $('#loan-name').text(rows.userName);//贷款人
+            table.render({
+                elem: '#loan-list'
+                , id: 'loanid'
+                ,url: getUrl(5) + '/getCollectionInfoList?userId='+ userId
+                , cols: [[
+                    {field: 'contractNo', title: '合同号', width: 100, sort: true}
+                    , {field: 'valueDate', title: '起息日', width: 120, sort: true}
+                    , {field: 'interestDate', title: '到息日', width: 120, sort: true}
+                    , {field: 'paidAmt', title: '实收金额', width: 100, sort: true}
+                    , {field: 'repaymentPrincipal', title: '还款本金', width: 100, sort: true}
+                    , {field: 'informationFlowFee', title: '信息流量费', width: 120, sort: true}
+                    , {field: 'platformOperationFee', title: '平台操作费', width: 120, sort: true}
+                    , {field: 'creditCheckingFee', title: '征信审核费', width: 120, sort: true}
+                    , {field: 'repaymentInterest', title: '还款利息', width: 100, sort: true}
+                    , {field: 'total', title: '总计', width: 100, sort: true}
+                    , {field: 'repaymentDate', title: '还款日期', width: 120, sort: true}
+                    , {field: 'createTime', title: '申请时间', width: 160, sort: true}
+                    , {field: 'status', title: '状态', templet: '#loanStatus', width: 150}
+                    , {fixed: 'right', title: '操作', width: 300, toolbar: '#loanBar'}
+                ]]
+                , height: 'auto'
+                , skin: 'row' //表格风格
+                , even: true
+                , page: true //是否显示分页
+                , limits: [5, 10, 20]
+                , limit: 5 //每页默认显示的数量
+                , done: function(res, curr, count) {
+                    var datas = res.data;
+                    var len = datas.length;
+                    var valueDate,interestDate,repaymentDate;
+                    for(var i = 0 ;i<len;i++){
+                        if(datas[i].valueDate != null && datas[i].valueDate != ''){
+                            valueDate = new Date(datas[i].valueDate);
+                            console.log(datas[i].valueDate)
+                            $($(".layui-table td[data-field='valueDate']")[i]).children().text(valueDate.getFullYear() + '-'+ (valueDate.getMonth()+1) + '-' + valueDate.getDate());
+                        }else {
+                            valueDate = null;
+                        }
+
+                        if(datas[i].interestDate != null && datas[i].interestDate !=''){
+                            interestDate = new Date(datas[i].interestDate);
+                            $($(".layui-table td[data-field='interestDate']")[i]).children().text(interestDate.getFullYear() + '-'+ (interestDate.getMonth()+1) + '-' + interestDate.getDate());
+                        }else {
+                            interestDate = null;
+                        }
+
+                        if(datas[i].repaymentDate != null && datas[i].repaymentDate !=''){
+                            repaymentDate = new Date(datas[i].repaymentDate);
+                            $($(".layui-table td[data-field='repaymentDate']")[i]).children().text(repaymentDate.getFullYear() + '-'+ (repaymentDate.getMonth()+1) + '-' + repaymentDate.getDate());
+                        }else {
+                            repaymentDate = null;
+                        }
+                    }
+                }
+            });
+
+        }
+
+
+
+        //放款列表监听工具条
+        table.on('tool(loanTable)', function (obj) {
+            var rows = obj.data;//列内容
+            if(obj.event=='hasBeenLend'){/*********已放款数据回显************/
+                var dd = layer.open({
+                    title:false,
+                    area: ['90%', '90%'],
+                    type:2,
+                    content:'../html/hasBeenLendView.html',
+                    success:function (layero,index) {
+                        var body = layer.getChildFrame('body', index); //巧妙的地方在这里哦
+                        body.contents().find("#userId").val(rows.userId);
+                        /**************已放款 获取OSS账户数据( 图片上传 )**************/
+                        $.ajax({
+                            url: getUrl(6)+"/upload/getObjectAccess",
+                            method: 'get',
+                            contentType: 'application/json;charset=utf-8',
+                            headers: {'wefinttoken': getCookie('token')},
+                            dataType: 'json',
+                            error: function(request) {
+                                alert("获取状态失败，请稍后刷新页面");
+                            },
+                            success: function(data) {//获取数据
+                                let objs = eval(data.content);
+                                console.log(objs);
+                                body.contents().find('#policy').val(objs.policy);
+                                body.contents().find('#callback').val(objs.callback);
+                                body.contents().find('#signature').val(objs.signature);
+                            }
+                        });
+
+                    },
+                    error:function() {
+                        alert('获取状态失败，请重试。')
+                    }
+                });
+            }else if(obj.event=='repayment'){ /**************还款***************/
+                var cf = layer.confirm('确定已经还款了吗？',{
+                    title:'温馨提示',
+                    btn:['确定','取消']
+                },function(index,layero){
+                    let Data = {
+                        contractNo:rows.contractNo
+                    }
+                    $.ajax({
+                        url:getUrl(5)+'/updateReturnStatus',
+                        method:'post',
+                        contentType: 'application/json;charset=utf-8',
+                        headers: {'wefinttoken': getCookie('token')},
+                        data:JSON.stringify(Data),//合同号
+                        error:function(result) {
+                            alert('操作失败,请刷新后重试');
+                        },
+                        success:function(result) {
+                            if(result.code === '000000'){
+                                reloadLoanList(rows);//重新加载放款列表
+                            }else if(result.code === 'E000004') {
+                                alert('还款失败,请重试');
+                            }else{
+                                alert('操作失败,请重试');
+                            }
+                        }
+                    });
+                    layer.close(cf);
+                })
             }
         });
     });
@@ -319,6 +466,18 @@ $(function () {
                 }
                 body.contents().find("#marryStatus").val(ms);//状况
                 //客栈情况
+                var ht = '',hotelType;
+                if(data.hotelType === null || data.hotelType === ''){
+                    hotelType = null;
+                }else {
+                    hotelType=data.hotelType.toString()
+                }
+                switch (hotelType){
+                    case null:ht='';break;
+                    case '0' : ht = '客栈';break;
+                    case '1' : ht = '酒店';break;
+                }
+                body.contents().find("#hotelType").val(ht);//客栈类型
                 body.contents().find("#motelName").val(data.motelName);//客栈名字
                 body.contents().find("#motelAddress").val(data.motelAddress);//客栈地址
 
@@ -621,41 +780,6 @@ $(function () {
                 showData(rows,index,0);
             }
         });
-    }
-    /*********已放款数据回显************/
-    function getHasBeenLend(rows) {
-        var dd = layer.open({
-            title:false,
-            area: ['90%', '90%'],
-            type:2,
-            content:'../html/hasBeenLendView.html',
-            success:function (layero,index) {
-                var body = layer.getChildFrame('body', index); //巧妙的地方在这里哦
-                body.contents().find("#userId").val(rows.userId);
-
-                /**************已放款 获取OSS账户数据( 图片上传 )**************/
-                $.ajax({
-                    url: getUrl(6)+"/upload/getObjectAccess",
-                    method: 'get',
-                    contentType: 'application/json;charset=utf-8',
-                    headers: {'wefinttoken': getCookie('token')},
-                    dataType: 'json',
-                    error: function(request) {
-                        alert("获取状态失败，请稍后刷新页面");
-                    },
-                    success: function(data) {//获取数据
-                        let objs = eval(data.content);
-                        body.contents().find('#policy').val(objs.policy);
-                        body.contents().find('#callback').val(objs.callback);
-                        body.contents().find('#signature').val(objs.signature);
-                    }
-                });
-
-            },
-            error:function() {
-                alert('获取状态失败，请重试。')
-            }
-        })
     }
 
     /**

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>疯特金融</title>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/floaticon.css"   type="text/css" >
+    <link rel="stylesheet" href="../css/hexagram.css"  type="text/css" />
+    <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+    <script src="../finance/layui/layui.js" charset="utf-8"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../js/repayment.js"></script>
+</head>
+<body>
+<!--header-->
+<div class="head">
+    <div class="head_left" onClick="window.location.href='mainPannel.html'">
+        <img src="../images/hotelStatus/logo.png">还款
+    </div>
+    <div class="head_right">
+        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="javascript:history.go(-1);">
+    </div>
+</div>
+
+<div class="contain">
+    <div class="payment">
+        <label class="pay-way">支付方式</label>
+        <div class="layui-form-item ">
+            <label class="layui-form-label">请输入还款金额</label>
+            <div class="layui-input-block">
+                <input type="number" required placeholder="" autocomplete="off" class="layui-input" name="amount">
+            </div>
+        </div>
+        <ul class="payment-list">
+            <li><input type="radio" name="pay" id="aliPay" value="aliPay"><label for="aliPay" id="aliPay-img"><img src="../images/alipay.jpg"></label></li>
+            <li><input type="radio" name="pay" id="wechatPay" value="wechatPay"><label for="wechatPay" id="wechatPay-img"><img src="../images/wechat.jpg"></label></li>
+        </ul>
+
+        <div hidden><input id="uerId"></div>
+        <div class="btns">
+            <button class="layui-btn layui-btn-danger" onclick="paymentBtn();">确认支付</button>
+            <button class="layui-btn">取消</button>
+        </div>
+    </div>
+</div>
+
+<!-- 支付宝支付 -->
+<form action="https://mapi.alipay.com/gateway.do" id="aliPayForm">
+    <!--签名-->
+    <input type="text" readonly="readonly" name="sign" value=""><br>
+    <!--字符集（固定值）-->
+    <input type="text" readonly="readonly" name="_input_charset" value="utf-8"><br>
+    <!--金额（回传填参）-->
+    <input type="text" readonly="readonly" name="total_fee" value=""><br>
+    <!--支付名称（中文需要encodeURIComponent编码）-->
+    <input type="text" readonly="readonly" name="subject" value="还款支付"><br>
+    <!--签名算法（固定值）-->
+    <input type="text" readonly="readonly" name="sign_type" value="MD5"><br>
+    <!--支付宝业务类型（固定值）-->
+    <input type="text" readonly="readonly" name="service" value="create_direct_pay_by_user"><br>
+    <!--回调地址（回传填参）-->
+    <input type="text" readonly="readonly" name="notify_url" value=""><br>
+    <!--支付宝合作号（固定值）-->
+    <input type="text" readonly="readonly" name="partner" value="2088911679497797"><br>
+    <!--卖家邮箱号（固定值）-->
+    <input type="text" readonly="readonly" name="seller_email" value="e1-pay@izhaowo.com"><br>
+    <!--支付类型（固定值）-->
+    <input type="text" readonly="readonly" name="payment_type" value="1"><br>
+    <!--支付超时时间（固定值）-->
+    <input type="text" readonly="readonly" name="it_b_pay" value="2h"><br>
+    <!--前台跳转地址（回传填参）-->
+    <input type="text" readonly="readonly" name="return_url" value="">
+    <!--交易号码（回传填参）-->
+    <input type="text" readonly="readonly" name="out_trade_no" value=""><br>
+    <input type="submit" value="支付宝提交">
+</form>
+
+<div class="footer">
+    <div class="footer_left">
+        <div>
+            <img src="../images/hotelStatus/call.png" alt="call">028-5191803
+        </div>
+        <div>
+            <img src="../images/hotelStatus/help.png" alt="call">帮助
+        </div>
+    </div>
+    <div class="footer_right">
+        <p>版权所有Copyright By 圣境环球</p>
+    </div>
+</div>
+</body>
+</html>

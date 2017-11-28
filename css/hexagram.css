@@ -3,6 +3,23 @@
     margin:0;
 
 }
+/****重写layui样式**/
+.layui-table-view{
+    width:100%;
+}
+.content-right-down .layui-btn{
+    width: 55px;
+}
+.layui-form-label{
+    width:150px;
+}
+.dataile-info .layui-col-md5{
+    width:100%;
+}
+.dataile-info .layui-col-md-offset1{
+    margin-left: 0;
+}
+/*-----------------------------*/
 #header {
     position: fixed;
     top:0;
@@ -34,8 +51,7 @@
 }
 .content-left-top{
     width:100%;
-    height:415px;
-    padding-top:70px;
+    height:375px;
     border-bottom: 1px solid #ccc;
 }
 .tittle{
@@ -49,7 +65,9 @@
 .dataile-info input{
     border:none;
 }
-
+.dataile-info .layui-form-item{
+    margin-bottom: 8px;
+}
 .content-left-down{
     width:100%;
     height:49%;
@@ -62,27 +80,38 @@
 }
 .content-right{
      width:70%;
-     padding-top:70px;
  }
 
 .content-right-top{
     width:100%;
-    height:415px;
+    height:375px;
     border-bottom: 1px solid #ccc;
 }
 .content-right-top .btb-tofile{
-    padding:80px;
+    padding:50px;
     width:80%;
 }
-.content-right-top .btb-tofile .remark{
-    margin-left: 50px;
+.content-right-top .btb-tofile div{
+    margin-top: 20px;
+}
+.content-right-top-left{
+    float: left;
+    width:40%;
+}
+.content-right-top-right{
+    float: right;
+    width:60%;
+}
+.content-right-down{
+    padding:10px;
+    height: 44%;
 }
 .remarkInfo{
     width:60%;
     margin:50px auto;
 }
 .limit-contain{
-    width:60%;
+   /* width:60%;*/
     padding:60px;
 }
 .limit-contain input[disabled]{
@@ -140,3 +169,70 @@
     background-color: rgb(0, 0, 0);
     opacity: 0.8
 }
+/*********支付页面*******/
+.pay-way{
+    display: block;
+    color: #444;
+    margin:0px 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.payment-list{
+    overflow: hidden;
+    width: 100%;
+}
+.payment-list li{
+    position: relative;
+    float: left;
+    width: 200px;
+    height:80px;
+    margin:20px 50px;
+}
+.payment-list input{
+    position: absolute;
+    top:25px;
+}
+.payment-list label{
+    display: inline-block;
+    border:1px solid #EEEEEE;
+    padding:10px 20px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.payment-list label img{
+    width:100%;
+    height:100%;
+}
+.btns{
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

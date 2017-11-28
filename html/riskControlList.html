@@ -14,13 +14,17 @@
     <div class="head">
         <div class="head_left" onclick="logout()">
             <img src="../images/hotelStatus/logo.png" alt="logo">
-            客户信息列表
+            风控审核列表
         </div>
     </div>
 </div>
 
 <div class="contain">
+    <!--信息审核列表-->
     <table class="layui-hide" id="hotel-list" lay-filter="hotelTable"></table>
+    <div class="title"><span id="loan-name"></span>&nbsp;贷款列表</div>
+    <!--上传文件列表-->
+    <table class="layui-hide" id="loan-list" lay-filter="loanTable"></table>
 </div>
 <div class="footer">
     <div class="footer_left">
@@ -35,9 +39,8 @@
         <p>版权所有Copyright By 圣境环球</p>
     </div>
 </div>
-
+<!--信息审核列表-->
 <script type="text/html" id="barDemo">
-
     {{# if(d.approveStatus == 0){ }}
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-mini" lay-event="checkLevelOne">一级审核</a>
@@ -46,11 +49,10 @@
     <a class="layui-btn layui-btn-mini layui-btn-mini" lay-event="checkLevelTwo">二级审核</a>
     {{# }else if(d.approveStatus == 4){ }}
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="hasBeenLend">已放款</a>
+    <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="loan">放款</a>
     {{# }else{ }}
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     {{# } }}
-
 </script>
 <script type="text/html" id="status">
     {{# if(d.approveStatus == 0){ }}
@@ -63,6 +65,23 @@
     二级审核驳回
     {{# }else if(d.approveStatus == 4){ }}
     审核通过
+    {{# } }}
+</script>
+
+<!--上传文件列表-->
+<script type="text/html" id="loanStatus">
+    {{# if(d.status == 0){ }}
+    发起申请
+    {{# } else if(d.status == 1){ }}
+    未还款
+    {{# } else if(d.status == 2){ }}
+    已还款
+    {{# } }}
+</script>
+<script type="text/html" id="loanBar">
+    <a class="layui-btn layui-btn-mini" lay-event="hasBeenLend">上传文件</a>
+    {{# if(d.status == 0 || d.status == 1){ }}
+    <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="repayment">还款</a>
     {{# } }}
 </script>
 <script src="../js/jquery-1.11.1.js"></script>

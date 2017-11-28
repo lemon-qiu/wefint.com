@@ -95,10 +95,8 @@
                 let searchUrl = encodeURI("./hexagram.html?userName=" + data.userName + '&' + 'certNo=' + data.certNo + '&' + 'mobile=' + data.mobile + '&' + 'motelName=' + data.motelName + '&' + 'friendMobile=' + data.friendMobile + '&' + 'averageCommision=' + data.monthIncome + '&' + 'userId=' + userId);
                 if (approveStatus === GETENDTIRELYAPPROVESTAATUS || approveStatus === GETENDTIRELYAPPROVESFIVE) {
                     $('#financial').attr({'onClick': "window.location.href='"+searchUrl+"'"})
-
                 } else if (approveStatus === GETPUTINAPPROVESTATUSONE || approveStatus === GETPUTINAPPROVESTATUSTWO) {
                     $('#financial').attr({'onClick': "window.location.href='"+searchUrl+"'"})
-
                 } else if (approveStatus === GETPUTINAPPROVESTATUSTHREE || approveStatus === GETPUTINAPPROVESTATUSFOUR) {
                     // 切换为修改数据的状态
                     $('#financial').attr({'onClick': "window.location.href='usercenter.html'"})

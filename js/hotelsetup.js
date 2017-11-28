@@ -252,11 +252,14 @@ function getCommisionMes() {
             $("#compensasenYiLongSolid").val('0')
         } else {
             let objs = eval(data.content);
-            $('#compensasenQuNaErSolid').attr({'data':objs.compensasenId});
+            $('#compensasenQuNaErSolid').attr({'data': objs.compensasenId});
             $("#compensasenQuNaErSolid").val(objs.compensasenQuNaErSolid);
             $("#compensasenXieChengSolid").val(objs.compensasenXieChengSolid);
             $("#compensasenFeiZhuSolid").val(objs.compensasenFeiZhuSolid);
             $("#compensasenYiLongSolid").val(objs.compensasenYiLongSolid);
+            $('#compensasenMeiTuanSolid').val(objs.compensasenMeiTuanSolid);
+            $('#compensasenTuJiaSolid').val(objs.compensasenTuJiaSolid);
+            $('#compensasenAliSolid').val(objs.compensasenAliSolid);
             if ($("#compensasenYiLongSolid").val() != '') {
                 $('#form2').hide();
             } else {
@@ -280,6 +283,9 @@ function changeCommision(B) {
         "compensasenYiLongSolid": B.compensasenYiLongSolid,
         "compensasenXieChengSolid": B.compensasenXieChengSolid,
         "compensasenQuNaErSolid": B.compensasenQuNaErSolid,
+        'compensasenMeiTuanSolid': B.compensasenMeiTuanSolid,
+        'compensasenTuJiaSolid': B.compensasenTuJiaSolid,
+        'compensasenAliSolid': B.compensasenAliSolid,
         'compensasenId': $('#compensasenQuNaErSolid').attr('data')
     };
     new ajaxHttp("POST", getUrl(3) + "/compensasen/update", Data, function(C) {
@@ -310,6 +316,9 @@ function form2(B) {
         "compensasenYiLongSolid": B.compensasenYiLongSolid,
         "compensasenXieChengSolid": B.compensasenXieChengSolid,
         "compensasenQuNaErSolid": B.compensasenQuNaErSolid,
+        'compensasenMeiTuanSolid': B.compensasenMeiTuanSolid,
+        'compensasenTuJiaSolid': B.compensasenTuJiaSolid,
+        'compensasenAliSolid': B.compensasenAliSolid,
     };
     if (Data.compensasenFeiZhuSolid !== '' || Data.compensasenYiLongSolid !== '' || Data.compensasenXieChengSolid !== '' || Data.compensasenQuNaErSolid !== '') {
 

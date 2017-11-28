@@ -4,7 +4,7 @@
  * @Date: 2017/11/14
  * @Time: 12:25
  */
-let dataUrl = '';
+let loanApplication = '';
 
 window.onload = function(e) {
     function GetQueryString(name) {
@@ -16,12 +16,17 @@ window.onload = function(e) {
     let userId = GetQueryString('userId');
     let appliedAmount = GetQueryString('appliedAmount');
     $.ajax({
-        url: url + '/getMerchantInfoByUserId?userId=' + encodeURIComponent(userId),
+        url: url + '/getLoanApplication?userId=' + encodeURIComponent(userId)+ '&' + 'applyAmt=' + appliedAmount,
         method: 'get',
         type: 'json',
-        success: function(data) {
+        success: function(result) {
             $('#appliedAmount').html(appliedAmount);//申请金额
-            setData(data);
+            if(result.code==='000000'){
+                var datas = result.data;
+                setData(datas);
+            }else if(result.code === 'E000003'){
+                alert('申请金额不能为空');
+            }
         }
     });
 };
@@ -59,9 +64,11 @@ function setData(data) {
     }
 
     $('#motelAssets').html(data.motelAssets);//客栈/店铺 价值
-    $('#motelRoomQuantity').html(data.motelRoomQuantity);//房间数量
-    $('#rentStartDate').html(data.rentStartDate);//起租时间
-    $('#rentEndDate').html(data.rentEndDate);//到期时间
+    $('#motelRoomQuantity').html(data.motelRoomQuantity);//房间数
+    var rentStartDate = new Date(data.rentStartDate),
+         rentEndDate = new Date(data.rentEndDate);
+    $('#rentStartDate').html(rentStartDate.getFullYear() + '年' + (rentStartDate.getMonth()+1) + '月' + rentStartDate.getDate() + '日' );//起租时间
+    $('#rentEndDate').html(rentEndDate.getFullYear() + '年' + (rentEndDate.getMonth()+1) + '月' + rentEndDate.getDate() + '日');//到期时间
 
     $('#accountName').html(data.accountName);//户名
     $('#openBank').html(data.openBank);//开户行
@@ -72,28 +79,8 @@ function setData(data) {
         taintTest: false,
         onrendered: function(canvas) {
             canvas.id = "mycanvas";
-            dataUrl = canvas.toDataURL();
-            let Data = {
-                type:16,
-                url:dataUrl,
-                userId:getCookie('userName')
-            };
-            $.ajax({
-                type: "POST",
-                url:getUrl(4)+ '/addPmsPic',
-                data:JSON.stringify(Data),
-                contentType: 'application/json;charset=UTF-8',
-                dataType: 'json',
-                success: function(result) {
-                    console.log(result)
-                },
-                error: function(request, status, e) {
-                    confirm('服务上传失败，点击确定刷新页面',function() {
-                        history.go(0)
-                    })
-                }
-
-            })
+            loanApplication = canvas.toDataURL();
+            Storage.loanApplication = loanApplication;
         }
     });
 }

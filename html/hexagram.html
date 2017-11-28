@@ -6,7 +6,7 @@
     <title>疯特金融</title>
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all"  type="text/css" />
     <link rel="stylesheet" href="../css/floaticon.css"   type="text/css" >
     <link rel="stylesheet" href="../css/hexagram.css"  type="text/css" />
     <link rel="stylesheet" href="../css/usercenter.css"  type="text/css" />
@@ -27,7 +27,7 @@
         <img src="../images/hotelStatus/logo.png">个人信息申请表
     </div>
     <div class="head_right">
-        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="javascript:history.go(-1);">
+        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="window.location.href='mainPannel.html'">
     </div>
 </div>
 
@@ -120,51 +120,72 @@
     </div>
     <div class="content-right">
         <div class="content-right-top">
-            <div class="btb-tofile">
-                <button class="layui-btn" onclick="onWithdraw()">客栈房贷</button>
-                <span class="remark">备注：</span> <span> 确定信息无误后点击进行客栈房贷。在下方输入金额可以进行额度提现。</span>
+            <div class="content-right-top-left">
+                <div class="btb-tofile">
+                    <button class="layui-btn" onclick="onWithdraw()">客栈房贷</button>
+                    <div><span class="remark">备注：</span> <span> 确定信息无误后点击进行客栈房贷。在下方输入金额可以进行额度提现。</span></div>
+                </div>
+                <div class="btb-tofile">
+                    <button class="layui-btn" onClick="window.location.href='usercenter1.html'">用户中心</button>
+                    <div><span class="remark">备注：</span> <span> 查看信息，如发现信息结果有误 可点击到用户中心 申请重新提交信息。</span></div>
+                </div>
             </div>
-            <div class="btb-tofile">
-                <button class="layui-btn" onClick="window.location.href='usercenter1.html'">用户中心</button>
-                <span class="remark">备注：</span> <span> 查看信息，如发现信息结果有误 可点击到用户中心 申请重新提交信息。</span>
+            <div class="content-right-top-right">
+                <div>
+                    <div class="remarkInfo" id="remarkInfo">
+                        <span>备注：</span> <span> 确定信息无误后点击进行客栈房贷。将进行额度提现。</span>
+                    </div>
+                    <div class="limit-contain" id="withdraw">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">最高可申请（元）:</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="maxLimit" autocomplete="off" class="layui-input" disabled value="10,000" id="appliedAmountMax">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">余额（元）:</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="balance" autocomplete="off" class="layui-input" disabled value="0" id="balance">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">申请金额（元）:</label>
+                            <div class="layui-input-block">
+                                <input type="number" required lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input" min="1"
+                                       max="10000" id="appliedAmount">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">同意申请请勾选:</label>
+                            <div class="layui-input-block checkboxbtn">
+                                <input type="checkbox" id="memberbasicTitle" onclick="clickUrl('memberbasicTitle')">
+                                <span onclick="memberbasicTitle()" class="showinfo memberbasicTitle">（附件）融资申请书</span>
+
+
+                                <input type="checkbox" id="ViewServiceProtocol" onclick="clickUrl('ViewServiceProtocol')">
+                                <span onclick="ViewServiceProtocol()" class="showinfo ViewServiceProtocol">居间服务协议</span>
+
+                                <input type="checkbox" id="loanAgreement" onclick="clickUrl('loanAgreement')">
+                                <span onclick="loanAgreement()" class="showinfo loanAgreement">借款协议</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button data-method="notice" class="layui-btn" onclick="DeterminedApply()" id="applyImmediately">立即申请</button>
+                                <button class="layui-btn layui-btn-primary">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="content-right-down">
-            <div class="remarkInfo" id="remarkInfo">
-                <span>备注：</span> <span> 确定信息无误后点击进行客栈房贷。将进行额度提现。</span>
+            <div class="tittle">
+                贷款列表:
             </div>
-            <div class="limit-contain" id="withdraw">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">最高可申请（元）:</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="maxLimit" autocomplete="off" class="layui-input" disabled value="10,000" id="appliedAmountMax">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">申请金额（元）:</label>
-                    <div class="layui-input-block">
-                        <input type="number" required lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input" min="1"
-                               max="10000" id="appliedAmount">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">同意申请请勾选:</label>
-                    <div class="layui-input-block checkboxbtn">
-                        <input type="checkbox" id="memberbasicTitle" onclick="clickUrl()">
-                        <span onclick="memberbasicTitle()" class="showinfo" id="clickUrl">（附件）融资申请书</span>
-                        <input type="checkbox" id="ViewServiceProtocol" onclick="clickUrl()">
-                        <span onclick="ViewServiceProtocol()" class="showinfo">居间服务协议</span>
-                        <input type="checkbox" id="loanAgreement" onclick="clickUrl()">
-                        <span onclick="loanAgreement()" class="showinfo">借款协议</span>
-                    </div>
-                </div>
-                <div class="layui-form-item updatafile">
-                    <div class="layui-input-block">
-                        <button data-method="notice" class="layui-btn" onclick="DeterminedApply()">立即申请</button>
-                        <button class="layui-btn layui-btn-primary">取消</button>
-                    </div>
-                </div>
-            </div>
+            <!--还款列表-->
+            <table class="layui-hide" id="repayment-list" lay-filter="repaymentTable"></table>
         </div>
     </div>
 </div>
@@ -192,6 +213,15 @@
 </div>
 
 </body>
+<script type="text/html" id="repaymentStatus">
+    {{# if(d.status == 0){ }}
+    发起申请
+    {{# } else if(d.status == 1){ }}
+    未还款
+    {{# } else if(d.status == 2){ }}
+    已还款
+    {{# } }}
+</script>
 <script>
     $($('.close')[0]).click(function() {
         $('#module').hide();

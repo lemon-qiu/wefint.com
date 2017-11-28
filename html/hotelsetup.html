@@ -7,17 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>设置</title>
-    <link rel="stylesheet" href="../layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all" type="text/css"/>
     <!--<link rel="stylesheet" href="../css/hotelsetup.css" media="all" />-->
-    <link rel="stylesheet" href="../css/floaticon.css"  type="text/css" >
-    <link rel="stylesheet" href="../layer/skin/default/layer.css"  type="text/css" >
+    <link rel="stylesheet" href="../css/floaticon.css" type="text/css">
+    <link rel="stylesheet" href="../layer/skin/default/layer.css" type="text/css">
     <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
     <script src="../js/pageonload.js"></script>
     <script src="../layui/layui.js" charset="utf-8"></script>
     <script src="../layer/layer.js" charset="utf-8"></script>
     <script src="../js/base64.js"></script>
     <script src="../js/hotelsetup.js"></script>
-    <link rel="stylesheet" href="../css/data.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/data.css" media="all" type="text/css"/>
 
 </head>
 
@@ -28,7 +28,7 @@
         <img src="../images/hotelStatus/logo.png">后台信息管理
     </div>
     <div class="head_right">
-        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="javascript:history.go(-1);" >
+        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="window.location.href='mainPannel.html'">
     </div>
 </div>
 <div class="layui-tab">
@@ -45,7 +45,16 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">房间类型:</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="roomType" required lay-verify="required" placeholder="请输入房型" autocomplete="off" class="layui-input">
+                        <!--<input type="text" name="roomType" required lay-verify="required" placeholder="请输入房型" autocomplete="off" class="layui-input">-->
+                        <select name="roomType" lay-verify="required" class="roomType">
+                            <option value="">请选择房间类型</option>
+                            <option value="大床房">大床房</option>
+                            <option value="标准间">标准间</option>
+                            <option value="家庭房">家庭房</option>
+                            <option value="复式房">服饰房</option>
+                            <option value="套房">套房</option>
+                            <option value="其他">其他</option>
+                        </select>
                     </div>
                     <label class="layui-form-label">房间名称:</label>
                     <div class="layui-input-inline">
@@ -54,18 +63,18 @@
                     </div>
                     <label class="layui-form-label">房间编号:</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="roomNumber" required lay-verify="required|number" placeholder="请输入房间编号" autocomplete="off"
+                        <input type="text" name="roomNumber" required lay-verify="required" placeholder="请输入房间编号" autocomplete="off"
                                class="layui-input">
                     </div>
                     <label class="layui-form-label">初始价格:</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="roomInitalPrice" required lay-verify="required|number" placeholder="单位“元”" autocomplete="off"
+                        <input type="text" name="roomInitalPrice" required lay-verify="required" placeholder="单位“元”" autocomplete="off"
                                class="layui-input">
                     </div>
 
                     <label class="layui-form-label hide">周末价格:</label>
                     <div class="layui-input-inline hide">
-                        <input type="text" name="roomSpecialDatePrice" value="0" required lay-verify="required|number" placeholder="单位“元”" autocomplete="off"
+                        <input type="text" name="roomSpecialDatePrice" value="0" required lay-verify="required" placeholder="单位“元”" autocomplete="off"
                                class="layui-input">
                     </div>
                 </div>
@@ -167,6 +176,57 @@
                         </div>
                     </fieldset>
                 </div>
+                <div class="layui-form-item">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>美团</legend>
+                        <div class="layui-field-box">
+                            <label class="layui-form-label">佣金比例</label>
+                            <div class="layui-input-inline">
+                                <input id="compensasenMeiTuanSolid" type="text" name="compensasenMeiTuanSolid" required lay-verify="required"
+                                       placeholder="请输入百分比" autocomplete="off" class="layui-input">
+                            </div>
+                            <!-- <label class="layui-form-label">佣金比例</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="ompensasenQuNaEr" required lay-verify="required" placeholder="请输入百分比" autocomplete="off" class="layui-input">
+                            </div> -->
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="layui-form-item">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>途家</legend>
+                        <div class="layui-field-box">
+                            <label class="layui-form-label">佣金比例</label>
+                            <div class="layui-input-inline">
+                                <input id="compensasenTuJiaSolid" type="text" name="compensasenTuJiaSolid" required lay-verify="required"
+                                       placeholder="请输入百分比" autocomplete="off" class="layui-input">
+                            </div>
+                            <!-- <label class="layui-form-label">佣金比例</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="ompensasenQuNaEr" required lay-verify="required" placeholder="请输入百分比" autocomplete="off" class="layui-input">
+                            </div> -->
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="layui-form-item">
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend>阿里</legend>
+                        <div class="layui-field-box">
+                            <label class="layui-form-label">佣金比例</label>
+                            <div class="layui-input-inline">
+                                <input id="compensasenAliSolid" type="text" name="compensasenAliSolid" required lay-verify="required"
+                                       placeholder="请输入百分比" autocomplete="off" class="layui-input">
+                            </div>
+                            <!-- <label class="layui-form-label">佣金比例</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="ompensasenQuNaEr" required lay-verify="required" placeholder="请输入百分比" autocomplete="off" class="layui-input">
+                            </div> -->
+                        </div>
+                    </fieldset>
+                </div>
+
                 <div class="layui-form-item">
                     <fieldset class="layui-elem-field layui-field-title">
                         <legend>操作</legend>
@@ -330,7 +390,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">房间类型</label>
                     <div class="layui-input-block">
-                        <input type="text" required  class="layui-input" id="roomType">
+                        <input type="text" required class="layui-input" id="roomType">
                     </div>
                 </div>
             </div>
@@ -340,7 +400,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">房间名称</label>
                     <div class="layui-input-block">
-                        <input type="text" required  class="layui-input" id="roomName">
+                        <input type="text" required class="layui-input" id="roomName">
                     </div>
                 </div>
             </div>
@@ -350,7 +410,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">房间编号</label>
                     <div class="layui-input-block">
-                        <input type="text" required  class="layui-input" id="roomNumber">
+                        <input type="text" required class="layui-input" id="roomNumber">
                     </div>
                 </div>
             </div>
@@ -360,7 +420,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">初始价格</label>
                     <div class="layui-input-block">
-                        <input type="text" required  class="layui-input" id="roomInitalPrice">
+                        <input type="text" required class="layui-input" id="roomInitalPrice">
                     </div>
                 </div>
             </div>
@@ -370,7 +430,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">周末价格</label>
                     <div class="layui-input-block">
-                        <input type="text" required value="0"  class="layui-input" id="roomSpecialDatePrice">
+                        <input type="text" required value="0" class="layui-input" id="roomSpecialDatePrice">
                     </div>
                 </div>
             </div>

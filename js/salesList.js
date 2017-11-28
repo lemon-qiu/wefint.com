@@ -92,16 +92,16 @@ $(function () {
         table.render({
             elem: '#hotel-list'
             , id: 'id'
-            , url: getUrl(5)+'/getMerchantInfoList'
+            , url: getUrl(5)+'/getSalesInfoList'
             , cols: [[
-                {field: 'id', title: '#', width: 80, sort: true}
-                , {field: 'userName', title: '姓名', width: 200, sort: true}
+                {field: 'userName', title: '姓名', width: 200, sort: true}
                 , {field: 'certNo', title: '身份证号', width: 200, sort: true}
                 , {field: 'mobile', title: '联系方式', width: 200, sort: true}
                 , {field: 'motelName', title: '客栈名称', width: 300, sort: true}
                 , {field: 'motelProviceName', title: '省份', width: 80, sort: true}
                 , {field: 'motelCityName', title: '市级', width: 80, sort: true}
                 , {field: 'motelAreaName', title: '区/县', width: 150, sort: true}
+                , {field: 'createTime', title: '申请时间', width: 160, sort: true}
                 , {field: 'approveStatus', title: '状态', templet: '#status', width: 150}
                 , {fixed: 'right', title: '操作', width: 300, toolbar: '#barDemo'}
             ]]
@@ -206,6 +206,18 @@ $(function () {
                 }
                 body.contents().find("#marryStatus").val(ms);//状况
                 //客栈情况
+                var ht = '',hotelType;
+                if(data.hotelType === null || data.hotelType === ''){
+                    hotelType = null;
+                }else {
+                    hotelType=data.hotelType.toString()
+                }
+                switch (hotelType){
+                    case null:ht='';break;
+                    case '0' : ht = '客栈';break;
+                    case '1' : ht = '酒店';break;
+                }
+                body.contents().find("#hotelType").val(ht);//客栈类型
                 body.contents().find("#motelName").val(data.motelName);//客栈名字
                 body.contents().find("#motelAddress").val(data.motelAddress);//客栈地址
                 var mp = '',mainPropertyStr;

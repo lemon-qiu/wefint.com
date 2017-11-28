@@ -4,7 +4,7 @@
  * @Date: 2017/11/6
  * @Time: 15:38
  */
-
+let Storage = window.localStorage;  // localStorage
 let SERVER_ADD_PORT = "http://47.94.108.64:3000";   // 设置的测试的端口
 let SUCCESSFULUSERLOGIN = '000000'; // 登录 操作 成功
 let USERDOESNOTEXIST = '200001';  // 用户不存在;
@@ -18,6 +18,7 @@ let DONTHAVEMESSAGE = '200106';  // 无业务数据
 let ROOMOCCUPANCYCONFLICT = '200105'; // 用户入住情况冲突
 let NOTOUTOFTIME = '200504';  //输入预定天数超时（超过30天）
 let USERCHOOSETIMENOTNOWTIME = '200506';  // 用户入住时间必须为当天时间才能入住
+let NOMORETHANTODAY = '200507'; // 用户输入住宿的时间不能超过今天
 
 /**
  *
@@ -28,7 +29,7 @@ let USERCHOOSETIMENOTNOWTIME = '200506';  // 用户入住时间必须为当天�
 function setCookie(B, C, D) {
     let A = new Date();
     A.setDate(A.getDate() + D);
-    document.cookie = B + "=" + escape(C) + ((D === null) ? "" : ";expires=" + A.toGMTString())
+    document.cookie = B + "=" + escape(C) + ((D === null) ? "" : ";expires=" + A.toGMTString());
 }
 
 /**
@@ -39,7 +40,7 @@ function setCookie(B, C, D) {
 function getCookie(A) {
     if (document.cookie.length > 0) {
         c_start = document.cookie.indexOf(A + "=");
-        if (c_start != -1) {
+        if (c_start !== -1) {
             c_start = c_start + A.length + 1;
             c_end = document.cookie.indexOf(";", c_start);
             if (c_end === -1) {
@@ -60,7 +61,7 @@ function delCookie(B) {
     let A = new Date();
     A.setTime(A.getTime() - 1);
     let C = getCookie(B);
-    if (C != null) {
+    if (C !== null) {
         document.cookie = B + "=" + C + ";expires=" + A.toGMTString()
     }
 }
@@ -152,10 +153,22 @@ function checkCookieLogin() {
  *  退出登录的方法 清楚cookie
  */
 function logout() {
-    delCookie("userName");
-    delCookie("token");
-    delCookie("token");
-    window.location.href = "./login.html"
+    let Data = null;
+    new ajaxHttp('get',getUrl(1)+'/sso/delete',Data,function(err) {
+        alert('服务器故障，正在维护中，请稍后',err)
+    },function(data) {
+        if(data.code === SUCCESSFULUSERLOGIN){
+            delCookie("userName");
+            delCookie("token");
+            window.location.href = "./login.html";
+        }else{
+            console.log(data.code);
+            delCookie("userName");
+            delCookie("token");
+            window.location.href = "./login.html";
+        }
+
+    })
 }
 
 /**
@@ -167,16 +180,15 @@ function getUrl(type) {
     if (type === 1) { // 登录
         return "http://192.168.0.8:48080"
     } else if (type === 2) { // 注册
-        //return "http://192.168.0.130:30000"
-        return "http://192.168.0.9:30000"
+        return "http://192.168.0.130:30000"
     } else if (type === 3) { // 设置
         //return "http://192.168.0.130:30000"
         return "http://192.168.0.9:30000"
     } else if(type === 4){
-        return "http://192.168.0.158:20000"//金融图片上传
+        return "http://192.168.0.183:20000"//金融图片上传
         //return "http://192.168.0.10:20000"//金融图片上传
     } else if(type === 5 ){
-        return "http://192.168.0.158:20000"//金融审核
+        return "http://192.168.0.183:20000"//金融审核
         //return "http://192.168.0.10:20000"//金融审核
     } else if(type === 6 ){
         return "http://192.168.0.100:30050" //OSS账户信息
@@ -186,8 +198,31 @@ function getUrl(type) {
         return "http://192.168.0.100:30050" //金融图片下载
         //return "http://115.28.115.6:30050" //金融图片下载
     }
-
 };
+/*function getUrl(type) {
+    if (type === 1) { // 登录
+        return "http://115.28.115.6:48080"
+    } else if (type === 2) { // 注册
+        //return "http://192.168.0.130:30000"
+        return "http://115.28.115.6:30000"
+    } else if (type === 3) { // 设置
+        //return "http://192.168.0.130:30000"
+        return "http://115.28.115.6:30000"
+    } else if(type === 4){
+        return "http://115.28.115.6:20000"//金融图片上传
+        //return "http://192.168.0.10:20000"//金融图片上传
+    } else if(type === 5 ){
+        return "http://115.28.115.6:20000"//金融审核
+        //return "http://192.168.0.10:20000"//金融审核
+    } else if(type === 6 ){
+        return "http://115.28.115.6:30050" //OSS账户信息
+    }else if(type === 7 ){
+        return "http://wefint.oss-cn-qingdao.aliyuncs.com" //OSS上传图片
+    }else if(type === 8 ){
+        return "http://115.28.115.6:30050" //金融图片下载
+    }
+};*/
+
 
 /**
  * window alert方法的封装

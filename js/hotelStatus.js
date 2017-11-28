@@ -13,12 +13,22 @@ layui.use(['laydate', 'form', 'layedit', 'jquery'], function() {
         , form = layui.form
         , layer = layui.layer
         , layedit = layui.layedit;
-
     layui.use('form', function() {
         let form = layui.form;
+        let onupdataBtn = $('#onupdata');
+        // if(onupdataBtn.text() === '立即提交'){
+        //     console.log('++++++++++')
         form.on('submit(insertHouse)', function(data) {
-            insertHouse(data.field);
-            return false;
+            if (onupdataBtn.text() === '立即提交') {
+                insertHouse(data.field);
+                return false;
+            } else if (onupdataBtn.text() === '补单') {
+                addAdditionalOrder(data.field);
+                return false;
+            } else {
+                console.log(onupdataBtn.text())
+            }
+
         });
         form.on('submit(addCheckin)', function(data) {
             if (data.field.clientType === '1') {
@@ -55,9 +65,9 @@ layui.use(['laydate', 'form', 'layedit', 'jquery'], function() {
                 let depositInput = $('#depositInput');
                 let otherChannelInput = $('#otherChannelInput');
                 $('#depositLayble').text('押金');
-                depositInput.attr({'name': 'deposit'});
+                depositInput.attr({'name': 'deposit', 'lay-verify': ''});
                 $('#otherChannelLayble').text('其他渠道');
-                otherChannelInput.attr({'name': 'otherChannel'});
+                otherChannelInput.attr({'name': 'otherChannel', 'lay-verify': ''});
                 $('#truePaymentLayble').text('实际收款金额');
                 $('#truePaymentLableInput').attr({'name': 'enterRoomPrice'});
                 $('.startDayLayble').text('当前时间');
@@ -78,11 +88,12 @@ layui.use(['laydate', 'form', 'layedit', 'jquery'], function() {
                 $('.startDayInput').attr({'name': 'hasStayDate', 'disabled': 'disabled'});
                 $('#depositLayble').text('退款金额');
                 depositInput.attr({'name': 'refund'});
-                depositInput.val('');
+                depositInput.val('0');
                 $('#otherChannelLayble').text('补差金额');
                 otherChannelInput.attr({'name': 'refundPrice'});
-                otherChannelInput.val('');
+                otherChannelInput.val('0');
                 form.on('submit(checkout)', function(data) {
+                    console.log(data.field.clientType);
                     if (data.field.clientType === '1' || data.field.clientType === '2') {
                         alert('请将订单状态改为退房才能修改退房')
                     } else {
@@ -126,6 +137,7 @@ window.onload = function() {  // 0.5 版本 在页面读取完毕后 根据当�
     createMainTable(nowDate, datenumber, 30);   // 自动创建表单的方法
 
 };
+
 function formatDate(date) {
     let y = date.getFullYear();
     let m = date.getMonth() + 1;
@@ -140,26 +152,30 @@ function formatDate(date) {
  * @param type  按钮的状态 是加时间 还是减时间
  */
 function appendTime(type) {
-    let viewTime = $('#nowTimeChoose');
-    let viewTimeArr = viewTime.val().split('-');
-    let year = viewTimeArr[0];
-    let mounth = viewTimeArr[1];
-    let date = viewTimeArr[2];
-    let numberDate = parseInt(date);
-    if (type === '+') {
-        numberDate++;
-        let nowTime = year + '-' + mounth + '-' + numberDate;
-        viewTime.val(nowTime);
-        let datenumber = mGetDate(year, mounth);
-        createMainTable(nowTime, datenumber, 30)
-    } else if (type === '-') {
-        numberDate--;
-        let nowTime = year + '-' + mounth + '-' + numberDate;
-        viewTime.val(nowTime);
-        let datenumber = mGetDate(year, mounth);
-        createMainTable(nowTime, datenumber, 30)
-    }
 
+    if (type === '+') {
+        let viewTime = $('#nowTimeChoose');
+        let date = new Date(viewTime.val());
+        date.setDate(date.getDate() + 1);
+        let time = date.Format("yyyy-MM-dd");
+        viewTime.val(time);
+        let viewTimeArr = viewTime.val().split('-');
+        let year = viewTimeArr[0];
+        let mounth = viewTimeArr[1];
+        let datenumber = mGetDate(year, mounth);
+        createMainTable(time, datenumber, 30)
+    } else if (type === '-') {
+        let viewTime = $('#nowTimeChoose');
+        let date = new Date(viewTime.val());
+        date.setDate(date.getDate() - 1);
+        let time = date.Format("yyyy-MM-dd");
+        viewTime.val(time);
+        let viewTimeArr = viewTime.val().split('-');
+        let year = viewTimeArr[0];
+        let mounth = viewTimeArr[1];
+        let datenumber = mGetDate(year, mounth);
+        createMainTable(time, datenumber, 30)
+    }
 }
 
 /**
@@ -210,29 +226,29 @@ function createMainTable(nowTime, n, maxnum) {
     }
     initPageData();
     initPanel(nowTime);
-}
+    }
 
-/**
- * 获取当前月有多少天
- * @param year  当前年
- * @param month 当前月
- * @returns {number}
- */
-function mGetDate(year, month) {
-    let d = new Date(year, month, 0);
-    return d.getDate();
-}
+    /**
+     * 获取当前月有多少天
+     * @param year  当前年
+     * @param month 当前月
+     * @returns {number}
+     */
+    function mGetDate(year, month) {
+        let d = new Date(year, month, 0);
+        return d.getDate();
+    }
 
-/**
- * 根据当前时间 获取 当前周
- * @param nowTime  当前的时间
- * @returns {string}
- */
-function getWeek(nowTime) {
-    let week = new Date(nowTime).getDay();
-    let str = '';
-    switch (week) {
-        case 0 :
+    /**
+     * 根据当前时间 获取 当前周
+     * @param nowTime  当前的时间
+     * @returns {string}
+     */
+    function getWeek(nowTime) {
+        let week = new Date(nowTime).getDay();
+        let str = '';
+        switch (week) {
+            case 0 :
             str += "日";
             break;
         case 1 :
@@ -280,20 +296,20 @@ function initPanel(nowTime) {
                 RoomIdArr.push(RoomId);
                 roomInitalPriceArr.push(roomInitalPrice);
                 let hotelInfoList = jsonData[i].hotelCheckinInfoList;
-                uiStr += '  <tr roomId="' + RoomId + '" roomInitalPrice="'+roomInitalPrice+'"><td>' + roomName + '</td><td>' + roomNumber + '</td></tr>';
+                uiStr += '  <tr roomId="' + RoomId + '" roomInitalPrice="' + roomInitalPrice + '"><td>' + roomName + '</td><td>' + roomNumber + '</td></tr>';
                 setTimeout(function() {
                     let leftTable = $('#left_table');
                     let dataRight = $('.dataRight');
                     for (let i = 0; i < dataRight.length; i++) {
                         let leftTableTd = leftTable.children().children().children('td:nth-of-type(2)');
                         let RoomNumber = $(leftTableTd[i]).text();
-                        $(dataRight[i]).attr({'roomId': RoomIdArr[i], 'RoomNumber': RoomNumber,'roomInitalPrice':roomInitalPriceArr[i]})
+                        $(dataRight[i]).attr({'roomId': RoomIdArr[i], 'RoomNumber': RoomNumber, 'roomInitalPrice': roomInitalPriceArr[i]})
                     }
                     for (let i = 0; i < dataRight.length; i++) {
                         let RoomID = $(dataRight[i]).attr('roomId');
                         let RoomNumber = $(dataRight[i]).attr('RoomNumber');
                         let roomInitalPrice = $(dataRight[i]).attr('roomInitalPrice');
-                        $(dataRight[i]).children().attr({'roomId': RoomID, 'RoomNumber': RoomNumber,'roomInitalPrice':roomInitalPrice})
+                        $(dataRight[i]).children().attr({'roomId': RoomID, 'RoomNumber': RoomNumber, 'roomInitalPrice': roomInitalPrice})
                     }
                 }, 200);
                 leftTableTbody.html(uiStr);
@@ -310,13 +326,13 @@ function initPanel(nowTime) {
                             let RoomID = $(leftTableTr[y]).attr('roomId');
                             let roomInitalPrice = $(leftTableTr[y]).attr('roomInitalPrice');
                             let RoomNumber = $(leftTableTd[y]).text();
-                            $(dataRight[y]).attr({'roomId': RoomID, 'RoomNumber': RoomNumber,'roomInitalPrice':roomInitalPrice})
+                            $(dataRight[y]).attr({'roomId': RoomID, 'RoomNumber': RoomNumber, 'roomInitalPrice': roomInitalPrice})
                         }
                         for (let i = 0; i < dataRight.length; i++) {
                             let RoomID = $(dataRight[i]).attr('roomId');
                             let RoomNumber = $(dataRight[i]).attr('RoomNumber');
                             let roomInitalPrice = $(dataRight[i]).attr('roomInitalPrice');
-                            $(dataRight[i]).children().attr({'roomId': RoomID, 'RoomNumber': RoomNumber,'roomInitalPrice':roomInitalPrice})
+                            $(dataRight[i]).children().attr({'roomId': RoomID, 'RoomNumber': RoomNumber, 'roomInitalPrice': roomInitalPrice})
                         }
                         for (let n = 0; n < nowdateDiv.length; n++) {
                             let hasStayDate = hotelInfoList[j].hasStayDate;
@@ -325,6 +341,7 @@ function initPanel(nowTime) {
                             let checkRightStr = '<div class="parent"><div class="checkSubscribe" copyId="' + copyId + '"  onclick="getColumnDetail(this,event)">已预定</div></div>';
                             let checkIn = '<div class="parent"><div class="checkIn" copyId="' + copyId + '"  onclick="getColumnDetail(this,event)">已入住</div></div>';
                             let checkOut = ' <div class="parent"><div class="checkOut" copyId="' + copyId + '"  onclick="getColumnDetail(this,event)">已退房</div></div>';
+                            let checkReplenishment = ' <div class="parent"><div class="checkOut" copyId="' + copyId + '"  onclick="getColumnDetail(this,event)">补单</div></div>'
                             if ($(nowdateDiv[n]).attr('date') === hasStayDate && $(nowdateDiv[n]).attr('roomId') === roomid) {
                                 if (clientType === '1') {
                                     $(nowdateDiv[n]).html(checkRightStr);
@@ -334,6 +351,9 @@ function initPanel(nowTime) {
                                 }
                                 if (clientType === '3') {
                                     $(nowdateDiv[n]).html(checkOut);
+                                }
+                                if (clientType === '4') {
+                                    $(nowdateDiv[n]).html(checkReplenishment);
                                 }
                             }
                         }
@@ -355,7 +375,6 @@ function initPanel(nowTime) {
         }
     });
 }
-
 /**
  * 初始化表单数据
  */
@@ -365,10 +384,10 @@ function initPageData() {
     let tableContent = $('#table_content');
     let strNode = '';
     for (let i = 0; i < leftTableTr.length; i++) {
-        if($(leftTableTr[i]).attr('date-type') !== '1'){
+        if ($(leftTableTr[i]).attr('date-type') !== '1') {
             strNode += ' <div class="dataRight"></div>';
             tableContent.html(strNode)
-        }else{
+        } else {
             tableContent.html('')
         }
 
@@ -403,6 +422,7 @@ function getColumnDetail(obj, e) {
     let roomId = $('.roomId');
     let startDay = $('.startDay');
     let roomNumber = $('.roomNumber');
+    let onupdata = $('#onupdata');
     let tdTxt = obj.innerHTML;
 
     let clickRoomId = '';
@@ -422,8 +442,18 @@ function getColumnDetail(obj, e) {
             type: 1,
             area: ["61%", "80%"],
             content: $('#checkRightStr')
+        });
+        roomInitalPrice = $(obj).parent().parent().attr('roomInitalPrice');
+        let stayDays = $('.stayDays');
+        let date = stayDays.val();
+        stayDays.blur(function() {
+            date = $(stayDays[0]).val();
+            let allReceivable = parseInt(date) * parseInt(roomInitalPrice);
+            $('.red').val(allReceivable)
         })
     } else if (tdTxt === "已入住") {
+        let stayDays = $('.stayDays');
+        stayDays.attr({'disabled':'disabled'});
         let copyId = $(obj).attr('copyId');
         let viewCopyId = $('.copyId');
         viewCopyId.val(copyId);
@@ -432,17 +462,31 @@ function getColumnDetail(obj, e) {
         startDay.val(clickDate);
         roomId.val(clickRoomId);
         viewOrder(copyId, clickDate, obj);
-        let index = layer.confirm('确认修改已入住', {
-            btn: ['确认'] //按钮
-        }, function() {
-            layer.close(index);
-            layer.open({
-                type: 1,
-                area: ["61%", "80%"],
-                content: $('#checkin')
-            });
+        // layer.close(index);
+        layer.open({
+            type: 1,
+            area: ["61%", "80%"],
+            content: $('#checkin')
         });
-    } else if(tdTxt === "已退房"){
+        // roomInitalPrice = $(obj).parent().parent().attr('roomInitalPrice');   // 版本号 ： 0.56  禁用 修改住房信息时  不再可以修改 入住天数
+        // let date = stayDays.val();
+        // stayDays.blur(function() {
+        //     date = $(stayDays[1]).val();
+        //     let allReceivable = parseInt(date) * parseInt(roomInitalPrice);
+        //     $('.red').val(allReceivable)
+        // })
+
+        // let index = layer.confirm('确认修改已入住', {
+        //     btn: ['确认'] //按钮
+        // }, function() {
+        //     layer.close(index);
+        //     layer.open({
+        //         type: 1,
+        //         area: ["61%", "80%"],
+        //         content: $('#checkin')
+        //     });
+        // });
+    } else if (tdTxt === "已退房" || tdTxt === "补单") {
         let copyId = $(obj).attr('copyId');
         clickDate = $(obj).parent().parent().attr('date');
         clickRoomId = $(obj).parent().parent().attr('roomid');
@@ -452,52 +496,126 @@ function getColumnDetail(obj, e) {
         $('#onupdata').hide();
         for (let i = 0; i < allInput.length; i++) {
             if ($(allInput[i]).attr('id') !== 'userName') {
-                 $($(allInput[i])).attr({'disabled':'disabled'});
+                $($(allInput[i])).attr({'disabled': 'disabled'});
             } else {
                 userName.val(getCookie('userName'));
                 userName.attr({'disabled': 'disabled'})
             }
 
         }
-        roomInitalPrice= $(obj).attr('roomInitalPrice');
-
+        roomInitalPrice = $(obj).attr('roomInitalPrice');
         startDay.val(clickDate);
         layer.open({
             type: 1,
             area: ["61%", "80%"],
             content: $('#addReservation')
         });
-    }else{
-        $('#onupdata').show();
-        let allInput = $('input');
-        for (let i = 0; i < allInput.length; i++) {
-            if ($(allInput[i]).attr('id') !== 'userName') {
-                $($(allInput[i])).val('');
-            } else {
-                userName.val(getCookie('userName'));
-                userName.attr({'disabled': 'disabled'})
-            }
-
-        }
+    } else {
+        let nowDate = new Date();
+        let formatNowDate = formatDate(nowDate);
         clickDate = $(obj).attr('date');
-        clickRoomId = $(obj).attr('roomid');
-        clickRoomNumber = $(obj).attr('roomnumber');
-        roomInitalPrice= $(obj).attr('roomInitalPrice');
+        if (clickDate >= formatNowDate) {
+            $('#clientType').text('预定');
+            onupdata.show();
+            onupdata.text('立即提交');
+            let allInput = $('input');
+            for (let i = 1; i < allInput.length; i++) {
+                if ($(allInput[i]).attr('id') !== 'userName') {
+                    $($(allInput[i])).val('');
+                    $($(allInput[i])).removeAttr('disabled');
+                } else {
+                    userName.val(getCookie('userName'));
+                    userName.attr({'disabled': 'disabled'})
+                }
 
-        startDay.val(clickDate);
-        roomId.val(clickRoomId);
-        roomNumber.val(clickRoomNumber);
-        layer.open({
-            type: 1,
-            area: ["61%", "80%"],
-            content: $('#addReservation')
-        });
-        let stayDays = $('.stayDays');
-        stayDays.blur(function() {
+            }
+            clickDate = $(obj).attr('date');
+            clickRoomId = $(obj).attr('roomid');
+            clickRoomNumber = $(obj).attr('roomnumber');
+            roomInitalPrice = $(obj).attr('roomInitalPrice');
+
+            startDay.val(clickDate);
+            roomId.val(clickRoomId);
+            roomNumber.val(clickRoomNumber);
+            layer.open({
+                title: '订单信息',
+                type: 1,
+                area: ["45%", "85%"],
+                content: $('#addReservation')
+            });
+
+
+            layui.use(['laydate', 'form', 'layedit', 'jquery'], function(){
+              let form = layui.form;
+                form.render(); //更新全部
+            });
+            let stayDays = $('.stayDays');
+            let truePayment = $('.truePayment');
+            let checkinPerson = $('.checkinPerson');
+            let deposit = $('.deposit');
+            deposit.val('0');
+            checkinPerson.val('0');
+            truePayment.val('0');
+            stayDays.val('1');
             let date = stayDays.val();
-            let allReceivable = parseInt(date)*parseInt(roomInitalPrice);
-            $('.red').val(allReceivable)
-        })
+            let allReceivable = parseInt(date) * parseInt(roomInitalPrice);
+            $('.red').val(allReceivable);
+            $('.red').attr({'disabled':'disabled'});
+            stayDays.blur(function() {
+                date = $(stayDays[2]).val();
+                let allReceivable = parseInt(date) * parseInt(roomInitalPrice);
+                $('.red').val(allReceivable)
+            })
+        } else {
+            $('#clientType').text('补单');
+            onupdata.show();
+            onupdata.text('补单');
+            let allInput = $('input');
+            for (let i = 1; i < allInput.length; i++) {
+                if ($(allInput[i]).attr('id') !== 'userName') {
+                    $($(allInput[i])).val('');
+                    $($(allInput[i])).removeAttr('disabled');
+                } else {
+                    userName.val(getCookie('userName'));
+                    userName.attr({'disabled': 'disabled'})
+                }
+
+            }
+            clickDate = $(obj).attr('date');
+            clickRoomId = $(obj).attr('roomid');
+            clickRoomNumber = $(obj).attr('roomnumber');
+            roomInitalPrice = $(obj).attr('roomInitalPrice');
+
+            startDay.val(clickDate);
+            roomId.val(clickRoomId);
+            roomNumber.val(clickRoomNumber);
+            layer.open({
+                type: 1,
+                area: ["61%", "80%"],
+                content: $('#addReservation')
+            });
+            layui.use(['laydate', 'form', 'layedit', 'jquery'], function(){
+                let form = layui.form;
+                form.render(); //更新全部
+            });
+            let stayDays = $('.stayDays');
+            let truePayment = $('.truePayment');
+            let checkinPerson = $('.checkinPerson');
+            let deposit = $('.deposit');
+            deposit.val('0');
+            checkinPerson.val('0');
+            truePayment.val('0');
+            stayDays.val('1');
+            let date = stayDays.val();
+            let allReceivable = parseInt(date) * parseInt(roomInitalPrice);
+            $('.red').val(allReceivable);
+            $('.red').attr({'disabled':'disabled'});
+            stayDays.blur(function() {
+                date = $(stayDays[2]).val();
+                let allReceivable = parseInt(date) * parseInt(roomInitalPrice);
+                $('.red').val(allReceivable)
+            })
+        }
     }
 }
 
@@ -510,9 +628,9 @@ function insertHouse(data) {
         alert('系统故障，正在维护中，请稍后', err)
     }, (Data) => {
         if (Data.code === SUCCESSFULUSERLOGIN) {
-            confirm('添加成功，请注意查看', function() {
+            // confirm('添加成功，请注意查看', function() {
                 history.go(0);
-            })
+            // })
         } else if (Data.code === PARAMETERCANNOTBEEMPTY) {
             alert('用户没有登录，请登录')
         } else if (Data.code === INSUFFICIENTPRIVILEGE) {
@@ -531,6 +649,46 @@ function insertHouse(data) {
     })
 }
 
+function addAdditionalOrder(data) {
+    let nowDate = new Date();
+    let formatNowDate = formatDate(nowDate);
+    let stayTime = $('.startDay').val();
+    let stayDays = $('.stayDays').val();
+    let dateDifference = (new Date(formatNowDate) - new Date(stayTime)) / 1000 / 60 / 60 / 24;
+    console.log(dateDifference, stayDays)
+    if (parseInt(dateDifference) >= parseInt(stayDays)) {
+        new ajaxHttp('post', getUrl(2) + '/roomStatus/addAdditionalOrder', data, (err) => {
+            alert('系统故障，正在维护中，请稍后', err)
+        }, (Data) => {
+            if (Data.code === SUCCESSFULUSERLOGIN) {
+                // confirm('添加成功，请注意查看', function() {
+                    history.go(0);
+                // })
+            } else if (Data.code === PARAMETERCANNOTBEEMPTY) {
+                alert('用户没有登录，请登录')
+            } else if (Data.code === INSUFFICIENTPRIVILEGE) {
+                alert('用户权限不够，请联系管理员')
+            } else if (Data.code === TIMEFORMATERROR) {
+                alert('时间格式不正确，请查看')
+            } else if (Data.code === ROOMOCCUPANCYCONFLICT) {
+                alert('用户入住情况冲突，请联系管理员')
+            } else if (Data.code === NOTOUTOFTIME) {
+                alert('输入预定天数超时（超过30天）');
+            } else if (Data.code === USERCHOOSETIMENOTNOWTIME) {
+                alert('用户入住时间必须为当天时间才能入住');
+            } else if (Data.code === NOMORETHANTODAY) {
+                alert('用户输入住宿的时间不能超过今天');
+            } else {
+                alert('系统故障，正在维护中，请稍后')
+            }
+        })
+    } else {
+        alert('补单住宿时间不能超过今天！')
+    }
+
+
+}
+
 /**
  * 根据表单内容 修改房间预订信息
  * @param data  修改预定信息的 表单内容
@@ -540,9 +698,9 @@ function updataHouse(data) {
         alert('系统故障，正在维护中，请稍后', err)
     }, (Data) => {
         if (Data.code === SUCCESSFULUSERLOGIN) {
-            confirm('修改成功，请注意查看', function() {
+            // confirm('修改成功，请注意查看', function() {
                 history.go(0);
-            })
+            // })
         } else if (Data.code === PARAMETERCANNOTBEEMPTY) {
             alert('用户没有登录，请登录')
         } else if (Data.code === INSUFFICIENTPRIVILEGE) {
@@ -566,18 +724,20 @@ function updataHouse(data) {
 function checkOut(e) {
     let copyId = $('.copyId').val();
     let note = $('#note').val();
+    let hasStayDate = $('.startDay').val();
     let Data = {
         copyId: copyId,
         note: note,
+        hasStayDate: hasStayDate,
     };
     confirm('确定退订房间？', function() {
         new ajaxHttp('post', getUrl(2) + '/roomStatus/deleteReservation', Data, (err) => {
             alert('系统故障，正在维护中，请稍后', err)
         }, (data) => {
             if (data.code === SUCCESSFULUSERLOGIN) {
-                confirm('退订成功，请注意查看', function() {
+                // confirm('退订成功，请注意查看', function() {
                     history.go(0);
-                })
+                // })
             } else if (data.code === PARAMETERCANNOTBEEMPTY) {
                 alert('用户没有登录，请登录')
             } else if (data.code === INSUFFICIENTPRIVILEGE) {
@@ -600,9 +760,9 @@ function addCheckin(Data) {
         alert('系统故障，正在维护中，请稍后', err)
     }, (data) => {
         if (data.code === SUCCESSFULUSERLOGIN) {
-            confirm('修改入住成功，请注意查看', function() {
+        +
                 history.go(0);
-            })
+            // })
         } else if (data.code === PARAMETERCANNOTBEEMPTY) {
             alert('用户没有登录，请登录')
         } else if (data.code === INSUFFICIENTPRIVILEGE) {
@@ -613,7 +773,7 @@ function addCheckin(Data) {
             alert('用户入住情况冲突，请联系管理员')
         } else if (data.code === NOTOUTOFTIME) {
             alert('输入预定天数超时（超过30天）');
-        } else if(data.code === USERCHOOSETIMENOTNOWTIME){
+        } else if (data.code === USERCHOOSETIMENOTNOWTIME) {
             alert('用户入住时间必须为当天时间才能入住');
         } else {
             alert('系统故障，正在维护中，请稍后')
@@ -627,9 +787,9 @@ function updateCheckinInfo(Data) {
         alert('系统故障，正在维护中，请稍后', err)
     }, (data) => {
         if (data.code === SUCCESSFULUSERLOGIN) {
-            confirm('修改入住成功，请注意查看', function() {
+            // confirm('修改入住成功，请注意查看', function() {
                 history.go(0);
-            })
+            // })
         } else if (data.code === PARAMETERCANNOTBEEMPTY) {
             alert('用户没有登录，请登录')
         } else if (data.code === INSUFFICIENTPRIVILEGE) {
@@ -640,7 +800,7 @@ function updateCheckinInfo(Data) {
             alert('用户入住情况冲突，请联系管理员')
         } else if (data.code === NOTOUTOFTIME) {
             alert('输入预定天数超时（超过30天）');
-        }else if(data.code === USERCHOOSETIMENOTNOWTIME){
+        } else if (data.code === USERCHOOSETIMENOTNOWTIME) {
             alert('用户入住时间必须为当天时间才能入住');
         } else {
             alert('系统故障，正在维护中，请稍后')
@@ -653,9 +813,9 @@ function checkout(Data) {
         alert('系统故障，正在维护中，请稍后', err)
     }, (data) => {
         if (data.code === SUCCESSFULUSERLOGIN) {
-            confirm('退房成功，请注意查看', function() {
+            // confirm('退房成功，请注意查看', function() {
                 history.go(0);
-            })
+            // })
         } else if (data.code === PARAMETERCANNOTBEEMPTY) {
             alert('用户没有登录，请登录')
         } else if (data.code === INSUFFICIENTPRIVILEGE) {
@@ -733,3 +893,20 @@ function clickSelect(dataName, className) {
         JqSelectId.next().find("dd[lay-value=" + dataName + "]").click();    // 车子是否贷款
     }
 }
+
+
+Date.prototype.Format = function(fmt) {
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+};

@@ -50,8 +50,8 @@
     二、 还款 <br>
     2.1 还款计划表<br>
     <table border="1" cellpadding="0" cellspacing="0">
-        <tr><td>还款日期 </td><td>还款本金 </td><td>还款利息 </td><td>服务费 </td></tr>
-        <tr><td><span id="repaymentDate"></span></td><td><span class="repaymentPrincipal"></span></td><td><span id="repaymentInterest"></span></td><td><span id="serviceCharge"></span></td></tr>
+        <tr><td>还款日期 </td><td>还款本金 </td><td>还款利息 </td></tr>
+        <tr><td><span id="repaymentDate"></span></td><td><span class="repaymentPrincipal"></span></td><td><span id="repaymentInterest"></span></td></tr>
     </table><br>
     注：<br>
     A、每期“还款金额”=每期应还本金+每期应还利息+每期借款人应交服务费<br>
@@ -155,9 +155,12 @@
 </div>
 <script src="../js/jquery-1.11.1.js"></script>
 <script src="../finance/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/html2canvas.js"></script>
 <script type="text/javascript" src="../js/pageonload.js"></script>
 <script src="../js/agreement.js"></script>
 <script>
+    let loanAgreement = '';
+    let  contractNo = '';
     layui.use(['laydate', 'form', 'layedit', 'jquery'], function() {
         let laydate = layui.laydate
             , form = layui.form
@@ -168,43 +171,65 @@
      * 获取页面数据
      * */
     window.onload = function(e) {
+        function GetQueryString(name) {
+            let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            let r = decodeURI(e.path[0].location.search).substr(1).match(reg);
+            if (r !== null) return unescape(r[2]);
+        }
         let userId = getCookie('userName');
+        let applyAmt = GetQueryString('appliedAmount');
         if(userId) {
             $.ajax({
                 method: 'get',
-                url: getUrl(5) + '/loanAgreement?userId='+ userId,
+                url: getUrl(5) + '/loanAgreement?userId=' + userId + '&' + 'applyAmt=' + applyAmt,
                 contentType: 'application/json;charset=utf-8',
                 headers: {'wefinttoken': getCookie('token')},
                 error: function(datas) {
                     alert('获取状态失败，请稍后。')
                 },
-                success: function(datas) {
-                    let spans = $('span'),
-                        spanLength = spans.length;
-                    let valueDate = new Date(datas.valueDate),//起息日
-                        interestDay = new Date(datas.interestDay),//到息日
-                        repaymentDate = new Date(datas.repaymentDate),//还款日期
-                        signDate = new Date(datas.signDate);//签署日期
+                success: function(result) {
+                    if(result.code==='000000'){
+                        var datas = result.data;
+                        let spans = $('span'),
+                            spanLength = spans.length;
+                        let valueDate = new Date(datas.valueDate),//起息日
+                            interestDate = new Date(datas.interestDate),//到息日
+                            repaymentDate = new Date(datas.repaymentDate),//还款日期
+                            signDate = new Date(datas.signDate);//签署日期
 
-                    //let dateStr = valueDate.toLocaleDateString();
-                    console.log(valueDate.getFullYear(), valueDate.getMonth() + 1, valueDate.getDate());
-                    $('#valueDateYear').text(valueDate.getFullYear());
-                    $('#valueDateMonth').text(valueDate.getMonth() + 1);
-                    $('#valueDateDate').text(valueDate.getDate());
-                    $('#interestDayYear').text(interestDay.getFullYear());
-                    $('#interestDayMonth').text(interestDay.getMonth() + 1);
-                    $('#interestDayDate').text(interestDay.getDate());
-                    $('#repaymentDate').text(repaymentDate.getMonth() + 1 + '月' + repaymentDate.getDate() + '日');
-                    $('#repaymentPrincipalBig').text(intToChinese(datas.repaymentPrincipal.toString()));
-                    $('.signDates').text( signDate.getFullYear() + '年' + (signDate.getMonth()+ 1) + '月' + signDate.getDate() + '日');
-                    for (let i = 0; i < spanLength; i++) {
-                        $.each(datas, function(key, value) {
-                            if ($($(spans)[i]).attr('id') === key) {
-                                $('#'+key).text(value);
-                            }else if ($($(spans)[i]).attr('class') === key) {
-                                $('.'+key).text(value);
+                        //let dateStr = valueDate.toLocaleDateString();
+                        console.log(valueDate.getFullYear(), valueDate.getMonth() + 1, valueDate.getDate());
+                        $('#valueDateYear').text(valueDate.getFullYear());
+                        $('#valueDateMonth').text(valueDate.getMonth() + 1);
+                        $('#valueDateDate').text(valueDate.getDate());
+                        $('#interestDayYear').text(interestDate.getFullYear());
+                        $('#interestDayMonth').text(interestDate.getMonth() + 1);
+                        $('#interestDayDate').text(interestDate.getDate());
+                        $('#repaymentPrincipalBig').text(intToChinese(datas.repaymentPrincipal.toString()));
+                        $('.signDates').text( signDate.getFullYear() + '年' + (signDate.getMonth()+ 1) + '月' + signDate.getDate() + '日');
+                        for (let i = 0; i < spanLength; i++) {
+                            $.each(datas, function(key, value) {
+                                if ($($(spans)[i]).attr('id') === key) {
+                                    $('#'+key).text(value);
+                                }else if ($($(spans)[i]).attr('class') === key) {
+                                    $('.'+key).text(value);
+                                }
+                            })
+                        }
+                        $('#repaymentDate').text(repaymentDate.getFullYear() + '年' + (repaymentDate.getMonth() + 1) + '月' + repaymentDate.getDate() + '日');
+                        html2canvas(document.body, {
+                            allowTaint: true,
+                            taintTest: false,
+                            onrendered: function(canvas) {
+                                canvas.id = "mycanvas";
+                                loanAgreement = canvas.toDataURL();
+                                contractNo = $('#contractNo').text();
+                                Storage.loanAgreement = loanAgreement;
+                                Storage.contractNo = contractNo;
                             }
-                        })
+                        });
+                    }else if(result.code === 'E000003'){
+                        alert('申请金额不能为空');
                     }
                 }
             })
@@ -216,13 +241,14 @@
 /**
 *数字小写转大写
 */
-function intToChinese ( str ) {str = str.replace(/[^\d\.]/g,'').replace(/^0/,'');
+function intToChinese ( str ) {
+    str = str.replace(/[^\d\.]/g,'').replace(/^0/,'');
     var Num = str;
-    if(Num=="") {
+    if(Num=="" || Num=="0") {
         //输入框删减为空时，将大写金额的内容值设为原始状态，当然也可以根据需求进行修改
-        $("#dx").text("零元整");
-        return false;
-    }
+        var bigStr = "零元整";
+        return bigStr;
+    }else {
     part = String(Num).split(".");
     newchar = "";
     for(i=part[0].length-1;i>=0;i--){
@@ -295,6 +321,7 @@ function intToChinese ( str ) {str = str.replace(/[^\d\.]/g,'').replace(/^0/,'')
         newchar = newchar+"整";
     }
     return newchar;
+    }
 }
 
     $('#stamp').click(function() {

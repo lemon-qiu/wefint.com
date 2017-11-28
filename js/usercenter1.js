@@ -82,8 +82,9 @@
                     // 获取全局的按钮
                     let HTMLALLBUTTON = $('button');    // 获取全局所有的按钮
                     let HTMLALLINPUT = $('input');      // 获取全局所有的输入框
+                    let HTMLALLSELECT = $('select');   //获取全局所有的选择框
                     // 定义审核的状态
-                   // checkPageStatus(data.approveStatus, HTMLALLINPUT, HTMLALLBUTTON, searchUrl);  //检查页面状态 根据不同状态 显示不同效果
+                   // checkPageStatus(data.approveStatus, HTMLALLINPUT, HTMLALLBUTTON, HTMLALLSELECT,searchUrl);  //检查页面状态 根据不同状态 显示不同效果
                     let strcustomer = data.customerCooperation;
                     let strtourism = data.tourismCooperation;
                     if (strcustomer) {   // 客户合作方
@@ -113,6 +114,7 @@
                     getOnePhoto(data.spouseCertBack, 'spouseCertBack');//配偶身份证反面
 
                     clickSelect(data.mainProperty, 'mainProperty'); // 主体性质
+                    clickSelect(data.hotelType, 'hotelType');//客栈类型
                     $('#motelName').val(data.motelName); // 客栈名称
                     $('#motelAssets').val(data.motelAssets); // 客栈详细地址
                     $('#motelRoomQuantity').val(data.motelRoomQuantity); // 客栈的房间数
@@ -173,7 +175,7 @@
                     $('#platesStartDate').val(fmtDate(data.platesStartDate));            // 上牌时间
                     $('#driverKm').val(data.driverKm);// 驾驶里程
                     clickSelect(data.carIfnotLoan, 'carIfnotLoan');
-                    $('#carloanAmt').val(data.carloanAmt);          // 贷款金额
+                    $('#carLoanAmt').val(data.carLoanAmt);          // 贷款金额
                     $('#carLoanStartDate').val(data.carLoanStartDate);      // 车子贷款时间
                     $('#carLoanDuration').val(data.carLoanDuration);       // 还款方式
                     $('#carLoanPaymentOption').val(data.carLoanPaymentOption); // 还款方式
@@ -252,7 +254,7 @@
         }
         /**
          *
-         * @type {{userId: string, userName: jQuery, certNo: jQuery, mobile: jQuery, relativeMobile: jQuery, friendMobile: jQuery, companyTelephone: jQuery, certFront: jQuery, certBack: jQuery, monthIncome: jQuery, marryStatus: jQuery, marryCert: jQuery, approveStatus: string, spouseName: jQuery, spouseMobile: jQuery, spouseCertNo: jQuery, referencePictures: jQuery, spouseCertFront: jQuery, spouseCertBack: jQuery, motelName: jQuery, motelAssets: jQuery, motelRoomQuantity: jQuery, motelCertNo: jQuery, motelCert: jQuery, motelBusinessScale: jQuery, motelPic: jQuery, motelProvice: jQuery, motelCity: jQuery, motelArea: jQuery, motelAddress: jQuery, leftRentYear: jQuery, leftPaidRentalMonth: jQuery, loanDuration: jQuery, loanPaymentOption: jQuery, monthIncomeType: jQuery, resaleFeeFlag: jQuery, occupieRate: jQuery, motelMonthIncome: jQuery, roomMonthIncome: jQuery, landlordName: jQuery, mainProperty: jQuery, rentStartDate: jQuery, resaleFee: jQuery, rentEndDate: jQuery, rentPaymentOption: jQuery, rentPerYear: jQuery, reMark: string, deposit: jQuery, rentContract: jQuery, accountName: jQuery, openBank: jQuery, bankAccount: jQuery, cardFront: jQuery, cardBack: jQuery, educationDegree: jQuery, workExperiences: jQuery, otherJobs: jQuery, personalHealth: jQuery, preWorkspace: jQuery, customerCooperation: string, tourismCooperation: string, bondsman: jQuery, averageCommision: jQuery, onlinePercentage: jQuery, offlinePercentage: jQuery, residenceYear: jQuery, houseAddress: jQuery, houseSquare: jQuery, houseFloors: jQuery, houseDecoLevel: jQuery, ifnotLoan: jQuery, loanAmt: jQuery, loanStartDate: jQuery, housePic: jQuery, houseCertPic: jQuery, carAddress: jQuery, carCatelog: jQuery, platesStartDate: jQuery, driverKm: jQuery, carIfnotLoan: jQuery, carloanAmt: jQuery, carLoanStartDate: jQuery, carLoanDuration: jQuery, carLoanPaymentOption: jQuery, carPic: jQuery, carCertPic: jQuery, personalIncome: Array, innIncome: Array, hydroelectric: Array, energy: Array, waterPayment: Array, energyPayment: Array, otherPhoto: Array}}
+         * @type {{userId: string, userName: jQuery, certNo: jQuery, mobile: jQuery, relativeMobile: jQuery, friendMobile: jQuery, companyTelephone: jQuery, certFront: jQuery, certBack: jQuery, monthIncome: jQuery, marryStatus: jQuery, marryCert: jQuery, approveStatus: string, spouseName: jQuery, spouseMobile: jQuery, spouseCertNo: jQuery, referencePictures: jQuery, spouseCertFront: jQuery, spouseCertBack: jQuery, motelName: jQuery, motelAssets: jQuery, motelRoomQuantity: jQuery, motelCertNo: jQuery, motelCert: jQuery, motelBusinessScale: jQuery, motelPic: jQuery, motelProvice: jQuery, motelCity: jQuery, motelArea: jQuery, motelAddress: jQuery, leftRentYear: jQuery, leftPaidRentalMonth: jQuery, loanDuration: jQuery, loanPaymentOption: jQuery, monthIncomeType: jQuery, resaleFeeFlag: jQuery, occupieRate: jQuery, motelMonthIncome: jQuery, roomMonthIncome: jQuery, landlordName: jQuery, mainProperty: jQuery, rentStartDate: jQuery, resaleFee: jQuery, rentEndDate: jQuery, rentPaymentOption: jQuery, rentPerYear: jQuery, reMark: string, deposit: jQuery, rentContract: jQuery, accountName: jQuery, openBank: jQuery, bankAccount: jQuery, cardFront: jQuery, cardBack: jQuery, educationDegree: jQuery, workExperiences: jQuery, otherJobs: jQuery, personalHealth: jQuery, preWorkspace: jQuery, customerCooperation: string, tourismCooperation: string, bondsman: jQuery, averageCommision: jQuery, onlinePercentage: jQuery, offlinePercentage: jQuery, residenceYear: jQuery, houseAddress: jQuery, houseSquare: jQuery, houseFloors: jQuery, houseDecoLevel: jQuery, ifnotLoan: jQuery, loanAmt: jQuery, loanStartDate: jQuery, housePic: jQuery, houseCertPic: jQuery, carAddress: jQuery, carCatelog: jQuery, platesStartDate: jQuery, driverKm: jQuery, carIfnotLoan: jQuery, carLoanAmt: jQuery, carLoanStartDate: jQuery, carLoanDuration: jQuery, carLoanPaymentOption: jQuery, carPic: jQuery, carCertPic: jQuery, personalIncome: Array, innIncome: Array, hydroelectric: Array, energy: Array, waterPayment: Array, energyPayment: Array, otherPhoto: Array}}
          */
         const private = {
             userId: getCookie("userName"),
@@ -296,6 +298,7 @@
             roomMonthIncome: $('#roomMonthIncome').val(),
             landlordName: $('#landlordName').val(),
             mainProperty: $('#mainProperty').val(),
+            hotelType: $('#hotelType').val(),
             rentStartDate: $('#rentStartDate').val(),
             resaleFee: $('#resaleFee').val(),
             rentEndDate: $('#rentEndDate').val(),
@@ -340,7 +343,7 @@
             platesStartDate: $('#platesStartDate').val(),
             driverKm: $('#driverKm').val(),
             carIfnotLoan: $('#carIfnotLoan').val(),
-            carloanAmt: $('#carloanAmt').val(),
+            carLoanAmt: $('#carLoanAmt').val(),
             carLoanStartDate: $('#carLoanStartDate').val(),
             carLoanDuration: $('#carLoanDuration').val(),
             carLoanPaymentOption: $('#carLoanPaymentOption').val(),
@@ -607,19 +610,25 @@
      * @param htmlinput 获取到的所有的input 按钮
      * @param htmlbutton 获取到的所有的 button 按钮
      */
-    function checkPageStatus(dataName, htmlinput, htmlbutton, searchUrl) {
+    function checkPageStatus(dataName, htmlinput, htmlbutton, htmlselect, searchUrl) {
         const GETENDTIRELYAPPROVESTAATUS = 4;           // 完全审核通过
         const GETPUTINAPPROVESTATUSONE = 0;             // 一级审核
         const GETPUTINAPPROVESTATUSTWO = 1;             // 二级审核
         const GETPUTINAPPROVESTATUSTHREE = 2;            // 一级驳回
         const GETPUTINAPPROVESTATUSFOUR = 3;             // 二级驳回
-        if (dataName === GETENDTIRELYAPPROVESTAATUS) {
+        const GETPUTINAPPROVESTATUSLOAN = 5;             //放款
+        if (dataName === GETENDTIRELYAPPROVESTAATUS || dataName === GETPUTINAPPROVESTATUSLOAN) {
             window.location.href = searchUrl;
             for (let i = 0; i < htmlinput.length; i++) {
                 $(htmlinput[i]).attr({'disabled': "disabled"})
+                console.log('input')
             }
             for (let i = 0; i < htmlbutton.length; i++) {
                 $(htmlbutton[i]).attr({'disabled': "disabled"})
+            }
+            for (let i = 0; i < htmlselect.length; i++) {
+                $(htmlselect[i]).attr({'disabled': "disabled"})
+                console.log('select')
             }
         } else if (dataName === GETPUTINAPPROVESTATUSONE || dataName === GETPUTINAPPROVESTATUSTWO) {
             window.location.href = searchUrl;
@@ -628,6 +637,9 @@
             }
             for (let i = 0; i < htmlbutton.length; i++) {
                 $(htmlbutton[i]).attr({'disabled': "disabled"})
+            }
+            for (let i = 0; i < htmlselect.length; i++) {
+                $(htmlselect[i]).attr({'disabled': "disabled"})
             }
         } else if (dataName === GETPUTINAPPROVESTATUSTHREE || dataName === GETPUTINAPPROVESTATUSFOUR) {
             // 切换为修改数据的状态

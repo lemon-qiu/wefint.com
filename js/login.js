@@ -81,17 +81,19 @@ function memberLogin(E) {
                     success: function(result) {
                         if (result.code === SUCCESSFULUSERLOGIN) {
                             setCookie('userName', result.content.userName, 7);
-                            if (result.content.loginRoleLevel === '1') {   // 销售·1
+                            if (result.content.loginRoleLevel === '1') {   //普通用户 
                                 setCookie('loginRoleLevel', result.content.loginRoleLevel);
                                 window.location.href = './mainPannel.html';
-                            } else if (result.content.loginRoleLevel === '2') {  // 风控
+                            } else if (result.content.loginRoleLevel === '2') {  //销售
                                 setCookie('loginRoleLevel', result.content.loginRoleLevel);
                                 window.location.href = './salesList.html';
-                            } else if (result.content.loginRoleLevel === '3') {  // 投资方
+                            } else if (result.content.loginRoleLevel === '3') {  //风控
                                 setCookie('loginRoleLevel', result.content.loginRoleLevel);
                                 window.location.href = './riskControlList.html';
-                            } else if (result.content.loginRoleLevel === '4') {
+                            } else if (result.content.loginRoleLevel === '4') {//投资方
                                 window.location.href = './checkAudit.html';
+                            }else if (result.content.loginRoleLevel === '5') {//催收方
+                                window.location.href = './hasBeenLendList.html';
                             } else {
                                 window.location.href = './mainPannel.html';
                             }

@@ -11,14 +11,14 @@ $(function() {
             , id: 'id'
             , url: getUrl(5)+'/getMerchantInfoList?approveStatus=5'
             , cols: [[
-                {field: 'id', title: '#', width: 80, sort: true}
-                , {field: 'userName', title: '姓名', width: 200, sort: true}
+                {field: 'userName', title: '姓名', width: 200, sort: true}
                 , {field: 'certNo', title: '身份证号', width: 200, sort: true}
                 , {field: 'mobile', title: '联系方式', width: 200, sort: true}
                 , {field: 'motelName', title: '客栈名称', width: 300, sort: true}
                 , {field: 'motelProviceName', title: '省份', width: 80, sort: true}
                 , {field: 'motelCityName', title: '市级', width: 80, sort: true}
                 , {field: 'motelAreaName', title: '区/县', width: 150, sort: true}
+                , {field: 'createTime', title: '申请时间', width: 160, sort: true}
                 , {fixed: 'right', title: '操作', width: 300, toolbar: '#barDemo'}
             ]]
             , height: 315
@@ -66,20 +66,31 @@ $(function() {
             data:{
                 user:rows.userId
             },
-            error:function(result) {
-                alert('下载失败，请刷新后重试。')
+            beforeSend:function() {
+                $('.shadow').removeClass('hidden');
             },
             success:function(data) {
                 if(data.code == '000000' ){
-                    var downUrl = 'http://image.wefint.com/'+ data.content;
-                    var exportIframe = document.createElement('iframe');
-                    exportIframe.src = downUrl;
-                    exportIframe.style.display = "none";
-                    document.body.appendChild(exportIframe);
+                    $('.shadow').removeClass('hidden');
+                    setTimeout(function() {
+                        var downUrl = 'http://image.wefint.com/'+ data.content;
+                        var exportIframe = document.createElement('iframe');
+                        exportIframe.src = downUrl;
+                        exportIframe.style.display = "none";
+                        document.body.appendChild(exportIframe);
+
+                        setTimeout(function() {
+                            $('.shadow').addClass('hidden');
+                        },1000)
+                    },1000);
+
                 }else {
                     alert('下载失败，请刷新后重试。');
                 }
-
+            },
+            error:function(result) {
+                $('.shadow').addClass('hidden');
+                alert('下载失败，请刷新后重试。')
             }
         });
 
