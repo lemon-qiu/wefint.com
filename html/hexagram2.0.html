@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>疯特金融</title>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/floaticon.css"   type="text/css" >
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/hexagram2.0.css"  type="text/css" />
+    <link rel="stylesheet" href="../css/usercenter.css"  type="text/css" />
+    <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+    <script src="../finance/layui/layui.js" charset="utf-8"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../js/hexagram2.0.js"></script>
+    <script type="text/javascript" src="../js/echarts.js"></script>
+    <script src="../js/base64.js"></script>
+    <script src="../js/config.js"></script>
+</head>
+<body>
+<div class="shadow"></div>
+<!--header-->
+<div class="head">
+    <div class="head_left" onClick="window.location.href='mainPannel.html'">
+        <img src="../images/hotelStatus/logo.png">个人信息申请表
+    </div>
+    <div class="head_right">
+        <img src="../images/hotelStatus/backHome.png" alt="logo" onclick="window.location.href='mainPannel.html'">
+    </div>
+</div>
+
+<div class="content">
+    <div class="content-title">客栈名<span>蓝天客栈</span></div>
+    <div class="content-top">
+        <div class="content-top-left fl">
+            <div id="main"></div>
+            <div class="H6star-name">
+                <div class="list-left fl">
+                    <div class="list"><i class="iconfont icon-zufang"></i></div>
+                    <div class="list"><i class="iconfont icon-xiaoliangpaihang"></i></div>
+                </div>
+
+                <div class="list-center">
+                    <div class="list"><i class="iconfont icon-gerenzhongxin"></i></div>
+                    <div class="list"><i class="iconfont icon-iconfont12502"></i></div>
+                </div>
+
+                <div class="list-right fr">
+                    <div class="list"><i class="iconfont icon-renmai"></i></div>
+                    <div class="list"><i class="iconfont icon-renmai1"></i></div>
+                </div>
+            </div>
+            <div class="h6Star-info fr">
+                <label>疯特信用</label>
+                <ul id="h6Star-info-list">
+                    <li class="on"><i class="iconfont icon-gerenzhongxin"></i><p>身份:丰富的个人信息是疯特用重要的评估条件之一。</p></li>
+                    <li><i class="iconfont icon-renmai"></i><p>人脉:我们会综合考虑你在人际交往中的影响力及好友信用状况。</p></li>
+                    <li><i class="iconfont icon-zufang"></i><p>承租:客栈的承租情况同样是重要的评估因素。</p></li>
+                    <li><i class="iconfont icon-renmai1"></i><p>信用历史:丰富的履约记录将帮助你获得更高的疯特分。</p></li>
+                    <li><i class="iconfont icon-xiaoliangpaihang"></i><p>销量:更多的销量可以带来更多的疯特分。</p></li>
+                    <li><i class="iconfont icon-iconfont12502"></i><p>规模:客栈规模逐渐扩大，疯特与您一起成长。</p></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-top-right fr">
+            <div class="usercenter-top">
+                <div class="usercenter-top-left fl">
+                    <i class="iconfont icon-gerenzhongxin fl"></i>
+                    <div class="usercenter-enter">
+                        <p>用户个人中心</p>
+                        <div>信用从这里开始 ~</div>
+                    </div>
+                </div>
+                <div class="usercenter-top-right fr">
+                    <button class="btn btn-default" onclick="fillInfo();">立即进入</button>
+                </div>
+            </div>
+            <div class="usercenter-tips">
+                <p>信息完整度</p>
+                <label>马上就可以完成啦~加油！</label>
+            </div>
+            <div class="usercenter-center">
+                <div class="progress-bar-list">
+                    <p>个人中心</p>
+                    <div class="progress-bar">
+                        <dl class="barbox">
+                            <dd class="barline">
+                                <div per="20" style="width:0px;" class="charts"></div>
+                            </dd>
+                        </dl>
+                        <button class="btn btn-default">去完成</button>
+                        <label class="percentage"></label>
+                    </div>
+                </div>
+                <div class="progress-bar-list">
+                    <p>婚姻状况</p>
+                    <div class="progress-bar">
+                        <dl class="barbox">
+                            <dd class="barline">
+                                <div per="40" style="width:0px;" class="charts"></div>
+                            </dd>
+                        </dl>
+                        <button class="btn btn-default">去完成</button>
+                        <label class="percentage"></label>
+                    </div>
+                </div>
+                <div class="progress-bar-list">
+                    <p>客栈情况</p>
+                    <div class="progress-bar">
+                        <dl class="barbox">
+                            <dd class="barline">
+                                <div per="60" style="width:0px;" class="charts"></div>
+                            </dd>
+                        </dl>
+                        <button class="btn btn-default">去完成</button>
+                        <label class="percentage"></label>
+                    </div>
+                </div>
+                <div class="progress-bar-list">
+                    <p>承租情况</p>
+                    <div class="progress-bar">
+                        <dl class="barbox">
+                            <dd class="barline">
+                                <div per="80" style="width:0px;" class="charts"></div>
+                            </dd>
+                        </dl>
+                        <button class="btn btn-default">去完成</button>
+                        <label class="percentage"></label>
+                    </div>
+                </div>
+                <div class="progress-bar-list">
+                    <p>客栈经营情况</p>
+                    <div class="progress-bar">
+                        <dl class="barbox">
+                            <dd class="barline">
+                                <div per="100" style="width:0px;" class="charts"></div>
+                            </dd>
+                        </dl>
+                        <button class="btn btn-default">去完成</button>
+                        <label class="percentage"></label>
+                    </div>
+                </div>
+                <div class="progress-bar-list">
+                    <p>收款银行账户信息</p>
+                    <div class="progress-bar">
+                        <dl class="barbox">
+                            <dd class="barline">
+                                <div per="15" style="width:0px;" class="charts"></div>
+                            </dd>
+                        </dl>
+                        <button class="btn btn-default">去完成</button>
+                        <label class="percentage"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="usercenter-bottom">
+                <p>其他信用加分项信息<i class="iconfont icon-gengduo"></i></p>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="content-bottom">
+        <div class="content-bottom-left fl">
+            <img src="../images/kzd.png" class="fl"/>
+            <div class="content-bottom-center">
+                <p>客栈贷</p>
+                <p>额度</p>
+                <div class="btn btn-tip">￥ 10000~50000</div>
+            </div>
+            <button class="btn btn-default fr">申请</button>
+        </div>
+        <div class="content-bottom-right fr">
+            <img src="../images/qld.png" class="fl">
+            <div class="content-bottom-center">
+                <p>青旅贷</p>
+                <p>额度</p>
+                <div class="btn btn-tip">￥ 200000 起</div>
+            </div>
+            <button class="btn btn-default fr">申请</button>
+        </div>
+    </div>
+
+</div>
+<div class="footer">
+    <div class="footer_left">
+        <div>
+            <img src="../images/hotelStatus/call.png" alt="call">028-5191803
+        </div>
+        <div>
+            <img src="../images/hotelStatus/help.png" alt="call">帮助
+        </div>
+    </div>
+    <div class="footer_right">
+        <p>版权所有Copyright By 圣境环球</p>
+    </div>
+</div>
+</body>
+</html>

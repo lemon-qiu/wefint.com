@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>疯特科技</title>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../finance/layui/css/layui.css" media="all"  type="text/css" />
+    <link rel="stylesheet" href="../css/hexagram2.0.css"  type="text/css" />
+    <link rel="stylesheet" href="../css/usercenter2.0.css"  type="text/css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+    <script src="../finance/layui/layui.js" charset="utf-8"></script>
+    <script src="../js/pageonload.js"></script>
+    <script src="../js/usercenter2.0.js"></script>
+    <script src="../js/base64.js"></script>
+</head>
+<body>
+    <div class="content-left">
+
+        <div class="tab-item">
+            <ul>
+                <li class="on"><span>1</span><label>未完成</label></li>
+                <li><span>2</span><label>未完成</label></li>
+                <li><span>3</span><label>未完成</label></li>
+                <li><span>4</span><label>未完成</label></li>
+                <li><span>5</span><label>未完成</label></li>
+                <li><span>6</span><label>未完成</label></li>
+            </ul>
+        </div>
+
+        <div class="tab-personal-info">
+            <ul>
+                <li class="on">
+                    <i class="iconfont icon-gerenxinxi"></i>
+                    <label>个人信息</label>
+                    <p>丰富的个人信息是疯特信用重要的评估条件之一。</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-kezhangongyu1"></i>
+                    <label>经营情况</label>
+                    <p>丰富的个人信息是疯特信用重要的评估条件之一。</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-gerenxinxi"></i>
+                    <label>收款银行账户信息</label>
+                    <p>丰富的个人信息是疯特信用重要的评估条件之一。</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-gerenxinxi"></i>
+                    <label>婚姻状况</label>
+                    <p>丰富的个人信息是疯特信用重要的评估条件之一。</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-kezhangongyu"></i>
+                    <label>商户情况</label>
+                    <p>丰富的个人信息是疯特信用重要的评估条件之一。</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-kezhangongyu"></i>
+                    <label>承租情况</label>
+                    <p>丰富的个人信息是疯特信用重要的评估条件之一。</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-right">
+
+        <div class="tab-apply-form">
+
+            <div class="apply-form">
+                <div class="title">
+                    个人信息（必填）
+                </div>
+                <div class="form-block">
+                    <form class="layui-form form-box">
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">姓名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="userName" id="userName" placeholder="请输入您的姓名" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">手机号</label>
+                                <div class="layui-input-inline">
+                                    <input type="number" name="mobile" id="mobile" placeholder="请输入您的手机号码" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身份证号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="certNo" id="certNo" placeholder="请输入您的身份证号" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">家庭月收入</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="monthIncome" id="monthIncome" placeholder="￥" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">亲属电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="number" name="relativeMobile" id="relativeMobile" placeholder="请输入您的亲属电话" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">公司电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="number" name="companyTelephone" id="companyTelephone" placeholder="请输入您的公司电话" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">朋友电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="number" name="friendMobile" id="friendMobile" placeholder="请输入您的朋友电话" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身份证正面</label>
+                                <div class="upload-list">
+                                    <div class="puload-btn certFront" onclick="choosephoto(this,'certFront')">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                    <div  class="img-list" id="certFront">
+                                        <img>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身份证背面</label>
+                                <div class="upload-list">
+                                    <div class="puload-btn certBack" onclick="choosephoto(this,'certBack')">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                    <div  class="img-list" id="certBack">
+                                        <img>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">户口簿照片</label>
+                                <div class="upload-list">
+                                    <div class="puload-btn householdRegister" onclick="choosephoto(this,'householdRegister')">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                    <div  class="img-list" id="householdRegister">
+                                        <img>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="saveInfo">保存</button>
+                                <button class="layui-btn layui-btn-disabled" lay-submit lay-filter="formDemo">立即提交</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="apply-form on">
+                <div class="title">
+                    婚姻状况（必填）
+                </div>
+                <div class="form-block">
+                    <form class="layui-form form-box">
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">婚姻状况</label>
+                                <div class="layui-input-inline">
+                                    <select name="maritalStatus" id="maritalStatus" lay-filter="marryStatus">
+                                        <option value="">请输入</option>
+                                        <option value="0">已婚有子女</option>
+                                        <option value="1">已婚无子女</option>
+                                        <option value="2">离异有子女</option>
+                                        <option value="3">离异无子女</option>
+                                        <option value="4">未婚</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">配偶姓名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="spouseName" id="spouseName" placeholder="请输入您的配偶姓名" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">配偶联系电话</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="spouseMobile" id="spouseMobile" placeholder="请输入您的配偶联系电话" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">配偶身份证</label>
+                                <div class="layui-input-inline">
+                                    <input type="number" name="spouseCertNo" id="spouseCertNo" placeholder="请输入您的配偶身份证" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">上传婚姻证</label>
+                                <div class="upload-list">
+                                    <div class="puload-btn marriageCertificate" onclick="choosephoto(this,'marriageCertificate')">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                    <div  class="img-list" id="marriageCertificate">
+                                        <img>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">配偶身份证正面</label>
+                                <div class="upload-list">
+                                    <div class="puload-btn spouseCertFront" onclick="choosephoto(this,'spouseCertFront')">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                    <div  class="img-list" id="spouseCertFront">
+                                        <img>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">配偶身份证背面</label>
+                                <div class="upload-list">
+                                    <div class="puload-btn spouseCertBack" onclick="choosephoto(this,'spouseCertBack')">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                    <div  class="img-list" id="spouseCertBack">
+                                        <img>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="marriageInfo">保存</button>
+                                <button class="layui-btn layui-btn-disabled" lay-submit lay-filter="formDemo">立即提交</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="apply-form">
+                <div class="title">
+                    经营情况（必填）
+                </div>
+                <div class="form-block">
+                    <form class="layui-form form-box">
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">客栈月收入</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="motelMonthIncome" id="motelMonthIncome" placeholder="请输入您的姓名" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">客房月收入</label>
+                                <div class="layui-input-inline">
+                                    <input type="number" name="roomMonthIncome" id="roomMonthIncome" placeholder="请输入您的手机号码" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">月流水收入证明</label>
+                                <div class="upload-list">
+                                    <div  class="img-list" id="personalIncome">
+                                        <img>
+                                    </div>
+                                    <div class="puload-btn personalIncome" onclick="choosephoto(this,'personalIncome',true)">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">近三个月水费</label>
+                                <div class="upload-list">
+                                    <div  class="img-list" id="hydroelectric">
+                                        <img>
+                                    </div>
+                                    <div class="puload-btn hydroelectric" onclick="choosephoto(this,'hydroelectric',true)">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">近三个月电费</label>
+                                <div class="upload-list">
+                                    <div  class="img-list" id="energy">
+                                        <img>
+                                    </div>
+                                    <div class="puload-btn energy" onclick="choosephoto(this,'energy',true)">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">客房月收入证明</label>
+                                <div class="upload-list">
+                                    <div  class="img-list" id="incomePhoto">
+                                        <img>
+                                    </div>
+                                    <div class="puload-btn incomePhoto" onclick="choosephoto(this,'incomePhoto',true)">
+                                        <i class="iconfont icon-information"></i>
+                                        <label>点击上传图片</label>
+                                        <p>支持jpg/gif/png格式不超过5M。</p>
+                                    </div>
+                                    <input type="file" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="saveBusinessCase">保存</button>
+                                <button class="layui-btn layui-btn-disabled" lay-submit lay-filter="formDemo">立即提交</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

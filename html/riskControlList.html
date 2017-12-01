@@ -47,7 +47,7 @@
     {{# }else if(d.approveStatus == 1){ }}
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-mini layui-btn-mini" lay-event="checkLevelTwo">二级审核</a>
-    {{# }else if(d.approveStatus == 4){ }}
+    {{# }else if(d.approveStatus == 4 || d.approveStatus == 5){ }}
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn  layui-btn-normal layui-btn-mini" lay-event="loan">放款</a>
     {{# }else{ }}

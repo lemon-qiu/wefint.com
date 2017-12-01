@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="3e8dc308-35be-4f88-ac7d-1a7338d028e2" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/kzd.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/qld.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/去哪儿.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html/b.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/upload2.0.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/a.html" afterPath="$PROJECT_DIR$/html/a.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/config.js" afterPath="$PROJECT_DIR$/js/config.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/hexagram.js" afterPath="$PROJECT_DIR$/js/hexagram.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/pageonload.js" afterPath="$PROJECT_DIR$/js/pageonload.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,59 +26,117 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="hexagram2.0.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/hexagram2.0.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="11" column="59" lean-forward="false" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+              <folding>
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="usercenter.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/usercenter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="578" column="13" lean-forward="false" selection-start-line="578" selection-start-column="13" selection-end-line="578" selection-end-column="13" />
+            <state relative-caret-position="555">
+              <caret line="578" column="24" lean-forward="false" selection-start-line="578" selection-start-column="13" selection-end-line="578" selection-end-column="24" />
               <folding>
-                <marker date="1511776749594" expanded="true" signature="12982:13010" ph="..." />
-                <marker date="1511776749594" expanded="true" signature="13041:13049" ph="..." />
-                <marker date="1511776749594" expanded="true" signature="13311:13339" ph="..." />
-                <marker date="1511776749594" expanded="true" signature="13370:13378" ph="..." />
+                <marker date="1512110157667" expanded="true" signature="12982:13010" ph="..." />
+                <marker date="1512110157667" expanded="true" signature="13041:13049" ph="..." />
+                <marker date="1512110157667" expanded="true" signature="13311:13339" ph="..." />
+                <marker date="1512110157667" expanded="true" signature="13370:13378" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="usercenter1.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/usercenter1.html">
+      <file leaf-file-name="usercenter1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/usercenter1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="1284" column="105" lean-forward="true" selection-start-line="1284" selection-start-column="105" selection-end-line="1284" selection-end-column="105" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="riskControlList.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/riskControlList.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hexagram.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/hexagram.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="116" column="8" lean-forward="false" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hexagram.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/hexagram.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="219" column="27" lean-forward="true" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
+            <state relative-caret-position="-152">
+              <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
               <folding>
-                <marker date="1511861267694" expanded="true" signature="5699:5708" ph="..." />
+                <marker date="1511779408097" expanded="true" signature="12640:12668" ph="..." />
+                <marker date="1511779408097" expanded="true" signature="12699:12707" ph="..." />
+                <marker date="1511779408097" expanded="true" signature="12969:12997" ph="..." />
+                <marker date="1511779408097" expanded="true" signature="13028:13036" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usercenter2.0.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/usercenter2.0.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="140" column="10" lean-forward="false" selection-start-line="140" selection-start-column="10" selection-end-line="140" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usercenter.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/usercenter.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="221" column="118" lean-forward="false" selection-start-line="221" selection-start-column="107" selection-end-line="221" selection-end-column="118" />
+              <folding>
+                <marker date="1511781412330" expanded="false" signature="69419:69451" ph="..." />
+                <marker date="1511781412330" expanded="false" signature="70327:70359" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="salesView.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/salesView.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="431">
+              <caret line="217" column="94" lean-forward="false" selection-start-line="217" selection-start-column="80" selection-end-line="217" selection-end-column="94" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usercenter2.0.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/usercenter2.0.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="604">
+              <caret line="220" column="69" lean-forward="false" selection-start-line="220" selection-start-column="64" selection-end-line="220" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usercenter2.0.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/usercenter2.0.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1482">
+              <caret line="78" column="15" lean-forward="true" selection-start-line="78" selection-start-column="15" selection-end-line="78" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hexagram2.0.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/hexagram2.0.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pageonload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/pageonload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="247" column="24" lean-forward="true" selection-start-line="247" selection-start-column="24" selection-end-line="247" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -85,43 +146,44 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>verify=&quot;img&quot;</find>
-      <find>月</find>
-      <find>IssueNumber</find>
-      <find>月流水收入证明</find>
-      <find>流水</find>
-      <find>rentStartDate</find>
-      <find>marryStatus</find>
-      <find>marryed</find>
-      <find>closequire</find>
-      <find>houseloan</find>
-      <find>resaleFeeFlag</find>
-      <find>服务费</find>
-      <find>cuowu</find>
-      <find>disabled</find>
-      <find>checkPageStatus</find>
-      <find>linkageToChoose</find>
-      <find>requiredFields</find>
-      <find>appliedAmountMax</find>
-      <find>balance</find>
-      <find>getMerchantInfoByUserId</find>
-      <find>repayment</find>
-      <find>hasBeenLend</find>
-      <find>loan</find>
-      <find>confi</find>
-      <find>strcustomer</find>
-      <find>ajax</find>
-      <find>customerCooperation</find>
       <find>energyphoto</find>
+      <find>DeterminedApply</find>
+      <find>658ee9</find>
+      <find>h6Star</find>
       <find>main</find>
-      <find>readerChart</find>
+      <find>usercenter-bottom</find>
+      <find>switch_menu</find>
+      <find>立即</find>
+      <find>open</find>
+      <find>434343</find>
+      <find>form.on</find>
+      <find>ajax</find>
+      <find>img</find>
+      <find>updatafile</find>
+      <find>银行</find>
+      <find>choosephoto</find>
+      <find>incomePhoto</find>
+      <find>signature</find>
+      <find>water</find>
+      <find>tab-apply-form</find>
+      <find>流水</find>
+      <find>客栈月</find>
+      <find>客栈月收入</find>
+      <find>水费</find>
+      <find>apply-form</find>
+      <find>weixinPhoto</find>
+      <find>marryStatus</find>
+      <find>clickSelect</find>
+      <find>婚姻</find>
+      <find>deleteFather</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -195,15 +257,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/html/allMessage.html" />
-        <option value="$PROJECT_DIR$/html/hotelButler.html" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/html/accountBook.html" />
-        <option value="$PROJECT_DIR$/html/hotelsetup.html" />
-        <option value="$PROJECT_DIR$/css/BrokerageContract.css" />
-        <option value="$PROJECT_DIR$/html/b.html" />
-        <option value="$PROJECT_DIR$/js/registermember.js" />
-        <option value="$PROJECT_DIR$/finance/js/upload.js" />
         <option value="$PROJECT_DIR$/css/login.css" />
         <option value="$PROJECT_DIR$/finance/html/BrokerageContract.html" />
         <option value="$PROJECT_DIR$/html/applayForFinance.html" />
@@ -211,7 +264,6 @@
         <option value="$PROJECT_DIR$/css/floaticon.css" />
         <option value="$PROJECT_DIR$/html/crazySell.html" />
         <option value="$PROJECT_DIR$/assets/css/main.css" />
-        <option value="$PROJECT_DIR$/js/upload.js" />
         <option value="$PROJECT_DIR$/assets1/css/main.css" />
         <option value="$PROJECT_DIR$/html/login.html" />
         <option value="$PROJECT_DIR$/html/mainPannel.html" />
@@ -225,19 +277,15 @@
         <option value="$PROJECT_DIR$/js/applayForFinance.js" />
         <option value="$PROJECT_DIR$/html/repayment.html" />
         <option value="$PROJECT_DIR$/js/repayment.js" />
-        <option value="$PROJECT_DIR$/html/salesView.html" />
         <option value="$PROJECT_DIR$/html/riskControlView.html" />
         <option value="$PROJECT_DIR$/css/usercenter.css" />
         <option value="$PROJECT_DIR$/html/hasBeenLendList.html" />
         <option value="$PROJECT_DIR$/html/loanAgreement.html" />
         <option value="$PROJECT_DIR$/js/hasBeenLendList.js" />
-        <option value="$PROJECT_DIR$/js/usercenter.js" />
         <option value="$PROJECT_DIR$/finance/css/checkPage.css" />
         <option value="$PROJECT_DIR$/js/usercenter1.js" />
         <option value="$PROJECT_DIR$/html/usercenter.html" />
         <option value="$PROJECT_DIR$/html/hexagram.html" />
-        <option value="$PROJECT_DIR$/js/pageonload.js" />
-        <option value="$PROJECT_DIR$/html/riskControlList.html" />
         <option value="$PROJECT_DIR$/html/usercenter1.html" />
         <option value="$PROJECT_DIR$/js/checkAudit.js" />
         <option value="$PROJECT_DIR$/js/salesList.js" />
@@ -245,7 +293,21 @@
         <option value="$PROJECT_DIR$/html/hasBeenLendView.html" />
         <option value="$PROJECT_DIR$/js/riskControlList.js" />
         <option value="$PROJECT_DIR$/css/hexagram.css" />
+        <option value="$PROJECT_DIR$/html/riskControlList.html" />
         <option value="$PROJECT_DIR$/js/hexagram.js" />
+        <option value="$PROJECT_DIR$/js/echarts.common.min.js" />
+        <option value="$PROJECT_DIR$/js/hexagram2.0.js" />
+        <option value="$PROJECT_DIR$/html/salesView.html" />
+        <option value="$PROJECT_DIR$/html/usercenter1.0.html" />
+        <option value="$PROJECT_DIR$/html/usercenter2.html" />
+        <option value="$PROJECT_DIR$/js/upload.js" />
+        <option value="$PROJECT_DIR$/js/usercenter.js" />
+        <option value="$PROJECT_DIR$/js/pageonload.js" />
+        <option value="$PROJECT_DIR$/html/hexagram2.0.html" />
+        <option value="$PROJECT_DIR$/css/hexagram2.0.css" />
+        <option value="$PROJECT_DIR$/css/usercenter2.0.css" />
+        <option value="$PROJECT_DIR$/html/usercenter2.0.html" />
+        <option value="$PROJECT_DIR$/js/usercenter2.0.js" />
       </list>
     </option>
   </component>
@@ -286,6 +348,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -297,23 +360,12 @@
             <path>
               <item name="wefint.com" type="b2602c69:ProjectViewProjectNode" />
               <item name="wefint.com" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wefint.com" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wefint.com" type="462c0819:PsiDirectoryNode" />
-              <item name="html" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wefint.com" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wefint.com" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -325,19 +377,20 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="nodejs_interpreter_path" value="D:/Program Files/node/node" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\FT\svn\wefint.com\iconfont" />
+      <recent name="D:\FT\svn\wefint.com\js" />
+      <recent name="D:\FT\svn\wefint.com\css" />
+      <recent name="D:\FT\svn\wefint.com\images" />
+      <recent name="D:\FT\svn\wefint.com\html" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\FT\svn\wefint.com\images\fulls" />
       <recent name="D:\FT\svn\wefint.com\img" />
       <recent name="D:\FT\svn\wefint.com\assets\css\images" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\FT\svn\wefint.com\js" />
-      <recent name="D:\FT\svn\wefint.com\images" />
-      <recent name="D:\FT\svn\wefint.com\html" />
-      <recent name="D:\FT\svn\wefint.com\finance\html" />
-      <recent name="D:\FT\svn\wefint.com\images\hotelStatus" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -412,28 +465,10 @@
       <workItem from="1511487320619" duration="18702000" />
       <workItem from="1511513321438" duration="8776000" />
       <workItem from="1511746958175" duration="28987000" />
-      <workItem from="1511832736103" duration="17597000" />
-    </task>
-    <task id="LOCAL-00042">
-      <created>1510642307904</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1510642307904</updated>
-    </task>
-    <task id="LOCAL-00043">
-      <created>1510651126141</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1510651126141</updated>
-    </task>
-    <task id="LOCAL-00044">
-      <created>1510657134726</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1510657134726</updated>
+      <workItem from="1511832736103" duration="24969000" />
+      <workItem from="1511919164338" duration="56163000" />
+      <workItem from="1512092061239" duration="27480000" />
+      <workItem from="1512124797114" duration="9280000" />
     </task>
     <task id="LOCAL-00045">
       <created>1510670094301</created>
@@ -757,11 +792,32 @@
       <option name="project" value="LOCAL" />
       <updated>1511856211348</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091">
+      <created>1511873484526</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1511873484526</updated>
+    </task>
+    <task id="LOCAL-00092">
+      <created>1512123911775</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1512123911775</updated>
+    </task>
+    <task id="LOCAL-00093">
+      <created>1512135417510</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1512135417510</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="573647000" />
+    <option name="totallyTimeSpent" value="673942000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -777,19 +833,19 @@
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13962065" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11521739" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.50632244" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.032608695" sideWeight="0.49578503" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.50632244" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.032608695" sideWeight="0.49578503" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.06521739" sideWeight="0.49789253" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.06521739" sideWeight="0.49789253" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49367756" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -811,131 +867,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html/hotelStatus.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="39" column="24" lean-forward="true" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/registermember.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/wechat.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/alipay.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="1534" column="9" lean-forward="false" selection-start-line="1534" selection-start-column="9" selection-end-line="1534" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/checkPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1938">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/registermember.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/pageonload2.js" />
-    <entry file="file://$PROJECT_DIR$/js/plupload.full.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodejsapp/pms/html/js/jquery-1.11.1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="9312" column="0" lean-forward="false" selection-start-line="9312" selection-start-column="0" selection-end-line="9312" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="2983" column="40" lean-forward="false" selection-start-line="2983" selection-start-column="40" selection-end-line="2983" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finance/js/upload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/homepage.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodejsapp/pms/typings/globals/node/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="2895" column="12" lean-forward="false" selection-start-line="2895" selection-start-column="12" selection-end-line="2895" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/mainPannel.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-570">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/loanScore.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-171">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="83" column="82" lean-forward="true" selection-start-line="83" selection-start-column="82" selection-end-line="83" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/applayForFinance.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1685">
-          <caret line="16" column="38" lean-forward="false" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/repayment.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
@@ -947,7 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -965,31 +895,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/salesView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4446">
-          <caret line="234" column="30" lean-forward="true" selection-start-line="234" selection-start-column="30" selection-end-line="234" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/upload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1685">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1510832272375" expanded="true" signature="2848:2867" ph="..." />
-            <marker date="1510832272375" expanded="true" signature="3304:3318" ph="..." />
-            <marker date="1510832272375" expanded="true" signature="3412:3470" ph="..." />
-            <marker date="1510832272375" expanded="true" signature="3587:3620" ph="..." />
-            <marker date="1510832272375" expanded="true" signature="3622:3630" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,7 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
           <caret line="53" column="147" lean-forward="false" selection-start-line="53" selection-start-column="147" selection-end-line="53" selection-end-column="147" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,7 +948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="53" column="1" lean-forward="true" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1048,39 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/pageonload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="190" column="36" lean-forward="false" selection-start-line="190" selection-start-column="36" selection-end-line="190" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/usercenter1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="233" column="31" lean-forward="false" selection-start-line="233" selection-start-column="12" selection-end-line="233" selection-end-column="31" />
-          <folding>
-            <marker date="1511779408097" expanded="true" signature="12640:12668" ph="..." />
-            <marker date="1511779408097" expanded="true" signature="12699:12707" ph="..." />
-            <marker date="1511779408097" expanded="true" signature="12969:12997" ph="..." />
-            <marker date="1511779408097" expanded="true" signature="13028:13036" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/usercenter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="1275" column="95" lean-forward="false" selection-start-line="1275" selection-start-column="76" selection-end-line="1275" selection-end-column="95" />
-          <folding>
-            <marker date="1511781412330" expanded="false" signature="69419:69451" ph="..." />
-            <marker date="1511781412330" expanded="false" signature="70327:70359" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1088,7 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="43" column="75" lean-forward="false" selection-start-line="43" selection-start-column="75" selection-end-line="43" selection-end-column="75" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,7 +969,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1112,23 +984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="91">
           <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/hasBeenLendView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="12" lean-forward="true" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/riskControlList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="255" column="41" lean-forward="true" selection-start-line="255" selection-start-column="41" selection-end-line="255" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1136,7 +991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="96" column="16" lean-forward="false" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1144,7 +998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
           <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1152,54 +1005,238 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="80" column="15" lean-forward="true" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/usercenter1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="1284" column="105" lean-forward="true" selection-start-line="1284" selection-start-column="105" selection-end-line="1284" selection-end-column="105" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/images/bg.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/无标题.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/fulls/01.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/fulls/去哪儿.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/riskControlList.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="252">
+          <caret line="49" column="61" lean-forward="false" selection-start-line="49" selection-start-column="61" selection-end-line="49" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/usercenter.js">
+    <entry file="file://$PROJECT_DIR$/html/riskControlList2.0.html" />
+    <entry file="file://$PROJECT_DIR$/js/hexagram.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="578" column="13" lean-forward="false" selection-start-line="578" selection-start-column="13" selection-end-line="578" selection-end-column="13" />
+        <state relative-caret-position="703">
+          <caret line="300" column="5" lean-forward="false" selection-start-line="300" selection-start-column="5" selection-end-line="300" selection-end-column="5" />
           <folding>
-            <marker date="1511776749594" expanded="true" signature="12982:13010" ph="..." />
-            <marker date="1511776749594" expanded="true" signature="13041:13049" ph="..." />
-            <marker date="1511776749594" expanded="true" signature="13311:13339" ph="..." />
-            <marker date="1511776749594" expanded="true" signature="13370:13378" ph="..." />
+            <marker date="1511874237469" expanded="true" signature="5699:5708" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/hexagram.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="116" column="8" lean-forward="false" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
+        <state relative-caret-position="0">
+          <caret line="104" column="53" lean-forward="false" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/hexagram.js">
+    <entry file="file://$PROJECT_DIR$/images/hotelStatus/backHome.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/hotelStatus/call.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/hotelStatus/head.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/hotelStatus/help.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/hotelStatus/logo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/hotelStatus/rightBtn.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/echarts.common.min.js" />
+    <entry file="file://$PROJECT_DIR$/js/hexagram2.0.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="219" column="27" lean-forward="true" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
+        <state relative-caret-position="3401">
+          <caret line="239" column="34" lean-forward="true" selection-start-line="239" selection-start-column="34" selection-end-line="239" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <marker date="1511861267694" expanded="true" signature="5699:5708" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="2848:2867" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3304:3318" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3412:3470" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3587:3620" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3622:3630" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/upload2.0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2996">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1510832272375" expanded="true" signature="2848:2867" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3304:3318" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3412:3470" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3587:3620" ph="..." />
+            <marker date="1510832272375" expanded="true" signature="3622:3630" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/riskControlList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="344" column="87" lean-forward="true" selection-start-line="344" selection-start-column="87" selection-end-line="344" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/hasBeenLendView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="108" column="19" lean-forward="true" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/hexagram2.0.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/usercenter2.0.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1482">
+          <caret line="78" column="15" lean-forward="true" selection-start-line="78" selection-start-column="15" selection-end-line="78" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/hexagram2.0.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="11" column="59" lean-forward="false" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/usercenter1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20317">
+          <caret line="1284" column="105" lean-forward="false" selection-start-line="1284" selection-start-column="105" selection-end-line="1284" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/salesView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="217" column="94" lean-forward="false" selection-start-line="217" selection-start-column="80" selection-end-line="217" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/pageonload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="247" column="24" lean-forward="true" selection-start-line="247" selection-start-column="24" selection-end-line="247" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/usercenter2.0.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="220" column="69" lean-forward="false" selection-start-line="220" selection-start-column="64" selection-end-line="220" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/usercenter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="578" column="24" lean-forward="false" selection-start-line="578" selection-start-column="13" selection-end-line="578" selection-end-column="24" />
+          <folding>
+            <marker date="1512110157667" expanded="true" signature="12982:13010" ph="..." />
+            <marker date="1512110157667" expanded="true" signature="13041:13049" ph="..." />
+            <marker date="1512110157667" expanded="true" signature="13311:13339" ph="..." />
+            <marker date="1512110157667" expanded="true" signature="13370:13378" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/usercenter.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="221" column="118" lean-forward="false" selection-start-line="221" selection-start-column="107" selection-end-line="221" selection-end-column="118" />
+          <folding>
+            <marker date="1511781412330" expanded="false" signature="69419:69451" ph="..." />
+            <marker date="1511781412330" expanded="false" signature="70327:70359" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/usercenter1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-152">
+          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+          <folding>
+            <marker date="1511779408097" expanded="true" signature="12640:12668" ph="..." />
+            <marker date="1511779408097" expanded="true" signature="12699:12707" ph="..." />
+            <marker date="1511779408097" expanded="true" signature="12969:12997" ph="..." />
+            <marker date="1511779408097" expanded="true" signature="13028:13036" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/usercenter2.0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="140" column="10" lean-forward="false" selection-start-line="140" selection-start-column="10" selection-end-line="140" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

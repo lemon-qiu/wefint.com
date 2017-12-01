@@ -185,10 +185,10 @@ function getUrl(type) {
         //return "http://192.168.0.130:30000"
         return "http://192.168.0.9:30000"
     } else if(type === 4){
-        return "http://192.168.0.183:20000"//金融图片上传
+        return "http://192.168.0.182:20000"//金融图片上传
         //return "http://192.168.0.10:20000"//金融图片上传
     } else if(type === 5 ){
-        return "http://192.168.0.183:20000"//金融审核
+        return "http://192.168.0.182:20000"//金融审核
         //return "http://192.168.0.10:20000"//金融审核
     } else if(type === 6 ){
         return "http://192.168.0.100:30050" //OSS账户信息
